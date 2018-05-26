@@ -4,7 +4,7 @@ import Nav from './componentes/navbarAdm';
 class App extends Component {
   render() {
     return (
-      <Nav/>
+      <Nav isadm={false}/>
     );
   }
 }
