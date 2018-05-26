@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import Nav from './componentes/navbarAdm';
+import Login from './componentes/Login' 
 class App extends Component {
   render() {
     return (
-      <Nav/>
-    );
+     <div>
+        <Nav/>
+        <Login/>
+      </div>
+    )
   }
 }
 
