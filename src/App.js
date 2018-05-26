@@ -4,11 +4,16 @@ import Login from './componentes/Login'
 class App extends Component {
   render() {
     return (
+
+      <Nav isadm={false}/>
+    );
+
      <div>
         <Nav/>
         <Login/>
       </div>
     )
+
   }
 }
 

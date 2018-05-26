@@ -22,7 +22,7 @@ export default class navbarAdm extends React.Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      isOpen: false
+      isOpen: false,
     };
   }
   toggle() {
@@ -30,7 +30,30 @@ export default class navbarAdm extends React.Component {
       isOpen: !this.state.isOpen
     });
   }
+
+
+  requisicao = () =>{
+    if (this.props.isadm){
+
+    return(<UncontrolledDropdown nav inNavbar>
+                  <DropdownToggle nav caret>
+                    Requisições
+                  </DropdownToggle>
+                  <DropdownMenu right>
+                    <DropdownItem>
+                      <NavLink href="https://github.com/reactstrap/reactstrap">Criar Requisição</NavLink>
+                    </DropdownItem>
+                    <DropdownItem>
+                      <NavLink href="https://github.com/reactstrap/reactstrap">Visualizar Requisição</NavLink>
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>)
+    }
+    return ("")
+  }
+
   render() {
+
     return (
       <div>
         <Navbar color="light" light expand="md">
@@ -56,19 +79,7 @@ export default class navbarAdm extends React.Component {
                 </DropdownMenu>
               </UncontrolledDropdown>
 
-              <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                  Requisições
-                </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem>
-                    <NavLink href="https://github.com/reactstrap/reactstrap">Criar Requisição</NavLink>
-                  </DropdownItem>
-                  <DropdownItem>
-                    <NavLink href="https://github.com/reactstrap/reactstrap">Visualizar Requisição</NavLink>
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
+              <this.requisicao />
 
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
