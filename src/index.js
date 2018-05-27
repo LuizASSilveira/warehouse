@@ -4,7 +4,7 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './componentes/css/login.css'
-import { Router } from 'react-router'
+import { Router,Route } from 'react-router'
 import createBrowserHistory from 'history/createBrowserHistory'
 
 const history = createBrowserHistory()
@@ -12,7 +12,7 @@ const history = createBrowserHistory()
 ReactDOM.render(
     (
       <Router history={history}>
-         <App/>
+         <Route component={App}/>
       </Router>
     ),
     document.getElementById('root')

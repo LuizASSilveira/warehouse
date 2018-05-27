@@ -33,15 +33,16 @@ export default class Login extends Component {
             });
     }
     
+    
     render(){
-        return (
+        return(
             <div className="login-box">
             <h1 className="header-logo">WareHouse</h1>
             <span>{this.state.msg}</span>
                 <form onSubmit={this.envia.bind(this)}>
-                    <input type="text"      ref={(input) => this.nome = input}/>
-                    <input type="password"  ref={(input) => this.senha = input}/>
-                    <input type="submit"    value="login"/>
+                    <input placeholder=" Usuario" type="text" ref={(input) => this.nome = input}/>
+                    <input placeholder=" Senha" type="password" ref={(input) => this.senha = input}/>
+                    <input type="submit" value="login" />
                 </form>
             </div>
         );

@@ -4,12 +4,11 @@ import Login from './componentes/login'
 class App extends Component {
   render() {
     return (
-     <div>
 
-        <Nav/>
-        <Login/>
-
-      </div>
+    <div id="main">
+      <Nav/>
+      {this.props.children}
+    </div>    
     )
 
   }
