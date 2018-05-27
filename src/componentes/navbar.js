@@ -16,7 +16,7 @@ var FontAwesome = require('react-fontawesome')
 
 
 
-export default class navbarAdm extends React.Component {
+export default class NavbarQ extends React.Component {
   constructor(props) {
     super(props);
 
