@@ -4,13 +4,24 @@ import registerServiceWorker from './registerServiceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './componentes/css/login.css'
 import App from './App';
-import { BrowserRouter } from 'react-router-dom'
+
+import { Switch,Router,Route,BrowserRouter } from 'react-router-dom'
+
+import Login from './componentes/login';
+import Criar from './Requisicao/criar';
 
 ReactDOM.render(
 (
-  <BrowserRouter>
-        <App />
-  </BrowserRouter>
+  
+    <BrowserRouter>
+      <App>
+        <Switch>
+          <Route exact path="/"   component={Login}/>
+          <Route path="/criar"    component={Criar}/>
+        </Switch>
+      </App>
+    </BrowserRouter>
+
 )
 ,document.getElementById('root'));
 
