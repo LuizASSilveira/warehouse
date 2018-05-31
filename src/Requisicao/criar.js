@@ -3,7 +3,7 @@ import Nav from '../componentes/navbarAdm';
 import Login from './componentes/login';
 import Teste from './componentes/confirmModal';
 import {Button}  from 'reactstrap';
-import {Table} from '../componentes/table'
+import {Table} from './componentes/table'
 
 export default class Criar extends Component {
 	constructor(props) {
@@ -22,7 +22,7 @@ export default class Criar extends Component {
 
   	funcCancel(){
   		this.toggle()
-	  }
+	}
  	 toggle(){
   		this.setState({
   			modal: !this.state.modal
@@ -34,8 +34,7 @@ export default class Criar extends Component {
 
   		if(this.state.modal){
   		modal = <Teste onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} mensagem={'Deseja confirmar?'}/>
-  		// this.toggle()
-  		// setTimeout( this.toggle(), 100)
+		}  
         return(
             <div>
                 <Nav />
@@ -43,7 +42,7 @@ export default class Criar extends Component {
                 <Table  />
                
                 <Button color="danger" onClick={this.toggle}>Criar Requisição</Button>
-						    {modal}
+			    {modal}
 
             </div>
         )
