@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import Nav from '../componentes/navbarAdm';
-import Login from './componentes/login';
-import Teste from './componentes/confirmModal';
+import Teste from '../componentes/confirmModal';
 import {Button}  from 'reactstrap';
-import {Table} from './componentes/table'
+import {Table} from '../componentes/table'
 
 export default class Criar extends Component {
 	constructor(props) {
@@ -38,12 +37,9 @@ export default class Criar extends Component {
         return(
             <div>
                 <Nav />
-
                 <Table  />
-               
                 <Button color="danger" onClick={this.toggle}>Criar Requisição</Button>
 			    {modal}
-
             </div>
         )
     }
