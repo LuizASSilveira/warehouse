@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Nav from '../componentes/navbarAdm';
 import Teste from '../componentes/confirmModal';
-import {Button}  from 'reactstrap';
-import {Table} from '../componentes/table'
+import {Button, Form}  from 'reactstrap';
+import {Table} from '../componentes/table';
+import InputG from '../componentes/inputGenerico';
 
 export default class Criar extends Component {
 	constructor(props) {
@@ -27,9 +28,9 @@ export default class Criar extends Component {
 
   		this.setState({
   			modal: !this.state.modal
-  	})
-
+  		})
   	}
+
 
     render(){
 		let modal = ""
@@ -47,8 +48,11 @@ export default class Criar extends Component {
                 <Nav />
                 <Table  />
                 <Button color="danger" onClick={this.toggle}>Criar Requisição</Button>
-
 				{modal}
+				<Form>
+					<InputG classname={'valid'} label={'もしもし'} placeholder={'何だこれ'} type={'textarea'} formtext={'なるほど'}/>
+					<InputG classname={'valid'} label={'もしもし'} placeholder={'何だこれ'} type={'number'} formtext={'なるほど'}/>
+				</Form>
             </div>
         )
         
