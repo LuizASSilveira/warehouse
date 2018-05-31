@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './css/table.css'
 import {BootstrapTable, TableHeaderColumn} from '../../node_modules/react-bootstrap-table';
 import '../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
@@ -18,7 +19,7 @@ class Table extends React.Component {
     
     render() {
       return (
-        <div>
+        <div id ="table">
           <BootstrapTable
             data = { this.state.products }
             pagination>
