@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {FormGroup,Col,Label,Row,FormControl,HelpBlock } from 'react-bootstrap';
+import {FormGroup,Col,Label,Row,FormControl } from 'reactstrap';
 
 const inputGenerico = ({name, size ,label, onChange, placeholder, value, error,help,disabled=false, type="text"}) => {
   
@@ -25,7 +25,7 @@ const inputGenerico = ({name, size ,label, onChange, placeholder, value, error,h
         />
         <FormControl.Feedback />
       
-        <HelpBlock>{error}</HelpBlock>
+
       </Col>
     </Row>  
     </FormGroup>

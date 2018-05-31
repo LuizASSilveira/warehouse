@@ -25,8 +25,6 @@ export default class Criar extends Component {
 
  	toggle(){
 
- 	 toggle(){
-
   		this.setState({
   			modal: !this.state.modal
   	})
@@ -43,7 +41,6 @@ export default class Criar extends Component {
   		// setTimeout( this.toggle(), 100)
   		}
 
-		}  
 
         return(
             <div>
@@ -57,11 +54,4 @@ export default class Criar extends Component {
         
     }
 }
-
-			    {modal}
-            </div>
-        )
-    }
-
-} 
 
