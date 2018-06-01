@@ -3,3 +3,7 @@
     margin: auto;
     margin-top: 5%;
 }
+
+#buttonPost{
+    float: right;
+}

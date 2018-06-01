@@ -36,7 +36,7 @@ class Table extends Component {
             'Content-type':'application/json'
           })
         };
-        fetch(`????????????????localStorage.getItem('auth-token')}`,requestInfo)
+        fetch(this.props.urlPost,requestInfo)
           .then(response => {
             if(response.ok){
               //alerta dados salvos com sucesso
@@ -59,7 +59,7 @@ class Table extends Component {
         }
       }
     componentDidMount(){
-        fetch('https://raw.githubusercontent.com/LuizASSilveira/pi-almoxarifado/master/listSolicitacao.json')
+        fetch(this.props.urlGet + '')
         .then(response => response.json())
         .then(product => {         
         this.setState({products:product});
@@ -80,12 +80,14 @@ class Table extends Component {
             search={ true }
             pagination
             >
-            <TableHeaderColumn dataField='id' isKey>  ID            </TableHeaderColumn>
-            <TableHeaderColumn dataField='descricao'> Product Name  </TableHeaderColumn>
-            <TableHeaderColumn dataField='status'>    Product Price </TableHeaderColumn>
+            <TableHeaderColumn dataField= 'id' isKey>  ID                                  </TableHeaderColumn>
+            <TableHeaderColumn dataField= {this.props.descricao}> {this.props.descricao}  </TableHeaderColumn>
+            <TableHeaderColumn dataField= {this.props.status}>    {this.props.status}     </TableHeaderColumn>
+            <TableHeaderColumn dataField= {this.props.data}>      {this.props.data}       </TableHeaderColumn>
           </BootstrapTable>
-          <Button color="danger" onClick={this.toggle}>{this.props.buttonName}</Button>
-				        {modal}
+          
+          <Button id="buttonPost" color="danger" onClick={this.toggle}>{this.props.buttonName}</Button>
+				    {modal}
         </div>
       );
     }
