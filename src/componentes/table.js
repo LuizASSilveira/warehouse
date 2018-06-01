@@ -12,8 +12,13 @@ function onRowSelect(row, isSelected, e) {
   }else{
     selected.pop(row.id)
   }
-  console.log(selected)
 }
+var selectRowProp = {
+  clickToSelect: true,
+  mode: 'checkbox',
+  bgColor: 'pink', 
+  onSelect: onRowSelect
+};
 class Table extends Component {
     constructor(){
         super()
@@ -47,12 +52,6 @@ class Table extends Component {
   		if(this.state.modal){
   		modal = <Teste onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} mensagem={'Deseja confirmar?'}/>
   		}
-      var selectRowProp = {
-        clickToSelect: true,
-        mode: 'checkbox',
-        bgColor: 'pink', 
-        onSelect: onRowSelect
-      };
       return (
         <div id ="table">
           <BootstrapTable
