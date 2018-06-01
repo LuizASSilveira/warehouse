@@ -5,7 +5,7 @@ import '../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.
 import Teste from '../componentes/confirmModal';
 import {Button}  from 'reactstrap';
 
-var selected
+var selected= []
 function onRowSelect(row, isSelected) {
     if(isSelected){
         selected.push(row.id)
