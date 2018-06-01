@@ -35,8 +35,25 @@ class Table extends Component {
         });      
     }    
   	funcConfirm(){
+      const requestInfo = {
+        method:'POST',
+        body:JSON.stringify({selected}),
+        headers: new Headers({
+          'Content-type':'application/json'
+        })
+      };
+      fetch(`????????????????localStorage.getItem('auth-token')}`,requestInfo)
+        .then(response => {
+          if(response.ok){
+            //aleta dados salvos com sucesso
+            console.log("tudo ok")
+          } else {
+            throw new Error("não foi possivel salvar as alterações");
+          }
+        })
       console.log("salvo")
-      }
+    }
+
     funcCancel(){
       this.toggle()
     }
