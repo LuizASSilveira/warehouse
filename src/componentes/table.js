@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import './css/table.css'
 import {BootstrapTable, TableHeaderColumn} from '../../node_modules/react-bootstrap-table';
 import '../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
-import {Button}  from 'reactstrap';
 import Teste from '../componentes/confirmModal';
+import {Button}  from 'reactstrap';
 
-var selected= []
-function onRowSelect(row, isSelected, e) {
-  if(isSelected){
-    selected.push(row.id)
-  }else{
-    selected.pop(row.id)
+var selected
+function onRowSelect(row, isSelected) {
+    if(isSelected){
+        selected.push(row.id)
+    }else{
+        selected.pop(row.id)
+    }
   }
-}
 var selectRowProp = {
   clickToSelect: true,
   mode: 'checkbox',
@@ -20,13 +20,44 @@ var selectRowProp = {
   onSelect: onRowSelect
 };
 class Table extends Component {
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state = {products:[],modal: false}
         this.toggle= this.toggle.bind(this)
         this.funcCancel= this.funcCancel.bind(this)
         this.funcConfirm= this.funcConfirm.bind(this)
     }
+    
+    funcConfirm(){
+        const requestInfo = {
+          method:'POST',
+          body:JSON.stringify({selected}),
+          headers: new Headers({
+            'Content-type':'application/json'
+          })
+        };
+        fetch(`????????????????localStorage.getItem('auth-token')}`,requestInfo)
+          .then(response => {
+            if(response.ok){
+              //alerta dados salvos com sucesso
+              console.log("tudo ok")
+            } else {
+              throw new Error("não foi possivel salvar as alterações");
+            }
+          })
+        console.log("salvo")
+      }
+  
+      funcCancel(){
+        this.toggle()
+      }
+      toggle(){
+        if(selected.length !== 0){
+          this.setState({
+            modal: !this.state.modal
+          })
+        }
+      }
     componentDidMount(){
         fetch('https://raw.githubusercontent.com/LuizASSilveira/pi-almoxarifado/master/listSolicitacao.json')
         .then(response => response.json())
@@ -34,53 +65,27 @@ class Table extends Component {
         this.setState({products:product});
         });      
     }    
-  	funcConfirm(){
-      const requestInfo = {
-        method:'POST',
-        body:JSON.stringify({selected}),
-        headers: new Headers({
-          'Content-type':'application/json'
-        })
-      };
-      fetch(`????????????????localStorage.getItem('auth-token')}`,requestInfo)
-        .then(response => {
-          if(response.ok){
-            //aleta dados salvos com sucesso
-            console.log("tudo ok")
-          } else {
-            throw new Error("não foi possivel salvar as alterações");
-          }
-        })
-      console.log("salvo")
-    }
-
-    funcCancel(){
-      this.toggle()
-    }
-    toggle(){
-      if(selected.length !== 0){
-        this.setState({
-          modal: !this.state.modal
-        })
-      }
-    }
+  	
     render(){
       let modal = ""
-  		if(this.state.modal){
-  		modal = <Teste onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} mensagem={'Deseja confirmar?'}/>
-  		}
+        
+      if(this.state.modal){
+      modal = <Teste onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} mensagem={'Deseja confirmar?'}/>
+      }
       return (
         <div id ="table">
           <BootstrapTable
-            data = { this.state.products } selectRow={ selectRowProp }
+            data = { this.state.products } 
+            selectRow={ selectRowProp }
+            search={ true }
             pagination
             >
-            <TableHeaderColumn dataField='id' isKey>  ID    </TableHeaderColumn>
+            <TableHeaderColumn dataField='id' isKey>  ID            </TableHeaderColumn>
             <TableHeaderColumn dataField='descricao'> Product Name  </TableHeaderColumn>
             <TableHeaderColumn dataField='status'>    Product Price </TableHeaderColumn>
           </BootstrapTable>
           <Button color="danger" onClick={this.toggle}>{this.props.buttonName}</Button>
-				  {modal}
+				        {modal}
         </div>
       );
     }
