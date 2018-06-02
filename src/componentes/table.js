@@ -4,11 +4,10 @@ import {BootstrapTable, TableHeaderColumn} from '../../node_modules/react-bootst
 import '../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import Teste from '../componentes/confirmModal';
 import {Button,Input}  from 'reactstrap';
-
 import './css/input.css'
 
 var selected= []
-var name = ''
+
 function onRowSelect(row, isSelected) {
     if(isSelected){
         selected.push(row.id)
@@ -33,9 +32,11 @@ class Table extends Component {
     }
     
     funcConfirm(){
-        const requestInfo = {
+      
+      
+      const requestInfo = {
           method:'POST',
-          body:JSON.stringify({selected, name}),
+          body:JSON.stringify('nome:' + this.state.name , 'solicitacoes:' + selected),
           headers: new Headers({
             'Content-type':'application/json',
             'token' : localStorage.getItem('auth-token')
@@ -74,7 +75,6 @@ class Table extends Component {
       this.setState({name: event.target.value});
     }
   
-  	
     render(){
       let modal = ""
       if(this.state.modal){
