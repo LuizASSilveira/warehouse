@@ -14,8 +14,6 @@ import {
 
 var FontAwesome = require('react-fontawesome')
 
-
-
 export default class navbarAdm extends React.Component {
   constructor(props) {
     super(props);
@@ -30,7 +28,6 @@ export default class navbarAdm extends React.Component {
       isOpen: !this.state.isOpen
     });
   }
-
 
   requisicao = () =>{
     if (this.props.isadm){

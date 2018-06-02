@@ -13,17 +13,15 @@ import Historico  from './Requisicao/historico'
 
 ReactDOM.render(
 (
-  
-    <BrowserRouter>
-      <App>
-        <Switch>
-          <Route exact path="/"           component={Login}/>
-          <Route        path="/criar"     component={Criar}/>
-          <Route        path="/historico" component={Historico} />
-        </Switch>
-      </App>
-    </BrowserRouter>
-
+  <BrowserRouter>
+    <App>
+      <Switch>
+        <Route exact path="/"           component={Login}/>
+        <Route        path="/criar"     component={Criar}/>
+        <Route        path="/historico" component={Historico} />
+      </Switch>
+    </App>
+  </BrowserRouter>
 )
 ,document.getElementById('root'));
 
