@@ -37,7 +37,8 @@ class Table extends Component {
           method:'POST',
           body:JSON.stringify({selected, name}),
           headers: new Headers({
-            'Content-type':'application/json'
+            'Content-type':'application/json',
+            'token' : localStorage.getItem('auth-token')
           })
         };
         fetch(this.props.urlPost,requestInfo)
