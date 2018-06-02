@@ -10,8 +10,8 @@ export default class Criar extends Component {
                 <Nav    isadm = {true} />
 
                 <Table  buttonName= {'Criar Requisicao'}
-                        urlGet=     {'https://raw.githubusercontent.com/LuizASSilveira/pi-almoxarifado/master/listSolicitacao.json'}
-                        urlPost=    {'?????????????????www'}
+                        urlGet=     {'http://localhost:3001/solicitacoes'}
+                        urlPost=    {'http://localhost:3001/requisicoes'}
                         descricao=  {'Descrição'}
                         status=     {'Estado'}
                         data=       {'Data'}
