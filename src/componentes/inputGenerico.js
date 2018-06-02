@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {FormGroup,Col,Label,Row, Input, FormFeedback, FormText} from 'reactstrap';
+import {FormGroup,Label, Input, FormFeedback, FormText} from 'reactstrap';
 
 const InputG = ({id, name, classname, formtext, feedback ,label, onChange, placeholder, value, error,help,disabled=false, type}) => {
   

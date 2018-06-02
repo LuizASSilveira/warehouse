@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './componentes/css/login.css'
 import App from './App';
 
-import { Switch,Router,Route,BrowserRouter } from 'react-router-dom'
+import { Switch,Route,BrowserRouter } from 'react-router-dom'
 
 import Login from './componentes/login';
 import Criar from './Requisicao/criar';
