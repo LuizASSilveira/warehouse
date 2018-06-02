@@ -38,7 +38,7 @@ class Table extends Component {
   funcConfirm() {
     const requestInfo = {
       method: 'POST',
-      body: JSON.stringify('nome:' + this.state.name, 'solicitacoes:' + selected),
+      body: JSON.stringify({nome: this.state.name  ,solicitacoes: selected}),
       headers: new Headers({
         'Content-type': 'application/json',
         'token': localStorage.getItem('auth-token')
