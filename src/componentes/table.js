@@ -81,10 +81,11 @@ class Table extends Component {
             search={ true }
             pagination
             >
-            <TableHeaderColumn dataField= 'id' isKey>  ID                                  </TableHeaderColumn>
-            <TableHeaderColumn dataField= {this.props.descricao}> {this.props.descricao}  </TableHeaderColumn>
-            <TableHeaderColumn dataField= {this.props.status}>    {this.props.status}     </TableHeaderColumn>
-            <TableHeaderColumn dataField= {this.props.data}>      {this.props.data}       </TableHeaderColumn>
+            <TableHeaderColumn dataField= 'id' isKey>  ID                                 </TableHeaderColumn>
+            <TableHeaderColumn dataField= {this.props.descricaoL}> {this.props.descricao}  </TableHeaderColumn>
+            <TableHeaderColumn dataField= {this.props.dataL}>      {this.props.data}       </TableHeaderColumn>
+            <TableHeaderColumn dataField= {this.props.statusL}>    {this.props.status}     </TableHeaderColumn>
+            <TableHeaderColumn dataField= {this.props.nomeL}>      {this.props.nome}       </TableHeaderColumn>
           </BootstrapTable>
           
           <Button id="buttonPost" color="danger" onClick={this.toggle}>{this.props.buttonName}</Button>
