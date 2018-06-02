@@ -3,9 +3,12 @@ import './css/table.css'
 import {BootstrapTable, TableHeaderColumn} from '../../node_modules/react-bootstrap-table';
 import '../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import Teste from '../componentes/confirmModal';
-import {Button}  from 'reactstrap';
+import {Button,Input}  from 'reactstrap';
+
+import './css/input.css'
 
 var selected= []
+var name = ''
 function onRowSelect(row, isSelected) {
     if(isSelected){
         selected.push(row.id)
@@ -20,18 +23,19 @@ var selectRowProp = {
   onSelect: onRowSelect
 };
 class Table extends Component {
-    constructor(props){
-        super(props)
-        this.state = {products:[],modal: false}
+    constructor(){
+        super()
+        this.state = {products:[], modal: false, name: ''}
         this.toggle= this.toggle.bind(this)
         this.funcCancel= this.funcCancel.bind(this)
         this.funcConfirm= this.funcConfirm.bind(this)
+        this.handleChange = this.handleChange.bind(this);
     }
     
     funcConfirm(){
         const requestInfo = {
           method:'POST',
-          body:JSON.stringify({selected}),
+          body:JSON.stringify({selected, name}),
           headers: new Headers({
             'Content-type':'application/json'
           })
@@ -45,7 +49,6 @@ class Table extends Component {
               throw new Error("não foi possivel salvar as alterações");
             }
           })
-        console.log("salvo")
       }
   
       funcCancel(){
@@ -65,13 +68,18 @@ class Table extends Component {
         this.setState({products:product});
         });      
     }    
+    
+    handleChange(event) {
+      this.setState({name: event.target.value});
+    }
+  
   	
     render(){
       let modal = ""
-        
       if(this.state.modal){
       modal = <Teste onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} mensagem={'Deseja confirmar?'}/>
       }
+
       return (
         <div id ="table">
           <BootstrapTable
@@ -87,9 +95,13 @@ class Table extends Component {
             <TableHeaderColumn dataField= {this.props.nomeL}>      {this.props.nome}       </TableHeaderColumn>
           </BootstrapTable>
           
-          <Button id="buttonPost" color="danger" onClick={this.toggle}>{this.props.buttonName}</Button>
-				    {modal}
-        </div>
+            <div id= "InputButton">
+              <Input  id="nome" type="text" name="nome" value={this.state.value} onChange={this.handleChange}/>
+              <Button id="buttonPost" color="danger" onClick={this.toggle}>{this.props.buttonName}</Button>
+              
+            </div>
+              {modal}
+          </div>
       );
     }
   }

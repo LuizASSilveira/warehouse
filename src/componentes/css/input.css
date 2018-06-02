@@ -1,0 +1,16 @@
+#Inputs{
+    width: 60%;
+    margin: auto;
+}
+#InputButton{
+    display: inline-table;
+    float: right;
+    width: 28%;
+}
+#nome{
+    display: inline-table;
+    width: 50%;  
+}
+#buttonPost{
+    background-color:blue;
+}
