@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import InputG from '../componentes/inputGenerico';
 
 export default class Login extends Component {
     constructor(props){
@@ -36,14 +37,20 @@ export default class Login extends Component {
     
     render(){
         return(
-            <div className="login-box">
-            <h1 className="header-logo">WareHouse</h1>
-            <span>{this.state.msg}</span>
-                <form onSubmit={this.envia.bind(this)}>
-                    <input placeholder=" Usuario" type="text" ref={(input) => this.nome = input}/>
-                    <input placeholder=" Senha" type="password" ref={(input) => this.senha = input}/>
-                    <input type="submit" value="login" />
-                </form>
+            <div class="login">
+                <div class="login-screen">
+                    <div class="app-title">
+                        <h1>Login</h1>
+                    </div>
+                    <div class="login-form">
+                        <span>{this.state.msg}</span>
+                        <form onSubmit={this.envia.bind(this)}>
+                            <InputG placeholder={'Usuário'} type={'text'} ref={'{(input) => this.nome = input}'}/>
+                            <InputG placeholder={'Senha'} type={'password'} ref={'{(input) => this.senha = input}'}/>
+                            <InputG type={'submit'} value={'Entrar'}/>
+                        </form>
+                    </div>
+                </div>
             </div>
         );
     }
