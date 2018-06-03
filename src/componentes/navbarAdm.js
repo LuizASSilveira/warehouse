@@ -38,10 +38,10 @@ export default class navbarAdm extends React.Component {
                   </DropdownToggle>
                   <DropdownMenu right>
                     <DropdownItem>
-                      <NavLink href="https://github.com/reactstrap/reactstrap">Criar Requisição</NavLink>
+                      <NavLink href="/requisicao/criar">Criar Requisição</NavLink>
                     </DropdownItem>
                     <DropdownItem>
-                      <NavLink href="https://github.com/reactstrap/reactstrap">Visualizar Requisição</NavLink>
+                      <NavLink href="/requisicao/historico">Visualizar Requisição</NavLink>
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>)
@@ -53,7 +53,7 @@ export default class navbarAdm extends React.Component {
 
     return (
       <div>
-        <Navbar color="dark" dark expand="md">
+        <Navbar color="dark"  expand="md">
           <NavbarBrand href="/">warehouse</NavbarBrand>
           <NavbarToggler onClick={this.toggle}/>
           <Collapse isOpen={this.state.isOpen} navbar>
@@ -65,13 +65,13 @@ export default class navbarAdm extends React.Component {
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem>
-                    <NavLink href="https://github.com/reactstrap/reactstrap">Criar Solicitação</NavLink>
+                    <NavLink href="/solicitacao/criar">Criar Solicitação</NavLink>
                   </DropdownItem>
                   <DropdownItem>
-                    <NavLink href="https://github.com/reactstrap/reactstrap">Visualizar Solicitação</NavLink>
+                    <NavLink href="/solicitacao/historico">Visualizar Solicitação</NavLink>
                   </DropdownItem>
                   <DropdownItem>
-                    <NavLink href="https://github.com/reactstrap/reactstrap">Validar Solicitação</NavLink>
+                    <NavLink href="/solicitacao/editar">Validar Solicitação</NavLink>
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
@@ -84,10 +84,10 @@ export default class navbarAdm extends React.Component {
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem>
-                    <NavLink href="https://github.com/reactstrap/reactstrap">Adicionar Siorg</NavLink>
+                    <NavLink href="/siorg/criar">Adicionar Siorg</NavLink>
                   </DropdownItem>
                   <DropdownItem>
-                    <NavLink href="https://github.com/reactstrap/reactstrap">Consultar Siorg</NavLink>
+                    <NavLink href="/siorg/lista">Consultar Siorg</NavLink>
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
