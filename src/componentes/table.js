@@ -3,14 +3,10 @@ import './css/table.css'
 import { BootstrapTable, TableHeaderColumn } from '../../node_modules/react-bootstrap-table';
 import '../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import Teste from '../componentes/confirmModal';
-
 import { Button, Input } from 'reactstrap';
-
 import './css/input.css'
 
 var selected = []
-var name = ''
-
 function onRowSelect(row, isSelected) {
   if (isSelected) {
     selected.push(row.id)
@@ -53,7 +49,7 @@ class Table extends Component {
           throw new Error("não foi possivel salvar as alterações");
         }
       })
-  }
+    }
 
   funcCancel() {
     this.toggle()
@@ -65,7 +61,6 @@ class Table extends Component {
       })
     }
   }
-
 
   componentDidMount() {
     fetch(this.props.urlGet, {
@@ -83,7 +78,6 @@ class Table extends Component {
   handleChange(event) {
     this.setState({ name: event.target.value });
   }
-
 
   render() {
     let modal = ""
