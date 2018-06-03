@@ -2,58 +2,98 @@ import React, { Component } from 'react';
 import Nav      from '../componentes/navbarAdm';
 import InputG   from '../componentes/inputGenerico'
 import '../componentes/css/input.css'
-import NumericInput,{valueAsNumber,getValueAsNumber} from 'react-numeric-input';
+import NumericInput from 'react-numeric-input';
+import { Button,Label } from 'reactstrap';
 export default class CriarS extends Component {     
     constructor(){
         super()
-        this.state = { decricao: '', justificativa:'', quantidade:''}
-        this.handleChangeDes = this.handleChangeDes.bind(this);
-        this.handleChangeJus = this.handleChangeJus.bind(this);
-
+        this.state = { decricao: '', justificativa:'', quantidade: 1, siorg:''}
     }
     handleChangeDes(event) {
         this.setState({ decricao: event.target.value });
+        console.log(this.state.decricao)
     }
-    
     handleChangeJus(event) {
         this.setState({ justificativa: event.target.value });
+        console.log(this.state.justificativa)
+    }
+    handleChangeQtd(valor) {
+        this.setState({ quantidade: valor });
+    }
+    handleChangeSio(event) {
+        this.setState({ siorg: event.target.value  });
     }
 
-    handleChangeQtd(event) {
-        console.log(getValueAsNumber(valueAsNumber))
-        
+    salvar(){
+        if(this.state.decricao.length !== 0 && this.state.justificativa.length !== 0){
+            const requestInfo = {
+                method: 'POST',
+                body: JSON.stringify({descricao: this.state.decricao  ,justificativa: this.state.justificativa, quantidade: this.state.quantidade}),
+                headers: new Headers({
+                  'Content-type': 'application/json',
+                  'token': localStorage.getItem('auth-token')
+                })
+              };
+              fetch(this.props.urlPost, requestInfo)
+                .then(response => {
+                  if (response.ok) {
+                    //alerta dados salvos com sucesso
+                    console.log("tudo ok")
+                  } else {
+                    throw new Error("não foi possivel salvar as alterações");
+                  }
+                })
+        }
+        else{
+            console.log("Campos em Brancos")
+        }
     }
-    
     render(){
         return(
             <div>
                 <Nav isadm = {false} />
                 <div id = "Inputs">
+                    <div id='siorgButton'>
+                        <InputG 
+                            label=          {'Siorg:'}
+                            name=           {'siorg'}
+                            placeholder=    {' Nº Siorg'}
+                            type=           {'text'}   
+                            id=             {'inputSiorg'}
+                            disabled=       {true}
+                            value=          {this.state.value} 
+                            onChange=       {this.handleChangeSio.bind(this)}
+                        />
+                        <Button id="buttonSiorg" color="danger" onClick={this.salvar.bind(this)}> Lista Siorg </Button>      
+                    </div>    
+
+                    <Label> Quantidade: </Label><br />
                     <NumericInput 
-                        type=           "number"
                         min=            {1} 
                         max=            {1000} 
-                        value=          {1}
-                        onChange=       {this.handleChangeQtd()}
+                        name=           {'qtd'}
+                        value=          {this.state.quantidade} 
+                        onChange=       {this.handleChangeQtd.bind(this)}
                     />
                     <InputG 
-                        label=          {'Descrição'}
+                        label=          {'Descrição:'}
                         name=           {'descrição'}
                         placeholder=    {'Descrição'}
                         type=           {'text'}   
                         id=             {'inputDesc'}
                         value=          {this.state.value} 
-                        onChange=       {this.handleChangeDes}
+                        onChange=       {this.handleChangeDes.bind(this)}
                     />                    
                     <InputG 
-                        label=          {'Justificativa'}
+                        label=          {'Justificativa:'}
                         name=           {'justificativa'}
                         placeholder=    {'Justificativa'}
                         type=           {'text'}   
                         id=             {'inputJus'}
                         value=          {this.state.value} 
-                        onChange=       {this.handleChangeJus}
+                        onChange=       {this.handleChangeJus.bind(this)}
                     />
+                    <Button id="buttonPost" color="danger" onClick={this.salvar.bind(this)}> Salvar </Button>
                 </div>
             </div>
         )

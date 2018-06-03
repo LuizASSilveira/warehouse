@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './css/table.css'
 import { BootstrapTable, TableHeaderColumn } from '../../node_modules/react-bootstrap-table';
 import '../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
-import Teste from '../componentes/confirmModal';
+import Modal from '../componentes/confirmModal';
 import { Button, Input } from 'reactstrap';
 import './css/input.css'
 
@@ -82,7 +82,7 @@ class Table extends Component {
   render() {
     let modal = ""
     if (this.state.modal) {
-      modal = <Teste onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} mensagem={'Deseja confirmar?'} />
+      modal = <Modal onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} mensagem={'Deseja confirmar?'} />
     }
 
     return (
