@@ -11,6 +11,7 @@ import Login      from './componentes/login'
 import Criar      from './Requisicao/criar'
 import Historico  from './Requisicao/historico'
 import criarS     from './Solicitacao/criar'
+import criarSiorg     from './Siorg/criar'
 
 ReactDOM.render(
 (
@@ -22,6 +23,8 @@ ReactDOM.render(
         <Route        path="/historico" component={Historico} />
 
         <Route        path="/solicitacao/criar" component={criarS} />
+        <Route        path="/siorg/criar"       component={criarSiorg} />
+
       </Switch>
     </App>
   </BrowserRouter>
