@@ -18,22 +18,22 @@
 
 import React, { Component } from "react";
 // import "./App.css";
-import ProdutosTable from "./componentes/table/produtos";
+import SolicitacoesTable from "./componentes/table/solicitacoes";
 
 var data = [
   {
-    siorg: 1,
-    nome: "Arduino",
+    siorg: 5,
+    data: new Date(2018, 11, 24),
     descricao: "Placa Eletrônica Arduino",
-    categoria: "Placa Eletrônica",
-    condicao: "Novo"
+    qtde: 1,
+    status: "Em aberto"
   },
   {
     siorg: 1,
-    nome: "Arduino",
-    descricao: "Placa Eletrônica Arduino",
-    categoria: "Placa Eletrônica",
-    condicao: "Novo"
+    data: new Date(2018, 11, 22),
+    descricao: "APlaca Eletrônica Arduino",
+    qtde: 5,
+    status: "Comprado"
   }
 ];
 
@@ -41,7 +41,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <ProdutosTable data={data} />
+        <SolicitacoesTable data={data} />
       </div>
     );
   }
