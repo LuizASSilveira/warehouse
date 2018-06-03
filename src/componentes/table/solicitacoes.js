@@ -33,6 +33,7 @@ class SolicitacoesTable extends Component {
           data={this.props.data}
           options={this.options}
           pagination
+          search
         >
           <TableHeaderColumn
             dataField="data"
