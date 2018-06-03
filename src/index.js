@@ -18,6 +18,7 @@ import criarS       from './Solicitacao/criar'
 import Orcamento    from './Solicitacao/orcamento'
 import Editar       from './Solicitacao/editar'  
 import HistoricoSol from './Solicitacao/hitorico'
+import ValidarS from './Solicitacao/validar'
 
 ReactDOM.render(
 (
@@ -32,7 +33,7 @@ ReactDOM.render(
         <Route        path="/solicitacao/hitorico"   component={HistoricoSol}/>
         <Route        path="/solicitacao/criar"      component={criarS} />
         <Route        path="/solicitacao/orcamento"  component={Orcamento} />
-        <Route        path="/solicitacao/editar"     component={Editar}/>
+        <Route        path="/solicitacao/validar"     component={ValidarS}/>
         
         <Route        path="/siorg/criar" component={criarSiorg} />
         <Route        path="/siorg/lista" component={criarLista} />
