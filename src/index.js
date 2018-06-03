@@ -20,6 +20,7 @@ import Editar       from './Solicitacao/editar'
 import HistoricoSol from './Solicitacao/hitorico'
 import ValidarS from './Solicitacao/validar'
 
+
 ReactDOM.render(
 (
   <BrowserRouter>
@@ -30,7 +31,7 @@ ReactDOM.render(
         <Route        path="/requisicao/historico"   component={Historico} />
         <Route        path="/requisicao/editar"      component={EditarReq}/>
 
-        <Route        path="/solicitacao/hitorico"   component={HistoricoSol}/>
+        <Route        path="/solicitacao/historico"   component={HistoricoSol}/>
         <Route        path="/solicitacao/criar"      component={criarS} />
         <Route        path="/solicitacao/orcamento"  component={Orcamento} />
         <Route        path="/solicitacao/validar"     component={ValidarS}/>
