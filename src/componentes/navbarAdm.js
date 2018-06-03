@@ -53,7 +53,7 @@ export default class navbarAdm extends React.Component {
 
     return (
       <div>
-        <Navbar color="dark" dark expand="md">
+        <Navbar color="dark"  expand="md">
           <NavbarBrand href="/">warehouse</NavbarBrand>
           <NavbarToggler onClick={this.toggle}/>
           <Collapse isOpen={this.state.isOpen} navbar>
