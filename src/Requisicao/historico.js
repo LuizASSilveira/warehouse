@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Nav from '../componentes/navbarAdm';
-import {Table} from '../componentes/tableHistorico';
+import {Table} from '../componentes/table/tableHistorico';
 
 
 export default class Criar extends Component {     
