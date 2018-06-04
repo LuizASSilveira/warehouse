@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
+import { BootstrapTable, TableHeaderColumn,DeleteButton } from "react-bootstrap-table";
 import "../../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css";
 
 class ValidaSolTable extends React.Component {
