@@ -3,7 +3,14 @@
     margin: auto;
     margin-top: 5%;
 }
-
 #buttonPost{
     float: right;
+    
+}
+#buttonPostEdit{
+margin: 2%;   
+
+}
+#InputButtonEditar{
+    float: left;
 }
