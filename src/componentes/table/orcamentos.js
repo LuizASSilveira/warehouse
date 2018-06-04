@@ -3,11 +3,23 @@ import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import "../../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css";
 
 class OrcamentosTable extends Component {
+    constructor(props){
+        super(props)
+        this.state = {products:[]}
+    }
+    componentDidMount(){
+        fetch(this.props.urlGet + '')
+        .then(response => response.json())
+        .then(product => {         
+        this.setState({products:product});
+        });      
+    }       
   render() {
     return (
       <div>
         <p className="Table-header">Orçamentos</p>
-        <BootstrapTable data={this.props.data}>
+        <BootstrapTable 
+         data = { this.state.products } >
           <TableHeaderColumn isKey dataField="cnpj">
             CNPJ
           </TableHeaderColumn>
