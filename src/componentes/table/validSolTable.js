@@ -3,6 +3,7 @@ import { BootstrapTable, TableHeaderColumn, InsertModalHeader} from "react-boots
 import "../../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css";
 import {Container, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import InputG from "../inputGenerico";
+import OrcamentosTable from "./orcamentos";
 import '../css/validSolTable.css'
 
 
@@ -96,6 +97,7 @@ class ValidaSolTable extends React.Component {
            </Input>
            </div>
           </ModalBody>
+          <OrcamentosTable urlGet={'https://rawgit.com/caionakai/8f1f95eea65eef8797e89ed4b0ac34e9/raw/a42343357eaf8a7c82ce9e5db5e06318c41c4672/orc.json'}/>
           <ModalFooter>
             <Button color="primary" onClick={this.toggle}>Validar</Button>{' '}
             <Button color="secondary" onClick={this.toggle}>Cancelar</Button>
