@@ -14,45 +14,8 @@
     border: 1px solid #dbdbdb;
 }
 
-.login-form input[type='submit'] {
-    background: #000000;
+.login-box input[type='submit'] {
+    background: #3897f0;
     border-color: #3897f0;
     color: white;    
 }
-
-* {
-box-sizing: border-box;
-}
- 
-*:focus {
-    outline: none;
-}
-body {
-font-family: Arial;
-
-}
-.login {
-margin: 20px auto;
-width: 300px;
-}
-.login-screen {
-background-color: #FFF;
-padding: 20px;
-border-radius: 5px
-}
- 
-.app-title {
-text-align: center;
-color: #777;
-}
- 
-.login-form {
-text-align: center;
-}
-.control-group {
-margin-bottom: 10px;
-}
-.btn:hover {
-  background-color: #2980B9;
-}
- 
