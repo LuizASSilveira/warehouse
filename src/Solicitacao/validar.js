@@ -56,19 +56,8 @@ export default class CriarS extends Component {
             <div>
                 <Nav isadm = {false} />
                 <ErrorAlert isOpen={this.state.alerta} id="errorAlert" color="danger" text='Preencha todos os campos'/>
-                <div id = "Inputs">
-                    <div id='siorgButton'>
-                        <InputG label={'Siorg:'} name={'siorg'} placeholder={' Nº Siorg'} type={'text'} id={'inputSiorg'} disabled={true} value={this.state.value}/>    
-                    </div>    
 
-                    <InputG disabled={'true'} label={'Quantidade:'} name={'quantidade'} placeholder={'Quantidade'}/>
-                    <InputG disabled={'true'} label={'Descrição:'} name={'descrição'} placeholder={'Descrição'} type={'text'} id={'inputDesc'} value={this.state.value} onChange={this.handleChangeDes.bind(this)}/>                    
-                    <InputG disabled={'true'} label={'Justificativa:'} name={'justificativa'} placeholder={'Justificativa'} type={'text'} id={'inputJus'} value={this.state.value} onChange={this.handleChangeJus.bind(this)}
-                    />
-                    <Button id="buttonPost" color="danger" onClick={this.salvar.bind(this)}> Salvar </Button>
-                    
-                </div>
-                <ValidaSolTable urlGet={'https://gist.githubusercontent.com/caionakai/14335e0f3b7523e9bd52524deda7a4eb/raw/5cac43a94ef1e6160c6b25a9e463a5d1067c3502/sol.json'}/>
+                <ValidaSolTable urlGet={'https://gist.githubusercontent.com/caionakai/14335e0f3b7523e9bd52524deda7a4eb/raw/312a8f63eef178f581510093e12fe8d34d9d07b4/sol.json'}/>
 
                 
             </div>
