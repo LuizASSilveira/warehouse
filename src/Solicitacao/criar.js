@@ -34,13 +34,14 @@ export default class CriarS extends Component {
                   'token': localStorage.getItem('auth-token')
                 })
               };
-              fetch(this.props.urlPost, requestInfo)
+              fetch('http://localhost:3001/solicitacoes', requestInfo)
                 .then(response => {
                   if (response.ok) {
                     //alerta dados salvos com sucesso
                     console.log("tudo ok")
                   } else {
-                    throw new Error("não foi possivel salvar as alterações");
+                      console.log(response)
+                    throw new Error(response);
                   }
                 })
         }
