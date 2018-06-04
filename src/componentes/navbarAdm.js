@@ -71,7 +71,7 @@ export default class navbarAdm extends React.Component {
                     <NavLink href="/solicitacao/historico">Visualizar Solicitação</NavLink>
                   </DropdownItem>
                   <DropdownItem>
-                    <NavLink href="/solicitacao/editar">Validar Solicitação</NavLink>
+                    <NavLink href="/solicitacao/validar">Validar Solicitação</NavLink>
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>

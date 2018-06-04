@@ -7,7 +7,7 @@ class SolicitacoesTable extends Component {
     return (
       <div>
         <p className="Table-header">Solicitações</p>
-        <BootstrapTable data={this.props.data}>
+        <BootstrapTable>
           <TableHeaderColumn isKey dataField="siorg">
             SIORG
           </TableHeaderColumn>
