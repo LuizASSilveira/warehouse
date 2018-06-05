@@ -34,7 +34,7 @@ class Table extends Component {
   funcConfirm() {
     const requestInfo = {
       method: 'POST',
-      body: JSON.stringify({nome: this.state.name  ,solicitacoes: selected}),
+      body: JSON.stringify({nome: this.state.name ,solicitacoes: selected}),
       headers: new Headers({
         'Content-type': 'application/json',
         'token': localStorage.getItem('auth-token')
@@ -49,12 +49,16 @@ class Table extends Component {
           throw new Error("não foi possivel salvar as alterações");
         }
       })
-    }
+    
+    this.funcCancel()  
+}
 
   funcCancel() {
-    this.toggle()
+    this.setState({modal:false})
   }
   toggle() {
+    
+    this.setState({modal:true})
     if (selected.length !== 0) {
       this.setState({
         modal: !this.state.modal
@@ -80,10 +84,6 @@ class Table extends Component {
   }
 
   render() {
-    let modal = ""
-    if (this.state.modal) {
-      modal = <Modal onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} mensagem={'Deseja confirmar?'} />
-    }
 
     return (
       <div id="table">
@@ -107,7 +107,7 @@ class Table extends Component {
           <Button id="buttonPost" color="danger" onClick={this.toggle}>{this.props.buttonName}</Button>
 
         </div>
-        {modal}
+        <Modal modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} mensagem={'Deseja confirmar?'} />
       </div>
     );
   }

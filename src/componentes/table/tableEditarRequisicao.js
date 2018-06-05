@@ -3,8 +3,11 @@ import { BootstrapTable, TableHeaderColumn } from '../../../node_modules/react-b
 import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import { Button, Input } from 'reactstrap';
 import '../css/table.css'
+import Modal from '../confirmModal'
+
 
 const options = {
+  noDataText: 'Não há dados.',
   onRowDoubleClick: function(row) {
     console.log(row.id)
   }
@@ -22,13 +25,14 @@ class TableEditar extends Component {
   }
 
   funcConfirm() {
+    this.funcCancel()
   }
 
   funcCancel() {
-   
+    this.setState({modal: false})
   }
   toggle() {
-   
+   this.setState({modal: true})
    
   }
 
@@ -57,7 +61,7 @@ class TableEditar extends Component {
     return (
       <div id="table">  
          <div id="InputButtonEditar">
-          <Input readOnly  placeholder="Nº Requisição" id="nome" type="text" name="nome"  />
+          <Input placeholder="Nº Requisição" id="nome" type="text" name="nome"  />
           <Button id="buttonPostEdit" color="danger" onClick={this.toggle}>{this.props.buttonName}</Button>
         </div> 
 
@@ -66,7 +70,6 @@ class TableEditar extends Component {
           options={ options }
           search={true}
           searchPlaceholder='Pesquisar'
-          options={{noDataText: 'Não há dados.'}}
           pagination
         >
           <TableHeaderColumn dataField='id' isKey>  ID                                 </TableHeaderColumn>
@@ -74,8 +77,7 @@ class TableEditar extends Component {
           <TableHeaderColumn dataField={this.props.nomeL}>      {this.props.nome}       </TableHeaderColumn>
           <TableHeaderColumn dataField={this.props.numeroL}>    {this.props.numero}     </TableHeaderColumn>
         </BootstrapTable>
-
-       
+        <Modal modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} mensagem={'Deseja confirmar?'} />
         
       </div>
     );

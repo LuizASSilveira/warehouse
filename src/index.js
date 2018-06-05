@@ -15,8 +15,7 @@ import criarSiorg   from './Siorg/criar'
 import criarLista   from './Siorg/pesquisar'
 
 import criarS       from './Solicitacao/criar'
-import Orcamento    from './Solicitacao/orcamento'
-import Editar       from './Solicitacao/editar'  
+import Orcamento    from './Solicitacao/orcamento'  
 import HistoricoSol from './Solicitacao/historico'
 import ValidarS from './Solicitacao/validar'
 
