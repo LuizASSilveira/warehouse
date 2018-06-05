@@ -60,7 +60,6 @@ class ValidaSolTable extends React.Component {
   render() {
   	const selectRowProp = {
  		 mode: 'radio',
- 		 bgColor: 'black', 
  		 hideSelectColumn: true,  
  		 clickToSelect: true,
  		 onSelect: this.properFunc
