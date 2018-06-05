@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Nav from '../componentes/navbarAdm';
-import {Table} from '../componentes/table';
+import {TableEditar} from '../componentes/table/tableEditarRequisicao';
 
 export default class Criar extends Component {     
     render(){
@@ -9,16 +9,13 @@ export default class Criar extends Component {
             <div>
                 <Nav    isadm = {true} />
 
-                <Table  buttonName= {'Criar Requisicao'}
-                        urlGet=     {'http://localhost:3001/solicitacoes'}
-                        urlPost=    {'http://localhost:3001/requisicoes'}
-                        descricao=  {'Descrição'}
-                        status=     {'Estado'}
+                <TableEditar  buttonName= {'Editar'}
+                        urlGet=     {'https://raw.githubusercontent.com/LuizASSilveira/pi-almoxarifado/master/listSolicitacao.json'}
+                        numero=     {'Numero'}
                         data=       {'Data'}
                         nome=       {'Solicitante'}
 
-                        descricaoL=  {'descricao'}
-                        statusL=     {'status'}
+                        numeroL=     {'numero'}
                         dataL=       {'data'}
                         nomeL=       {'nome'}
                 />                   
