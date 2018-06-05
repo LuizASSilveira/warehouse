@@ -57,7 +57,7 @@ export default class CriarS extends Component {
                 <Nav isadm = {false} />
                 <ErrorAlert isOpen={this.state.alerta} id="errorAlert" color="danger" text='Preencha todos os campos'/>
 
-                <ValidaSolTable urlGet={'https://gist.githubusercontent.com/caionakai/14335e0f3b7523e9bd52524deda7a4eb/raw/312a8f63eef178f581510093e12fe8d34d9d07b4/sol.json'}/>
+                <ValidaSolTable urlGet={'http://localhost:3001/solicitacoes/validar'}/>
 
                 
             </div>

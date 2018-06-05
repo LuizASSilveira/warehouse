@@ -30,7 +30,7 @@ export default class Login extends Component {
                 localStorage.setItem('auth-token',obj.token);
                 localStorage.setItem('isAdm',obj.isAdm);
                 
-                Redirect.push('/solicitacao/historico')
+               // Redirect.push('/solicitacao/historico')
             })
             .catch(error => {
                 this.setState({msg:error.message});
