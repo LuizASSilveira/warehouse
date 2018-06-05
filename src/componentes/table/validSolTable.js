@@ -14,6 +14,7 @@ class ValidaSolTable extends React.Component {
         this.state = {
        		modal: false,
        		products:[],
+          feed: false,
        		selected: {descricao:'', data: '', siorg: '', qtde:'', status: ''}
         }
     	this.toggle = this.toggle.bind(this);
@@ -47,17 +48,22 @@ class ValidaSolTable extends React.Component {
     }
     loadSelect(){
     	let status = ['ABERTA','REQUISITADA', 'COMPRADA', 'DESERTO', 'CANCELADA']
-    	let options = []
-    	options.push(<option>{this.state.selected.status}</option>)
-    	status.forEach( (stat)=>{
-    		if (stat != this.state.selected.status){
-    			options.push(<option>{stat}</option>)
-    		}    		
-    	})
-    	return options
+    	return status.map( (stat)=>{
+    			return <option>{stat}</option>
+      })
+    }
+
+    setselect = (e) =>{
+      let x = this.state.selected
+      x.status= e.target.value
+      this.setState({selected: x})
     }
 
   render() {
+    let feed
+    if(this.state.selected.status == 'CANCELADA'){
+      feed = <InputG label={'Feedback:'} type={'textarea'} placeholder={'Insira um comentário para o solicitante sobre o motivo do cancelamento da solicitação.'}/>
+    }
   	const selectRowProp = {
  		 mode: 'radio',
  		 hideSelectColumn: true,  
@@ -90,11 +96,11 @@ class ValidaSolTable extends React.Component {
            <InputG label={'Siorg:'} disabled={true} value={this.state.selected.siorg}/>
            <InputG label={'Data'} disabled={true} value={this.state.selected.data}/>    
            <InputG label={'Descricao:'} disabled={'true'} value={this.state.selected.descricao} />
-           <InputG label={'Quantidade:'} disabled={'true'}  value={this.state.selected.qtde}/>
-		   <InputG label={'FeedBack:'} type={'textarea'} placeholder={'Insira um comentário para o solicitante sobre o motivo da aprovação ou não da solicitação.'}/>
-           <Input type="select" name="select" id="exampleSelect">
+           <InputG label={'Quantidade:'} disabled={'true'}  value={this.state.selected.qtde}/>		   
+           <Input type="select" name="select" id="exampleSelect" value={this.state.selected.status} onChange={this.setselect}>
             { this.loadSelect() }
            </Input>
+           {feed}
            </div>
           </ModalBody>
           <OrcamentosTable urlGet={'https://rawgit.com/caionakai/8f1f95eea65eef8797e89ed4b0ac34e9/raw/a42343357eaf8a7c82ce9e5db5e06318c41c4672/orc.json'}/>
