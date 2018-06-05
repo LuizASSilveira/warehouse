@@ -92,6 +92,8 @@ class Table extends Component {
           selectRow={selectRowProp}
           search={true}
           pagination
+          searchPlaceholder='Pesquisar'
+          options={{noDataText: 'Não há dados.'}}
         >
           <TableHeaderColumn dataField='id' isKey>  ID                                 </TableHeaderColumn>
           <TableHeaderColumn dataField={this.props.descricaoL}> {this.props.descricao}  </TableHeaderColumn>

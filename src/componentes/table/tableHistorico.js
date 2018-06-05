@@ -28,6 +28,8 @@ class Table extends Component {
         <BootstrapTable
           data={this.state.products}
           search={true}
+          searchPlaceholder='Pesquisar' 
+          options={{noDataText: 'Não há dados.'}}
           pagination
         >
           <TableHeaderColumn dataField='id' isKey>  ID                                  </TableHeaderColumn>

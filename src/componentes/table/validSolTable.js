@@ -70,7 +70,8 @@ class ValidaSolTable extends React.Component {
         <BootstrapTable             
           data = { this.state.products } 
 		  selectRow = {selectRowProp}
-		  cursor={true}
+		  searchPlaceholder='Pesquisar'
+          options={{noDataText: 'Não há dados.'}}
 		  hover={true}
         >
           <TableHeaderColumn isKey dataField="siorg">

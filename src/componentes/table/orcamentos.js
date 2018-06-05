@@ -19,7 +19,10 @@ class OrcamentosTable extends Component {
       <div>
         <p className="Table-header">Orçamentos</p>
         <BootstrapTable 
-         data = { this.state.products } >
+         data = { this.state.products } 
+         searchPlaceholder='Pesquisar'
+         options={{noDataText: 'Não há dados.'}}
+        >
           <TableHeaderColumn isKey dataField="cnpj">
             CNPJ
           </TableHeaderColumn>

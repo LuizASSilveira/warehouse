@@ -32,6 +32,8 @@ class TableSiorg extends Component {
                     data={this.state.lista}
                     search={true}
                     pagination
+                    searchPlaceholder='Pesquisar'
+                    options={{noDataText: 'Não há dados.'}}
                 >
                     <TableHeaderColumn dataField={this.props.siorgL} isKey>     {this.props.siorg}     </TableHeaderColumn>
                     <TableHeaderColumn dataField={this.props.dataL}>      {this.props.data}       </TableHeaderColumn>

@@ -65,6 +65,8 @@ class TableEditar extends Component {
           data={this.state.products}
           options={ options }
           search={true}
+          searchPlaceholder='Pesquisar'
+          options={{noDataText: 'Não há dados.'}}
           pagination
         >
           <TableHeaderColumn dataField='id' isKey>  ID                                 </TableHeaderColumn>
