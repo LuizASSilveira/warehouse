@@ -3,12 +3,22 @@ import Nav      from '../componentes/navbarAdm';
 import InputG   from '../componentes/inputGenerico'
 import '../componentes/css/input.css'
 import NumericInput from 'react-numeric-input';
-import { Button,Label } from 'reactstrap';
+import { Button,Label , Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import {ErrorAlert} from '../componentes/alerta'
 export default class CriarS extends Component {     
     constructor(){
         super()
-        this.state = { decricao: '', justificativa:'', quantidade: 1, siorg:'', alerta: false}
+        this.state = { 
+            decricao: '', justificativa:'', quantidade: 1, siorg:'', alerta: false,
+            modal: false
+        };
+        this.toggle = this.toggle.bind(this);
+    }
+
+    toggle() {
+      this.setState({
+        modal: !this.state.modal
+      });
     }
     handleChangeDes(event) {
         this.setState({ decricao: event.target.value });
@@ -57,7 +67,17 @@ export default class CriarS extends Component {
                 <div id = "Inputs">
                     <div id='siorgButton'>
                         <InputG label={'Siorg:'} name={'siorg'} placeholder={' Nº Siorg'} type={'text'} id={'inputSiorg'} disabled={true} value={this.state.value}/>
-                        <Button id="buttonSiorg" color="danger" onClick={this.salvar.bind(this)}> Lista Siorg </Button>      
+                        <Button color="danger" onClick={this.toggle}>Lista Siorg</Button>      
+                        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                          <ModalHeader toggle={this.toggle}>Lista Siorg</ModalHeader>
+                          <ModalBody>
+                             oi
+                          </ModalBody>
+                          <ModalFooter>
+                            <Button color="primary" onClick={this.toggle}>Confirmar</Button>{' '}
+                            <Button color="secondary" onClick={this.toggle}>Cancelar</Button>
+                          </ModalFooter>
+                        </Modal>
                     </div>    
 
                     <Label> Quantidade: </Label><br />
