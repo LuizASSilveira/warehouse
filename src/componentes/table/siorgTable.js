@@ -4,7 +4,7 @@ import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
 
-class TableSiorg extends Component {
+export default class TableSiorg extends Component {
     constructor() {
         super()
         this.state = { lista: []}
@@ -35,9 +35,9 @@ class TableSiorg extends Component {
                     searchPlaceholder='Pesquisar'
                     options={{noDataText: 'Não há dados.'}}
                 >
-                    <TableHeaderColumn dataField={this.props.siorgL} isKey>     {this.props.siorg}     </TableHeaderColumn>
-                    <TableHeaderColumn dataField={this.props.dataL}>      {this.props.data}       </TableHeaderColumn>
-                    <TableHeaderColumn dataField={this.props.descricaoL}> {this.props.descricao}  </TableHeaderColumn>
+                    <TableHeaderColumn dataField="siorgL" isKey>     Nº Siorg     </TableHeaderColumn>
+                    <TableHeaderColumn dataField="dataL">      Data       </TableHeaderColumn>
+                    <TableHeaderColumn dataField="descricaoL"> Descricao  </TableHeaderColumn>
 
                 </BootstrapTable>
 

@@ -21,6 +21,10 @@
 }
 #buttonSiorg{
     display: block;
-    margin-top: -6.6%;
+    margin-top: -8.3%;
     margin-left: 31%;
+}
+
+.modal-xl { 
+    max-width: 1140px; 
 }

@@ -4,7 +4,8 @@ import InputG   from '../componentes/inputGenerico'
 import '../componentes/css/input.css'
 import NumericInput from 'react-numeric-input';
 import { Button,Label , Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import {ErrorAlert} from '../componentes/alerta'
+import {ErrorAlert} from '../componentes/alerta';
+import TableSiorg from "../componentes/table/siorgTable";
 export default class CriarS extends Component {     
     constructor(){
         super()
@@ -67,11 +68,11 @@ export default class CriarS extends Component {
                 <div id = "Inputs">
                     <div id='siorgButton'>
                         <InputG label={'Siorg:'} name={'siorg'} placeholder={' Nº Siorg'} type={'text'} id={'inputSiorg'} disabled={true} value={this.state.value}/>
-                        <Button color="danger" onClick={this.toggle}>Lista Siorg</Button>      
-                        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                        <Button id="buttonSiorg" color="danger" onClick={this.toggle}>Lista Siorg</Button>      
+                        <Modal isOpen={this.state.modal} toggle={this.toggle} className='modal-xl'>
                           <ModalHeader toggle={this.toggle}>Lista Siorg</ModalHeader>
                           <ModalBody>
-                             oi
+                             <TableSiorg urlGet={'https://gist.githubusercontent.com/caionakai/1ee2b50876f4ac8fe689b89f35580851/raw/c7909049b0603707ad77c7bc0ea65c857014ca72/siorg.json'}/>
                           </ModalBody>
                           <ModalFooter>
                             <Button color="primary" onClick={this.toggle}>Confirmar</Button>{' '}
