@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { BootstrapTable, TableHeaderColumn, InsertModalHeader} from "react-bootstrap-table";
+import { BootstrapTable, TableHeaderColumn, InsertModalHeader } from "react-bootstrap-table";
 import "../../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css";
-import {Container, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Container, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import InputG from "../inputGenerico";
 import OrcamentosTable from "./orcamentos";
 import '../css/validSolTable.css'
@@ -19,25 +19,25 @@ class ValidaSolTable extends React.Component {
         }
     	this.toggle = this.toggle.bind(this);
     	this.properFunc = this.properFunc.bind(this);
-    }
+  }
 
-    toggle() {
-  		this.setState({
-     	 modal: !this.state.modal
-   		});
-  	} 
+  toggle() {
+    this.setState({
+      modal: !this.state.modal
+    });
+  }
 
-    componentDidMount(){
-        fetch(this.props.urlGet + '')
-        .then(response => response.json())
-        .then(product => {        
+  componentDidMount() {
+    fetch(this.props.urlGet + '')
+      .then(response => response.json())
+      .then(product => {
         this.setState(
-        	{
-        		products:product
-        	}
+          {
+            products: product
+          }
         );
-        });      
-    } 
+      });
+  }
 
     properFunc(row, isSelected, e){
     	console.log(row)
@@ -73,12 +73,12 @@ class ValidaSolTable extends React.Component {
     return (
       <div className="teste">
         <p className="Table-header">Selecione a solicitação para valida-lá.</p>
-        <BootstrapTable             
-          data = { this.state.products } 
-		  selectRow = {selectRowProp}
-		  searchPlaceholder='Pesquisar'
-          options={{noDataText: 'Não há dados.'}}
-		  hover={true}
+        <BootstrapTable
+          data={this.state.products}
+          selectRow={selectRowProp}
+          searchPlaceholder='Pesquisar'
+          options={{ noDataText: 'Não há dados.' }}
+          hover={true}
         >
           <TableHeaderColumn isKey dataField="siorg">
             SIORG
@@ -89,7 +89,7 @@ class ValidaSolTable extends React.Component {
           <TableHeaderColumn dataField="status">Status</TableHeaderColumn>
         </BootstrapTable>
 
-		<Modal isOpen={this.state.modal} toggle={this.toggle} className='modal-xl'>
+        <Modal isOpen={this.state.modal} toggle={this.toggle} className='modal-xl'>
           <ModalHeader toggle={this.toggle}> Validar Solicitação </ModalHeader>
           <ModalBody>
            <div className='anything'>
@@ -103,7 +103,7 @@ class ValidaSolTable extends React.Component {
            {feed}
            </div>
           </ModalBody>
-          <OrcamentosTable urlGet={'https://rawgit.com/caionakai/8f1f95eea65eef8797e89ed4b0ac34e9/raw/a42343357eaf8a7c82ce9e5db5e06318c41c4672/orc.json'}/>
+          <OrcamentosTable urlGet={'https://rawgit.com/caionakai/8f1f95eea65eef8797e89ed4b0ac34e9/raw/a42343357eaf8a7c82ce9e5db5e06318c41c4672/orc.json'} />
           <ModalFooter>
             <Button color="primary" onClick={this.toggle}>Validar</Button>{' '}
             <Button color="secondary" onClick={this.toggle}>Cancelar</Button>

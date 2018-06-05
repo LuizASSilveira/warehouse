@@ -62,8 +62,8 @@ export default class CriarS extends Component {
 
                     <Label> Quantidade: </Label><br />
                     <NumericInput min={1}max={1000} name={'qtd'} value={this.state.quantidade} onChange={this.handleChangeQtd.bind(this)}/>
-                    <InputG label={'Descrição:'} name={'descrição'} placeholder={'Descrição'} type={'text'} id={'inputDesc'} value={this.state.value} onChange={this.handleChangeDes.bind(this)}/>                    
-                    <InputG label={'Justificativa:'} name={'justificativa'} placeholder={'Justificativa'} type={'text'} id={'inputJus'} value={this.state.value} onChange={this.handleChangeJus.bind(this)}
+                    <InputG label={'Descrição:'} name={'descrição'} placeholder={'Descrição'} type={'textarea'} id={'inputDesc'} value={this.state.value} onChange={this.handleChangeDes.bind(this)}/>                    
+                    <InputG label={'Justificativa:'} name={'justificativa'} placeholder={'Justificativa'} type={'textarea'} id={'inputJus'} value={this.state.value} onChange={this.handleChangeJus.bind(this)}
                     />
                     <Button id="buttonPost" color="danger" onClick={this.salvar.bind(this)}> Salvar </Button>
                     

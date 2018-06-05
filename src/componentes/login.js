@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './css/login.css';
+import { Redirect } from 'react-router-dom'
 
 export default class Login extends Component {
     constructor(props){
@@ -28,8 +29,8 @@ export default class Login extends Component {
                 var obj = JSON.parse(token);
                 localStorage.setItem('auth-token',obj.token);
                 localStorage.setItem('isAdm',obj.isAdm);
-                console.log(token)
                 
+                Redirect.push('/solicitacao/historico')
             })
             .catch(error => {
                 this.setState({msg:error.message});
