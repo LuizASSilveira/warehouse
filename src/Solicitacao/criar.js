@@ -3,7 +3,7 @@ import Nav      from '../componentes/navbarAdm';
 import InputG   from '../componentes/inputGenerico'
 import '../componentes/css/input.css'
 import NumericInput from 'react-numeric-input';
-import { Button,Label , Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import {Input, Button,Label , Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import {ErrorAlert} from '../componentes/alerta';
 import TableSiorg from "../componentes/table/siorgTable";
 export default class CriarS extends Component {     
@@ -67,8 +67,9 @@ export default class CriarS extends Component {
                 <ErrorAlert isOpen={this.state.alerta} id="errorAlert" color="danger" text='Preencha todos os campos'/>
                 <div id = "Inputs">
                     <div id='siorgButton'>
-                        <InputG label={'Siorg:'} name={'siorg'} placeholder={' Nº Siorg'} type={'text'} id={'inputSiorg'} disabled={true} value={this.state.value}/>
-                        <Button id="buttonSiorg" color="danger" onClick={this.toggle}>Lista Siorg</Button>      
+                        <Input label='Siorg:' name='siorg' placeholder='Nº Siorg' type='text' id='inputSiorg' disabled='true' value={this.state.value}/>
+                        <Button id="buttonSiorg" color="secondary" onClick={this.toggle}>Lista Siorg</Button> 
+                    </div>     
                         <Modal isOpen={this.state.modal} toggle={this.toggle} className='modal-xl'>
                           <ModalHeader toggle={this.toggle}>Lista Siorg</ModalHeader>
                           <ModalBody>
@@ -79,14 +80,14 @@ export default class CriarS extends Component {
                             <Button color="secondary" onClick={this.toggle}>Cancelar</Button>
                           </ModalFooter>
                         </Modal>
-                    </div>    
+                    {/* </div>     */}
 
                     <Label> Quantidade: </Label><br />
                     <NumericInput min={1}max={1000} name={'qtd'} value={this.state.quantidade} onChange={this.handleChangeQtd.bind(this)}/>
                     <InputG label={'Descrição:'} name={'descrição'} placeholder={'Descrição'} type={'textarea'} id={'inputDesc'} value={this.state.value} onChange={this.handleChangeDes.bind(this)}/>                    
                     <InputG label={'Justificativa:'} name={'justificativa'} placeholder={'Justificativa'} type={'textarea'} id={'inputJus'} value={this.state.value} onChange={this.handleChangeJus.bind(this)}
                     />
-                    <Button id="buttonPost" color="danger" onClick={this.salvar.bind(this)}> Salvar </Button>
+                    <Button id="buttonPost" color="primary" onClick={this.salvar.bind(this)}> Salvar </Button>
                     
                 </div>
             </div>

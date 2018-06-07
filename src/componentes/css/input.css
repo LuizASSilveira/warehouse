@@ -16,13 +16,15 @@
 #siorgButton{
     width: 100%;
 }
+
 #inputSiorg{
     width: 30%;
+    display: inline;
 }
 #buttonSiorg{
-    display: block;
-    margin-top: -8.3%;
-    margin-left: 31%;
+    display: inline;
+    margin: 15px;
+    vertical-align: middle;
 }
 
 .modal-xl { 

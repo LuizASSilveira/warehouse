@@ -36,7 +36,6 @@ export default class TableSiorg extends Component {
                     options={{noDataText: 'Não há dados.'}}
                 >
                     <TableHeaderColumn dataField="siorgL" isKey>     Nº Siorg     </TableHeaderColumn>
-                    <TableHeaderColumn dataField="dataL">      Data       </TableHeaderColumn>
                     <TableHeaderColumn dataField="descricaoL"> Descricao  </TableHeaderColumn>
 
                 </BootstrapTable>
