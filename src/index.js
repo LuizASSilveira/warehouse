@@ -18,6 +18,7 @@ import criarS       from './Solicitacao/criar'
 import Orcamento    from './Solicitacao/orcamento'  
 import HistoricoSol from './Solicitacao/historico'
 import ValidarS from './Solicitacao/validar'
+import ValidEspec from './Solicitacao/validarEspec'
 
 
 ReactDOM.render(
@@ -34,6 +35,7 @@ ReactDOM.render(
         <Route        path="/solicitacao/criar"      component={criarS} />
         <Route        path="/solicitacao/orcamento"  component={Orcamento} />
         <Route        path="/solicitacao/validar"     component={ValidarS}/>
+        <Route        path="/solicitacao/teste"     component={ValidEspec}/>
         
         <Route        path="/siorg/criar" component={criarSiorg} />
         <Route        path="/siorg/lista" component={criarLista} />
