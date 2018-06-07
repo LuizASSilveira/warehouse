@@ -5,7 +5,8 @@ import { Container, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter } 
 import InputG from "../inputGenerico";
 import OrcamentosTable from "./orcamentos";
 import '../css/validSolTable.css'
-
+import {Link, Redirect} from 'react-router-dom'
+import Moment from 'react-moment'
 
 
 class ValidaSolTable extends React.Component {
@@ -14,11 +15,14 @@ class ValidaSolTable extends React.Component {
     this.state = {
       modal: false,
       products: [],
+      redirect: false,
+      id: '',
       feed: false,
       selected: { descricao: '', data: '', siorg: '', qtde: '', status: '' }
     }
     this.toggle = this.toggle.bind(this);
     this.properFunc = this.properFunc.bind(this);
+    this.onRowClick = this.onRowClick.bind(this);
   }
 
   toggle() {
@@ -60,6 +64,11 @@ class ValidaSolTable extends React.Component {
     this.setState({ selected: x })
   }
 
+  onRowClick(row){
+    this.setState({ id: row.id})
+    this.setState({ redirect : true })
+  }
+
   render() {
     let feed
     if (this.state.selected.status == 'CANCELADA') {
@@ -71,6 +80,22 @@ class ValidaSolTable extends React.Component {
       clickToSelect: true,
       onSelect: this.properFunc
     }
+
+    const { handleSubmit,history }=this.props;
+
+
+    const options ={
+      noDataText: 'Não há dados.',
+      onRowClick: this.onRowClick
+        
+    }
+
+    if(this.state.redirect) {
+      return(
+          <Redirect to="/solicitacao/teste"/>
+      )
+    }
+    
     return (
       <div className="teste">
         <p className="Table-header">Selecione a solicitação para valida-lá.</p>
@@ -78,9 +103,10 @@ class ValidaSolTable extends React.Component {
           data={this.state.products}
           selectRow={selectRowProp}
           searchPlaceholder='Pesquisar'
-          options={{ noDataText: 'Não há dados.' }}
           hover={true}
+          options={options}
         >
+        {console.log(this.state.products[0])}
           <TableHeaderColumn isKey dataField="siorg">
             SIORG
           </TableHeaderColumn>
@@ -90,26 +116,7 @@ class ValidaSolTable extends React.Component {
           <TableHeaderColumn dataField="status">Status</TableHeaderColumn>
         </BootstrapTable>
 
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className='modal-xl'>
-          <ModalHeader toggle={this.toggle}> Validar Solicitação </ModalHeader>
-          <ModalBody>
-            <div className='anything'>
-              <InputG label={'Siorg:'}      disabled={true}   value={this.state.selected.siorg} />
-              <InputG label={'Data'}        disabled={true}   value={this.state.selected.data} />
-              <InputG label={'Descricao:'}  disabled={'true'} value={this.state.selected.descricao} />
-              <InputG label={'Quantidade:'} disabled={'true'} value={this.state.selected.quantidade} />
-              <Input type="select" name="select" id="exampleSelect" value={this.state.selected.status} onChange={this.setselect}>
-                {this.loadSelect()}
-              </Input>
-              {feed}
-            </div>
-          </ModalBody>
-          <OrcamentosTable urlGet={'https://rawgit.com/caionakai/8f1f95eea65eef8797e89ed4b0ac34e9/raw/a42343357eaf8a7c82ce9e5db5e06318c41c4672/orc.json'} />
-          <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>Validar</Button>{' '}
-            <Button color="secondary" onClick={this.toggle}>Cancelar</Button>
-          </ModalFooter>
-        </Modal>
+        
       </div>
     );
   }
