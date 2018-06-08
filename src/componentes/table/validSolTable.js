@@ -71,6 +71,7 @@ class ValidaSolTable extends React.Component {
 
   render() {
     let feed
+    var teste
     if (this.state.selected.status == 'CANCELADA') {
       feed = <InputG label={'Feedback:'} type={'textarea'} placeholder={'Insira um comentário para o solicitante sobre o motivo do cancelamento da solicitação.'} />
     }
@@ -92,8 +93,9 @@ class ValidaSolTable extends React.Component {
 
     if(this.state.redirect) {
       return(
-          <Redirect to="/solicitacao/teste"/>
-      )
+          <Redirect to= "/solicitacao/teste"   />
+        )
+      
     }
     
     return (

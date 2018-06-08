@@ -40,7 +40,6 @@ ReactDOM.render(
         <Route        path="/siorg/criar" component={criarSiorg} />
         <Route        path="/siorg/lista" component={criarLista} />
 
-        <Redirect to="/"  />        
       </Switch>
     </App>
   </BrowserRouter>
