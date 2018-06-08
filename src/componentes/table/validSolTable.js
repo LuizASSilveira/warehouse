@@ -97,7 +97,7 @@ class ValidaSolTable extends React.Component {
         )
       
     }
-    
+  
     return (
       <div className="teste">
         <p className="Table-header">Selecione a solicitação para valida-lá.</p>
@@ -118,7 +118,6 @@ class ValidaSolTable extends React.Component {
           <TableHeaderColumn dataField="status">Status</TableHeaderColumn>
         </BootstrapTable>
 
-        
       </div>
     );
   }
