@@ -1,21 +1,17 @@
 import React, { Component } from 'react';
 import Nav      from '../componentes/navbarAdm';
-import InputG   from '../componentes/inputGenerico'
 import '../componentes/css/input.css'
-import NumericInput from 'react-numeric-input';
-import { Button,Label } from 'reactstrap';
 import {ErrorAlert} from '../componentes/alerta'
-import SolicitacoesTable from '../componentes/table/solicitacoes';
 import ValidaSolTable from '../componentes/table/validSolTable';
 
 export default class CriarS extends Component {     
     constructor(){
         super()
-        this.state = { decricao: '', justificativa:'', quantidade: 1, siorg:'', alerta: false}
+        this.state = { descricao: '', justificativa:'', quantidade: 1, siorg:'', alerta: false}
     }
     handleChangeDes(event) {
         this.setState({ decricao: event.target.value });
-        console.log(this.state.decricao)
+        console.log(this.state.descricao)
     }
     handleChangeJus(event) {
         this.setState({ justificativa: event.target.value });
@@ -31,7 +27,7 @@ export default class CriarS extends Component {
         if(this.state.decricao.length !== 0 && this.state.justificativa.length !== 0){
             const requestInfo = {
                 method: 'POST',
-                body: JSON.stringify({descricao: this.state.decricao  ,justificativa: this.state.justificativa, quantidade: this.state.quantidade}),
+                body: JSON.stringify({descricao: this.state.descricao  ,justificativa: this.state.justificativa, quantidade: this.state.quantidade}),
                 headers: new Headers({
                   'Content-type': 'application/json',
                   'token': localStorage.getItem('auth-token')
@@ -43,7 +39,7 @@ export default class CriarS extends Component {
                     //alerta dados salvos com sucesso
                     console.log("tudo ok")
                   } else {
-                    throw new Error("não foi possivel salvar as alterações");
+                    throw new Error("Não foi possivel salvar as alterações");
                   }
                 })
         }
