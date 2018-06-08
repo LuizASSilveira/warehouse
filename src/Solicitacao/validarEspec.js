@@ -30,19 +30,6 @@ export default class validEspec extends Component {
     });
   }
 
-  componentDidMount() {
-    fetch(this.props.urlGet, {
-      method: 'GET',
-      headers: new Headers({
-        'Content-type': 'application/json',
-        'token': localStorage.getItem('auth-token')
-      })
-    }).then(response => response.json())
-      .then(product => {
-        this.setState({ products: product });
-      });
-  }
-
   properFunc(row, isSelected, e) {
     console.log(row)
     this.setState({
