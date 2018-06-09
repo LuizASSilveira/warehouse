@@ -30,6 +30,19 @@ export default class validEspec extends Component {
     });
   }
 
+  componentDidMount() {
+    fetch(this.props.urlGet, {
+      method: 'GET',
+      headers: new Headers({
+        'Content-type': 'application/json',
+        'token': localStorage.getItem('auth-token')
+      })
+    }).then(response => response.json())
+      .then(product => {
+        this.setState({ products: product });
+      });
+  }
+
   properFunc(row, isSelected, e) {
     console.log(row)
     this.setState({
@@ -39,6 +52,7 @@ export default class validEspec extends Component {
   }
   loadSelect() {
     let status = ['ABERTA', 'REQUISITADA', 'COMPRADA', 'DESERTO', 'CANCELADA']
+    console.log(this.state)
     return status.map((stat) => {
       return <option>{stat}</option>
     })
@@ -62,6 +76,7 @@ export default class validEspec extends Component {
       onSelect: this.properFunc
     }    
     return(
+
          <div>
            <div className='anything'>
                 <p>{this.props.match.params.id}</p>

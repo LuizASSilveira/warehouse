@@ -69,6 +69,7 @@ class ValidaSolTable extends React.Component {
 
   render() {
     let feed
+    {console.log(this.state)}
     if (this.state.selected.status === 'CANCELADA') {
       feed = <InputG label={'Feedback:'} type={'textarea'} placeholder={'Insira um comentário para o solicitante sobre o motivo do cancelamento da solicitação.'} />
     }
@@ -89,7 +90,7 @@ class ValidaSolTable extends React.Component {
 
     if(this.state.redirect) {
       return(
-          <Redirect to= {"/solicitacao/teste/"+this.state.id}   />
+          <Redirect to= {"/solicitacao/validar/"+this.state.id}   />
         )
       
     }
@@ -104,7 +105,6 @@ class ValidaSolTable extends React.Component {
           hover={true}
           options={options}
         >
-        {console.log(this.state.products[0])}
           <TableHeaderColumn isKey dataField="siorg">
             SIORG
           </TableHeaderColumn>
