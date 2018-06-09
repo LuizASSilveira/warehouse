@@ -7,6 +7,7 @@ export default class Criar extends Component {
         return(
             <div>
                 <Nav isadm = {true} />
+                
                 <Table  buttonName= {'Criar Requisicao'}
                         urlGet=     {'http://localhost:3001/requisicoes'}
                         urlPost=    {'?????????????????www'}

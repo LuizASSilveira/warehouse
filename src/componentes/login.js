@@ -39,7 +39,7 @@ export default class Login extends Component {
     
     render(){
         if (this.state.redirect) {
-            return <Redirect to='/somewhere'/>;
+            return <Redirect to='/solicitacao/historico'/>;
         }
         return(
             <div className="login-box">

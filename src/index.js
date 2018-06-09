@@ -26,19 +26,21 @@ ReactDOM.render(
   <BrowserRouter>
     <App>
       <Switch>
-        <Route exact  path="/"             component={Login}/>
+        <Route exact  path="/"                       component={Login}/>
         <Route        path="/requisicao/criar"       component={Criar}/>
         <Route        path="/requisicao/historico"   component={Historico} />
-        <Route        path="/requisicao/editar"      component={EditarReq}/>
+        <Route        path="/requisicao/editar/:id"  component={EditarReq}/>
 
-        <Route        path="/solicitacao/historico"   component={HistoricoSol}/>
+        <Route        path="/solicitacao/historico"  component={HistoricoSol}/>
         <Route        path="/solicitacao/criar"      component={criarS} />
         <Route        path="/solicitacao/orcamento"  component={Orcamento} />
+        
         <Route   exact     path="/solicitacao/validar"     component={ValidarS}/>
         <Route exact path="/solicitacao/validar/:id"     component={ValidEspec}/>
+
         
-        <Route        path="/siorg/criar" component={criarSiorg} />
-        <Route        path="/siorg/lista" component={criarLista} />
+        <Route        path="/siorg/criar"            component={criarSiorg} />
+        <Route        path="/siorg/lista"            component={criarLista} />
 
       </Switch>
     </App>
