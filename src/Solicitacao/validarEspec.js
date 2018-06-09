@@ -11,6 +11,7 @@ import InputG from "../componentes/inputGenerico";
 import OrcamentosTable from "../componentes/table/orcamentos";
 import '../componentes/css/validSolTable.css'
 
+
 export default class validEspec extends Component { 
   constructor(props) {
     super(props)
@@ -66,9 +67,12 @@ componentDidMount() {
 
   render() {
     let feed
-    var descricao
+    var dado = []
     if (this.state.products.length > 0) {
-        descricao=this.state.products[0].descricao;
+        dado[0]=this.state.products[0].descricao;
+        dado[1]=this.state.products[0].status;
+        dado[2]=this.state.products[0].justificativa;
+        dado[3]=this.state.products[0].data;
     }
     console.log(this.state.products[0])
     if (this.state.selected.status == 'CANCELADA') {
@@ -81,19 +85,20 @@ componentDidMount() {
       onSelect: this.properFunc
     }    
     return(
-
          <div>
+           <Nav isadm = {true} />
+           <h3>Validar Solicitação</h3>
            <div className='anything'>
-                <p>{this.props.match.params.id}</p>
                 <InputG label={'Siorg:'}      disabled={true}   value={this.state.selected.siorg} />
-                <InputG label={'Data'}        disabled={true}   value={this.state.selected.data} />
-                <InputG label={'Descricao:'}  disabled={'true'} value={descricao} />
-                <InputG label={'Quantidade:'} disabled={'true'} value={this.state.selected.quantidade} />
+                <InputG label={'Data'}         value={dado[3]} />
+                <InputG label={'Descricao:'}  value={dado[0]} />
+                <InputG label={'Quantidade:'} value={this.state.selected.quantidade} />
+                <InputG label={'Justificativa:'} value={dado[2]} />
                 <Input type="select" name="select" id="exampleSelect" value={this.state.selected.status} onChange={this.setselect}>
                     {this.loadSelect()}
                 </Input>
                 {feed}
-                <OrcamentosTable urlGet={'https://rawgit.com/caionakai/8f1f95eea65eef8797e89ed4b0ac34e9/raw/a42343357eaf8a7c82ce9e5db5e06318c41c4672/orc.json'} />
+                <OrcamentosTable urlGet={"http://localhost:3001/solicitacoes/" + this.props.match.params.id +"/orcamentos"}/>
                 </div>
             </div>
     )
