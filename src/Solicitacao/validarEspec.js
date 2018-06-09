@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import Nav      from '../componentes/navbarAdm';
 import '../componentes/css/input.css'
-import NumericInput from 'react-numeric-input';
-import {ErrorAlert} from '../componentes/alerta'
-import SolicitacoesTable from '../componentes/table/solicitacoes';
-import ValidaSolTable from '../componentes/table/validSolTable';
-import { BootstrapTable, TableHeaderColumn, InsertModalHeader } from "react-bootstrap-table";
-import { Container, Input, Label, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import {  Input } from 'reactstrap';
 import InputG from "../componentes/inputGenerico";
 import OrcamentosTable from "../componentes/table/orcamentos";
 import '../componentes/css/validSolTable.css'
@@ -75,7 +70,7 @@ componentDidMount() {
         dado[3]=this.state.products[0].data;
     }
     console.log(this.state.products[0])
-    if (this.state.selected.status == 'CANCELADA') {
+    if (this.state.selected.status === 'CANCELADA') {
       feed = <InputG label={'Feedback:'} type={'textarea'} placeholder={'Insira um comentário para o solicitante sobre o motivo do cancelamento da solicitação.'} />
     }
     const selectRowProp = {
