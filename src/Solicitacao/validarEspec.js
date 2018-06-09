@@ -30,19 +30,19 @@ export default class validEspec extends Component {
     });
   }
 
-  componentDidMount() {
-    fetch(this.props.urlGet, {
+componentDidMount() {
+    fetch("http://localhost:3001/solicitacoes/"+this.props.match.params.id, {
       method: 'GET',
       headers: new Headers({
         'Content-type': 'application/json',
         'token': localStorage.getItem('auth-token')
       })
-    }).then(response => response.json())
+    })
+      .then(response => response.json())
       .then(product => {
         this.setState({ products: product });
       });
   }
-
   properFunc(row, isSelected, e) {
     console.log(row)
     this.setState({
@@ -66,6 +66,11 @@ export default class validEspec extends Component {
 
   render() {
     let feed
+    var descricao
+    if (this.state.products.length > 0) {
+        descricao=this.state.products[0].descricao;
+    }
+    console.log(this.state.products[0])
     if (this.state.selected.status == 'CANCELADA') {
       feed = <InputG label={'Feedback:'} type={'textarea'} placeholder={'Insira um comentário para o solicitante sobre o motivo do cancelamento da solicitação.'} />
     }
@@ -82,7 +87,7 @@ export default class validEspec extends Component {
                 <p>{this.props.match.params.id}</p>
                 <InputG label={'Siorg:'}      disabled={true}   value={this.state.selected.siorg} />
                 <InputG label={'Data'}        disabled={true}   value={this.state.selected.data} />
-                <InputG label={'Descricao:'}  disabled={'true'} value={this.state.selected.descricao} />
+                <InputG label={'Descricao:'}  disabled={'true'} value={descricao} />
                 <InputG label={'Quantidade:'} disabled={'true'} value={this.state.selected.quantidade} />
                 <Input type="select" name="select" id="exampleSelect" value={this.state.selected.status} onChange={this.setselect}>
                     {this.loadSelect()}

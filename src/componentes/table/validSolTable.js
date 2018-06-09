@@ -90,7 +90,7 @@ class ValidaSolTable extends React.Component {
 
     if(this.state.redirect) {
       return(
-          <Redirect to= {"/solicitacao/validar/"+this.state.id}   />
+          <Redirect to= {"/solicitacao/validar/"+this.state.id} />
         )
       
     }
