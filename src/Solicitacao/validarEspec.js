@@ -13,11 +13,14 @@ export default class validEspec extends Component {
     this.state = {
       modal: false,
       products: [],
+      index:0,
       feed: false,
-      selected: { descricao: '', data: '', siorg: '', qtde: '', status: '' }
+      loading: true
     }
     this.toggle = this.toggle.bind(this);
     this.properFunc = this.properFunc.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.quandoClica = this.quandoClica.bind(this);
   }
 
   toggle() {
@@ -36,7 +39,8 @@ componentDidMount() {
     })
       .then(response => response.json())
       .then(product => {
-        this.setState({ products: product });
+        this.setState({ products: product,
+                        loading: false });
       });
   }
   properFunc(row, isSelected, e) {
@@ -59,26 +63,54 @@ componentDidMount() {
     x.status = e.target.value
     this.setState({ selected: x })
   }
+  onChange(ev){
+    let products = this.state.products
+    products[this.state.index][ev.target.name]=ev.target.value
+    this.setState({products: products})
+  }
+
+  quandoClica(){
+        if(this.state.decricao.length !== 0 && this.state.justificativa.length !== 0){
+            const requestInfo = {
+                method: 'POST',
+                body: JSON.stringify({descricao: this.state.decricao  ,justificativa: this.state.justificativa, quantidade: this.state.quantidade}),
+                headers: new Headers({
+                  'Content-type': 'application/json',
+                  'token': localStorage.getItem('auth-token')
+                })
+              };
+              fetch('http://localhost:3001/solicitacoes', requestInfo)
+                .then(response => {
+                  if (response.ok) {
+                    //alerta dados salvos com sucesso
+                    console.log("tudo ok")
+                  } else {
+                      console.log(response)
+                    throw new Error(response);
+                  }
+                })
+        }
+        else{
+            this.setState({ alerta: true })
+        }
+  }
+
 
   render() {
     let feed
-    var dado = []
-    if (this.state.products.length > 0) {
-        dado[0]=this.state.products[0].descricao;
-        dado[1]=this.state.products[0].status;
-        dado[2]=this.state.products[0].justificativa;
-        dado[3]=this.state.products[0].data;
-    }
+
     console.log(this.state.products[0])
-    if (this.state.selected.status === 'CANCELADA') {
-      feed = <InputG label={'Feedback:'} type={'textarea'} placeholder={'Insira um comentário para o solicitante sobre o motivo do cancelamento da solicitação.'} />
-    }
     const selectRowProp = {
       mode: 'radio',
       hideSelectColumn: true,
       clickToSelect: true,
       onSelect: this.properFunc
     }    
+    if(!this.state.loading){
+        if (this.state.products[this.state.index].status === 'CANCELADA') {
+          feed = <InputG label={'Feedback:'} type={'textarea'} placeholder={'Insira um comentário para o solicitante sobre o motivo do cancelamento da solicitação.'} />
+        }
+
     return(
          <div>
            <Nav isadm = {true} />
@@ -87,7 +119,7 @@ componentDidMount() {
                         <FormGroup>
                             <Label> Siorg</Label>
                              <div id='siorgButton'>
-                                <Input label='Siorg:' name='siorg' type='text' id='inputSiorg' disabled='true' value={this.state.selected.siorg}/>
+                                <Input label='Siorg:' name='siorg' type='text' id='inputSiorg' disabled='true' />
                                 <Button id="buttonSiorg" color="secondary" onClick={this.toggle}>Lista Siorg</Button> 
                             </div>    
                         <Modal isOpen={this.state.modal} toggle={this.toggle} className='modal-xl'>
@@ -101,20 +133,26 @@ componentDidMount() {
                           </ModalFooter>
                         </Modal>
                         </FormGroup>
-                    <InputG label={'Data'}   value={dado[3]} />
-                    <InputG label={'Descrição'}  value={dado[0]} />
-                    <InputG label={'Quantidade'} type={'number'} value={this.state.selected.quantidade} />
-                    <InputG label={'Justificativa'} value={dado[2]} />
+                    <InputG label={'Data'}  onChange={this.onChange} name={'data'} value={this.state.products[this.state.index].data} />
+                    <InputG label={'Descrição'} valid={true} feedback={'anything'} name={'descricao'} onChange={this.onChange} value={this.state.products[this.state.index].descricao} />
+                    <InputG label={'Quantidade'}  type={'number'} name={'quantidade'}  />
+                    <InputG label={'Justificativa'} name={'justificativa'} onChange={this.onChange} value={this.state.products[this.state.index].justificativa} />
                     <FormGroup>
                     <Label>Status</Label>
-                    <Input type="select" name="select" id="exampleSelect" value={this.state.selected.status} onChange={this.setselect}>
+                    <Input type="select" name="status" id="exampleSelect" value={this.state.products[this.state.index].status} onChange={this.onChange}>
                         {this.loadSelect()}
                     </Input>
                     </FormGroup>
                     {feed}
                     <OrcamentosTable urlGet={"http://localhost:3001/solicitacoes/" + this.props.match.params.id +"/orcamentos"}/>
             </div>
+            <Button onClick={this.quandoClica}>Confirmar</Button>
+            <Button>Cancelar</Button>
         </div>
     )
+    }
+    else{
+        return ("loading")
+    }
   }
 }
