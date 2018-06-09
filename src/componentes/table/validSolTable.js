@@ -1,12 +1,10 @@
-import React, { Component } from "react";
-import { BootstrapTable, TableHeaderColumn, InsertModalHeader } from "react-bootstrap-table";
+import React from "react";
+import { BootstrapTable, TableHeaderColumn} from "react-bootstrap-table";
 import "../../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css";
-import { Container, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import InputG from "../inputGenerico";
-import OrcamentosTable from "./orcamentos";
 import '../css/validSolTable.css'
-import {Link, Redirect} from 'react-router-dom'
-import Moment from 'react-moment'
+import {Redirect} from 'react-router-dom'
+
 
 
 class ValidaSolTable extends React.Component {
@@ -71,8 +69,7 @@ class ValidaSolTable extends React.Component {
 
   render() {
     let feed
-    var teste
-    if (this.state.selected.status == 'CANCELADA') {
+    if (this.state.selected.status === 'CANCELADA') {
       feed = <InputG label={'Feedback:'} type={'textarea'} placeholder={'Insira um comentário para o solicitante sobre o motivo do cancelamento da solicitação.'} />
     }
     const selectRowProp = {
@@ -82,7 +79,6 @@ class ValidaSolTable extends React.Component {
       onSelect: this.properFunc
     }
 
-    const { handleSubmit,history }=this.props;
 
 
     const options ={

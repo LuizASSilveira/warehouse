@@ -64,6 +64,7 @@ export default class validEspec extends Component {
     return(
          <div>
            <div className='anything'>
+                <p>{this.props.match.params.id}</p>
                 <InputG label={'Siorg:'}      disabled={true}   value={this.state.selected.siorg} />
                 <InputG label={'Data'}        disabled={true}   value={this.state.selected.data} />
                 <InputG label={'Descricao:'}  disabled={'true'} value={this.state.selected.descricao} />
