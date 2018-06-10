@@ -20,6 +20,26 @@ class TableEditar extends Component {
 
   }
   funcConfirm() {
+    if (this.state.numero !== '') {
+      const requestInfo = {
+        method: 'POST',
+        body: JSON.stringify({ numero: this.state.numero }),
+        headers: new Headers({
+          'Content-type': 'application/json',
+          'token': localStorage.getItem('auth-token')
+        })
+      };
+      fetch(this.props.urlPost, requestInfo)
+        .then(response => {
+          if (response.ok) {
+            //alerta dados salvos com sucesso
+            window.location.reload()
+          } else {
+            throw new Error("não foi possivel salvar as alterações");
+          }
+        })
+    }
+
     this.funcCancel()
   }
   funcCancel() {
@@ -53,7 +73,7 @@ class TableEditar extends Component {
       .then(number => {
         this.setState({ numero: number });
         if (number !== "Não Definido") {
-          this.setState({ disabled : true })
+          this.setState({ disabled: true })
         }
 
       });
