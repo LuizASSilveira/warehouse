@@ -15,6 +15,8 @@ export default class CriarS extends Component {
             modal: false
         };
         this.toggle = this.toggle.bind(this);
+        this.mandaSiorg = this.mandaSiorg.bind(this);
+        this.guardaRow = this.guardaRow.bind(this);
     }
 
     toggle() {
@@ -34,6 +36,19 @@ export default class CriarS extends Component {
     handleChangeSio(event) {
         this.setState({ siorg: event.target.value });
     }
+    
+    mandaSiorg(){
+    this.setState({
+        value: this.state.linha.siorgL
+    })
+    this.toggle()
+     }
+
+       guardaRow(row){
+    this.setState({
+      linha: row
+    });
+  }
 
     salvar(){
         if(this.state.decricao.length !== 0 && this.state.justificativa.length !== 0){
@@ -73,10 +88,10 @@ export default class CriarS extends Component {
                         <Modal isOpen={this.state.modal} toggle={this.toggle} className='modal-xl'>
                           <ModalHeader toggle={this.toggle}>Lista Siorg</ModalHeader>
                           <ModalBody>
-                             <TableSiorg urlGet={'https://gist.githubusercontent.com/caionakai/1ee2b50876f4ac8fe689b89f35580851/raw/c7909049b0603707ad77c7bc0ea65c857014ca72/siorg.json'}/>
+                             <TableSiorg a={this.guardaRow} urlGet={'https://gist.githubusercontent.com/caionakai/1ee2b50876f4ac8fe689b89f35580851/raw/c7909049b0603707ad77c7bc0ea65c857014ca72/siorg.json'}/>
                           </ModalBody>
                           <ModalFooter>
-                            <Button color="primary" onClick={this.toggle}>Confirmar</Button>{' '}
+                            <Button color="primary" onClick={this.mandaSiorg}>Confirmar</Button>{' '}
                             <Button color="secondary" onClick={this.toggle}>Cancelar</Button>
                           </ModalFooter>
                         </Modal>
