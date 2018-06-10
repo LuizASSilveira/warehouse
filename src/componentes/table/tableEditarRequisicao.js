@@ -40,13 +40,8 @@ class TableEditar extends Component {
       .then(response => response.json())
       .then(number => {
         this.setState({ numero: number });
-        if(number ===  ''){
-          this.setState ({ disabled: true })
-        }
       });
   }
-
-
   componentDidMount() {
     fetch(this.props.urlGet, {
       method: 'GET',
@@ -94,7 +89,7 @@ class TableEditar extends Component {
     return (
       <div id="table">
         <div id="InputButtonEditar">
-          <Input placeholder="Nº Requisição" id="nome" type="text" name="nome" disabled={this.state.disabled} />
+          <Input placeholder="Nº Requisição" id="nome" type="text" name="nome" value={this.state.numero} disabled={this.state.disabled} />
           <Button id="buttonPostEdit" color="primary" onClick={this.toggle}>{this.props.buttonName}</Button>
         </div>
         
