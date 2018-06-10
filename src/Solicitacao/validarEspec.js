@@ -15,12 +15,15 @@ export default class validEspec extends Component {
       products: [],
       index:0,
       feed: false,
-      loading: true
+      loading: true,
+      linha: []
     }
     this.toggle = this.toggle.bind(this);
     this.properFunc = this.properFunc.bind(this);
     this.onChange = this.onChange.bind(this);
     this.quandoClica = this.quandoClica.bind(this);
+    this.guardaRow = this.guardaRow.bind(this);
+    this.mandaSiorg = this.mandaSiorg.bind(this);
   }
 
   toggle() {
@@ -63,6 +66,13 @@ componentDidMount() {
     x.status = e.target.value
     this.setState({ selected: x })
   }
+
+  guardaRow(row){
+    this.setState({
+      linha: row
+    });
+  }
+
   onChange(ev){
     let products = this.state.products
     products[this.state.index][ev.target.name]=ev.target.value
@@ -95,6 +105,15 @@ componentDidMount() {
         }
   }
 
+  mandaSiorg(){
+    let products = this.state.products
+    products[this.state.index].siorg = this.state.linha.siorgL
+    this.setState({
+        products: products
+    })
+    this.toggle()
+  }
+
 
   render() {
     let feed
@@ -119,16 +138,16 @@ componentDidMount() {
                         <FormGroup>
                             <Label> Siorg</Label>
                              <div id='siorgButton'>
-                                <Input label='Siorg:' name='siorg' type='text' id='inputSiorg' disabled='true' />
+                                <Input label='Siorg:' name='siorg' value={this.state.products[this.state.index].siorg} type='text' id='inputSiorg' disabled='true' />
                                 <Button id="buttonSiorg" color="secondary" onClick={this.toggle}>Lista Siorg</Button> 
                             </div>    
                         <Modal isOpen={this.state.modal} toggle={this.toggle} className='modal-xl'>
                           <ModalHeader toggle={this.toggle}>Lista Siorg</ModalHeader>
                           <ModalBody>
-                             <TableSiorg urlGet={'https://gist.githubusercontent.com/caionakai/1ee2b50876f4ac8fe689b89f35580851/raw/c7909049b0603707ad77c7bc0ea65c857014ca72/siorg.json'}/>
+                             <TableSiorg a={this.guardaRow} urlGet={'https://gist.githubusercontent.com/caionakai/1ee2b50876f4ac8fe689b89f35580851/raw/c7909049b0603707ad77c7bc0ea65c857014ca72/siorg.json'}/>
                           </ModalBody>
                           <ModalFooter>
-                            <Button color="primary" onClick={this.toggle}>Confirmar</Button>{' '}
+                            <Button color="primary" onClick={this.mandaSiorg}>Confirmar</Button>{' '}
                             <Button color="secondary" onClick={this.toggle}>Cancelar</Button>
                           </ModalFooter>
                         </Modal>
