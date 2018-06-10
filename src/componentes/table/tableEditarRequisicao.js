@@ -69,10 +69,10 @@ class TableEditar extends Component {
     })
       .then(response => response.json())
       .then(number => {
-        this.setState({ numero: number });
         if (number !== "Não Definido") {
           this.setState({ disabled: true })
-        }
+          this.setState({ numero: number })
+        } 
 
       });
   }
@@ -100,7 +100,9 @@ class TableEditar extends Component {
       })
     //reload pagina
   }
-
+  handleChangeNum(event) {
+    this.setState({ numero: event.target.value });
+  }
   render() {
     let self = this;
     function buttonFormatter(cell, row) {
@@ -110,7 +112,7 @@ class TableEditar extends Component {
     return (
       <div id="table">
         <div id="InputButtonEditar">
-          <Input placeholder="Nº Requisição" id="nome" type="text" name="nome" value={this.state.numero} disabled={this.state.disabled} />
+          <Input placeholder="Nº Requisição" id="nome" type="text" name="nome" value={this.state.numero} onChange={this.handleChangeNum.bind(this)} disabled={this.state.disabled} />
           <Button id="buttonPostEdit" color="primary" onClick={this.toggle}>{this.props.buttonName}</Button>
         </div>
 
