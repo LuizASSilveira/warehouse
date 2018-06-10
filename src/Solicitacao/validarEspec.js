@@ -39,8 +39,7 @@ componentDidMount() {
     })
       .then(response => response.json())
       .then(product => {
-        this.setState({ products: product,
-                        loading: false });
+        this.setState({ products: product, loading: false });
       });
   }
   properFunc(row, isSelected, e) {
