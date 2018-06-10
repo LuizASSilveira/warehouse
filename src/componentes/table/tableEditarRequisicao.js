@@ -22,14 +22,14 @@ class TableEditar extends Component {
   funcConfirm() {
     if (this.state.numero !== '') {
       const requestInfo = {
-        method: 'POST',
+        method: 'PUT',
         body: JSON.stringify({ numero: this.state.numero }),
         headers: new Headers({
           'Content-type': 'application/json',
           'token': localStorage.getItem('auth-token')
         })
       };
-      fetch(this.props.urlPost, requestInfo)
+      fetch(this.props.urlPut2, requestInfo)
         .then(response => {
           if (response.ok) {
             //alerta dados salvos com sucesso
@@ -39,7 +39,6 @@ class TableEditar extends Component {
           }
         })
     }
-
     this.funcCancel()
   }
   funcCancel() {
@@ -48,7 +47,6 @@ class TableEditar extends Component {
   toggle() {
     this.setState({ modal: true })
   }
-
   componentDidMount() {
     fetch(this.props.urlGet, {
       method: 'GET',
