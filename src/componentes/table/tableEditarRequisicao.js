@@ -7,10 +7,7 @@ import '../css/table.css'
 
 const options = {
   noDataText: 'Não há dados.',
-  onRowDoubleClick: function (row) {
-    console.log(row.id)
-
-  }
+ 
 };
 class TableEditar extends Component {
   constructor() {
@@ -67,14 +64,16 @@ class TableEditar extends Component {
     this.setState({ name: event.target.value });
   }
   excluir(row){
-    console.log("Excluir-----" + row)
+   console.log(row.id)
     //post
     //reload pagina
   }
 
   render() {
+    let self = this;
     function buttonFormatter(cell, row) {
-      return <Button color="danger" onClick={this.excluir(row)} >X</Button>;
+      console.log(row.id)
+      return <Button color="danger" onClick={() => self.excluir(row)} >X</Button>;
     }
     return (
       <div id="table">
