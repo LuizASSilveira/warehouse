@@ -11,26 +11,19 @@ class Table extends Component {
     this.state = { products: [], id:'' , redirect : false }
     this.onRowClick = this.onRowClick.bind(this);
   }
-  // componentDidMount() {
-  //   fetch(this.props.urlGet, {
-  //     method: 'GET',
-  //     headers: new Headers({
-  //       'Content-type': 'application/json',
-  //       'token': localStorage.getItem('auth-token')
-  //     })
-  //   }).then(response => response.json())
-  //     .then(product => {
-  //       this.setState({ products: product });
-  //     });
-  // }
   componentDidMount() {
-    fetch("https://raw.githubusercontent.com/LuizASSilveira/pi-almoxarifado/master/listSolicitacao.json")
-    .then(response => response.json())
+    fetch(this.props.urlGet, {
+      method: 'GET',
+      headers: new Headers({
+        'Content-type': 'application/json',
+        'token': localStorage.getItem('auth-token')
+      })
+    }).then(response => response.json())
       .then(product => {
         this.setState({ products: product });
       });
   }
-
+ 
   onRowClick(row){
     this.setState({ id: row.id})
     this.setState({ redirect: true })
@@ -64,10 +57,11 @@ class Table extends Component {
           selectRow={selectRowProp}
           options={options}
         >
-          <TableHeaderColumn dataField= 'id' isKey>   ID        </TableHeaderColumn>
-          <TableHeaderColumn dataField= 'data'>       Data     </TableHeaderColumn>
-          <TableHeaderColumn dataField= 'nome'>       Nome      </TableHeaderColumn>
-          <TableHeaderColumn dataField= 'numero'>     Numero    </TableHeaderColumn>
+          <TableHeaderColumn dataField= 'id' isKey>   ID              </TableHeaderColumn>
+          <TableHeaderColumn dataField= 'data'>       Data            </TableHeaderColumn>
+          <TableHeaderColumn dataField= 'nome'>       Nome Requisição </TableHeaderColumn>
+          <TableHeaderColumn dataField= 'numero'>     Numero          </TableHeaderColumn>
+          <TableHeaderColumn dataField= 'solicitante'>Solicitante      </TableHeaderColumn>
         </BootstrapTable>
 
       </div>

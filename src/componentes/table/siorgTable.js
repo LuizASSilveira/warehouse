@@ -51,8 +51,9 @@ export default class TableSiorg extends Component {
                     searchPlaceholder='Pesquisar'
                     options={{noDataText: 'Não há dados.'}}
                 >
-                    <TableHeaderColumn dataField="siorgL" isKey>     Nº Siorg     </TableHeaderColumn>
-                    <TableHeaderColumn dataField="descricaoL"> Descricao  </TableHeaderColumn>
+                    <TableHeaderColumn dataField='id' isKey>  ID                                 </TableHeaderColumn>
+                    <TableHeaderColumn dataField="siorgL">     Nº Siorg     </TableHeaderColumn>
+                    <TableHeaderColumn dataField="descricaoL">       Descricao  </TableHeaderColumn>
 
                 </BootstrapTable>
 

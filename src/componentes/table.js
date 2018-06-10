@@ -5,6 +5,8 @@ import '../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.
 import Modal from '../componentes/confirmModal';
 import { Button, Input } from 'reactstrap';
 import './css/input.css'
+import { Redirect } from 'react-router-dom'
+
 
 var selected = []
 function onRowSelect(row, isSelected) {
@@ -29,6 +31,7 @@ class Table extends Component {
     this.funcCancel = this.funcCancel.bind(this)
     this.funcConfirm = this.funcConfirm.bind(this)
     this.handleChange = this.handleChange.bind(this);
+    this.onRowClick = this.onRowClick.bind(this);
   }
 
   funcConfirm() {
@@ -44,7 +47,7 @@ class Table extends Component {
       .then(response => {
         if (response.ok) {
           //alerta dados salvos com sucesso
-          console.log("tudo ok")
+          window.location.reload()
         } else {
           throw new Error("não foi possivel salvar as alterações");
         }
@@ -83,7 +86,22 @@ class Table extends Component {
     this.setState({ name: event.target.value });
   }
 
+  onRowClick(row){
+    this.setState({ id: row.id})
+    this.setState({ redirect: true })
+  }
+
   render() {
+    
+    if (this.state.redirect) {
+      return <Redirect to= {"/solicitacao/validar/"+this.state.id}   />
+    }
+
+    const options ={
+      noDataText: 'Não há dados.',
+      onRowClick: this.onRowClick
+        
+    }
 
     return (
       <div id="table">
@@ -93,7 +111,7 @@ class Table extends Component {
           search={true}
           pagination
           searchPlaceholder='Pesquisar'
-          options={{noDataText: 'Não há dados.'}}
+          options={options}
         >
           <TableHeaderColumn dataField='id' isKey>  ID                                 </TableHeaderColumn>
           <TableHeaderColumn dataField={this.props.descricaoL}> {this.props.descricao}  </TableHeaderColumn>
@@ -103,8 +121,8 @@ class Table extends Component {
         </BootstrapTable>
 
         <div id="InputButton">
-          <Input id="nome" type="text" name="nome" value={this.state.value} onChange={this.handleChange} />
-          <Button id="buttonPost" color="danger" onClick={this.toggle}>{this.props.buttonName}</Button>
+          <Input placeholder="Nome Requisição" id="nome" type="text" name="nome" value={this.state.value} onChange={this.handleChange} />
+          <Button id="buttonPost" color="primary" onClick={this.toggle}>{this.props.buttonName}</Button>
 
         </div>
         <Modal modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} mensagem={'Deseja confirmar?'} />
