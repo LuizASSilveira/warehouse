@@ -13,6 +13,10 @@ export default class Criar extends Component {
                         urlGet=     {'http://localhost:3001/requisicoes/' + this.props.match.params.id}
                         urlDelete =   {'http://localhost:3001/requisicoes/excluir/solicitacao/'}
 
+                        urlGet2=     {'http://localhost:3001/requisicoes/' + this.props.match.params.id}
+                
+
+
                         descricao=  {'Descrição'}
                         data=       {'Data'}
                         nome=       {'Solicitante'}
