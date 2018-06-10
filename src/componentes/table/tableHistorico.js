@@ -61,7 +61,7 @@ class Table extends Component {
           <TableHeaderColumn dataField= 'data'>       Data            </TableHeaderColumn>
           <TableHeaderColumn dataField= 'nome'>       Nome Requisição </TableHeaderColumn>
           <TableHeaderColumn dataField= 'numero'>     Numero          </TableHeaderColumn>
-          <TableHeaderColumn dataField= 'solicitante'>Solicitante          </TableHeaderColumn>
+          <TableHeaderColumn dataField= 'solicitante'>Solicitante      </TableHeaderColumn>
         </BootstrapTable>
 
       </div>
