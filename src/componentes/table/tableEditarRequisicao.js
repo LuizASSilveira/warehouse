@@ -7,12 +7,12 @@ import '../css/table.css'
 
 const options = {
   noDataText: 'Não há dados.',
- 
+
 };
 class TableEditar extends Component {
   constructor() {
     super()
-    this.state = { products: [], modal: false, numero:'', disabled: false}
+    this.state = { products: [], modal: false, numero: '', disabled: false }
     this.toggle = this.toggle.bind(this)
     this.funcCancel = this.funcCancel.bind(this)
     this.funcConfirm = this.funcConfirm.bind(this)
@@ -30,19 +30,6 @@ class TableEditar extends Component {
   }
 
   componentDidMount() {
-    fetch(this.props.urlGet2, {
-      method: 'GET',
-      headers: new Headers({
-        'Content-type': 'application/json',
-        'token': localStorage.getItem('auth-token')
-      })
-    })
-      .then(response => response.json())
-      .then(number => {
-        this.setState({ numero: number });
-      });
-  }
-  componentDidMount() {
     fetch(this.props.urlGet, {
       method: 'GET',
       headers: new Headers({
@@ -54,29 +41,45 @@ class TableEditar extends Component {
       .then(product => {
         this.setState({ products: product });
       });
+
+    fetch(this.props.urlGet2, {
+      method: 'GET',
+      headers: new Headers({
+        'Content-type': 'application/json',
+        'token': localStorage.getItem('auth-token')
+      })
+    })
+      .then(response => response.json())
+      .then(number => {
+        this.setState({ numero: number });
+        if (number !== "Não Definido") {
+          this.setState({ disabled : true })
+        }
+
+      });
   }
   handleChange(event) {
     this.setState({ name: event.target.value });
   }
-  excluir(row){
-   console.log(row.id)
-   
-   const requestInfo = {
-    method: 'DELETE',
-    headers: new Headers({
-      'Content-type': 'application/json',
-      'token': localStorage.getItem('auth-token')
-    })
-  };
-  fetch(this.props.urlDelete + row.id, requestInfo)
-    .then(response => {
-      if (response.ok) {
-        //alerta dados salvos com sucesso
-        window.location.reload()
-      } else {
-        throw new Error("não foi possivel salvar as alterações");
-      }
-    })
+  excluir(row) {
+    console.log(row.id)
+
+    const requestInfo = {
+      method: 'DELETE',
+      headers: new Headers({
+        'Content-type': 'application/json',
+        'token': localStorage.getItem('auth-token')
+      })
+    };
+    fetch(this.props.urlDelete + row.id, requestInfo)
+      .then(response => {
+        if (response.ok) {
+          //alerta dados salvos com sucesso
+          window.location.reload()
+        } else {
+          throw new Error("não foi possivel salvar as alterações");
+        }
+      })
     //reload pagina
   }
 
@@ -92,7 +95,7 @@ class TableEditar extends Component {
           <Input placeholder="Nº Requisição" id="nome" type="text" name="nome" value={this.state.numero} disabled={this.state.disabled} />
           <Button id="buttonPostEdit" color="primary" onClick={this.toggle}>{this.props.buttonName}</Button>
         </div>
-        
+
         <BootstrapTable
           data={this.state.products}
           options={options}
