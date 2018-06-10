@@ -11,6 +11,7 @@ export default class Criar extends Component {
                 <TableEditar  buttonName= {'Salvar'}
 
                         urlGet=     {'http://localhost:3001/requisicoes/' + this.props.match.params.id}
+                        urlDelete =   {''}
 
                         descricao=  {'Descrição'}
                         data=       {'Data'}

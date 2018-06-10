@@ -68,13 +68,12 @@ class TableEditar extends Component {
    
    const requestInfo = {
     method: 'DELETE',
-    body: JSON.stringify({id: row.id}),
     headers: new Headers({
       'Content-type': 'application/json',
       'token': localStorage.getItem('auth-token')
     })
   };
-  fetch(this.props.urlPost, requestInfo)
+  fetch(this.props.urlDelete + row.id, requestInfo)
     .then(response => {
       if (response.ok) {
         //alerta dados salvos com sucesso
