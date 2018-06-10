@@ -65,7 +65,24 @@ class TableEditar extends Component {
   }
   excluir(row){
    console.log(row.id)
-    //post
+   
+   const requestInfo = {
+    method: 'DELETE',
+    body: JSON.stringify({id: row.id}),
+    headers: new Headers({
+      'Content-type': 'application/json',
+      'token': localStorage.getItem('auth-token')
+    })
+  };
+  fetch(this.props.urlPost, requestInfo)
+    .then(response => {
+      if (response.ok) {
+        //alerta dados salvos com sucesso
+        window.location.reload()
+      } else {
+        throw new Error("não foi possivel salvar as alterações");
+      }
+    })
     //reload pagina
   }
 
