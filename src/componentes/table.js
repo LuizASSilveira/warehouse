@@ -47,7 +47,7 @@ class Table extends Component {
       .then(response => {
         if (response.ok) {
           //alerta dados salvos com sucesso
-          console.log("tudo ok")
+          window.location.reload()
         } else {
           throw new Error("não foi possivel salvar as alterações");
         }
