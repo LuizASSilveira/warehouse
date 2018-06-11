@@ -11,6 +11,7 @@ export default class Criar extends Component {
 
                 <TableSiorg  buttonName= {'Criar Requisicao'}
                         urlGet=     {'http://localhost:3001/produtos'}
+                        urlDelete= {'http://localhost:3001/produtos/'}
                         
                         descricao=  {'Descrição'}
                         siorg=      {'Siorg'}

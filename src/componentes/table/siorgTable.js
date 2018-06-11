@@ -34,7 +34,6 @@ export default class TableSiorg extends Component {
     }
 
     excluir(row) {
-        console.log(row.id)
 
         const requestInfo = {
             method: 'DELETE',
@@ -43,7 +42,7 @@ export default class TableSiorg extends Component {
                 'token': localStorage.getItem('auth-token')
             })
         };
-        fetch(this.props.urlDelete + row.id, requestInfo)
+        fetch(this.props.urlDelete + row.siorg, requestInfo)
             .then(response => {
                 if (response.ok) {
                     //alerta dados salvos com sucesso
@@ -52,15 +51,12 @@ export default class TableSiorg extends Component {
                     throw new Error("não foi possivel salvar as alterações");
                 }
             })
-        //reload pagina
-        window.location.reload()
     }
 
     render() {
 
         let self = this;
         function buttonFormatter(cell, row) {
-            console.log(row.id)
             return <Button color="danger" onClick={() => self.excluir(row)} >X</Button>;
         }
         const selectRowProp = {
@@ -81,9 +77,9 @@ export default class TableSiorg extends Component {
                     searchPlaceholder='Pesquisar'
                     options={{ noDataText: 'Não há dados.' }}
                 >
-                    <TableHeaderColumn dataField="siorg" isKey>     Código Siorg     </TableHeaderColumn>
-                    <TableHeaderColumn dataField="descricao">       Descrição  </TableHeaderColumn>
-                    <TableHeaderColumn dataField="button" dataFormat={buttonFormatter}> Remover   </TableHeaderColumn>
+                    <TableHeaderColumn width='10%' dataField="siorg" isKey>     Código Siorg     </TableHeaderColumn>
+                    <TableHeaderColumn width='60%' dataField="descricao">       Descrição  </TableHeaderColumn>
+                    <TableHeaderColumn width='10%' dataField="button" dataFormat={buttonFormatter}> Remover   </TableHeaderColumn>
                 </BootstrapTable>
 
 

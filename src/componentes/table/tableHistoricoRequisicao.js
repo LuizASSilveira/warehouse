@@ -57,11 +57,11 @@ class Table extends Component {
           selectRow={selectRowProp}
           options={options}
         >
-          <TableHeaderColumn dataField='id' isKey>  ID                                 </TableHeaderColumn>
-          <TableHeaderColumn dataField={this.props.dataL}>          {this.props.data}       </TableHeaderColumn>
-          <TableHeaderColumn dataField={this.props.numeroL}>        {this.props.numero}  </TableHeaderColumn>
-          <TableHeaderColumn dataField={this.props.nomeL}>          {this.props.nome}       </TableHeaderColumn>
-          <TableHeaderColumn dataField={this.props.solicitanteL}>   {this.props.solicitante}     </TableHeaderColumn>
+          <TableHeaderColumn width='10%' dataField='id' isKey>  ID                                 </TableHeaderColumn>
+          <TableHeaderColumn width='22%' dataField={this.props.dataL}>          {this.props.data}       </TableHeaderColumn>
+          <TableHeaderColumn width='22%' dataField={this.props.numeroL}>        {this.props.numero}  </TableHeaderColumn>
+          <TableHeaderColumn width='22%' dataField={this.props.nomeL}>          {this.props.nome}       </TableHeaderColumn>
+          <TableHeaderColumn width='22%' dataField={this.props.solicitanteL}>   {this.props.solicitante}     </TableHeaderColumn>
         </BootstrapTable>
 
       </div>
