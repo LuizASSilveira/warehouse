@@ -27,7 +27,9 @@ export default class TableSiorg extends Component {
       }
 
         properFunc(row, isSelected) {
-          this.props.a(row, isSelected)
+          if(this.props.a){
+            this.props.a(row, isSelected)
+          }
           console.log(row)
         }
     
