@@ -12,27 +12,27 @@ export default class TableSiorg extends Component {
         this.properFunc = this.properFunc.bind(this)
     }
 
-    // componentDidMount() {
-    //     fetch(this.props.urlGet, {
-    //         method: 'GET',
-    //         headers: new Headers({
-    //             'Content-type': 'application/json',
-    //             'token': localStorage.getItem('auth-token')
-    //         })
-    //     })
-    //         .then(response => response.json())
-    //         .then(product => {
-    //             this.setState({ lista: product });
-    //         });
-    // }
-
     componentDidMount() {
-        fetch("https://raw.githubusercontent.com/LuizASSilveira/pi-almoxarifado/master/siorg.json")
+        fetch(this.props.urlGet, {
+            method: 'GET',
+            headers: new Headers({
+                'Content-type': 'application/json',
+                'token': localStorage.getItem('auth-token')
+            })
+        })
             .then(response => response.json())
             .then(product => {
                 this.setState({ lista: product });
             });
     }
+
+    // componentDidMount() {
+    //     fetch("https://raw.githubusercontent.com/LuizASSilveira/pi-almoxarifado/master/siorg.json")
+    //         .then(response => response.json())
+    //         .then(product => {
+    //             this.setState({ lista: product });
+    //         });
+    // }
 
     properFunc(row, isSelected) {
         this.setState({ normal: false })
