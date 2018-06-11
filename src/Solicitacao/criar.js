@@ -12,7 +12,7 @@ export default class CriarS extends Component {
         super()
         this.state = { 
             decricao: '', justificativa:'', quantidade: 1, siorg:'', alerta: false,
-            modal: false
+            modal: false, errorDes:false, errorJus:false, errorNum:false
         };
         this.toggle = this.toggle.bind(this);
         this.mandaSiorg = this.mandaSiorg.bind(this);
@@ -43,7 +43,6 @@ export default class CriarS extends Component {
     })
     this.toggle()
      }
-
        guardaRow(row){
     this.setState({
       linha: row
@@ -71,9 +70,20 @@ export default class CriarS extends Component {
                   }
                 })
         }
-        else{
-            this.setState({ alerta: true })
-        }
+        else {
+            if(this.state.decricao.length === 0){
+                this.setState({ errorDes: false })
+            }else{
+                this.setState({ errorDes: true })
+            }
+
+            if(this.state.justificativa.length === 0){
+                this.setState({ errorJus:false })
+            }else{
+                this.setState({ errorJus: true })
+            }
+    }
+        
     }
     render(){
         return(
@@ -98,8 +108,8 @@ export default class CriarS extends Component {
 
                     <Label> Quantidade: </Label><br />
                     <NumericInput min={1}max={1000} name={'qtd'} value={this.state.quantidade} onChange={this.handleChangeQtd.bind(this)} />
-                    <InputG label={'Descrição:'} name={'descrição'} placeholder={'Descrição'} type={'textarea'} id={'inputDesc'} value={this.state.value} onChange={this.handleChangeDes.bind(this)}/>                    
-                    <InputG label={'Justificativa:'} name={'justificativa'} placeholder={'Justificativa'} type={'textarea'} id={'inputJus'} value={this.state.value} onChange={this.handleChangeJus.bind(this)}/>
+                    <InputG validDes={true}    label={'Descrição:'} name={'descrição'} placeholder={'Descrição'} type={'textarea'} id={'inputDesc'} value={this.state.value} onChange={this.handleChangeDes.bind(this)}/>                    
+                    <InputG validJus={true}    label={'Justificativa:'} name={'justificativa'} placeholder={'Justificativa'} type={'textarea'} id={'inputJus'} value={this.state.value} onChange={this.handleChangeJus.bind(this)}/>
                     <Button id="buttonPost" color="primary" onClick={this.salvar.bind(this)}> Salvar </Button>
                     
                 </div>
