@@ -50,7 +50,7 @@ export default class CriarS extends Component {
                 <div id = "Inputs">
                     
                     <Label> Quantidade: </Label><br />
-                    <NumericInput placeholder= "Numero Siorg" min={1}max={10000} name={'nSiorg'} value={this.state.siorg} onChange={this.handleChangeSio.bind(this)} />
+                    <NumericInput placeholder= "Numero Siorg" min={0} name={'nSiorg'} value={this.state.siorg} onChange={this.handleChangeSio.bind(this)} />
                     
                     <InputG label={'Descrição:'} name={'descrição'} placeholder={'Descrição'} type={'textarea'} id={'inputDesc'} value={this.state.value} onChange={this.handleChangeDes.bind(this)}/>                    
                     <Button id="buttonPost" color="danger" onClick={this.salvar.bind(this)}> Salvar </Button>

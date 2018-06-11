@@ -8,18 +8,26 @@ import { Button } from 'reactstrap';
 export default class TableSiorg extends Component {
     constructor(props) {
         super(props)
-        this.state = { lista: [] }
+        this.state = { lista: [], normal: true }
         this.properFunc = this.properFunc.bind(this)
     }
 
+    // componentDidMount() {
+    //     fetch(this.props.urlGet, {
+    //         method: 'GET',
+    //         headers: new Headers({
+    //             'Content-type': 'application/json',
+    //             'token': localStorage.getItem('auth-token')
+    //         })
+    //     })
+    //         .then(response => response.json())
+    //         .then(product => {
+    //             this.setState({ lista: product });
+    //         });
+    // }
+
     componentDidMount() {
-        fetch(this.props.urlGet, {
-            method: 'GET',
-            headers: new Headers({
-                'Content-type': 'application/json',
-                'token': localStorage.getItem('auth-token')
-            })
-        })
+        fetch("https://raw.githubusercontent.com/LuizASSilveira/pi-almoxarifado/master/siorg.json")
             .then(response => response.json())
             .then(product => {
                 this.setState({ lista: product });
@@ -27,10 +35,11 @@ export default class TableSiorg extends Component {
     }
 
     properFunc(row, isSelected) {
+        this.setState({ normal: false })
+
         if (this.props.a) {
             this.props.a(row, isSelected)
         }
-        console.log(row)
     }
 
     excluir(row) {
@@ -53,7 +62,12 @@ export default class TableSiorg extends Component {
             })
     }
 
+    
+
     render() {
+        const options = {
+            noDataText: 'Não há dados.',
+        };
 
         let self = this;
         function buttonFormatter(cell, row) {
@@ -75,11 +89,12 @@ export default class TableSiorg extends Component {
                     hover={true}
                     selectRow={selectRowProp}
                     searchPlaceholder='Pesquisar'
-                    options={{ noDataText: 'Não há dados.' }}
+                    options={ options }
+
                 >
-                    <TableHeaderColumn width='10%' dataField="siorg" isKey>     Código Siorg     </TableHeaderColumn>
-                    <TableHeaderColumn width='60%' dataField="descricao">       Descrição  </TableHeaderColumn>
-                    <TableHeaderColumn width='10%' dataField="button" dataFormat={buttonFormatter}> Remover   </TableHeaderColumn>
+                    <TableHeaderColumn width='10%' dataField="siorg" isKey>     Código Siorg                </TableHeaderColumn>
+                    <TableHeaderColumn width='60%' tdStyle={ { whiteSpace: this.state.normal? 'normal':'' } } dataField="descricao">       Descrição                   </TableHeaderColumn>
+                    <TableHeaderColumn width='10%' dataField="button" dataFormat={buttonFormatter} > Remover </TableHeaderColumn>
                 </BootstrapTable>
 
 
