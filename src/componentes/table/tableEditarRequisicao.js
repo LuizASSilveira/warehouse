@@ -72,7 +72,7 @@ class TableEditar extends Component {
         if (number !== "Não Definido") {
           this.setState({ disabled: true })
           this.setState({ numero: number })
-        } 
+        }
 
       });
   }

@@ -1,44 +1,73 @@
 import React, { Component } from 'react';
 import '../css/table.css'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
-import {PropTypes} from 'prop-types'
+import { PropTypes } from 'prop-types'
 import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
-
+import { Button } from 'reactstrap';
 
 export default class TableSiorg extends Component {
     constructor(props) {
         super(props)
-        this.state = { lista: []}
+        this.state = { lista: [] }
         this.properFunc = this.properFunc.bind(this)
-      }
+    }
 
-      componentDidMount() {
+    componentDidMount() {
         fetch(this.props.urlGet, {
-          method: 'GET',
-          headers: new Headers({
-            'Content-type': 'application/json',
-            'token': localStorage.getItem('auth-token')
-          })
+            method: 'GET',
+            headers: new Headers({
+                'Content-type': 'application/json',
+                'token': localStorage.getItem('auth-token')
+            })
         })
-          .then(response => response.json())
-          .then(product => {
-            this.setState({ lista: product });
-          });
-      }
+            .then(response => response.json())
+            .then(product => {
+                this.setState({ lista: product });
+            });
+    }
 
-        properFunc(row, isSelected) {
-          if(this.props.a){
+    properFunc(row, isSelected) {
+        if (this.props.a) {
             this.props.a(row, isSelected)
-          }
-          console.log(row)
         }
-    
+        console.log(row)
+    }
+
+    excluir(row) {
+        console.log(row.id)
+
+        const requestInfo = {
+            method: 'DELETE',
+            headers: new Headers({
+                'Content-type': 'application/json',
+                'token': localStorage.getItem('auth-token')
+            })
+        };
+        fetch(this.props.urlDelete + row.id, requestInfo)
+            .then(response => {
+                if (response.ok) {
+                    //alerta dados salvos com sucesso
+                    window.location.reload()
+                } else {
+                    throw new Error("não foi possivel salvar as alterações");
+                }
+            })
+        //reload pagina
+        window.location.reload()
+    }
+
     render() {
+
+        let self = this;
+        function buttonFormatter(cell, row) {
+            console.log(row.id)
+            return <Button color="danger" onClick={() => self.excluir(row)} >X</Button>;
+        }
         const selectRowProp = {
-           mode: 'radio',
-           clickToSelect: true,
-           bgColor: 'grey',
-           onSelect: this.properFunc
+            mode: 'radio',
+            clickToSelect: true,
+            bgColor: 'grey',
+            onSelect: this.properFunc
         }
 
         return (
@@ -50,11 +79,11 @@ export default class TableSiorg extends Component {
                     hover={true}
                     selectRow={selectRowProp}
                     searchPlaceholder='Pesquisar'
-                    options={{noDataText: 'Não há dados.'}}
+                    options={{ noDataText: 'Não há dados.' }}
                 >
                     <TableHeaderColumn dataField="siorg" isKey>     Código Siorg     </TableHeaderColumn>
                     <TableHeaderColumn dataField="descricao">       Descrição  </TableHeaderColumn>
-
+                    <TableHeaderColumn dataField="button" dataFormat={buttonFormatter}> Remover   </TableHeaderColumn>
                 </BootstrapTable>
 
 

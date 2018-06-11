@@ -35,10 +35,9 @@ ReactDOM.render(
         <Route        path="/solicitacao/criar"      component={criarS} />
         <Route        path="/solicitacao/orcamento"  component={Orcamento} />
         
-        <Route   exact     path="/solicitacao/validar"     component={ValidarS}/>
-        <Route exact path="/solicitacao/validar/:id"     component={ValidEspec}/>
+        <Route        path="/solicitacao/validar"     component={ValidarS}/>
+        <Route        path="/solicitacao/validar/:id" component={ValidEspec}/>
 
-        
         <Route        path="/siorg/criar"            component={criarSiorg} />
         <Route        path="/siorg/lista"            component={criarLista} />
 
