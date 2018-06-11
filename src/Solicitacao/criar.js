@@ -88,7 +88,7 @@ export default class CriarS extends Component {
                         <Modal isOpen={this.state.modal} toggle={this.toggle} className='modal-xl'>
                           <ModalHeader toggle={this.toggle}>Lista Siorg</ModalHeader>
                           <ModalBody>
-                             <TableSiorg a={this.guardaRow} urlGet={'https://gist.githubusercontent.com/caionakai/1ee2b50876f4ac8fe689b89f35580851/raw/c7909049b0603707ad77c7bc0ea65c857014ca72/siorg.json'}/>
+                             <TableSiorg a={this.guardaRow} urlGet={'http://localhost:3001/produtos'}/>
                           </ModalBody>
                           <ModalFooter>
                             <Button color="primary" onClick={this.mandaSiorg}>Confirmar</Button>{' '}

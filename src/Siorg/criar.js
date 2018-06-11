@@ -22,13 +22,13 @@ export default class CriarS extends Component {
         if(this.state.decricao.length !== 0 && this.state.siorg.length !== 0){
             const requestInfo = {
                 method: 'POST',
-                body: JSON.stringify({descricao: this.state.decricao  ,justificativa: this.state.justificativa, quantidade: this.state.quantidade}),
+                body: JSON.stringify({descricao: this.state.decricao  ,siorg: this.state.siorg}),
                 headers: new Headers({
                   'Content-type': 'application/json',
                   'token': localStorage.getItem('auth-token')
                 })
               };
-              fetch(this.props.urlPost, requestInfo)
+              fetch("http://localhost:3001/produtos", requestInfo)
                 .then(response => {
                   if (response.ok) {
                     //alerta dados salvos com sucesso

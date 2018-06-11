@@ -15,10 +15,10 @@ export default class TableSiorg extends Component {
       componentDidMount() {
         fetch(this.props.urlGet, {
           method: 'GET',
-          //headers: new Headers({
-            //'Content-type': 'application/json',
-            //'token': localStorage.getItem('auth-token')
-          //})
+          headers: new Headers({
+            'Content-type': 'application/json',
+            'token': localStorage.getItem('auth-token')
+          })
         })
           .then(response => response.json())
           .then(product => {
@@ -26,9 +26,8 @@ export default class TableSiorg extends Component {
           });
       }
 
-        properFunc(row, isSelected, e) {
+        properFunc(row) {
           console.log(row)
-          this.props.a(row)
         }
     
     render() {
@@ -51,9 +50,8 @@ export default class TableSiorg extends Component {
                     searchPlaceholder='Pesquisar'
                     options={{noDataText: 'Não há dados.'}}
                 >
-                    <TableHeaderColumn dataField='id' isKey>  ID                                 </TableHeaderColumn>
-                    <TableHeaderColumn dataField="siorgL">     Nº Siorg     </TableHeaderColumn>
-                    <TableHeaderColumn dataField="descricaoL">       Descricao  </TableHeaderColumn>
+                    <TableHeaderColumn dataField="siorg" isKey>     Código Siorg     </TableHeaderColumn>
+                    <TableHeaderColumn dataField="descricao">       Descrição  </TableHeaderColumn>
 
                 </BootstrapTable>
 
