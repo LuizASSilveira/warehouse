@@ -3,7 +3,7 @@ import Nav      from '../componentes/navbarAdm';
 import InputG   from '../componentes/inputGenerico'
 import '../componentes/css/input.css'
 import NumericInput from 'react-numeric-input';
-import {Input, Button,Label , Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import {Input, Button,Label ,FormGroup, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import {ErrorAlert} from '../componentes/alerta';
 import TableSiorg from "../componentes/table/siorgTable";
 
@@ -39,17 +39,19 @@ export default class CriarS extends Component {
     }
     
     mandaSiorg(){
-    this.setState({
-        value: this.state.linha.siorg,
-        qlq: this.state.linha.descricao
-    })
+    if(this.state.linha.siorg){
+        this.setState({
+          qlq: this.state.linha.descricao,
+          value: this.state.linha.siorg
+        })
+    }
     this.toggle()
      }
 
-    guardaRow(row){
-      this.setState({
-        linha: row
-      });
+    guardaRow(row, isSelected){
+        this.setState({
+          linha: isSelected?row:{siorg:null,decricao:null}
+        });
     }
 
     salvar(){
@@ -111,7 +113,10 @@ export default class CriarS extends Component {
 
                     <Label> Quantidade: </Label><br />
                     <NumericInput min={1}max={1000} name={'qtd'} value={this.state.quantidade} onChange={this.handleChangeQtd.bind(this)} />
-                    <InputG label={'Descrição:'} name={'descrição'} placeholder={'Descrição'} type={'textarea'} id={'inputDesc'} value={this.state.qlq} onChange={this.handleChangeDes.bind(this)}/>                    
+                    <FormGroup>
+                        <Label> Descrição</Label>
+                        <Input disabled={this.state.value? true: false} feedback={'anything'} name={'descricao'} onChange={this.handleChangeJus.bind(this)} value={this.state.qlq} />
+                    </FormGroup>                  
                     <InputG label={'Justificativa:'} name={'justificativa'} placeholder={'Justificativa'} type={'textarea'} id={'inputJus'} value={this.state.value} onChange={this.handleChangeJus.bind(this)}/>
 
                     <Button id="buttonPost" color="primary" onClick={this.salvar.bind(this)}> Salvar </Button>
