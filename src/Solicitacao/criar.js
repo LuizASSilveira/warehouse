@@ -12,7 +12,6 @@ export default class CriarS extends Component {
         super()
         this.state = { 
             decricao: '', justificativa:'', quantidade: 1, siorg:'', alerta: false,
-            qlq:'',
             modal: false, errorDes:false, errorJus:false, errorNum:false
         };
         this.toggle = this.toggle.bind(this);
@@ -26,7 +25,7 @@ export default class CriarS extends Component {
       });
     }
     handleChangeDes(event) {
-        this.setState({ qlq: event.target.value });
+        this.setState({ decricao: event.target.value });
     }
     handleChangeJus(event) {
         this.setState({ justificativa: event.target.value });
@@ -41,7 +40,7 @@ export default class CriarS extends Component {
     mandaSiorg(){
     if(this.state.linha.siorg){
         this.setState({
-          qlq: this.state.linha.descricao,
+          decricao: this.state.linha.descricao,
           value: this.state.linha.siorg
         })
     }
@@ -115,7 +114,7 @@ export default class CriarS extends Component {
                     <NumericInput min={1}max={1000} name={'qtd'} value={this.state.quantidade} onChange={this.handleChangeQtd.bind(this)} />
                     <FormGroup>
                         <Label> Descrição</Label>
-                        <Input disabled={this.state.value? true: false} feedback={'anything'} name={'descricao'} onChange={this.handleChangeDes.bind(this)} value={this.state.qlq} />
+                        <Input disabled={this.state.value? true: false} feedback={'anything'} name={'descricao'} onChange={this.handleChangeDes.bind(this)} value={this.state.decricao} />
                     </FormGroup>                  
                     <InputG label={'Justificativa:'} name={'justificativa'} placeholder={'Justificativa'} type={'textarea'} id={'inputJus'} value={this.state.value} onChange={this.handleChangeJus.bind(this)}/>
 
