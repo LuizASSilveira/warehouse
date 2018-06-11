@@ -44,7 +44,7 @@ class Table extends Component {
         
     }
     if (this.state.redirect) {
-      //return <Redirect to= {"/requisicao/editar/"+this.state.id}   />
+      return <Redirect to= {"/requisicao/editar/"+this.state.id}   />
     }
 
     return (
@@ -58,10 +58,10 @@ class Table extends Component {
           options={options}
         >
           <TableHeaderColumn dataField='id' isKey>  ID                                 </TableHeaderColumn>
-          <TableHeaderColumn dataField={this.props.descricaoL}> {this.props.descricao}  </TableHeaderColumn>
-          <TableHeaderColumn dataField={this.props.dataL}>      {this.props.data}       </TableHeaderColumn>
-          <TableHeaderColumn dataField={this.props.statusL}>    {this.props.status}     </TableHeaderColumn>
-          <TableHeaderColumn dataField={this.props.nomeL}>      {this.props.nome}       </TableHeaderColumn>
+          <TableHeaderColumn dataField={this.props.dataL}>          {this.props.data}       </TableHeaderColumn>
+          <TableHeaderColumn dataField={this.props.numeroL}>        {this.props.numero}  </TableHeaderColumn>
+          <TableHeaderColumn dataField={this.props.nomeL}>          {this.props.nome}       </TableHeaderColumn>
+          <TableHeaderColumn dataField={this.props.solicitanteL}>   {this.props.solicitante}     </TableHeaderColumn>
         </BootstrapTable>
 
       </div>
