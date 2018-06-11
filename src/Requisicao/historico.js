@@ -19,9 +19,7 @@ export default class Criar extends Component {
                         numero=         {"numero"}
                         nome=           {"nome"}
                         solicitante=    {'solicitante'}
-                        
-                        
-                        
+    
                         />                   
             </div>
         )

@@ -54,7 +54,6 @@ export default class CriarS extends Component {
                 <ErrorAlert isOpen={this.state.alerta} id="errorAlert" color="danger" text='Preencha todos os campos'/>
 
                 <ValidaSolTable urlGet={'http://localhost:3001/solicitacoes/validar'}/>
-
                 
             </div>
         )

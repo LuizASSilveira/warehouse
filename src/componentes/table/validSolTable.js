@@ -4,7 +4,7 @@ import "../../../node_modules/react-bootstrap-table/css/react-bootstrap-table.cs
 import InputG from "../inputGenerico";
 import '../css/validSolTable.css'
 import {Redirect} from 'react-router-dom'
-
+import '../css/table.css'
 
 
 class ValidaSolTable extends React.Component {
@@ -96,7 +96,7 @@ class ValidaSolTable extends React.Component {
     }
   
     return (
-      <div className="teste">
+      <div id="table">
         <p className="Table-header">Selecione a solicitação para valida-lá.</p>
         <BootstrapTable
           data={this.state.products}
