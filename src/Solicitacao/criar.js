@@ -26,7 +26,7 @@ export default class CriarS extends Component {
       });
     }
     handleChangeDes(event) {
-        this.setState({ decricao: event.target.value });
+        this.setState({ qlq: event.target.value });
     }
     handleChangeJus(event) {
         this.setState({ justificativa: event.target.value });
@@ -115,7 +115,7 @@ export default class CriarS extends Component {
                     <NumericInput min={1}max={1000} name={'qtd'} value={this.state.quantidade} onChange={this.handleChangeQtd.bind(this)} />
                     <FormGroup>
                         <Label> Descrição</Label>
-                        <Input disabled={this.state.value? true: false} feedback={'anything'} name={'descricao'} onChange={this.handleChangeJus.bind(this)} value={this.state.qlq} />
+                        <Input disabled={this.state.value? true: false} feedback={'anything'} name={'descricao'} onChange={this.handleChangeDes.bind(this)} value={this.state.qlq} />
                     </FormGroup>                  
                     <InputG label={'Justificativa:'} name={'justificativa'} placeholder={'Justificativa'} type={'textarea'} id={'inputJus'} value={this.state.value} onChange={this.handleChangeJus.bind(this)}/>
 
