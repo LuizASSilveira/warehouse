@@ -26,14 +26,14 @@ export default class TableSiorg extends Component {
           });
       }
 
-        properFunc(row) {
+        properFunc(row, isSelected) {
+          this.props.a(row, isSelected)
           console.log(row)
         }
     
     render() {
         const selectRowProp = {
            mode: 'radio',
-           hideSelectColumn: true,
            clickToSelect: true,
            bgColor: 'grey',
            onSelect: this.properFunc
