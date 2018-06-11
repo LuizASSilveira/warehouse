@@ -67,6 +67,7 @@ export default class CriarS extends Component {
                 .then(response => {
                   if (response.ok) {
                     //alerta dados salvos com sucesso
+                    window.location.reload()
                     console.log("tudo ok")
                   } else {
                       console.log(response)
