@@ -16,7 +16,8 @@ export default class validEspec extends Component {
       index:0,
       feed: false,
       loading: true,
-      linha: []
+      linha: [],
+      apertou: false
     }
     this.toggle = this.toggle.bind(this);
     this.properFunc = this.properFunc.bind(this);
@@ -66,10 +67,10 @@ componentDidMount() {
     this.setState({ selected: x })
   }
 
-  guardaRow(row){
+  guardaRow(row, isSelected){
     this.setState({
-      linha: row
-    });
+          linha: isSelected?row:{siorg:null,decricao:null}
+        });
   }
 
   onChange(ev){
@@ -106,9 +107,13 @@ componentDidMount() {
 
   mandaSiorg(){
     let products = this.state.products
-    products[this.state.index].siorg = this.state.linha.siorgL
+    if(this.state.linha.siorg){
+        products[this.state.index].siorg = this.state.linha.siorg
+        products[this.state.index].descricao = this.state.linha.descricao
+    }
+        
     this.setState({
-        products: products
+        products: products,
     })
     this.toggle()
   }
@@ -125,10 +130,7 @@ componentDidMount() {
       onSelect: this.properFunc
     }    
     if(!this.state.loading){
-        if (this.state.products[this.state.index].status === 'CANCELADA') {
-          feed = <InputG label={'Feedback:'} type={'textarea'} placeholder={'Insira um comentário para o solicitante sobre o motivo do cancelamento da solicitação.'} />
-        }
-
+        
     return(
          <div>
            <Nav isadm = {true} />
@@ -143,7 +145,7 @@ componentDidMount() {
                         <Modal isOpen={this.state.modal} toggle={this.toggle} className='modal-xl'>
                           <ModalHeader toggle={this.toggle}>Lista Siorg</ModalHeader>
                           <ModalBody>
-                             <TableSiorg a={this.guardaRow} urlGet={'https://gist.githubusercontent.com/caionakai/1ee2b50876f4ac8fe689b89f35580851/raw/c7909049b0603707ad77c7bc0ea65c857014ca72/siorg.json'}/>
+                             <TableSiorg a={this.guardaRow} urlGet={'http://localhost:3001/produtos'}/>
                           </ModalBody>
                           <ModalFooter>
                             <Button color="primary" onClick={this.mandaSiorg}>Confirmar</Button>{' '}
@@ -151,8 +153,12 @@ componentDidMount() {
                           </ModalFooter>
                         </Modal>
                         </FormGroup>
-                    <InputG label={'Data'}  onChange={this.onChange} name={'data'} value={this.state.products[this.state.index].data} />
-                    <InputG label={'Descrição'} valid={true} feedback={'anything'} name={'descricao'} onChange={this.onChange} value={this.state.products[this.state.index].descricao} />
+
+                    <FormGroup>
+                        <Label> Descrição</Label>
+                        <Input disabled={this.state.products[this.state.index].siorg? true: false} feedback={'anything'} name={'descricao'} onChange={this.onChange} value={this.state.products[this.state.index].descricao} />
+                    </FormGroup>
+
                     <InputG label={'Quantidade'}  type={'number'} name={'quantidade'}  />
                     <InputG label={'Justificativa'} name={'justificativa'} onChange={this.onChange} value={this.state.products[this.state.index].justificativa} />
                     <FormGroup>
@@ -161,7 +167,7 @@ componentDidMount() {
                         {this.loadSelect()}
                     </Input>
                     </FormGroup>
-                    {feed}
+                    <InputG label={'Feedback:'} type={'textarea'} placeholder={'Insira um comentário para o solicitante sobre o motivo do cancelamento da solicitação.'} />
                     <OrcamentosTable urlGet={"http://localhost:3001/solicitacoes/" + this.props.match.params.id +"/orcamentos"}/>
             </div>
             <Button onClick={this.quandoClica}>Confirmar</Button>
