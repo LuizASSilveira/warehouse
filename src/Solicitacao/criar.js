@@ -13,7 +13,7 @@ export default class CriarS extends Component {
         this.state = { 
             decricao: '', justificativa:'', quantidade: 1, siorg:'', alerta: false,
             qlq:'',
-            modal: false
+            modal: false, errorDes:false, errorJus:false, errorNum:false
         };
         this.toggle = this.toggle.bind(this);
         this.mandaSiorg = this.mandaSiorg.bind(this);
@@ -73,9 +73,20 @@ export default class CriarS extends Component {
                   }
                 })
         }
-        else{
-            this.setState({ alerta: true })
-        }
+        else {
+            if(this.state.decricao.length === 0){
+                this.setState({ errorDes: false })
+            }else{
+                this.setState({ errorDes: true })
+            }
+
+            if(this.state.justificativa.length === 0){
+                this.setState({ errorJus:false })
+            }else{
+                this.setState({ errorJus: true })
+            }
+    }
+        
     }
     render(){
         return(
@@ -102,6 +113,7 @@ export default class CriarS extends Component {
                     <NumericInput min={1}max={1000} name={'qtd'} value={this.state.quantidade} onChange={this.handleChangeQtd.bind(this)} />
                     <InputG label={'Descrição:'} name={'descrição'} placeholder={'Descrição'} type={'textarea'} id={'inputDesc'} value={this.state.qlq} onChange={this.handleChangeDes.bind(this)}/>                    
                     <InputG label={'Justificativa:'} name={'justificativa'} placeholder={'Justificativa'} type={'textarea'} id={'inputJus'} value={this.state.value} onChange={this.handleChangeJus.bind(this)}/>
+
                     <Button id="buttonPost" color="primary" onClick={this.salvar.bind(this)}> Salvar </Button>
                     
                 </div>
