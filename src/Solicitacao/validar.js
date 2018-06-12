@@ -65,7 +65,7 @@ export default class CriarS extends Component {
                                 <h4 id="Inputs">Validar Solicitações</h4>
                 <ErrorAlert isOpen={this.state.alerta} id="errorAlert" color="danger" text='Preencha todos os campos'/>
 
-                <ValidaSolTable history={this.props.history} urlGet={'http://localhost:3001/solicitacoes/validar'}/>
+                <ValidaSolTable teste={this.props.history} urlGet={'http://localhost:3001/solicitacoes/validar'}/>
                 
             </div>
         )

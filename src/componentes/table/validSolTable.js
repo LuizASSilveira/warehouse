@@ -11,23 +11,11 @@ class ValidaSolTable extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      modal: false,
       products: [],
-      redirect: false,
-      id: '',
-      feed: false,
-      selected: { descricao: '', data: '', siorg: '', qtde: '', status: '' }
     }
-    this.toggle = this.toggle.bind(this);
-    this.properFunc = this.properFunc.bind(this);
     this.onRowClick = this.onRowClick.bind(this);
   }
 
-  toggle() {
-    this.setState({
-      modal: !this.state.modal
-    });
-  }
 
   componentDidMount() {
     fetch(this.props.urlGet, {
@@ -42,29 +30,9 @@ class ValidaSolTable extends React.Component {
       });
   }
 
-  properFunc(row, isSelected, e) {
-    console.log(row)
-    this.setState({
-      selected: row
-    });
-    this.toggle()
-  }
-  loadSelect() {
-    let status = ['ABERTA', 'REQUISITADA', 'COMPRADA', 'DESERTO', 'CANCELADA']
-    return status.map((stat) => {
-      return <option>{stat}</option>
-    })
-  }
-
-  setselect = (e) => {
-    let x = this.state.selected
-    x.status = e.target.value
-    this.setState({ selected: x })
-  }
 
   onRowClick(row){
-    this.setState({ id: row.id, redirect : true})
-    this.props.history.push("/solicitacao/validar/"+this.state.id)
+    this.props.teste.push('/solicitacao/validar/'+row.id)
 
   }
 
@@ -73,7 +41,6 @@ class ValidaSolTable extends React.Component {
       mode: 'radio',
       hideSelectColumn: true,
       clickToSelect: true,
-      onSelect: this.properFunc
     }
 
 
