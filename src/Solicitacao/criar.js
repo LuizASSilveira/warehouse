@@ -60,7 +60,9 @@ export default class CriarS extends Component {
         let adm
         adm = localStorage.getItem('isAdm')
         console.log(adm)
-        this.setState({ isAdm: adm })
+        if(adm === false){
+            this.setState({ isAdm: false })
+        }
     }
 
     salvar(){
@@ -95,11 +97,10 @@ export default class CriarS extends Component {
     render(){
         return(
             <div>
-               
                 <Nav isadm={this.state.isAdm} />
-                                <h4>Criar Solicitação</h4>
                 <ErrorAlert isOpen={this.state.alerta} id="errorAlert" color="danger" text='Preencha todos os campos'/>
                 <div id = "Inputs">
+                    <h4>Criar Solicitação</h4>
                     <div id='siorgButton'>
                     <FormGroup>
                         <Label>Siorg</Label>

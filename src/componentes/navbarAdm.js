@@ -50,6 +50,12 @@ export default class navbarAdm extends React.Component {
   }
 
   render() {
+    let validar
+    if(this.props.isadm){
+      validar =                   <DropdownItem>
+                    <NavLink href="/solicitacao/validar">Validar Solicitação</NavLink>
+                  </DropdownItem>
+    }
 
     return (
       <div>
@@ -70,9 +76,7 @@ export default class navbarAdm extends React.Component {
                   <DropdownItem>
                     <NavLink href="/solicitacao/historico">Visualizar Solicitação</NavLink>
                   </DropdownItem>
-                  <DropdownItem>
-                    <NavLink href="/solicitacao/validar">Validar Solicitação</NavLink>
-                  </DropdownItem>
+                  {validar}
                 </DropdownMenu>
               </UncontrolledDropdown>
 
