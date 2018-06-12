@@ -41,7 +41,7 @@ export default class CriarS extends Component {
     if(this.state.linha.siorg){
         this.setState({
           decricao: this.state.linha.descricao,
-          value: this.state.linha.siorg
+          siorg: this.state.linha.siorg
         })
     }
     this.toggle()
