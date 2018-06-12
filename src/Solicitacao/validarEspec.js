@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Nav from '../componentes/navbarAdm';
 import '../componentes/css/input.css'
-import { Input, Button, Label, FormGroup, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Input, Button, Label, FormGroup, Modal, ModalHeader, ModalBody, ModalFooter, FormFeedback } from 'reactstrap';
 import InputG from "../componentes/inputGenerico";
 import OrcamentosTable from "../componentes/table/orcamentos";
 import TableSiorg from "../componentes/table/siorgTable";
@@ -90,23 +90,26 @@ export default class validEspec extends Component {
   quandoClica() {
     if (this.state.products[this.state.index].descricao !== 0 && this.state.products[this.state.index].justificativa !== 0) {
       const requestInfo = {
-        method: 'POST',
+        method: 'PUT',
         body: JSON.stringify({ descricao: this.state.products[this.state.index].descricao, 
                                justificativa: this.state.products[this.state.index].justificativa, 
                                quantidade: this.state.products[this.state.index].quantidade,
                                siorg: this.state.products[this.state.index].siorg,
                                feedback: this.state.products[this.state.index].feedback,
-                               status: 'APROVADO' }),
+                               status: this.state.products[this.state.index].status}),
         headers: new Headers({
           'Content-type': 'application/json',
           'token': localStorage.getItem('auth-token')
         })
+
       };
+
       fetch('http://localhost:3001/solicitacoes/'+this.props.match.params.id, requestInfo)
         .then(response => {
           if (response.ok) {
             //alerta dados salvos com sucesso
             console.log("tudo ok")
+            this.props.history.push('/solicitacao/validar');
           } else {
             console.log(response)
             throw new Error(response);
@@ -170,7 +173,12 @@ export default class validEspec extends Component {
 
             <FormGroup>
               <Label> Descrição</Label>
-              <Input type="textarea" disabled={this.state.products[this.state.index].siorg ? true : false} feedback={'anything'} name={'descricao'} onChange={this.onChange} value={this.state.products[this.state.index].descricao} />
+              <Input type="textarea" 
+                    disabled={this.state.products[this.state.index].siorg ? true : false}
+                    invalid={!this.state.products[this.state.index].descricao}
+                    feedback={'anything'} name={'descricao'} onChange={this.onChange} 
+                    value={this.state.products[this.state.index].descricao} />
+              <FormFeedback>Preencha este campo!</FormFeedback>
             </FormGroup>
             
             <FormGroup>
@@ -181,7 +189,10 @@ export default class validEspec extends Component {
 
             <FormGroup>
                 <Label>Justificativa </Label>
-                <Input type={'textarea'} name={'justificativa'} onChange={this.onChange} value={this.state.products[this.state.index].justificativa} />
+                <Input  type={'textarea'} name={'justificativa'} onChange={this.onChange} 
+                        invalid={!this.state.products[this.state.index].justificativa}
+                        value={this.state.products[this.state.index].justificativa} />
+                <FormFeedback>Preencha este campo!</FormFeedback>
             </FormGroup>
 
             <FormGroup>
@@ -191,10 +202,20 @@ export default class validEspec extends Component {
               </Input>
             </FormGroup>
             
-            <InputG label={'Feedback:'} type={'textarea'} placeholder={'Insira um comentário para o solicitante sobre o motivo da aprovação ou cancelamento da solicitação.'} />
+            <FormGroup>
+                <Label>Feedback</Label>
+                <Input type='textarea' invalid={!this.state.products[this.state.index].feedback} name='feedback' value={this.state.products[this.state.index].feedback} onChange={this.onChange} placeholder='Insira um comentário para o solicitante sobre o motivo da aprovação ou cancelamento da solicitação.' />
+                <FormFeedback>Preencha este campo!</FormFeedback>
+            </FormGroup>
             <OrcamentosTable urlGet={"http://localhost:3001/solicitacoes/" + this.props.match.params.id + "/orcamentos"} />
             
-            <Button id="confirm" onClick={this.quandoClica}>Confirmar</Button>
+            <Button id="confirm" 
+                    onClick={this.quandoClica} 
+                    disabled={
+                        !this.state.products[this.state.index].feedback ||
+                        !this.state.products[this.state.index].descricao ||
+                        !this.state.products[this.state.index].justificativa
+                    }>Confirmar</Button>
             <Link to="/solicitacao/validar">
                 <Button id="cancel">Cancelar</Button>
             </Link>

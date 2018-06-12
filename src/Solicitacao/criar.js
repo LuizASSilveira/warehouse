@@ -70,6 +70,7 @@ export default class CriarS extends Component {
                     //alerta dados salvos com sucesso
                     window.location.reload()
                     console.log("tudo ok")
+                    this.props.history.push('/solicitacao/historico');
                   } else {
                       console.log(response)
                     throw new Error(response);

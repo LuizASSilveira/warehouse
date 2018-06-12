@@ -39,6 +39,7 @@ export default class CriarS extends Component {
                     //alerta dados salvos com sucesso
                     console.log("tudo ok")
                     this.setState({vai:true});
+                    this.props.history.push('/siorg/lista');
                   } else {
                     throw new Error("não foi possivel salvar as alterações");
                   }
@@ -49,7 +50,7 @@ export default class CriarS extends Component {
         }
     }
     render(){
-
+        
         return(
             <div>
                 <Nav isadm = {true} />
@@ -59,15 +60,13 @@ export default class CriarS extends Component {
                 <h4>Criar Produto Siorg</h4>
                     
                     <FormGroup>
-                        <Label> Número do Siorg </Label>
-                        <Input placeholder="Número Siorg" type="number" name="siorg" value={this.state.siorg} onChange={this.onChange} />
+                        <Label> Nº Siorg </Label>
+                        <Input placeholder="Numero Siorg" type="number" name="siorg" value={this.state.siorg} onChange={this.onChange} />
                     </FormGroup>
 
 
                     <InputG label={'Descrição:'} name={'descrição'} placeholder={'Descrição'} type={'textarea'} id={'inputDesc'} value={this.state.value} onChange={this.handleChangeDes.bind(this)}/>                    
-                    <Link to="/siorg/lista"> 
                     <Button id="buttonPost" color="danger" onClick={this.salvar.bind(this)}> Salvar </Button>
-                    </Link>
                     
                     
                 </div>
