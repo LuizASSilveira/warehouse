@@ -12,7 +12,7 @@ export default class Criar extends Component {
                                 <h4 id="Inputs">Criar Requisição</h4>
 
                 <Table  buttonName= {'Criar Requisicao'}
-                        urlGet=     {'http://localhost:3001/solicitacoes'}
+                        urlGet=     {'http://localhost:3001/solicitacoes/requisicao'}
                         urlPost=    {'http://localhost:3001/requisicoes'}
                         descricao=  {'Descrição'}
                         status=     {'Estado'}
