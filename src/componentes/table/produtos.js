@@ -7,7 +7,10 @@ class ProdutosTable extends Component {
     return (
       <div>
         <p className="Table-header">Produtos</p>
-        <BootstrapTable data={this.props.data}>
+        <BootstrapTable data={this.props.data}
+          searchPlaceholder='Pesquisar'
+          options={{noDataText: 'Não há dados.'}}
+          >
           <TableHeaderColumn isKey dataField="siorg">
             SIORG
           </TableHeaderColumn>

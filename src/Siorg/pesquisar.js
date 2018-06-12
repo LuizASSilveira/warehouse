@@ -10,16 +10,14 @@ export default class Criar extends Component {
                 <Nav    isadm = {true} />
 
                 <TableSiorg  buttonName= {'Criar Requisicao'}
-                        urlGet=     {'http://localhost:3001/solicitacoes'}
-                        urlPost=    {'http://localhost:3001/requisicoes'}
+                        urlGet=     {'http://localhost:3001/produtos'}
+                        
                         descricao=  {'Descrição'}
-                        siorg=     {'Siorg'}
-                        data=       {'Data'}
+                        siorg=      {'Siorg'}
                         
 
                         descricaoL=  {'descricao'}
-                        siorgL=     {'siorg'}
-                        dataL=       {'data'}
+                        siorgL=      {'siorg'}
                         
                 />                   
             </div>

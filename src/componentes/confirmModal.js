@@ -36,7 +36,7 @@ class Confirm extends React.Component {
   render() {
     return (
       <div>
-        <Modal isOpen={this.state.modal} toggle={this.toggleCancel} className={this.props.className}>
+        <Modal isOpen={this.props.modal} toggle={this.toggleCancel} className={this.props.className}>
           <ModalHeader toggle={this.toggleCancel}></ModalHeader>
           <ModalBody>
             {this.props.mensagem}

@@ -7,7 +7,10 @@ class SolicitacoesTable extends Component {
     return (
       <div>
         <p className="Table-header">Solicitações</p>
-        <BootstrapTable>
+        <BootstrapTable
+          searchPlaceholder='Pesquisar'
+          options={{noDataText: 'Não há dados.'}}
+          >
           <TableHeaderColumn isKey dataField="siorg">
             SIORG
           </TableHeaderColumn>
