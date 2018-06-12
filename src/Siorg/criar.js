@@ -5,10 +5,11 @@ import '../componentes/css/input.css'
 import { Button, Label, FormGroup, Input } from 'reactstrap';
 import {ErrorAlert} from '../componentes/alerta'
 import NumericInput from 'react-numeric-input';
+import { Redirect, Link, NavLink } from 'react-router-dom'
 export default class CriarS extends Component {     
     constructor(){
         super()
-        this.state = { decricao: '', siorg: '' , alerta: false}
+        this.state = { decricao: '', siorg: '' , alerta: false, vai: false}
         this.onChange = this.onChange.bind(this);
     }
     handleChangeDes(event) {
@@ -37,6 +38,7 @@ export default class CriarS extends Component {
                   if (response.ok) {
                     //alerta dados salvos com sucesso
                     console.log("tudo ok")
+                    this.setState({vai:true});
                   } else {
                     throw new Error("não foi possivel salvar as alterações");
                   }
@@ -47,6 +49,10 @@ export default class CriarS extends Component {
         }
     }
     render(){
+        if(this.state.vai){
+            return <Link to="/siorg/lista" replace/>;
+        }
+
         return(
             <div>
                 <Nav isadm = {true} />
@@ -62,7 +68,10 @@ export default class CriarS extends Component {
 
 
                     <InputG label={'Descrição:'} name={'descrição'} placeholder={'Descrição'} type={'textarea'} id={'inputDesc'} value={this.state.value} onChange={this.handleChangeDes.bind(this)}/>                    
+                    <Link to="/siorg/lista"> 
                     <Button id="buttonPost" color="danger" onClick={this.salvar.bind(this)}> Salvar </Button>
+                    </Link>
+                    
                     
                 </div>
             </div>
