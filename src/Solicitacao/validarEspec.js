@@ -207,7 +207,11 @@ export default class validEspec extends Component {
                 <Input type='textarea' invalid={!this.state.products[this.state.index].feedback} name='feedback' value={this.state.products[this.state.index].feedback} onChange={this.onChange} placeholder='Insira um comentário para o solicitante sobre o motivo da aprovação ou cancelamento da solicitação.' />
                 <FormFeedback>Preencha este campo!</FormFeedback>
             </FormGroup>
-            <OrcamentosTable urlGet={"http://localhost:3001/solicitacoes/" + this.props.match.params.id + "/orcamentos"} />
+            {
+                /**
+                 <OrcamentosTable urlGet={"http://localhost:3001/solicitacoes/" + this.props.match.params.id + "/orcamentos"} />
+                **/
+            }
             
             <Button id="confirm" 
                     onClick={this.quandoClica} 
