@@ -50,10 +50,13 @@ export default class navbarAdm extends React.Component {
   }
 
   render() {
-    let validar
+    let validar, addSiorg
     if(this.props.isadm){
-      validar =                   <DropdownItem>
+      validar =   <DropdownItem>
                     <NavLink href="/solicitacao/validar">Validar Solicitação</NavLink>
+                  </DropdownItem>
+      addSiorg =  <DropdownItem>
+                    <NavLink href="/siorg/criar">Adicionar Siorg</NavLink>
                   </DropdownItem>
     }
 
@@ -87,9 +90,7 @@ export default class navbarAdm extends React.Component {
                   Siorg
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem>
-                    <NavLink href="/siorg/criar">Adicionar Siorg</NavLink>
-                  </DropdownItem>
+                  {addSiorg}
                   <DropdownItem>
                     <NavLink href="/siorg/lista">Consultar Siorg</NavLink>
                   </DropdownItem>
