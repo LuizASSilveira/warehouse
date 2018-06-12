@@ -2,20 +2,24 @@ import React, { Component } from 'react';
 import Nav      from '../componentes/navbarAdm';
 import InputG   from '../componentes/inputGenerico'
 import '../componentes/css/input.css'
-import { Button, Label } from 'reactstrap';
+import { Button, Label, FormGroup, Input } from 'reactstrap';
 import {ErrorAlert} from '../componentes/alerta'
 import NumericInput from 'react-numeric-input';
 export default class CriarS extends Component {     
     constructor(){
         super()
         this.state = { decricao: '', siorg: '' , alerta: false}
+        this.onChange = this.onChange.bind(this);
     }
     handleChangeDes(event) {
         this.setState({ decricao: event.target.value });
         console.log(this.state.decricao)
     }
-    handleChangeSio(valor) {
-        this.setState({ siorg: valor });
+
+    onChange(ev) {
+    let numsiorg = this.state.siorg
+       numsiorg = ev.target.value
+       this.setState({ siorg: numsiorg })
     }
 
     salvar(){
@@ -49,9 +53,11 @@ export default class CriarS extends Component {
                 <ErrorAlert isOpen={this.state.alerta} id="errorAlert" color="danger" text='Preencha todos os campos'/>
                 <div id = "Inputs">
                     
-                    <Label> Quantidade: </Label><br />
-                    <NumericInput placeholder= "Numero Siorg" min={1}max={10000} name={'nSiorg'} value={this.state.siorg} onChange={this.handleChangeSio.bind(this)} />
-                    
+                    <FormGroup>
+                        <Label> Quantidade </Label>
+                        <Input placeholder="Numero Siorg" type="number" name="siorg" value={this.state.siorg} onChange={this.onChange} />
+                    </FormGroup>
+
                     <InputG label={'Descrição:'} name={'descrição'} placeholder={'Descrição'} type={'textarea'} id={'inputDesc'} value={this.state.value} onChange={this.handleChangeDes.bind(this)}/>                    
                     <Button id="buttonPost" color="danger" onClick={this.salvar.bind(this)}> Salvar </Button>
                     

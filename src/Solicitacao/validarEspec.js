@@ -5,6 +5,7 @@ import { Input, Button, Label, FormGroup, Modal, ModalHeader, ModalBody, ModalFo
 import InputG from "../componentes/inputGenerico";
 import OrcamentosTable from "../componentes/table/orcamentos";
 import TableSiorg from "../componentes/table/siorgTable";
+import NumericInput from 'react-numeric-input';
 
 
 export default class validEspec extends Component {
@@ -54,7 +55,7 @@ export default class validEspec extends Component {
     this.toggle()
   }
   loadSelect() {
-    let status = ['ABERTA', 'REQUISITADA', 'COMPRADA', 'DESERTO', 'CANCELADA']
+    let status = ['ABERTO', 'REQUISITADO', 'CANCELADO']
     console.log(this.state)
     return status.map((stat) => {
       return <option>{stat}</option>
@@ -72,6 +73,12 @@ export default class validEspec extends Component {
       linha: isSelected ? row : { siorg: null, decricao: null }
     });
   }
+
+    handleChangeQtd(valor) {
+        let products = this.state.products
+        this.state.products[this.state.index].quantidade=  valor 
+        this.setState({ products: products}); 
+    }
 
   onChange(ev) {
     let products = this.state.products
@@ -158,8 +165,13 @@ export default class validEspec extends Component {
               <Label> Descrição</Label>
               <Input disabled={this.state.products[this.state.index].siorg ? true : false} feedback={'anything'} name={'descricao'} onChange={this.onChange} value={this.state.products[this.state.index].descricao} />
             </FormGroup>
+            
+            <FormGroup>
+                <Label>Quantidade</Label>
+                <br/>
+                <NumericInput min={1}max={1000}  value={this.state.products[this.state.index].quantidade} strict={true} onChange={this.handleChangeQtd.bind(this)} />
+            </FormGroup>
 
-            <InputG label={'Quantidade'} type={'number'} name={'quantidade'} onChange={this.onChange} value={this.state.products[this.state.index].quantidade} />
             <InputG label={'Justificativa'} name={'justificativa'} onChange={this.onChange} value={this.state.products[this.state.index].justificativa} />
             <FormGroup>
               <Label>Status</Label>

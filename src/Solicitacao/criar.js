@@ -102,7 +102,7 @@ export default class CriarS extends Component {
                         </Modal>
 
                     <Label> Quantidade: </Label><br />
-                    <NumericInput min={1}max={1000} name={'qtd'} value={this.state.quantidade} onChange={this.handleChangeQtd.bind(this)} />
+                    <NumericInput min={1}max={1000} name={'qtd'} value={this.state.quantidade} strict={true} onChange={this.handleChangeQtd.bind(this)} />
 
                     <FormGroup>
                         <Label> Descrição</Label>
