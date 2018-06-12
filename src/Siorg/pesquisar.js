@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Nav from '../componentes/navbarAdm';
 import {TableSiorg} from '../componentes/table/siorgTable';
+import '../componentes/css/input.css'
 
 export default class Criar extends Component {
     constructor(){
@@ -28,7 +29,7 @@ export default class Criar extends Component {
         return(
             <div>
                 <Nav    isadm = {this.state.isAdm} />
-                <h4>Tabela Siorg</h4>
+                <h4 id="Inputs">Tabela Siorg</h4>
 
                 <TableSiorg  b={this.qualquerCoisa} buttonName= {'Criar Requisicao'}
                         urlGet=     {'http://localhost:3001/produtos'}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Nav from '../componentes/navbarAdm';
 import {Table} from '../componentes/table';
+import '../componentes/css/input.css'
 
 export default class Criar extends Component {     
     render(){
@@ -8,7 +9,7 @@ export default class Criar extends Component {
         return(
             <div>
                 <Nav    isadm = {true} />
-                                <h4>Criar Requisição</h4>
+                                <h4 id="Inputs">Criar Requisição</h4>
 
                 <Table  buttonName= {'Criar Requisicao'}
                         urlGet=     {'http://localhost:3001/solicitacoes'}
