@@ -111,7 +111,7 @@ class ValidaSolTable extends React.Component {
           <TableHeaderColumn dataField="data">Data</TableHeaderColumn>
           <TableHeaderColumn dataField="descricao">Descrição</TableHeaderColumn>
           <TableHeaderColumn dataField="quantidade">Quantidade</TableHeaderColumn>
-          <TableHeaderColumn dataField="status">Status</TableHeaderColumn>
+          <TableHeaderColumn dataField="status">Estado</TableHeaderColumn>
         </BootstrapTable>
 
       </div>

@@ -180,7 +180,7 @@ export default class validEspec extends Component {
             </FormGroup>
 
             <FormGroup>
-              <Label>Status</Label>
+              <Label>Estado</Label>
               <Input type="select" name="status" id="exampleSelect" value={this.state.products[this.state.index].status} onChange={this.onChange}>
                 {this.loadSelect()}
               </Input>

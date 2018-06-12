@@ -16,6 +16,7 @@ export default class Criar extends Component {
         return(
             <div>
                 <Nav    isadm = {true} />
+                <h4>Tabela Siorg</h4>
 
                 <TableSiorg  b={this.qualquerCoisa} buttonName= {'Criar Requisicao'}
                         urlGet=     {'http://localhost:3001/produtos'}

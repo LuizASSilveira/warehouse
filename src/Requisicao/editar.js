@@ -7,6 +7,7 @@ export default class Criar extends Component {
         return(
             <div>
                 <Nav    isadm = {true} />
+                                <h4>Editar Requisição</h4>
                 <TableEditar  buttonName= {'Salvar'}
 
                         urlGet=     {'http://localhost:3001/requisicoes/' + this.props.match.params.id}

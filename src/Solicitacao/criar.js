@@ -85,6 +85,7 @@ export default class CriarS extends Component {
             <div>
                
                 <Nav isadm = {false} />
+                                <h4>Criar Solicitação</h4>
                 <ErrorAlert isOpen={this.state.alerta} id="errorAlert" color="danger" text='Preencha todos os campos'/>
                 <div id = "Inputs">
                     <div id='siorgButton'>
