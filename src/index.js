@@ -21,7 +21,9 @@ import ValidarS       from './Solicitacao/validar'
 import ValidEspec     from './Solicitacao/validarEspec'
 
 import AlmoEmprestimo from './Almoxarifado/emprestimo'
-import AlmoPedido     from './Almoxarifado/Pedidos'
+import AlmoPedido     from './Almoxarifado/pedidos'
+import AlmoHistorico  from './Almoxarifado/historico'
+import AlmoDevolucao  from './Almoxarifado/devolucao'
 
 ReactDOM.render(
 (
@@ -45,11 +47,12 @@ ReactDOM.render(
 
         <Route        path="/almoxarifado/emprestimo"  component={AlmoEmprestimo} />
         <Route        path="/almoxarifado/compras"     component={AlmoPedido} />
+        <Route        path="/almoxarifado/historico"   component={AlmoHistorico} />
+        <Route        path="/almoxarifado/devolucao"   component={AlmoDevolucao} />
 
       </Switch>
     </App>
   </BrowserRouter>
 )
 ,document.getElementById('root'));
-
 registerServiceWorker();

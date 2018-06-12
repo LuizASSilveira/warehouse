@@ -46,9 +46,6 @@ export default class Table extends Component {
 
     }
 
-
-
-
     render() {
         const options = {
             noDataText: 'Não há dados.',
@@ -68,9 +65,10 @@ export default class Table extends Component {
                     options={options}
                 >
                     <TableHeaderColumn dataField='id' isKey>  ID                                                                      </TableHeaderColumn>
-                    <TableHeaderColumn width='15%' dataField='quantidade' dataAlign='center'>  Quantidade                         </TableHeaderColumn>
-                    <TableHeaderColumn width='20%' dataField='requisicao' dataAlign='center'>  Requisição                         </TableHeaderColumn>
-                    <TableHeaderColumn width='50%' dataField='descricao'> Descrição                                               </TableHeaderColumn>
+                    <TableHeaderColumn width='15%' dataField='quantidade' dataAlign='center'>  Quantidade                             </TableHeaderColumn>
+                    <TableHeaderColumn width='20%' dataField='requisicao' dataAlign='center'>  Requisição                             </TableHeaderColumn>
+                    <TableHeaderColumn width='50%' dataField='descricao'> Descrição                                                   </TableHeaderColumn>  
+                    <TableHeaderColumn width='0%' dataField='data'>         Data                                                      </TableHeaderColumn>
                     <TableHeaderColumn width='15%' dataField="button" dataFormat={buttonFormatter.bind(this)}> Carregar Estoque       </TableHeaderColumn>
                 </BootstrapTable>
 
