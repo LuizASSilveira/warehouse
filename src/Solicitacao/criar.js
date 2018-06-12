@@ -3,7 +3,7 @@ import Nav      from '../componentes/navbarAdm';
 import InputG   from '../componentes/inputGenerico'
 import '../componentes/css/input.css'
 import NumericInput from 'react-numeric-input';
-import {Input, Button,Label , Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import {Input, Button,Label ,FormGroup, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import {ErrorAlert} from '../componentes/alerta';
 import TableSiorg from "../componentes/table/siorgTable";
 
@@ -12,11 +12,13 @@ export default class CriarS extends Component {
         super()
         this.state = { 
             decricao: '', justificativa:'', quantidade: 1, siorg:'', alerta: false,
-            modal: false, errorDes:false, errorJus:false, errorNum:false
+            isAdm: false,
+            modal: false
         };
         this.toggle = this.toggle.bind(this);
         this.mandaSiorg = this.mandaSiorg.bind(this);
         this.guardaRow = this.guardaRow.bind(this);
+        this.salvar = this.salvar.bind(this);
     }
 
     toggle() {
@@ -38,32 +40,52 @@ export default class CriarS extends Component {
     }
     
     mandaSiorg(){
-    this.setState({
-        value: this.state.linha.siorgL
-    })
+    if(this.state.linha.siorg){
+        this.setState({
+          decricao: this.state.linha.descricao,
+          siorg: this.state.linha.siorg,
+          value: this.state.linha.siorg
+        })
+    }
     this.toggle()
      }
-       guardaRow(row){
-    this.setState({
-      linha: row
-    });
-  }
+
+    guardaRow(row, isSelected){
+        this.setState({
+          linha: isSelected?row:{siorg:null,decricao:null}
+        });
+    }
+
+    componentDidMount(){
+        let adm
+        adm = localStorage.getItem('isAdm')
+        console.log(adm)
+        if(adm == "false"){
+            this.setState({ isAdm: false })
+        }else{
+            this.setState({ isAdm: true })
+        }
+    }
 
     salvar(){
         if(this.state.decricao.length !== 0 && this.state.justificativa.length !== 0){
             const requestInfo = {
                 method: 'POST',
-                body: JSON.stringify({descricao: this.state.decricao  ,justificativa: this.state.justificativa, quantidade: this.state.quantidade}),
+                body: JSON.stringify({descricao: this.state.decricao  ,justificativa: this.state.justificativa, quantidade: this.state.quantidade, siorg: this.state.siorg}),
                 headers: new Headers({
                   'Content-type': 'application/json',
-                  'token': localStorage.getItem('auth-token')
+                  'token': localStorage.getItem('auth-token'),
+                    
                 })
               };
+
               fetch('http://localhost:3001/solicitacoes', requestInfo)
                 .then(response => {
                   if (response.ok) {
                     //alerta dados salvos com sucesso
+                    window.location.reload()
                     console.log("tudo ok")
+                    this.props.history.push('/solicitacao/historico');
                   } else {
                       console.log(response)
                     throw new Error(response);
@@ -71,29 +93,23 @@ export default class CriarS extends Component {
                 })
         }
         else {
-            if(this.state.decricao.length === 0){
-                this.setState({ errorDes: false })
-            }else{
-                this.setState({ errorDes: true })
-            }
-
-            if(this.state.justificativa.length === 0){
-                this.setState({ errorJus:false })
-            }else{
-                this.setState({ errorJus: true })
-            }
-    }
-        
+            this.setState({ alerta: true })
+        }
     }
     render(){
         return(
             <div>
-                <Nav isadm = {false} />
+                <Nav isadm={this.state.isAdm} />
                 <ErrorAlert isOpen={this.state.alerta} id="errorAlert" color="danger" text='Preencha todos os campos'/>
                 <div id = "Inputs">
+                    <h4>Criar Solicitação</h4>
                     <div id='siorgButton'>
-                        <Input label='Siorg:' name='siorg' placeholder='Nº Siorg' type='text' id='inputSiorg' disabled='true' value={this.state.value}/>
+                    <FormGroup>
+                        <Label>Siorg</Label>
+                        <br / >
+                        <Input name='siorg' placeholder='Nº Siorg' type='text' id='inputSiorg' disabled='true' value={this.state.value}/>
                         <Button id="buttonSiorg" color="secondary" onClick={this.toggle}>Lista Siorg</Button> 
+                    </FormGroup>
                     </div>     
                         <Modal isOpen={this.state.modal} toggle={this.toggle} className='modal-xl'>
                           <ModalHeader toggle={this.toggle}>Lista Siorg</ModalHeader>
@@ -106,10 +122,14 @@ export default class CriarS extends Component {
                           </ModalFooter>
                         </Modal>
 
-                    <Label> Quantidade: </Label><br />
-                    <NumericInput min={1}max={1000} name={'qtd'} value={this.state.quantidade} onChange={this.handleChangeQtd.bind(this)} />
-                    <InputG validDes={true}    label={'Descrição:'} name={'descrição'} placeholder={'Descrição'} type={'textarea'} id={'inputDesc'} value={this.state.value} onChange={this.handleChangeDes.bind(this)}/>                    
-                    <InputG validJus={true}    label={'Justificativa:'} name={'justificativa'} placeholder={'Justificativa'} type={'textarea'} id={'inputJus'} value={this.state.value} onChange={this.handleChangeJus.bind(this)}/>
+                    <Label> Quantidade </Label><br />
+                    <NumericInput min={1}max={1000} name={'qtd'} value={this.state.quantidade} strict={true} onChange={this.handleChangeQtd.bind(this)} />
+
+                    <FormGroup>
+                        <Label> Descrição</Label>
+                        <Input placeholder="Descrição" disabled={this.state.value? true: false} type={'textarea'} feedback={'anything'} name={'descricao'} onChange={this.handleChangeDes.bind(this)} value={this.state.decricao} />
+                    </FormGroup>                  
+                    <InputG label={'Justificativa'} name={'justificativa'} placeholder={'Justificativa'} type={'textarea'} id={'inputJus'} value={this.state.value} onChange={this.handleChangeJus.bind(this)}/>
                     <Button id="buttonPost" color="primary" onClick={this.salvar.bind(this)}> Salvar </Button>
                     
                 </div>

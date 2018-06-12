@@ -4,30 +4,18 @@ import "../../../node_modules/react-bootstrap-table/css/react-bootstrap-table.cs
 import InputG from "../inputGenerico";
 import '../css/validSolTable.css'
 import {Redirect} from 'react-router-dom'
-
+import '../css/table.css'
 
 
 class ValidaSolTable extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      modal: false,
       products: [],
-      redirect: false,
-      id: '',
-      feed: false,
-      selected: { descricao: '', data: '', siorg: '', qtde: '', status: '' }
     }
-    this.toggle = this.toggle.bind(this);
-    this.properFunc = this.properFunc.bind(this);
     this.onRowClick = this.onRowClick.bind(this);
   }
 
-  toggle() {
-    this.setState({
-      modal: !this.state.modal
-    });
-  }
 
   componentDidMount() {
     fetch(this.props.urlGet, {
@@ -42,44 +30,18 @@ class ValidaSolTable extends React.Component {
       });
   }
 
-  properFunc(row, isSelected, e) {
-    console.log(row)
-    this.setState({
-      selected: row
-    });
-    this.toggle()
-  }
-  loadSelect() {
-    let status = ['ABERTA', 'REQUISITADA', 'COMPRADA', 'DESERTO', 'CANCELADA']
-    return status.map((stat) => {
-      return <option>{stat}</option>
-    })
-  }
-
-  setselect = (e) => {
-    let x = this.state.selected
-    x.status = e.target.value
-    this.setState({ selected: x })
-  }
 
   onRowClick(row){
-    this.setState({ id: row.id})
-    this.setState({ redirect : true })
+    this.props.teste.push('/solicitacao/validar/'+row.id)
+
   }
 
   render() {
-    let feed
-    {console.log(this.state)}
-    if (this.state.selected.status === 'CANCELADA') {
-      feed = <InputG label={'Feedback:'} type={'textarea'} placeholder={'Insira um comentário para o solicitante sobre o motivo do cancelamento da solicitação.'} />
-    }
     const selectRowProp = {
       mode: 'radio',
       hideSelectColumn: true,
       clickToSelect: true,
-      onSelect: this.properFunc
     }
-
 
 
     const options ={
@@ -88,15 +50,9 @@ class ValidaSolTable extends React.Component {
         
     }
 
-    if(this.state.redirect) {
-      return(
-          <Redirect to= {"/solicitacao/validar/"+this.state.id} />
-        )
-      
-    }
   
     return (
-      <div className="teste">
+      <div id="table">
         <p className="Table-header">Selecione a solicitação para valida-lá.</p>
         <BootstrapTable
           data={this.state.products}
@@ -111,7 +67,7 @@ class ValidaSolTable extends React.Component {
           <TableHeaderColumn dataField="data">Data</TableHeaderColumn>
           <TableHeaderColumn dataField="descricao">Descrição</TableHeaderColumn>
           <TableHeaderColumn dataField="quantidade">Quantidade</TableHeaderColumn>
-          <TableHeaderColumn dataField="status">Status</TableHeaderColumn>
+          <TableHeaderColumn dataField="status">Estado</TableHeaderColumn>
         </BootstrapTable>
 
       </div>

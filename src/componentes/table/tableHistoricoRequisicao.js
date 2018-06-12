@@ -44,7 +44,7 @@ class Table extends Component {
         
     }
     if (this.state.redirect) {
-      //return <Redirect to= {"/requisicao/editar/"+this.state.id}   />
+      return <Redirect to= {"/requisicao/editar/"+this.state.id}   />
     }
 
     return (
@@ -57,11 +57,11 @@ class Table extends Component {
           selectRow={selectRowProp}
           options={options}
         >
-          <TableHeaderColumn dataField='id' isKey>  ID                                 </TableHeaderColumn>
-          <TableHeaderColumn width='50%' dataField={this.props.descricaoL}> {this.props.descricao}  </TableHeaderColumn>
-          <TableHeaderColumn width='20%' dataField={this.props.dataL}>      {this.props.data}       </TableHeaderColumn>
-          <TableHeaderColumn width='10%' dataField={this.props.statusL}>    {this.props.status}     </TableHeaderColumn>
-          <TableHeaderColumn width='20%' dataField={this.props.nomeL}>      {this.props.nome}       </TableHeaderColumn>
+          <TableHeaderColumn width='10%' dataField='id' isKey>  ID                                 </TableHeaderColumn>
+          <TableHeaderColumn width='22%' dataField={this.props.dataL}>          {this.props.data}       </TableHeaderColumn>
+          <TableHeaderColumn width='22%' dataField={this.props.numeroL}>        {this.props.numero}  </TableHeaderColumn>
+          <TableHeaderColumn width='22%' dataField={this.props.nomeL}>          {this.props.nome}       </TableHeaderColumn>
+          <TableHeaderColumn width='22%' dataField={this.props.solicitanteL}>   {this.props.solicitante}     </TableHeaderColumn>
         </BootstrapTable>
 
       </div>

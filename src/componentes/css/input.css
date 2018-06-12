@@ -9,6 +9,10 @@
     float: right;
     width: 28%;
 }
+#confirm{
+    margin: 10px;
+    margin-left: 75%;
+}
 #nome{
     display: inline-table;
     width: 50%;  

@@ -72,7 +72,7 @@ class TableEditar extends Component {
         if (number !== "Não Definido") {
           this.setState({ disabled: true })
           this.setState({ numero: number })
-        } 
+        }
 
       });
   }
@@ -124,10 +124,10 @@ class TableEditar extends Component {
           pagination
         >
           <TableHeaderColumn dataField='id' isKey>  ID                                  </TableHeaderColumn>
-          <TableHeaderColumn dataField={this.props.descricaoL}> {this.props.descricao}  </TableHeaderColumn>
-          <TableHeaderColumn dataField={this.props.dataL}>      {this.props.data}       </TableHeaderColumn>
-          <TableHeaderColumn dataField={this.props.nomeL}>      {this.props.nome}       </TableHeaderColumn>
-          <TableHeaderColumn dataField="button" dataFormat={buttonFormatter}> Remover   </TableHeaderColumn>
+          <TableHeaderColumn width='50%' dataField={this.props.descricaoL}> {this.props.descricao}  </TableHeaderColumn>
+          <TableHeaderColumn width='20%' dataField={this.props.dataL}>      {this.props.data}       </TableHeaderColumn>
+          <TableHeaderColumn width='20%' dataField={this.props.nomeL}>      {this.props.nome}       </TableHeaderColumn>
+          <TableHeaderColumn width='10%' dataField="button" dataFormat={buttonFormatter}> Remover   </TableHeaderColumn>
         </BootstrapTable>
         <Modal modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} mensagem={'Deseja confirmar?'} />
 
