@@ -63,16 +63,12 @@ class ValidaSolTable extends React.Component {
   }
 
   onRowClick(row){
-    this.setState({ id: row.id})
-    this.setState({ redirect : true })
+    this.setState({ id: row.id, redirect : true})
+    this.props.history.push("/solicitacao/validar/"+this.state.id)
+
   }
 
   render() {
-    let feed
-    {console.log(this.state)}
-    if (this.state.selected.status === 'CANCELADA') {
-      feed = <InputG label={'Feedback:'} type={'textarea'} placeholder={'Insira um comentário para o solicitante sobre o motivo do cancelamento da solicitação.'} />
-    }
     const selectRowProp = {
       mode: 'radio',
       hideSelectColumn: true,
@@ -81,19 +77,12 @@ class ValidaSolTable extends React.Component {
     }
 
 
-
     const options ={
       noDataText: 'Não há dados.',
       onRowClick: this.onRowClick
         
     }
 
-    if(this.state.redirect) {
-      return(
-          <Redirect to= {"/solicitacao/validar/"+this.state.id} />
-        )
-      
-    }
   
     return (
       <div id="table">
