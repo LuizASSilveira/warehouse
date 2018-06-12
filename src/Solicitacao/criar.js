@@ -41,7 +41,8 @@ export default class CriarS extends Component {
     if(this.state.linha.siorg){
         this.setState({
           decricao: this.state.linha.descricao,
-          siorg: this.state.linha.siorg
+          siorg: this.state.linha.siorg,
+          value: this.state.linha.siorg
         })
     }
     this.toggle()
@@ -87,8 +88,12 @@ export default class CriarS extends Component {
                 <ErrorAlert isOpen={this.state.alerta} id="errorAlert" color="danger" text='Preencha todos os campos'/>
                 <div id = "Inputs">
                     <div id='siorgButton'>
-                        <Input label='Siorg:' name='siorg' placeholder='Nº Siorg' type='text' id='inputSiorg' disabled='true' value={this.state.value}/>
+                    <FormGroup>
+                        <Label>Siorg</Label>
+                        <br / >
+                        <Input name='siorg' placeholder='Nº Siorg' type='text' id='inputSiorg' disabled='true' value={this.state.value}/>
                         <Button id="buttonSiorg" color="secondary" onClick={this.toggle}>Lista Siorg</Button> 
+                    </FormGroup>
                     </div>     
                         <Modal isOpen={this.state.modal} toggle={this.toggle} className='modal-xl'>
                           <ModalHeader toggle={this.toggle}>Lista Siorg</ModalHeader>
@@ -101,14 +106,14 @@ export default class CriarS extends Component {
                           </ModalFooter>
                         </Modal>
 
-                    <Label> Quantidade: </Label><br />
+                    <Label> Quantidade </Label><br />
                     <NumericInput min={1}max={1000} name={'qtd'} value={this.state.quantidade} strict={true} onChange={this.handleChangeQtd.bind(this)} />
 
                     <FormGroup>
                         <Label> Descrição</Label>
-                        <Input disabled={this.state.value? true: false} type={'textarea'} feedback={'anything'} name={'descricao'} onChange={this.handleChangeDes.bind(this)} value={this.state.decricao} />
+                        <Input placeholder="Descrição" disabled={this.state.value? true: false} type={'textarea'} feedback={'anything'} name={'descricao'} onChange={this.handleChangeDes.bind(this)} value={this.state.decricao} />
                     </FormGroup>                  
-                    <InputG label={'Justificativa:'} name={'justificativa'} placeholder={'Justificativa'} type={'textarea'} id={'inputJus'} value={this.state.value} onChange={this.handleChangeJus.bind(this)}/>
+                    <InputG label={'Justificativa'} name={'justificativa'} placeholder={'Justificativa'} type={'textarea'} id={'inputJus'} value={this.state.value} onChange={this.handleChangeJus.bind(this)}/>
                     <Button id="buttonPost" color="primary" onClick={this.salvar.bind(this)}> Salvar </Button>
                     
                 </div>

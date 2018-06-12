@@ -163,7 +163,7 @@ export default class validEspec extends Component {
 
             <FormGroup>
               <Label> Descrição</Label>
-              <Input disabled={this.state.products[this.state.index].siorg ? true : false} feedback={'anything'} name={'descricao'} onChange={this.onChange} value={this.state.products[this.state.index].descricao} />
+              <Input type="textarea" disabled={this.state.products[this.state.index].siorg ? true : false} feedback={'anything'} name={'descricao'} onChange={this.onChange} value={this.state.products[this.state.index].descricao} />
             </FormGroup>
             
             <FormGroup>
@@ -172,7 +172,7 @@ export default class validEspec extends Component {
                 <NumericInput min={1}max={1000}  value={this.state.products[this.state.index].quantidade} strict={true} onChange={this.handleChangeQtd.bind(this)} />
             </FormGroup>
 
-            <InputG label={'Justificativa'} name={'justificativa'} onChange={this.onChange} value={this.state.products[this.state.index].justificativa} />
+            <InputG type={'textarea'} label={'Justificativa'} name={'justificativa'} onChange={this.onChange} value={this.state.products[this.state.index].justificativa} />
             <FormGroup>
               <Label>Status</Label>
               <Input type="select" name="status" id="exampleSelect" value={this.state.products[this.state.index].status} onChange={this.onChange}>
