@@ -58,6 +58,7 @@ export default class CriarS extends Component {
                         <Input placeholder="Numero Siorg" type="number" name="siorg" value={this.state.siorg} onChange={this.onChange} />
                     </FormGroup>
 
+
                     <InputG label={'Descrição:'} name={'descrição'} placeholder={'Descrição'} type={'textarea'} id={'inputDesc'} value={this.state.value} onChange={this.handleChangeDes.bind(this)}/>                    
                     <Button id="buttonPost" color="danger" onClick={this.salvar.bind(this)}> Salvar </Button>
                     
