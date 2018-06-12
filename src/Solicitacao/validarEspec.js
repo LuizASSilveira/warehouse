@@ -142,7 +142,9 @@ export default class validEspec extends Component {
         <div>
           <Nav isadm={true} />
           <h3>Validar Solicitação</h3>
+          
           <div id="Inputs">
+            
             <FormGroup>
               <Label> Siorg</Label>
               <div id='siorgButton'>
@@ -172,18 +174,24 @@ export default class validEspec extends Component {
                 <NumericInput min={1}max={1000}  value={this.state.products[this.state.index].quantidade} strict={true} onChange={this.handleChangeQtd.bind(this)} />
             </FormGroup>
 
-            <InputG type={'textarea'} label={'Justificativa'} name={'justificativa'} onChange={this.onChange} value={this.state.products[this.state.index].justificativa} />
+            <FormGroup>
+                <Label>Justificativa </Label>
+                <Input type={'textarea'} name={'justificativa'} onChange={this.onChange} value={this.state.products[this.state.index].justificativa} />
+            </FormGroup>
+
             <FormGroup>
               <Label>Status</Label>
               <Input type="select" name="status" id="exampleSelect" value={this.state.products[this.state.index].status} onChange={this.onChange}>
                 {this.loadSelect()}
               </Input>
             </FormGroup>
+            
             <InputG label={'Feedback:'} type={'textarea'} placeholder={'Insira um comentário para o solicitante sobre o motivo do cancelamento da solicitação.'} />
             <OrcamentosTable urlGet={"http://localhost:3001/solicitacoes/" + this.props.match.params.id + "/orcamentos"} />
-          </div>
-          <Button onClick={this.quandoClica}>Confirmar</Button>
+            
+            <Button onClick={this.quandoClica}>Confirmar</Button>
           <Button>Cancelar</Button>
+          </div>
         </div>
       )
     }
