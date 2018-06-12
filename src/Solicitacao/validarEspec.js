@@ -47,6 +47,7 @@ export default class validEspec extends Component {
       .then(product => {
         this.setState({ products: product, loading: false });
       });
+
   }
   properFunc(row, isSelected, e) {
     console.log(row)
@@ -54,13 +55,6 @@ export default class validEspec extends Component {
       selected: row
     });
     this.toggle()
-  }
-  loadSelect() {
-    let status = ['APROVADO', 'CANCELADO']
-    console.log(this.state)
-    return status.map((stat) => {
-      return <option>{stat}</option>
-    })
   }
 
   setselect = (e) => {
@@ -197,8 +191,12 @@ export default class validEspec extends Component {
 
             <FormGroup>
               <Label>Estado</Label>
-              <Input type="select" name="status" id="exampleSelect" value={this.state.products[this.state.index].status} onChange={this.onChange}>
-                {this.loadSelect()}
+              {console.log(this.state.products[0].status)}
+              <Input type="select" name="status"  value={this.state.products[this.state.index].status} onChange={this.onChange}>
+                <option>ABERTO</option>
+                <option>APROVADO</option>
+                <option>CANCELADO</option>
+
               </Input>
             </FormGroup>
             
@@ -207,24 +205,30 @@ export default class validEspec extends Component {
                 <Input type='textarea' invalid={!this.state.products[this.state.index].feedback} name='feedback' value={this.state.products[this.state.index].feedback} onChange={this.onChange} placeholder='Insira um comentário para o solicitante sobre o motivo da aprovação ou cancelamento da solicitação.' />
                 <FormFeedback>Preencha este campo!</FormFeedback>
             </FormGroup>
-            <OrcamentosTable urlGet={"http://localhost:3001/solicitacoes/" + this.props.match.params.id + "/orcamentos"} />
+            {
+                /**
+                 <OrcamentosTable urlGet={"http://localhost:3001/solicitacoes/" + this.props.match.params.id + "/orcamentos"} />
+                **/
+            }
             
-            <Button id="confirm" 
-                    onClick={this.quandoClica} 
-                    disabled={
-                        !this.state.products[this.state.index].feedback ||
-                        !this.state.products[this.state.index].descricao ||
-                        !this.state.products[this.state.index].justificativa
-                    }>Confirmar</Button>
-            <Link to="/solicitacao/validar">
-                <Button id="cancel">Cancelar</Button>
-            </Link>
+            <div class="right">
+                <Button id="confirm" color="primary" 
+                        onClick={this.quandoClica} 
+                        disabled={
+                            !this.state.products[this.state.index].feedback ||
+                            !this.state.products[this.state.index].descricao ||
+                            !this.state.products[this.state.index].justificativa
+                        }>Confirmar</Button>
+                <Link to="/solicitacao/validar">
+                    <Button id="cancel" color="danger" >Cancelar</Button>
+                </Link>
+            </div>
           </div>
         </div>
       )
     }
     else {
-      return ("loading")
+      return ("Algo deu errado!")
     }
   }
 }

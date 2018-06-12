@@ -9,13 +9,29 @@
     float: right;
     width: 28%;
 }
-#confirm{
+/*#confirm{
     margin: 10px;
     margin-left: 75%;
 }
+.confirm{
+    margin: 10px;
+}*/
+
 #nome{
     display: inline-table;
     width: 50%;  
+}
+
+/*.btn:disabled {
+    color: grey;
+}*/
+
+.right {
+    float: right;
+}
+
+.btn {
+    margin: 5px;
 }
 
 #siorgButton{

@@ -29,6 +29,7 @@ export default class Login extends Component {
                 var obj = JSON.parse(token);
                 localStorage.setItem('auth-token',obj.token);
                 localStorage.setItem('isAdm',obj.isAdm);
+                localStorage.setItem('nome',obj.nome);
                 this.setState({ redirect: true })
 
             })
