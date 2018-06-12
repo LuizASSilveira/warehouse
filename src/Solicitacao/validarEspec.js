@@ -148,7 +148,7 @@ export default class validEspec extends Component {
             <FormGroup>
               <Label> Siorg</Label>
               <div id='siorgButton'>
-                <Input label='Siorg:' name='siorg' value={this.state.products[this.state.index].siorg} type='text' id='inputSiorg' disabled='true' />
+                <Input placeholder="Nº Siorg" name='siorg' value={this.state.products[this.state.index].siorg} type='text' id='inputSiorg' disabled='true' />
                 <Button id="buttonSiorg" color="secondary" onClick={this.toggle}>Lista Siorg</Button>
               </div>
               <Modal isOpen={this.state.modal} toggle={this.toggle} className='modal-xl'>

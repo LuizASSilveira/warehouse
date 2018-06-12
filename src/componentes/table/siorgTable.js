@@ -8,7 +8,7 @@ import { Button } from 'reactstrap';
 export default class TableSiorg extends Component {
     constructor(props) {
         super(props)
-        this.state = { lista: [], normal: true }
+        this.state = { lista: [] }
         this.properFunc = this.properFunc.bind(this)
     }
 
@@ -26,20 +26,11 @@ export default class TableSiorg extends Component {
             });
     }
 
-    // componentDidMount() {
-    //     fetch("https://raw.githubusercontent.com/LuizASSilveira/pi-almoxarifado/master/siorg.json")
-    //         .then(response => response.json())
-    //         .then(product => {
-    //             this.setState({ lista: product });
-    //         });
-    // }
-
     properFunc(row, isSelected) {
-        this.setState({ normal: false })
-
         if (this.props.a) {
             this.props.a(row, isSelected)
         }
+        console.log(row)
     }
 
     excluir(row) {
@@ -62,22 +53,24 @@ export default class TableSiorg extends Component {
             })
     }
 
-    
-
     render() {
-        const options = {
-            noDataText: 'Não há dados.',
-        };
 
         let self = this;
         function buttonFormatter(cell, row) {
             return <Button color="danger" onClick={() => self.excluir(row)} >X</Button>;
         }
-        const selectRowProp = {
+        let selectRowProp;
+        if(this.props.b){
+           selectRowProp = {
+            onSelect: this.properFunc
+           }
+        }else{
+          selectRowProp = {
             mode: 'radio',
             clickToSelect: true,
             bgColor: 'grey',
             onSelect: this.properFunc
+        }
         }
 
         return (
@@ -89,12 +82,11 @@ export default class TableSiorg extends Component {
                     hover={true}
                     selectRow={selectRowProp}
                     searchPlaceholder='Pesquisar'
-                    options={ options }
-
+                    options={{ noDataText: 'Não há dados.' }}
                 >
-                    <TableHeaderColumn width='10%' dataField="siorg" isKey>     Código Siorg                </TableHeaderColumn>
-                    <TableHeaderColumn width='60%' tdStyle={ { whiteSpace: this.state.normal? 'normal':'' } } dataField="descricao">       Descrição                   </TableHeaderColumn>
-                    <TableHeaderColumn width='10%' dataField="button" dataFormat={buttonFormatter} > Remover </TableHeaderColumn>
+                    <TableHeaderColumn width='10%' dataField="siorg" isKey>     Código Siorg     </TableHeaderColumn>
+                    <TableHeaderColumn width='60%' dataField="descricao">       Descrição  </TableHeaderColumn>
+                    <TableHeaderColumn width='10%' dataField="button" dataFormat={buttonFormatter}> Remover   </TableHeaderColumn>
                 </BootstrapTable>
 
 
@@ -104,6 +96,7 @@ export default class TableSiorg extends Component {
 
 }
 TableSiorg.propTypes = {
-    a: PropTypes.func
+    a: PropTypes.func,
+    b:PropTypes.func
 };
 export { TableSiorg }
