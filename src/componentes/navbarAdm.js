@@ -29,6 +29,7 @@ export default class navbarAdm extends React.Component {
     });
   }
 
+
   requisicao = () =>{
     if (this.props.isadm){
 
@@ -102,13 +103,13 @@ export default class navbarAdm extends React.Component {
               <Nav className="ml-auto" navbar>
 
               <NavItem>
-                <NavLink href="/components/"> 
+                <NavLink > 
                     <FontAwesome
                       className="super-crazy-colors"
                       name="user"
                       style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
                     />
-                    Perfil
+                    {localStorage.getItem('nome')}
                 </NavLink>
               </NavItem>
 
