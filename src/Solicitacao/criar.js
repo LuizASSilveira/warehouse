@@ -6,6 +6,7 @@ import NumericInput from 'react-numeric-input';
 import {Input, Button,Label ,FormGroup, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import {ErrorAlert} from '../componentes/alerta';
 import TableSiorg from "../componentes/table/siorgTable";
+import { Link } from 'react-router-dom'
 
 export default class CriarS extends Component {     
     constructor(){
@@ -130,8 +131,10 @@ export default class CriarS extends Component {
                         <Input placeholder="Descrição" disabled={this.state.value? true: false} type={'textarea'} feedback={'anything'} name={'descricao'} onChange={this.handleChangeDes.bind(this)} value={this.state.decricao} />
                     </FormGroup>                  
                     <InputG label={'Justificativa'} name={'justificativa'} placeholder={'Justificativa'} type={'textarea'} id={'inputJus'} value={this.state.value} onChange={this.handleChangeJus.bind(this)}/>
-                    <Button id="buttonPost" color="primary" onClick={this.salvar.bind(this)}> Salvar </Button>
-                    
+                    <Link to="/solicitacao/historico">
+                        <Button  id="buttonPost" color="danger" >Cancelar</Button>
+                    </Link>
+                    <Button id="buttonPost" className="confirm" color="primary" onClick={this.salvar.bind(this)}> Salvar </Button>
                 </div>
             </div>
         )
