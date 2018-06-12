@@ -63,7 +63,7 @@ export default class navbarAdm extends React.Component {
     return (
       <div>
         <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">Almoxarifado UTFPR</NavbarBrand>
+          <NavbarBrand href="/solicitacao/historico">Almoxarifado UTFPR</NavbarBrand>
           <NavbarToggler onClick={this.toggle}/>
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="left" navbar>
@@ -113,7 +113,7 @@ export default class navbarAdm extends React.Component {
               </NavItem>
 
               <NavItem>
-                <NavLink href="/components/"> 
+                <NavLink href="/"> 
                     <FontAwesome
                       className="super-crazy-colors"
                       name="sign-out"

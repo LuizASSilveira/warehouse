@@ -16,6 +16,8 @@ export default class Criar extends Component {
         console.log(adm)
         if(adm === false){
             this.setState({ isAdm: false })
+        }else{
+            this.setState({ isAdm: true })
         }
     }
     render(){
