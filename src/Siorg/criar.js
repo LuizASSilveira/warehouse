@@ -54,8 +54,8 @@ export default class CriarS extends Component {
                 <div id = "Inputs">
                     
                     <FormGroup>
-                        <Label> Quantidade </Label>
-                        <Input placeholder="Numero Siorg" type="number" name="siorg" value={this.state.siorg} onChange={this.onChange} />
+                        <Label> Número do Siorg </Label>
+                        <Input placeholder="Número Siorg" type="number" name="siorg" value={this.state.siorg} onChange={this.onChange} />
                     </FormGroup>
 
 
