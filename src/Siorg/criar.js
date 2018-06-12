@@ -5,7 +5,7 @@ import '../componentes/css/input.css'
 import { Button, Label, FormGroup, Input } from 'reactstrap';
 import {ErrorAlert} from '../componentes/alerta'
 import NumericInput from 'react-numeric-input';
-import { Redirect, Link, NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 export default class CriarS extends Component {     
     constructor(){
         super()
@@ -49,17 +49,14 @@ export default class CriarS extends Component {
         }
     }
     render(){
-        if(this.state.vai){
-            return <Link to="/siorg/lista" replace/>;
-        }
 
         return(
             <div>
                 <Nav isadm = {true} />
-                <h4>Criar Produto Siorg</h4>
                 
                 <ErrorAlert isOpen={this.state.alerta} id="errorAlert" color="danger" text='Preencha todos os campos'/>
                 <div id = "Inputs">
+                <h4>Criar Produto Siorg</h4>
                     
                     <FormGroup>
                         <Label> Número do Siorg </Label>

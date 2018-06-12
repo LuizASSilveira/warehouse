@@ -6,6 +6,7 @@ import InputG from "../componentes/inputGenerico";
 import OrcamentosTable from "../componentes/table/orcamentos";
 import TableSiorg from "../componentes/table/siorgTable";
 import NumericInput from 'react-numeric-input';
+import { Link } from 'react-router-dom'
 
 
 export default class validEspec extends Component {
@@ -87,16 +88,21 @@ export default class validEspec extends Component {
   }
 
   quandoClica() {
-    if (this.state.decricao.length !== 0 && this.state.justificativa.length !== 0) {
+    if (this.state.products[this.state.index].descricao !== 0 && this.state.products[this.state.index].justificativa !== 0) {
       const requestInfo = {
         method: 'POST',
-        body: JSON.stringify({ descricao: this.state.decricao, justificativa: this.state.justificativa, quantidade: this.state.quantidade }),
+        body: JSON.stringify({ descricao: this.state.products[this.state.index].descricao, 
+                               justificativa: this.state.products[this.state.index].justificativa, 
+                               quantidade: this.state.products[this.state.index].quantidade,
+                               siorg: this.state.products[this.state.index].siorg,
+                               feedback: this.state.products[this.state.index].feedback,
+                               status: 'APROVADO' }),
         headers: new Headers({
           'Content-type': 'application/json',
           'token': localStorage.getItem('auth-token')
         })
       };
-      fetch('http://localhost:3001/solicitacoes', requestInfo)
+      fetch('http://localhost:3001/solicitacoes/'+this.props.match.params.id, requestInfo)
         .then(response => {
           if (response.ok) {
             //alerta dados salvos com sucesso
@@ -141,9 +147,8 @@ export default class validEspec extends Component {
       return (
         <div>
           <Nav isadm={true} />
-          <h3>Validar Solicitação</h3>
-          
           <div id="Inputs">
+          <h4>Validar Solicitação</h4>
             
             <FormGroup>
               <Label> Siorg</Label>
@@ -186,11 +191,13 @@ export default class validEspec extends Component {
               </Input>
             </FormGroup>
             
-            <InputG label={'Feedback:'} type={'textarea'} placeholder={'Insira um comentário para o solicitante sobre o motivo do cancelamento da solicitação.'} />
+            <InputG label={'Feedback:'} type={'textarea'} placeholder={'Insira um comentário para o solicitante sobre o motivo da aprovação ou cancelamento da solicitação.'} />
             <OrcamentosTable urlGet={"http://localhost:3001/solicitacoes/" + this.props.match.params.id + "/orcamentos"} />
             
-            <Button onClick={this.quandoClica}>Confirmar</Button>
-          <Button>Cancelar</Button>
+            <Button id="confirm" onClick={this.quandoClica}>Confirmar</Button>
+            <Link to="/solicitacao/validar">
+                <Button id="cancel">Cancelar</Button>
+            </Link>
           </div>
         </div>
       )
