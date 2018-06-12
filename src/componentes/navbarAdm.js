@@ -28,6 +28,12 @@ export default class navbarAdm extends React.Component {
       isOpen: !this.state.isOpen
     });
   }
+  cliqueiSair(){
+    console.log('chamou')
+    localStorage.removeItem('auth-token')
+    localStorage.removeItem('isAdm')
+    localStorage.removeItem('nome')
+  }
 
 
   requisicao = () =>{
@@ -114,7 +120,7 @@ export default class navbarAdm extends React.Component {
               </NavItem>
 
               <NavItem>
-                <NavLink href="/"> 
+                <NavLink isActive={this.cliqueiSair} href="/"> 
                     <FontAwesome
                       className="super-crazy-colors"
                       name="sign-out"

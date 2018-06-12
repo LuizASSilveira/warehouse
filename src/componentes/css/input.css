@@ -22,6 +22,10 @@
     width: 50%;  
 }
 
+/*.btn:disabled {
+    color: grey;
+}*/
+
 .right {
     float: right;
 }
