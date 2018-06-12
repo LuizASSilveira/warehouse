@@ -55,7 +55,7 @@ export default class validEspec extends Component {
     this.toggle()
   }
   loadSelect() {
-    let status = ['ABERTO', 'REQUISITADO', 'CANCELADO']
+    let status = ['APROVADO', 'CANCELADO']
     console.log(this.state)
     return status.map((stat) => {
       return <option>{stat}</option>
