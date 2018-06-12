@@ -3,10 +3,22 @@ import Nav from '../componentes/navbarAdm';
 import {Table} from '../componentes/table/tableHistorico';
 
 export default class Criar extends Component {     
+    constructor(){
+        super()
+        this.state={isAdm: false}
+    }
+
+
+    componentDidMount(){
+        let adm
+        adm = localStorage.getItem('isAdm')
+        console.log(adm)
+        this.setState({ isAdm: adm })
+    }
     render(){
         return(
             <div>
-                <Nav isadm = {true} />
+                <Nav isadm = {this.state.isAdm} />
                                 <h4>Histórico de Solicitações</h4>
                 <Table  buttonName= {'Criar Requisicao'}
                         urlGet=     {'http://localhost:3001/solicitacoes'}

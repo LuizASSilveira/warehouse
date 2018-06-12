@@ -12,11 +12,13 @@ export default class CriarS extends Component {
         super()
         this.state = { 
             decricao: '', justificativa:'', quantidade: 1, siorg:'', alerta: false,
+            isAdm: false,
             modal: false
         };
         this.toggle = this.toggle.bind(this);
         this.mandaSiorg = this.mandaSiorg.bind(this);
         this.guardaRow = this.guardaRow.bind(this);
+        this.salvar = this.salvar.bind(this);
     }
 
     toggle() {
@@ -54,6 +56,13 @@ export default class CriarS extends Component {
         });
     }
 
+    componentDidMount(){
+        let adm
+        adm = localStorage.getItem('isAdm')
+        console.log(adm)
+        this.setState({ isAdm: adm })
+    }
+
     salvar(){
         if(this.state.decricao.length !== 0 && this.state.justificativa.length !== 0){
             const requestInfo = {
@@ -61,9 +70,11 @@ export default class CriarS extends Component {
                 body: JSON.stringify({descricao: this.state.decricao  ,justificativa: this.state.justificativa, quantidade: this.state.quantidade, siorg: this.state.siorg}),
                 headers: new Headers({
                   'Content-type': 'application/json',
-                  'token': localStorage.getItem('auth-token')
+                  'token': localStorage.getItem('auth-token'),
+                    
                 })
               };
+
               fetch('http://localhost:3001/solicitacoes', requestInfo)
                 .then(response => {
                   if (response.ok) {
@@ -85,7 +96,7 @@ export default class CriarS extends Component {
         return(
             <div>
                
-                <Nav isadm = {false} />
+                <Nav isadm={this.state.isAdm} />
                                 <h4>Criar Solicitação</h4>
                 <ErrorAlert isOpen={this.state.alerta} id="errorAlert" color="danger" text='Preencha todos os campos'/>
                 <div id = "Inputs">

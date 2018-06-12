@@ -7,7 +7,7 @@ import ValidaSolTable from '../componentes/table/validSolTable';
 export default class CriarS extends Component {     
     constructor(){
         super()
-        this.state = { descricao: '', justificativa:'', quantidade: 1, siorg:'', alerta: false}
+        this.state = { isAdm: false, descricao: '', justificativa:'', quantidade: 1, siorg:'', alerta: false}
     }
     handleChangeDes(event) {
         this.setState({ decricao: event.target.value });
@@ -21,6 +21,13 @@ export default class CriarS extends Component {
     }
     handleChangeSio(event) {
         this.setState({ siorg: event.target.value  });
+    }
+
+    componentDidMount(){
+        let adm
+        adm = localStorage.getItem('isAdm')
+        console.log(adm)
+        this.setState({ isAdm: adm })
     }
 
     salvar(){
@@ -50,7 +57,7 @@ export default class CriarS extends Component {
     render(){
         return(
             <div>
-                <Nav isadm = {false} />
+                <Nav isadm = {this.state.isAdm} />
                                 <h4>Validar Solicitações</h4>
                 <ErrorAlert isOpen={this.state.alerta} id="errorAlert" color="danger" text='Preencha todos os campos'/>
 
