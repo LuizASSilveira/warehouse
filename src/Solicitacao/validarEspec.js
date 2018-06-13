@@ -7,6 +7,7 @@ import OrcamentosTable from "../componentes/table/orcamentos";
 import TableSiorg from "../componentes/table/siorgTable";
 import NumericInput from 'react-numeric-input';
 import { Link } from 'react-router-dom'
+import Orcamento from './orcamento'
 
 
 export default class validEspec extends Component {
@@ -223,6 +224,7 @@ export default class validEspec extends Component {
                     <Button id="cancel" color="danger" >Cancelar</Button>
                 </Link>
             </div>
+            <Orcamento/>
           </div>
         </div>
       )

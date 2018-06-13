@@ -30,6 +30,9 @@ const initialState = {
 };
 
 export default class Orcamento extends Component {
+  constructor(props){
+    super(props)
+  }
   state = { ...initialState };
 
   componentWillMount() {
