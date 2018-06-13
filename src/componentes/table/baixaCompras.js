@@ -6,14 +6,10 @@ import { Redirect } from 'react-router-dom'
 import { Button } from 'reactstrap'
 import Modal from '../modal-almoxarifado/modal'
 
-function onRowSelect(row) {
-    console.log(row.id)
-}
-
 export default class Table extends Component {
     constructor() {
         super()
-        this.state = { products: [], modal: false, qtd : 0 }
+        this.state = { products: [], modal: false, qtd : 0 , checked : true}
         this.toggle = this.toggle.bind(this)
         this.funcCancel = this.funcCancel.bind(this)
         this.funcConfirm = this.funcConfirm.bind(this)
@@ -28,18 +24,16 @@ export default class Table extends Component {
             });
     }
   
-
     funcConfirm() {
-
+        console.log("fumegando")
         this.funcCancel()
     }
 
     funcCancel() {
-        this.setState({ modal: false })
+        this.setState({ modal: !this.state.modal })
     }
 
     toggle(row) {
-        console.log(row)
         this.setState({
             modal: !this.state.modal,
             qtd : row.quantidade
@@ -47,7 +41,11 @@ export default class Table extends Component {
     }
 
     setQuantidade(valor){
-        this.setState({ quantidade: valor }); 
+        this.setState({ qtd: valor }); 
+    }
+
+    setGroup(){
+        this.setState({ checked : !this.state.checked }); 
     }
 
     render() {
@@ -55,8 +53,7 @@ export default class Table extends Component {
             noDataText: 'Não há dados.',
         }
         function buttonFormatter(cell, row) {
-            console.log(row.id)
-            return <Button color="danger" onClick={() => this.toggle(row)} >Carregar</Button>;
+            return <Button color="primary" onClick={() => this.toggle(row)} >Carregar</Button>;
         }
 
         return (
@@ -76,7 +73,7 @@ export default class Table extends Component {
                     <TableHeaderColumn width='15%' dataField="button" dataFormat={buttonFormatter.bind(this)}> Carregar Estoque       </TableHeaderColumn>
                 </BootstrapTable>
 
-                <Modal label='Produtos Recebidos' value={this.state.qtd} modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} />
+                <Modal onChange={this.setGroup.bind(this)} check={this.state.checked} func={this.setQuantidade.bind(this)} label='Produtos Recebidos' value={this.state.qtd} modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} />
             </div>
         );
     }
