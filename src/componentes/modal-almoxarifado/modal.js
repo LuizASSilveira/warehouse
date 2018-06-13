@@ -5,7 +5,7 @@ import NumericInput from 'react-numeric-input';
 class ModalAmoxarifado extends React.Component {
     render() {
         return (
-            <div>
+            <div id = 'modal'>
                 <Modal isOpen={this.props.modal} toggle={this.props.toggleCancel} className={this.props.className}>
                     <ModalHeader toggle={this.toggleCancel}></ModalHeader>
                     <ModalBody>

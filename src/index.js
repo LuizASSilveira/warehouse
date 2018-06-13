@@ -27,6 +27,7 @@ import AlmoHistorico  from './Almoxarifado/historico'
 import AlmoDevolucao  from './Almoxarifado/devolucao'
  
 ReactDOM.render(
+  (
   <BrowserRouter>
     <App>
       <Switch>
@@ -59,5 +60,5 @@ ReactDOM.render(
 
   </BrowserRouter>
 )
-,document.getElementById('root');
+,document.getElementById('root'));
 registerServiceWorker();
