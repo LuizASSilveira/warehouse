@@ -1,0 +1,52 @@
+#Inputs{
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+}
+#InputButton{
+    display: inline-table;
+    float: right;
+    width: 28%;
+}
+/*#confirm{
+    margin: 10px;
+    margin-left: 75%;
+}
+.confirm{
+    margin: 10px;
+}*/
+
+#nome{
+    display: inline-table;
+    width: 50%;  
+}
+
+/*.btn:disabled {
+    color: grey;
+}*/
+
+.right {
+    float: right;
+}
+
+.btn {
+    margin: 5px;
+}
+
+#siorgButton{
+    width: 100%;
+}
+
+#inputSiorg{
+    width: 30% ;
+    display: inline;
+}
+#buttonSiorg{
+    display: inline;
+    margin: 15px;
+    vertical-align: middle;
+}
+.modal-xl { 
+    max-width: 1140px; 
+}
