@@ -43,9 +43,11 @@ export default class Table extends Component {
         this.setState({
             modal: !this.state.modal,
             qtd : row.quantidade
-
         })
+    }
 
+    setQuantidade(valor){
+        this.setState({ quantidade: valor }); 
     }
 
     render() {
@@ -74,7 +76,7 @@ export default class Table extends Component {
                     <TableHeaderColumn width='15%' dataField="button" dataFormat={buttonFormatter.bind(this)}> Carregar Estoque       </TableHeaderColumn>
                 </BootstrapTable>
 
-                <Modal label='Produtos Recebidos' value={this.state.qtd} modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} mensagem={'Deseja confirmar?'} />
+                <Modal label='Produtos Recebidos' value={this.state.qtd} modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} />
             </div>
         );
     }
