@@ -52,9 +52,6 @@ ReactDOM.render(
         <Route        path="/almoxarifado/historico"   component={AlmoHistorico} />
         <Route        path="/almoxarifado/devolucao"   component={AlmoDevolucao} />
 
-
-        <Route path="/siorg/criar" component={criarSiorg} />
-        <Route path="/siorg/lista" component={criarLista} />
       </Switch>
     </App>
 
