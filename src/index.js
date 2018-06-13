@@ -1,10 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import registerServiceWorker from './registerServiceWorker';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom";
+import registerServiceWorker from "./registerServiceWorker";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../node_modules/font-awesome/css/font-awesome.min.css";
+import App from "./App";
 
-import { Switch,Route,BrowserRouter } from 'react-router-dom'
+import { Switch, Route, BrowserRouter } from "react-router-dom";
 
 import Login          from './componentes/login'
 import Criar          from './Requisicao/criar'
@@ -24,12 +25,12 @@ import AlmoEmprestimo from './Almoxarifado/emprestimo'
 import AlmoPedido     from './Almoxarifado/pedidos'
 import AlmoHistorico  from './Almoxarifado/historico'
 import AlmoDevolucao  from './Almoxarifado/devolucao'
-
+ 
 ReactDOM.render(
-(
   <BrowserRouter>
     <App>
       <Switch>
+
         <Route exact  path="/"                         component={Login}/>
         <Route        path="/requisicao/criar"         component={Criar}/>
         <Route        path="/requisicao/historico"     component={Historico} />
@@ -50,9 +51,13 @@ ReactDOM.render(
         <Route        path="/almoxarifado/historico"   component={AlmoHistorico} />
         <Route        path="/almoxarifado/devolucao"   component={AlmoDevolucao} />
 
+
+        <Route path="/siorg/criar" component={criarSiorg} />
+        <Route path="/siorg/lista" component={criarLista} />
       </Switch>
     </App>
+
   </BrowserRouter>
 )
-,document.getElementById('root'));
+,document.getElementById('root');
 registerServiceWorker();

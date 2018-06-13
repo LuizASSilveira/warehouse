@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import Nav from '../componentes/navbarAdm';
 import '../componentes/css/input.css'
-import { Input, Button, Label, FormGroup, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Input, Button, Label, FormGroup, Modal, ModalHeader, ModalBody, ModalFooter, FormFeedback } from 'reactstrap';
 import InputG from "../componentes/inputGenerico";
 import OrcamentosTable from "../componentes/table/orcamentos";
 import TableSiorg from "../componentes/table/siorgTable";
+import NumericInput from 'react-numeric-input';
+import { Link } from 'react-router-dom'
+import Orcamento from './orcamento'
 
 
 export default class validEspec extends Component {
@@ -45,6 +48,7 @@ export default class validEspec extends Component {
       .then(product => {
         this.setState({ products: product, loading: false });
       });
+
   }
   properFunc(row, isSelected, e) {
     console.log(row)
@@ -52,13 +56,6 @@ export default class validEspec extends Component {
       selected: row
     });
     this.toggle()
-  }
-  loadSelect() {
-    let status = ['ABERTA', 'REQUISITADA', 'COMPRADA', 'DESERTO', 'CANCELADA']
-    console.log(this.state)
-    return status.map((stat) => {
-      return <option>{stat}</option>
-    })
   }
 
   setselect = (e) => {
@@ -73,6 +70,12 @@ export default class validEspec extends Component {
     });
   }
 
+    handleChangeQtd(valor) {
+        let products = this.state.products
+        this.state.products[this.state.index].quantidade=  valor 
+        this.setState({ products: products}); 
+    }
+
   onChange(ev) {
     let products = this.state.products
     products[this.state.index][ev.target.name] = ev.target.value
@@ -80,20 +83,28 @@ export default class validEspec extends Component {
   }
 
   quandoClica() {
-    if (this.state.decricao.length !== 0 && this.state.justificativa.length !== 0) {
+    if (this.state.products[this.state.index].descricao !== 0 && this.state.products[this.state.index].justificativa !== 0) {
       const requestInfo = {
-        method: 'POST',
-        body: JSON.stringify({ descricao: this.state.decricao, justificativa: this.state.justificativa, quantidade: this.state.quantidade }),
+        method: 'PUT',
+        body: JSON.stringify({ descricao: this.state.products[this.state.index].descricao, 
+                               justificativa: this.state.products[this.state.index].justificativa, 
+                               quantidade: this.state.products[this.state.index].quantidade,
+                               siorg: this.state.products[this.state.index].siorg,
+                               feedback: this.state.products[this.state.index].feedback,
+                               status: this.state.products[this.state.index].status}),
         headers: new Headers({
           'Content-type': 'application/json',
           'token': localStorage.getItem('auth-token')
         })
+
       };
-      fetch('http://localhost:3001/solicitacoes', requestInfo)
+
+      fetch('http://localhost:3001/solicitacoes/'+this.props.match.params.id, requestInfo)
         .then(response => {
           if (response.ok) {
             //alerta dados salvos com sucesso
             console.log("tudo ok")
+            this.props.history.push('/solicitacao/validar');
           } else {
             console.log(response)
             throw new Error(response);
@@ -134,12 +145,13 @@ export default class validEspec extends Component {
       return (
         <div>
           <Nav isadm={true} />
-          <h3>Validar Solicitação</h3>
           <div id="Inputs">
+          <h4>Validar Solicitação</h4>
+            
             <FormGroup>
               <Label> Siorg</Label>
               <div id='siorgButton'>
-                <Input label='Siorg:' name='siorg' value={this.state.products[this.state.index].siorg} type='text' id='inputSiorg' disabled='true' />
+                <Input placeholder="Nº Siorg" name='siorg' value={this.state.products[this.state.index].siorg} type='text' id='inputSiorg' disabled='true' />
                 <Button id="buttonSiorg" color="secondary" onClick={this.toggle}>Lista Siorg</Button>
               </div>
               <Modal isOpen={this.state.modal} toggle={this.toggle} className='modal-xl'>
@@ -156,27 +168,69 @@ export default class validEspec extends Component {
 
             <FormGroup>
               <Label> Descrição</Label>
-              <Input disabled={this.state.products[this.state.index].siorg ? true : false} feedback={'anything'} name={'descricao'} onChange={this.onChange} value={this.state.products[this.state.index].descricao} />
+              <Input type="textarea" 
+                    disabled={this.state.products[this.state.index].siorg ? true : false}
+                    invalid={!this.state.products[this.state.index].descricao}
+                    feedback={'anything'} name={'descricao'} onChange={this.onChange} 
+                    value={this.state.products[this.state.index].descricao} />
+              <FormFeedback>Preencha este campo!</FormFeedback>
+            </FormGroup>
+            
+            <FormGroup>
+                <Label>Quantidade</Label>
+                <br/>
+                <NumericInput min={1}max={1000}  value={this.state.products[this.state.index].quantidade} strict={true} onChange={this.handleChangeQtd.bind(this)} />
             </FormGroup>
 
-            <InputG label={'Quantidade'} type={'number'} name={'quantidade'} onChange={this.onChange} value={this.state.products[this.state.index].quantidade} />
-            <InputG label={'Justificativa'} name={'justificativa'} onChange={this.onChange} value={this.state.products[this.state.index].justificativa} />
             <FormGroup>
-              <Label>Status</Label>
-              <Input type="select" name="status" id="exampleSelect" value={this.state.products[this.state.index].status} onChange={this.onChange}>
-                {this.loadSelect()}
+                <Label>Justificativa </Label>
+                <Input  type={'textarea'} name={'justificativa'} onChange={this.onChange} 
+                        invalid={!this.state.products[this.state.index].justificativa}
+                        value={this.state.products[this.state.index].justificativa} />
+                <FormFeedback>Preencha este campo!</FormFeedback>
+            </FormGroup>
+
+            <FormGroup>
+              <Label>Estado</Label>
+              {console.log(this.state.products[0].status)}
+              <Input type="select" name="status"  value={this.state.products[this.state.index].status} onChange={this.onChange}>
+                <option>ABERTO</option>
+                <option>APROVADO</option>
+                <option>CANCELADO</option>
+
               </Input>
             </FormGroup>
-            <InputG label={'Feedback:'} type={'textarea'} placeholder={'Insira um comentário para o solicitante sobre o motivo do cancelamento da solicitação.'} />
-            <OrcamentosTable urlGet={"http://localhost:3001/solicitacoes/" + this.props.match.params.id + "/orcamentos"} />
+            
+            <FormGroup>
+                <Label>Feedback</Label>
+                <Input type='textarea' invalid={!this.state.products[this.state.index].feedback} name='feedback' value={this.state.products[this.state.index].feedback} onChange={this.onChange} placeholder='Insira um comentário para o solicitante sobre o motivo da aprovação ou cancelamento da solicitação.' />
+                <FormFeedback>Preencha este campo!</FormFeedback>
+            </FormGroup>
+            {
+                /**
+                 <OrcamentosTable urlGet={"http://localhost:3001/solicitacoes/" + this.props.match.params.id + "/orcamentos"} />
+                **/
+            }
+            
+            <div class="right">
+                <Button id="confirm" color="primary" 
+                        onClick={this.quandoClica} 
+                        disabled={
+                            !this.state.products[this.state.index].feedback ||
+                            !this.state.products[this.state.index].descricao ||
+                            !this.state.products[this.state.index].justificativa
+                        }>Confirmar</Button>
+                <Link to="/solicitacao/validar">
+                    <Button id="cancel" color="danger" >Cancelar</Button>
+                </Link>
+            </div>
+            <Orcamento/>
           </div>
-          <Button onClick={this.quandoClica}>Confirmar</Button>
-          <Button>Cancelar</Button>
         </div>
       )
     }
     else {
-      return ("loading")
+      return ("Algo deu errado!")
     }
   }
 }

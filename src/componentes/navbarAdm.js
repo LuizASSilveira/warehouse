@@ -50,11 +50,20 @@ export default class navbarAdm extends React.Component {
   }
 
   render() {
+    let validar, addSiorg
+    if(this.props.isadm){
+      validar =   <DropdownItem>
+                    <NavLink href="/solicitacao/validar">Validar Solicitação</NavLink>
+                  </DropdownItem>
+      addSiorg =  <DropdownItem>
+                    <NavLink href="/siorg/criar">Adicionar Siorg</NavLink>
+                  </DropdownItem>
+    }
 
     return (
       <div>
         <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">Almoxarifado UTFPR</NavbarBrand>
+          <NavbarBrand href="/solicitacao/historico">Almoxarifado UTFPR</NavbarBrand>
           <NavbarToggler onClick={this.toggle}/>
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="left" navbar>
@@ -70,9 +79,7 @@ export default class navbarAdm extends React.Component {
                   <DropdownItem>
                     <NavLink href="/solicitacao/historico">Visualizar Solicitação</NavLink>
                   </DropdownItem>
-                  <DropdownItem>
-                    <NavLink href="/solicitacao/validar">Validar Solicitação</NavLink>
-                  </DropdownItem>
+                  {validar}
                 </DropdownMenu>
               </UncontrolledDropdown>
 
@@ -83,9 +90,7 @@ export default class navbarAdm extends React.Component {
                   Siorg
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem>
-                    <NavLink href="/siorg/criar">Adicionar Siorg</NavLink>
-                  </DropdownItem>
+                  {addSiorg}
                   <DropdownItem>
                     <NavLink href="/siorg/lista">Consultar Siorg</NavLink>
                   </DropdownItem>
@@ -97,18 +102,18 @@ export default class navbarAdm extends React.Component {
               <Nav className="ml-auto" navbar>
 
               <NavItem>
-                <NavLink href="/components/"> 
+                <NavLink > 
                     <FontAwesome
                       className="super-crazy-colors"
                       name="user"
                       style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
                     />
-                    Perfil
+                    {localStorage.getItem('nome')}
                 </NavLink>
               </NavItem>
 
               <NavItem>
-                <NavLink href="/components/"> 
+                <NavLink href="/"> 
                     <FontAwesome
                       className="super-crazy-colors"
                       name="sign-out"
