@@ -8,7 +8,7 @@ import { Button } from 'reactstrap';
 export default class TableSiorg extends Component {
     constructor(props) {
         super(props)
-        this.state = { lista: [] }
+        this.state = { lista: [], isAdm:false }
         this.properFunc = this.properFunc.bind(this)
     }
 
@@ -24,6 +24,15 @@ export default class TableSiorg extends Component {
             .then(product => {
                 this.setState({ lista: product });
             });
+
+        let adm
+        adm = localStorage.getItem('isAdm')
+        console.log(adm)
+        if(adm == "false"){
+            this.setState({ isAdm: false })
+        }else{
+            this.setState({ isAdm: true })
+        }
     }
     componentDidUpdate(){
                 fetch(this.props.urlGet, {
@@ -87,6 +96,13 @@ export default class TableSiorg extends Component {
         }
         }
 
+        let ganbis                
+        if(this.state.isAdm){
+            
+            ganbis = <TableHeaderColumn width='10%' dataField="button" dataFormat={buttonFormatter}> Remover   
+        </TableHeaderColumn>
+        }
+
         return (
             <div id="table">
                 <BootstrapTable
@@ -100,7 +116,8 @@ export default class TableSiorg extends Component {
                 >
                     <TableHeaderColumn width='10%' dataField="siorg" isKey>     Código Siorg     </TableHeaderColumn>
                     <TableHeaderColumn width='60%' dataField="descricao">       Descrição  </TableHeaderColumn>
-                    <TableHeaderColumn width='10%' dataField="button" dataFormat={buttonFormatter}> Remover   </TableHeaderColumn>
+                    
+                    {ganbis}
                 </BootstrapTable>
 
 

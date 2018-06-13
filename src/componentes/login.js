@@ -37,6 +37,12 @@ export default class Login extends Component {
                 this.setState({msg:error.message});
             });
     }
+
+    componentDidMount(){
+        localStorage.removeItem('auth-token')
+        localStorage.removeItem('isAdm')
+        localStorage.removeItem('nome')
+    }
     
     render(){
         if (this.state.redirect) {
