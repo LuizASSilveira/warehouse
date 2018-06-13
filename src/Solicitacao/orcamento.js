@@ -230,7 +230,7 @@ export default class Orcamento extends Component {
               Fornecedor
             </TableHeaderColumn>
             <TableHeaderColumn dataField="valor">Valor R$</TableHeaderColumn>
-            <TableHeaderColumn dataField="referencia">
+            <TableHeaderColumn dataField="origem">
               Referência
             </TableHeaderColumn>
             <TableHeaderColumn dataField="pdf_path">Arquivo</TableHeaderColumn>
