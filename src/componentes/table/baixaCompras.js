@@ -9,12 +9,11 @@ import Modal from '../modal-almoxarifado/modal'
 export default class Table extends Component {
     constructor() {
         super()
-        this.state = { products: [], modal: false, qtd : 0 , checked : true}
+        this.state = { products: [], modal: false, qtd : 0 ,id : 0, checked : true}
         this.toggle = this.toggle.bind(this)
         this.funcCancel = this.funcCancel.bind(this)
         this.funcConfirm = this.funcConfirm.bind(this)
     }
-
 
     componentDidMount() {
         fetch('https://raw.githubusercontent.com/LuizASSilveira/pi-almoxarifado/master/emprestimo.json')
@@ -25,7 +24,22 @@ export default class Table extends Component {
     }
   
     funcConfirm() {
-        console.log("fumegando")
+        const requestInfo = {
+            method: 'POST',
+            body: JSON.stringify({quantidade: this.state.qtd, solicitacoes: this.state.id}),
+            headers: new Headers({
+              'Content-type': 'application/json',
+              'token': localStorage.getItem('auth-token')
+            })
+          };
+          fetch(this.props.urlPost, requestInfo)
+            .then(response => {
+              if (response.ok) {
+                window.location.reload()
+              } else {
+                throw new Error("não foi possivel salvar as alterações");
+              }
+            })
         this.funcCancel()
     }
 
@@ -36,7 +50,8 @@ export default class Table extends Component {
     toggle(row) {
         this.setState({
             modal: !this.state.modal,
-            qtd : row.quantidade
+            qtd : row.quantidade,
+            id  : row.id
         })
     }
 

@@ -10,14 +10,14 @@ export default class Criar extends Component {
     } 
 
     qualquerCoisa(){
-        let a
+        //let a
     }
 
     componentDidMount(){
         let adm
         adm = localStorage.getItem('isAdm')
         console.log(adm)
-        if(adm == "false"){
+        if(adm === "false"){
             this.setState({ isAdm: false })
         }else{
             this.setState({ isAdm: true })

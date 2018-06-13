@@ -52,7 +52,6 @@ class Table extends Component {
           throw new Error("não foi possivel salvar as alterações");
         }
       })
-    
     this.funcCancel()  
 }
 

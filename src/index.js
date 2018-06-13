@@ -31,7 +31,7 @@ ReactDOM.render(
   <BrowserRouter>
     <App>
       <Switch>
-
+        
         <Route exact  path="/"                         component={Login}/>
         <Route        path="/requisicao/criar"         component={Criar}/>
         <Route        path="/requisicao/historico"     component={Historico} />
@@ -54,7 +54,6 @@ ReactDOM.render(
 
       </Switch>
     </App>
-
   </BrowserRouter>
 )
 ,document.getElementById('root'));
