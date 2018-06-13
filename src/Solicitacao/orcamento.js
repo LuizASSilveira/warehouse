@@ -45,17 +45,58 @@ export default class Orcamento extends Component {
     this.setState({ orcamento: initialState.orcamento });
   }
 
-  save() {
-    const orcamento = this.state.orcamento;
-    const method = orcamento.id ? "put" : "post";
-    const url = orcamento.id ? `${baseURL}/${orcamento.id}` : baseURL;
-    axios[method](url, orcamento).then(resp => {
-      const lista = this.getUpdatedList(resp.data);
-      this.setState({
-        orcamento: initialState.orcamento,
-        listaOrcamentos: lista
+  componentDidMount() {
+    fetch(this.props.urlGet, {
+      method: 'GET',
+      headers: new Headers({
+        'Content-type': 'application/json',
+        'token': localStorage.getItem('auth-token')
+      })
+    }).then(response => response.json())
+      .then(product => {
+        this.setState({ products: product });
       });
-    });
+  }
+
+  // save() {
+  //   const orcamento = this.state.orcamento;
+  //   const method = orcamento.id ? "put" : "post";
+  //   const url = orcamento.id ? `${baseURL}/${orcamento.id}` : baseURL;
+  //   axios[method](url, orcamento).then(resp => {
+  //     const lista = this.getUpdatedList(resp.data);
+  //     this.setState({
+  //       orcamento: initialState.orcamento,
+  //       listaOrcamentos: lista
+  //     });
+  //   });
+  // }
+  save(){
+    const requestInfo = {
+                method: 'POST',
+                body: JSON.stringify({cnpj_fornecedor: this.state.orcamento.cnpj_fornecedor, 
+                  nome_fornecedor: this.state.orcamento.nome_fornecedor, 
+                  valor: this.state.orcamento.valor, 
+                  solicitacao_id: this.props.dado,
+                  origem: this.state.orcamento.referencia}),
+                headers: new Headers({
+                  'Content-type': 'application/json',
+                  'token': localStorage.getItem('auth-token'),
+                    
+                })
+              };
+
+              fetch('http://localhost:3001/orcamentos/'+ this.props.dado, requestInfo)
+                .then(response => {
+                  if (response.ok) {
+                    //alerta dados salvos com sucesso
+                    window.location.reload()
+                    console.log("tudo ok")
+                    this.props.history.push('/solicitacao/historico');
+                  } else {
+                      console.log(response)
+                    throw new Error(response);
+                  }
+                })
   }
 
   getUpdatedList(orcamento) {
@@ -89,7 +130,7 @@ export default class Orcamento extends Component {
   renderForm() {
     return (
       <Container>
-        <h3>Orçamentos</h3>
+        <h4>Orçamentos</h4>
         <Form>
           <FormGroup row>
             <Col sm={4}>
@@ -147,13 +188,14 @@ export default class Orcamento extends Component {
                 name="pdf_path"
                 label="Submeta um arquivo de orçamento."
               />
+
             </Col>
           </FormGroup>
           <div>
             <Button color="primary" onClick={event => this.save(event)}>
-              Salvar
+              Adicionar
             </Button>{" "}
-            <Button color="secondary" onClick={event => this.clear(event)}>
+            <Button color="danger" onClick={event => this.clear(event)}>
               Cancelar
             </Button>{" "}
           </div>
@@ -175,6 +217,7 @@ export default class Orcamento extends Component {
           <BootstrapTable
             data={this.state.listaOrcamentos}
             search
+            data={this.state.products}
             multiColumnSearch
             searchPlaceholder="Pesquisar"
             options={options}
@@ -284,8 +327,6 @@ export default class Orcamento extends Component {
   render() {
     return (
       <div>
-        <Nav isadm={true} />
-
         {this.renderForm()}
 
         {this.renderTable()}
