@@ -4,7 +4,7 @@ import { BootstrapTable, TableHeaderColumn } from '../../../node_modules/react-b
 import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import { Redirect } from 'react-router-dom'
 import { Button } from 'reactstrap'
-import Modal from '../confirmModal'
+import Modal from '../modal-almoxarifado/modal'
 
 function onRowSelect(row) {
     console.log(row.id)
@@ -13,7 +13,7 @@ function onRowSelect(row) {
 export default class Table extends Component {
     constructor() {
         super()
-        this.state = { products: [], modal: false }
+        this.state = { products: [], modal: false, qtd : 0 }
         this.toggle = this.toggle.bind(this)
         this.funcCancel = this.funcCancel.bind(this)
         this.funcConfirm = this.funcConfirm.bind(this)
@@ -41,7 +41,9 @@ export default class Table extends Component {
     toggle(row) {
         console.log(row)
         this.setState({
-            modal: !this.state.modal
+            modal: !this.state.modal,
+            qtd : row.quantidade
+
         })
 
     }
@@ -72,7 +74,7 @@ export default class Table extends Component {
                     <TableHeaderColumn width='15%' dataField="button" dataFormat={buttonFormatter.bind(this)}> Carregar Estoque       </TableHeaderColumn>
                 </BootstrapTable>
 
-                <Modal modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} mensagem={'Deseja confirmar?'} />
+                <Modal label='Produtos Recebidos' value={this.state.qtd} modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} mensagem={'Deseja confirmar?'} />
             </div>
         );
     }
