@@ -16,7 +16,7 @@ export default class Table extends Component {
     }
 
     componentDidMount() {
-        fetch(this.props.urlGet, {
+        fetch("http://localhost:3001/estoque/requisitado", {
           method: 'GET',
           headers: new Headers({
             'Content-type': 'application/json',
@@ -25,6 +25,7 @@ export default class Table extends Component {
         })
           .then(response => response.json())
           .then(product => {
+          console.log(this.props.urlGet)    
             this.setState({ products: product });
           });
       }
@@ -87,11 +88,11 @@ export default class Table extends Component {
                     pagination
                     options={options}
                 >
-                    <TableHeaderColumn dataField='id' isKey>  ID                                                                      </TableHeaderColumn>
+                    <TableHeaderColumn dataField='solicitacao_id' isKey>  ID                                                                      </TableHeaderColumn>
                     <TableHeaderColumn width='15%' dataField='quantidade' dataAlign='center'>  Quantidade                             </TableHeaderColumn>
-                    <TableHeaderColumn width='20%' dataField='requisicao' dataAlign='center'>  Requisição                             </TableHeaderColumn>
+                    <TableHeaderColumn width='20%' dataField='requisicao_id' dataAlign='center'>  Requisição                             </TableHeaderColumn>
                     <TableHeaderColumn width='50%' dataField='descricao'> Descrição                                                   </TableHeaderColumn>  
-                    <TableHeaderColumn width='0%' dataField='data'>         Data                                                      </TableHeaderColumn>
+                    <TableHeaderColumn width='0%' dataField='requisicao_data'>         Data                                                      </TableHeaderColumn>
                     <TableHeaderColumn width='15%' dataField="button" dataFormat={buttonFormatter.bind(this)}> Carregar Estoque       </TableHeaderColumn>
                 </BootstrapTable>
 
