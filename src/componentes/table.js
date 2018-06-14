@@ -81,6 +81,7 @@ class Table extends Component {
         this.setState({ products: product });
       });
   }
+  
   handleChange(event) {
     this.setState({ name: event.target.value });
   }

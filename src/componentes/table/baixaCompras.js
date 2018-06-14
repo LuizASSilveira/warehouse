@@ -16,12 +16,18 @@ export default class Table extends Component {
     }
 
     componentDidMount() {
-        fetch('https://raw.githubusercontent.com/LuizASSilveira/pi-almoxarifado/master/emprestimo.json')
-            .then(response => response.json())
-            .then(product => {
-                this.setState({ products: product })
-            });
-    }
+        fetch(this.props.urlGet, {
+          method: 'GET',
+          headers: new Headers({
+            'Content-type': 'application/json',
+            'token': localStorage.getItem('auth-token')
+          })
+        })
+          .then(response => response.json())
+          .then(product => {
+            this.setState({ products: product });
+          });
+      }
   
     funcConfirm() {
         const requestInfo = {
