@@ -50,13 +50,24 @@ export default class navbarAdm extends React.Component {
   }
 
   render() {
-    let validar, addSiorg
+    let validar, addSiorg, compras, devolver, informa
     if(this.props.isadm){
       validar =   <DropdownItem>
                     <NavLink href="/solicitacao/validar">Validar Solicitação</NavLink>
                   </DropdownItem>
       addSiorg =  <DropdownItem>
                     <NavLink href="/siorg/criar">Adicionar Siorg</NavLink>
+                  </DropdownItem>
+      compras =                   <DropdownItem>
+                    <NavLink href="/almoxarifado/compras">Compras</NavLink>
+                  </DropdownItem>
+
+      devolver =                   <DropdownItem>
+                    <NavLink href="/almoxarifado/devolucao">Devolução</NavLink>
+                  </DropdownItem>
+
+      informa =                   <DropdownItem>
+                    <NavLink href="/almoxarifado/info">Informações</NavLink>
                   </DropdownItem>
     }
 
@@ -94,6 +105,23 @@ export default class navbarAdm extends React.Component {
                   <DropdownItem>
                     <NavLink href="/siorg/lista">Consultar Siorg</NavLink>
                   </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+
+              <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav caret>
+                  Produtos
+                </DropdownToggle>
+                <DropdownMenu right>
+                  <DropdownItem>
+                    <NavLink href="/almoxarifado/emprestimo">Emprestar</NavLink>
+                  </DropdownItem>
+                  {compras}
+                  {devolver}
+                  <DropdownItem>
+                    <NavLink href="/almoxarifado/historico">Histórico</NavLink>
+                  </DropdownItem>
+                  {informa}
                 </DropdownMenu>
               </UncontrolledDropdown>
               
