@@ -14,7 +14,7 @@ export default class Table extends Component {
   }
 
   componentDidMount() {
-    fetch("?????????", {
+    fetch("http://localhost:3001/estoque/emprestimo", {
       method: 'GET',
       headers: new Headers({
         'Content-type': 'application/json',
@@ -29,6 +29,7 @@ export default class Table extends Component {
   }
 
   funcConfirm() {
+    console.log(this.state.qtd)
     const requestInfo = {
       method: 'POST',
       body: JSON.stringify({quantidade: this.state.qtd, produto_id : this.state.siorg }),
@@ -37,7 +38,7 @@ export default class Table extends Component {
         'token': localStorage.getItem('auth-token')
       })
     };
-    fetch("?????????", requestInfo)
+    fetch("http://localhost:3001/estoque/emprestimo", requestInfo)
       .then(response => {
         if (response.ok) {
           window.location.reload()
@@ -67,6 +68,7 @@ export default class Table extends Component {
     function buttonFormatter(cell, row) {
       return <Button color="primary" onClick={() => this.toggle(row)} >Emprestar</Button>;
     }
+    console.log(this.state.qtd)
     return (
       <div id="table">
         <BootstrapTable
@@ -79,12 +81,12 @@ export default class Table extends Component {
         >
           <TableHeaderColumn             dataField='produto_id'         isKey>       ID                               </TableHeaderColumn>
           <TableHeaderColumn width='0%'  dataField='data'>                           Data                             </TableHeaderColumn>
-          <TableHeaderColumn width='20%' dataField='quantidade' dataAlign='center'>  Quantidade Disponivel            </TableHeaderColumn>
+          <TableHeaderColumn width='20%' dataField='quantidade_atual' dataAlign='center'>  Quantidade Disponivel            </TableHeaderColumn>
           <TableHeaderColumn width='70%' dataField='descricao'>                      Produto                          </TableHeaderColumn>
           <TableHeaderColumn width='12%' dataField="button"     dataFormat={buttonFormatter.bind(this)}> Emprestimo   </TableHeaderColumn>
         </BootstrapTable>
         
-        <Modal maxQtd={this.state.qtd} divID = "invisivel" func={this.setQuantidade.bind(this)} label='Quantidade de Produto' value={this.state.qtd} modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} />
+        <Modal maxQtd={this.state.qtd} divID = "invisivel" func={this.setQuantidade.bind(this)} label='Quantidade de Produto' value={this.state.qtd} modal={this.state.modal} onCancel={this.funcCancel.bind(this)} onConfirm={this.funcConfirm.bind(this)} toggle={true} />
       </div>
     );
   }
