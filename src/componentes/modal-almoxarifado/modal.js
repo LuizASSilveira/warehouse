@@ -10,9 +10,11 @@ class ModalAmoxarifado extends React.Component {
                 <Modal isOpen={this.props.modal} toggle={this.props.onCancel} className={this.props.className}>
                     <ModalHeader toggle={this.props.onCancel}>Almoxarifado</ModalHeader>
                     <ModalBody>
-                        <div>
+                        {this.props.mensagem}
+
+                        <div id={this.props.divNum}>
                             <Label> {this.props.label}: </Label><br />
-                            <NumericInput min={1} max={1000} value={this.props.value} onChange={this.props.setQuantidade} />
+                            <NumericInput min={1} max={ this.props.max } value={this.props.value} onChange={this.props.setQuantidade} />
                         </div>
                         <div id={this.props.divID}>
                             <Label check id= "checkModal">

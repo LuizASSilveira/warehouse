@@ -25,7 +25,9 @@ import AlmoEmprestimo from './Almoxarifado/emprestimo'
 import AlmoPedido     from './Almoxarifado/pedidos'
 import AlmoHistorico  from './Almoxarifado/historico'
 import AlmoDevolucao  from './Almoxarifado/devolucao'
+import AlmoInfo       from './Almoxarifado/info'
  
+
 ReactDOM.render(
   (
   <BrowserRouter>
@@ -51,6 +53,7 @@ ReactDOM.render(
         <Route        path="/almoxarifado/compras"     component={AlmoPedido} />
         <Route        path="/almoxarifado/historico"   component={AlmoHistorico} />
         <Route        path="/almoxarifado/devolucao"   component={AlmoDevolucao} />
+        <Route        path="/almoxarifado/info"        component={AlmoInfo} />
 
       </Switch>
     </App>

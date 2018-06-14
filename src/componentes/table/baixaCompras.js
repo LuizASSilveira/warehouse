@@ -9,7 +9,7 @@ import Modal from '../modal-almoxarifado/modal'
 export default class Table extends Component {
     constructor() {
         super()
-        this.state = { products: [], modal: false, qtd : 0 ,id : 0, checked : true}
+        this.state = { products: [], modal: false, qtd : 0 ,id : 0, checked : true, qtdMAX: 0}
         this.toggle = this.toggle.bind(this)
         this.funcCancel = this.funcCancel.bind(this)
         this.funcConfirm = this.funcConfirm.bind(this)
@@ -49,9 +49,10 @@ export default class Table extends Component {
 
     toggle(row) {
         this.setState({
-            modal: !this.state.modal,
-            qtd : row.quantidade,
-            id  : row.id
+            modal:  !this.state.modal,
+            qtd :   row.quantidade,
+            id  :   row.id,
+            qtdMAX: row.quantidade
         })
     }
 

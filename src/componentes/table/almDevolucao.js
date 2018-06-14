@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { BootstrapTable, TableHeaderColumn } from '../../../node_modules/react-bootstrap-table';
-import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
-import { Redirect } from 'react-router-dom'
-import '../css/table.css'
 import { Button } from 'reactstrap'
+import Modal from '../modal-almoxarifado/modal'
+import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
+import '../css/table.css'
 
 export default class Table extends Component {
   constructor() {
@@ -21,31 +21,27 @@ export default class Table extends Component {
         this.setState({ products: product })
       });
   }
+
   funcConfirm() {
-
     this.funcCancel()
-}
+  }
 
-funcCancel() {
+  funcCancel() {
     this.setState({ modal: false })
-}
+  }
 
-toggle(row) {
-    console.log(row)
+  toggle(row) {
     this.setState({
-        modal: !this.state.modal
+      modal: !this.state.modal
     })
-
-}
-
+  }
 
   render() {
     const options = {
       noDataText: 'Não há dados.',
     }
     function buttonFormatter(cell, row) {
-        console.log(row.id)
-        return <Button color="danger" onClick={() => this.toggle(row)} >Devolvido</Button>;
+      return <Button color="danger" onClick={() => this.toggle(row)} >Devolvido</Button>;
     }
     return (
       <div id="table">
@@ -57,15 +53,15 @@ toggle(row) {
           pagination
           options={options}
         >
-          <TableHeaderColumn             dataField='id' isKey>                          ID                        </TableHeaderColumn>
-          <TableHeaderColumn width='14%' dataField='dataA'      dataAlign='center'>     Data Emprestimo           </TableHeaderColumn>
-          <TableHeaderColumn width='14%' dataField='dataD'      dataAlign='center'>     Data Devolução            </TableHeaderColumn>
+          <TableHeaderColumn dataField='id' isKey>                                      ID                        </TableHeaderColumn>
+          <TableHeaderColumn width='14%' dataField='dataA' dataAlign='center'>          Data Emprestimo           </TableHeaderColumn>
+          <TableHeaderColumn width='14%' dataField='dataD' dataAlign='center'>          Data Devolução            </TableHeaderColumn>
           <TableHeaderColumn width='12%' dataField='quantidade' dataAlign='center'>     Quantidade                </TableHeaderColumn>
           <TableHeaderColumn width='30%' dataField='descricao'>                         Produto                   </TableHeaderColumn>
           <TableHeaderColumn width='19%' dataField='solicitante'>                       Solicitante               </TableHeaderColumn>
           <TableHeaderColumn width='11%' dataField="button" dataFormat={buttonFormatter.bind(this)}> Devolução    </TableHeaderColumn>
         </BootstrapTable>
-
+        <Modal divID="invisivel" divNum="invisivel" mensagem="Gostaria de confimar a devolução"  modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} />
       </div>
     );
   }

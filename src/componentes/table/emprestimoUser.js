@@ -8,10 +8,9 @@ import Modal from '../modal-almoxarifado/modal'
 export default class Table extends Component {
   constructor() {
     super()
-    this.state = { products: [], modal: false, qtd: 0 }
+    this.state = { products: [], modal: false, qtd: 1, qtdMAX: 0 }
     this.toggle = this.toggle.bind(this)
-    this.funcCancel = this.funcCancel.bind(this)
-    this.funcConfirm = this.funcConfirm.bind(this)
+
   }
 
   componentDidMount() {
@@ -29,7 +28,8 @@ export default class Table extends Component {
   }
   toggle(row) {
     this.setState({
-      modal: !this.state.modal
+      modal: !this.state.modal,
+      qtdMAX: row.quantidade
     })
   }
   setQuantidade(valor){
@@ -59,7 +59,7 @@ export default class Table extends Component {
           <TableHeaderColumn width='12%' dataField="button"     dataFormat={buttonFormatter.bind(this)}> Emprestimo   </TableHeaderColumn>
         </BootstrapTable>
         
-        <Modal divID = "invisivel" func={this.setQuantidade.bind(this)} label='Quantidade de Produto' value={this.state.qtd} modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} />
+        <Modal maxQtd={this.state.qtd} divID = "invisivel" func={this.setQuantidade.bind(this)} label='Quantidade de Produto' value={this.state.qtd} modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} />
       </div>
     );
   }
