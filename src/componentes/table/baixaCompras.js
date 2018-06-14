@@ -39,7 +39,7 @@ export default class Table extends Component {
               'token': localStorage.getItem('auth-token')
             })
           };
-          fetch(this.props.urlPost, requestInfo)
+          fetch('http://localhost:3001/estoque', requestInfo)
             .then(response => {
               if (response.ok) {
                 window.location.reload()
