@@ -211,6 +211,7 @@ export default class validEspec extends Component {
                  <OrcamentosTable urlGet={"http://localhost:3001/solicitacoes/" + this.props.match.params.id + "/orcamentos"} />
                 **/
             }
+            <Orcamento dado={this.props.match.params.id} urlGet={'http://localhost:3001/orcamentos/'+ this.props.match.params.id} />
             
             <div class="right">
                 <Button id="confirm" color="primary" 
@@ -224,7 +225,6 @@ export default class validEspec extends Component {
                     <Button id="cancel" color="danger" >Cancelar</Button>
                 </Link>
             </div>
-            <Orcamento/>
           </div>
         </div>
       )
