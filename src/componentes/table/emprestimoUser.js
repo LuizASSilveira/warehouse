@@ -14,13 +14,37 @@ export default class Table extends Component {
   }
 
   componentDidMount() {
-    fetch('https://raw.githubusercontent.com/LuizASSilveira/pi-almoxarifado/master/emprestimo.json')
+    fetch("?????????", {
+      method: 'GET',
+      headers: new Headers({
+        'Content-type': 'application/json',
+        'token': localStorage.getItem('auth-token')
+      })
+    })
       .then(response => response.json())
       .then(product => {
-        this.setState({ products: product })
+      console.log(this.props.urlGet)    
+        this.setState({ products: product });
       });
   }
+
   funcConfirm() {
+    const requestInfo = {
+      method: 'POST',
+      body: JSON.stringify({quantidade: this.state.qtd, solicitacao_id: this.state.id, produto_id : this.state.siorg }),
+      headers: new Headers({
+        'Content-type': 'application/json',
+        'token': localStorage.getItem('auth-token')
+      })
+    };
+    fetch("?????????", requestInfo)
+      .then(response => {
+        if (response.ok) {
+          window.location.reload()
+        } else {
+          throw new Error("não foi possivel salvar as alterações");
+        }
+      })
     this.funcCancel()
   }
   funcCancel() {
