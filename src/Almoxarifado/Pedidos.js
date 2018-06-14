@@ -8,7 +8,7 @@ export default class AlmoEmprestimo extends Component {
             <div>
                 <Nav isadm = {true} />
                 <Table 
-                urlGet = "????"
+                urlGet = "http://localhost:3001/estoque/requisitado"
                 urlPost = "?????"
                 />    
             </div>
