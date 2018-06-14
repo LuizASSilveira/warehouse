@@ -87,12 +87,12 @@ export default class Table extends Component {
                     pagination
                     options={options}
                 >
-                    <TableHeaderColumn dataField='id' isKey>  ID                                                                      </TableHeaderColumn>
+                    <TableHeaderColumn dataField='solicitacao_id' isKey>  ID                                                                      </TableHeaderColumn>
+                    <TableHeaderColumn width='0%' dataField='produto_id' dataAlign='center'>  Requisição                             </TableHeaderColumn>
+                    <TableHeaderColumn width='0%' dataField='requisicao_data'>         Data                                                      </TableHeaderColumn>
                     <TableHeaderColumn width='15%' dataField='quantidade' dataAlign='center'>  Quantidade                             </TableHeaderColumn>
-                    <TableHeaderColumn width='20%' dataField='requisicao' dataAlign='center'>  Requisição                             </TableHeaderColumn>
+                    <TableHeaderColumn width='20%' dataField='requisicao_id' dataAlign='center'>  Requisição                             </TableHeaderColumn>
                     <TableHeaderColumn width='50%' dataField='descricao'> Descrição                                                   </TableHeaderColumn>  
-                    <TableHeaderColumn width='0%' dataField='data'>         Data                                                      </TableHeaderColumn>
-                    <TableHeaderColumn width='15%' dataField="button" dataFormat={buttonFormatter.bind(this)}> Carregar Estoque       </TableHeaderColumn>
                 </BootstrapTable>
 
                 <Modal max= {this.state.qtd}  onChange={this.setGroup.bind(this)} check={this.state.checked} func={this.setQuantidade.bind(this)} label='Produtos Recebidos' value={this.state.qtd} modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} />
