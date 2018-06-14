@@ -18,10 +18,23 @@ export default class navbarAdm extends React.Component {
   constructor(props) {
     super(props);
 
+
     this.toggle = this.toggle.bind(this);
     this.state = {
       isOpen: false,
+      admin: false
     };
+  }
+
+  componentDidMount(){
+        let adm
+        adm = localStorage.getItem('isAdm')
+        console.log(adm)
+        if(adm === "false"){
+            this.setState({ admin: false })
+        }else{
+            this.setState({ admin: true })
+        }
   }
   toggle() {
     this.setState({
@@ -30,7 +43,7 @@ export default class navbarAdm extends React.Component {
   }
 
   requisicao = () =>{
-    if (this.props.isadm){
+    if (this.state.admin){
 
     return(<UncontrolledDropdown nav inNavbar>
                   <DropdownToggle nav caret>
@@ -51,7 +64,7 @@ export default class navbarAdm extends React.Component {
 
   render() {
     let validar, addSiorg, compras, devolver, informa
-    if(this.props.isadm){
+    if(this.state.admin){
       validar =   <DropdownItem>
                     <NavLink href="/solicitacao/validar">Validar Solicitação</NavLink>
                   </DropdownItem>

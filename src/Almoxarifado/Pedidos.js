@@ -6,7 +6,7 @@ export default class AlmoEmprestimo extends Component {
     render(){
         return(
             <div>
-                <Nav isadm = {true} />
+                <Nav  />
                 <Table 
                 urlGet = "????"
                 urlPost = "?????"
