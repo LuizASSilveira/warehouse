@@ -8,6 +8,7 @@ export default class AlmoEmprestimo extends Component {
             <div>
                 <Nav isadm = {true} />
                 <Table 
+                urlGet = "????"
                 urlPost = "?????"
                 />    
             </div>
