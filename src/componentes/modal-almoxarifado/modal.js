@@ -14,7 +14,7 @@ class ModalAmoxarifado extends React.Component {
 
                         <div id={this.props.divNum}>
                             <Label> {this.props.label}: </Label><br />
-                            <NumericInput type="number" min={1} max={ this.props.max } value={this.props.value} onChange={this.props.setQuantidade} />
+                            <NumericInput type="number" min={1} max={ this.props.max } value={this.props.value} onChange={this.props.func} />
                         </div>
                         <div id={this.props.divID}>
                             <Label check id= "checkModal">
