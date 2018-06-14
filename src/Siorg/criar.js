@@ -4,7 +4,6 @@ import InputG   from '../componentes/inputGenerico'
 import '../componentes/css/input.css'
 import { Button, Label, FormGroup, Input } from 'reactstrap';
 import {ErrorAlert} from '../componentes/alerta'
-import NumericInput from 'react-numeric-input';
 import { Link } from 'react-router-dom'
 export default class CriarS extends Component {     
     constructor(){

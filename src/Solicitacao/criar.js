@@ -3,7 +3,7 @@ import Nav      from '../componentes/navbarAdm';
 import InputG   from '../componentes/inputGenerico'
 import '../componentes/css/input.css'
 import NumericInput from 'react-numeric-input';
-import {Input, Button,Label ,FormGroup, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import {Input, Button,Label ,FormGroup, Modal, ModalHeader, ModalBody, ModalFooter, FormFeedback } from 'reactstrap';
 import {ErrorAlert} from '../componentes/alerta';
 import TableSiorg from "../componentes/table/siorgTable";
 import { Link } from 'react-router-dom'
@@ -13,13 +13,14 @@ export default class CriarS extends Component {
         super()
         this.state = { 
             decricao: '', justificativa:'', quantidade: 1, siorg:'', alerta: false,
-            isAdm: false,
+            isAdm: false, validDesc: false, validJust: false,
             modal: false
         };
         this.toggle = this.toggle.bind(this);
         this.mandaSiorg = this.mandaSiorg.bind(this);
         this.guardaRow = this.guardaRow.bind(this);
         this.salvar = this.salvar.bind(this);
+        this.mudaJust = this.mudaJust.bind(this);
     }
 
     toggle() {
@@ -28,10 +29,11 @@ export default class CriarS extends Component {
       });
     }
     handleChangeDes(event) {
-        this.setState({ decricao: event.target.value });
+        this.setState({ decricao: event.target.value, validDesc: false });
     }
-    handleChangeJus(event) {
-        this.setState({ justificativa: event.target.value });
+    mudaJust(event) {
+        let teste = event.target.value
+        this.setState({ justificativa: teste, validJust: false });
     }
     handleChangeQtd(valor) {
         this.setState({ quantidade: valor }); 
@@ -45,7 +47,8 @@ export default class CriarS extends Component {
         this.setState({
           decricao: this.state.linha.descricao,
           siorg: this.state.linha.siorg,
-          value: this.state.linha.siorg
+          value: this.state.linha.siorg,
+          validDesc: false
         })
     }
     this.toggle()
@@ -61,7 +64,7 @@ export default class CriarS extends Component {
         let adm
         adm = localStorage.getItem('isAdm')
         console.log(adm)
-        if(adm == "false"){
+        if(adm === "false"){
             this.setState({ isAdm: false })
         }else{
             this.setState({ isAdm: true })
@@ -69,6 +72,7 @@ export default class CriarS extends Component {
     }
 
     salvar(){
+        console.log(this.state)
         if(this.state.decricao.length !== 0 && this.state.justificativa.length !== 0){
             const requestInfo = {
                 method: 'POST',
@@ -85,7 +89,6 @@ export default class CriarS extends Component {
                   if (response.ok) {
                     //alerta dados salvos com sucesso
                     window.location.reload()
-                    console.log("tudo ok")
                     this.props.history.push('/solicitacao/historico');
                   } else {
                       console.log(response)
@@ -94,7 +97,13 @@ export default class CriarS extends Component {
                 })
         }
         else {
-            this.setState({ alerta: true })
+            // verifica se a descricao está vazia, se esta entao seta a variavel de validacao
+            if(this.state.decricao.length == 0){
+                this.setState({validDesc: true});
+            }
+            if(this.state.justificativa.length == 0){
+                this.setState({validJust: true});
+            }
         }
     }
     render(){
@@ -124,13 +133,27 @@ export default class CriarS extends Component {
                         </Modal>
 
                     <Label> Quantidade </Label><br />
-                    <NumericInput min={1}max={1000} name={'qtd'} value={this.state.quantidade} strict={true} onChange={this.handleChangeQtd.bind(this)} />
+                    <NumericInput min={1} max={1000} name={'qtd'} value={this.state.quantidade} strict={true} onChange={this.handleChangeQtd.bind(this)} />
 
                     <FormGroup>
                         <Label> Descrição</Label>
-                        <Input placeholder="Descrição" disabled={this.state.value? true: false} type={'textarea'} feedback={'anything'} name={'descricao'} onChange={this.handleChangeDes.bind(this)} value={this.state.decricao} />
-                    </FormGroup>                  
-                    <InputG label={'Justificativa'} name={'justificativa'} placeholder={'Justificativa'} type={'textarea'} id={'inputJus'} value={this.state.value} onChange={this.handleChangeJus.bind(this)}/>
+                        <Input invalid={this.state.validDesc} placeholder="Descrição" disabled={this.state.value? true: false} 
+                        type={'textarea'} feedback={'anything'} name={'descricao'} 
+                        onChange={this.handleChangeDes.bind(this)} value={this.state.decricao} />
+                        <FormFeedback>Preencha este campo!</FormFeedback>
+                    </FormGroup>  
+
+                     <FormGroup>  
+
+                        
+                        <Label>Justificativa</Label>
+                        <Input 
+                        invalid={this.state.validJust} 
+                     placeholder={'Justificativa'} 
+                    type={'textarea'}  value={this.state.justificativa} 
+                    onChange={this.mudaJust}/>
+                    <FormFeedback>Preencha este campo!</FormFeedback>
+                      </FormGroup>  
                     <Link to="/solicitacao/historico">
                         <Button  id="buttonPost" color="danger" >Cancelar</Button>
                     </Link>

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {FormGroup,Label, Input, FormFeedback, FormText} from 'reactstrap';
-import { Tooltip } from 'reactstrap';
 import PropTypes from 'prop-types';
 
 

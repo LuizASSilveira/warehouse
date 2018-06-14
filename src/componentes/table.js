@@ -52,7 +52,6 @@ class Table extends Component {
           throw new Error("não foi possivel salvar as alterações");
         }
       })
-    
     this.funcCancel()  
 }
 
@@ -82,6 +81,7 @@ class Table extends Component {
         this.setState({ products: product });
       });
   }
+  
   handleChange(event) {
     this.setState({ name: event.target.value });
   }
