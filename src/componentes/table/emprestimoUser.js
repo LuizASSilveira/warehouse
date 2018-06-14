@@ -8,7 +8,7 @@ import Modal from '../modal-almoxarifado/modal'
 export default class Table extends Component {
   constructor() {
     super()
-    this.state = { products: [], modal: false, qtd: 1, qtdMAX: 0 }
+    this.state = { products: [], modal: false, qtd: 1, qtdMAX: 0 , siorg:0 }
     this.toggle = this.toggle.bind(this)
 
   }
@@ -31,7 +31,7 @@ export default class Table extends Component {
   funcConfirm() {
     const requestInfo = {
       method: 'POST',
-      body: JSON.stringify({quantidade: this.state.qtd, solicitacao_id: this.state.id, produto_id : this.state.siorg }),
+      body: JSON.stringify({quantidade: this.state.qtd, produto_id : this.state.siorg }),
       headers: new Headers({
         'Content-type': 'application/json',
         'token': localStorage.getItem('auth-token')
@@ -53,7 +53,8 @@ export default class Table extends Component {
   toggle(row) {
     this.setState({
       modal: !this.state.modal,
-      qtdMAX: row.quantidade
+      qtdMAX: row.quantidade,
+      siorg : row.produto_id
     })
   }
   setQuantidade(valor){
@@ -76,7 +77,7 @@ export default class Table extends Component {
           pagination
           options={options}
         >
-          <TableHeaderColumn             dataField='id'         isKey>               ID                               </TableHeaderColumn>
+          <TableHeaderColumn             dataField='produto_id'         isKey>       ID                               </TableHeaderColumn>
           <TableHeaderColumn width='0%'  dataField='data'>                           Data                             </TableHeaderColumn>
           <TableHeaderColumn width='20%' dataField='quantidade' dataAlign='center'>  Quantidade Disponivel            </TableHeaderColumn>
           <TableHeaderColumn width='70%' dataField='descricao'>                      Produto                          </TableHeaderColumn>
