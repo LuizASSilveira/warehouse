@@ -9,7 +9,7 @@ import Modal from '../modal-almoxarifado/modal'
 export default class Table extends Component {
     constructor() {
         super()
-        this.state = { products: [], modal: false, qtd : 0 ,id : 0, checked : true, qtdMAX: 0}
+        this.state = { products: [], modal: false, qtd : 0 ,id : 0, siorg: 0 , checked : true, qtdMAX: 0}
         this.toggle = this.toggle.bind(this)
         this.funcCancel = this.funcCancel.bind(this)
         this.funcConfirm = this.funcConfirm.bind(this)
@@ -33,7 +33,7 @@ export default class Table extends Component {
     funcConfirm() {
         const requestInfo = {
             method: 'POST',
-            body: JSON.stringify({quantidade: this.state.qtd, solicitacoes: this.state.id}),
+            body: JSON.stringify({quantidade: this.state.qtd, solicitacao_id: this.state.id, produto_id : this.state.siorg }),
             headers: new Headers({
               'Content-type': 'application/json',
               'token': localStorage.getItem('auth-token')
@@ -57,8 +57,9 @@ export default class Table extends Component {
     toggle(row) {
         this.setState({
             modal:  !this.state.modal,
-            qtd :   row.quantidade,
-            id  :   row.id,
+            qtd:    row.quantidade,
+            id:     row.solicitacao_id,
+            siorg:  row.produto_id,
             qtdMAX: row.quantidade
         })
     }
@@ -89,14 +90,15 @@ export default class Table extends Component {
                     options={options}
                 >
                     <TableHeaderColumn dataField='solicitacao_id' isKey>  ID                                                                      </TableHeaderColumn>
+                    <TableHeaderColumn width='0%' dataField='produto_id' dataAlign='center'>  Requisição                             </TableHeaderColumn>
+                    <TableHeaderColumn width='0%' dataField='requisicao_data'>         Data                                                      </TableHeaderColumn>
                     <TableHeaderColumn width='15%' dataField='quantidade' dataAlign='center'>  Quantidade                             </TableHeaderColumn>
                     <TableHeaderColumn width='20%' dataField='requisicao_id' dataAlign='center'>  Requisição                             </TableHeaderColumn>
                     <TableHeaderColumn width='50%' dataField='descricao'> Descrição                                                   </TableHeaderColumn>  
-                    <TableHeaderColumn width='0%' dataField='requisicao_data'>         Data                                                      </TableHeaderColumn>
                     <TableHeaderColumn width='15%' dataField="button" dataFormat={buttonFormatter.bind(this)}> Carregar Estoque       </TableHeaderColumn>
                 </BootstrapTable>
 
-                <Modal divID = "invisivel" max= {this.state.qtd}  onChange={this.setGroup.bind(this)} check={this.state.checked} func={this.setQuantidade.bind(this)} label='Produtos Recebidos' value={this.state.qtd} modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} />
+                <Modal divID = "invisivel" max= {this.state.qtdMAX}  onChange={this.setGroup.bind(this)} check={this.state.checked} func={this.setQuantidade.bind(this)} label='Produtos Recebidos' value={this.state.qtd} modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} />
             </div>
         );
     }
