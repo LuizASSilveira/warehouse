@@ -53,12 +53,13 @@ class ValidaSolTable extends React.Component {
   
     return (
       <div id="table">
-        <p className="Table-header">Selecione a solicitação para valida-lá.</p>
         <BootstrapTable
           data={this.state.products}
           selectRow={selectRowProp}
           searchPlaceholder='Pesquisar'
           hover={true}
+          search={true}
+          pagination
           options={options}
         >
           <TableHeaderColumn isKey dataField="siorg">

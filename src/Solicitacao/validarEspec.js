@@ -144,7 +144,7 @@ export default class validEspec extends Component {
 
       return (
         <div>
-          <Nav isadm={true} />
+          <Nav/>
           <div id="Inputs">
           <h4>Validar Solicitação</h4>
             

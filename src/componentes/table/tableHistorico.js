@@ -35,7 +35,7 @@ class Table extends Component {
           clickToSelect: true,
           hideSelectColumn: true,
           mode: 'radio',
-          bgColor: 'pink',
+          bgColor: 'gray',
     };
 
     const options ={
@@ -54,6 +54,7 @@ class Table extends Component {
           search={true}
           searchPlaceholder='Pesquisar'
           pagination
+          hover={true}
           selectRow={selectRowProp}
           options={options}
         >
