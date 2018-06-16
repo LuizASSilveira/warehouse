@@ -230,7 +230,7 @@ export default class validEspec extends Component {
       )
     }
     else {
-      return ("Algo deu errado!")
+      return ("Carregando")
     }
   }
 }
