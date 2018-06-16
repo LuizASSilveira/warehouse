@@ -3,7 +3,7 @@ import './css/table.css'
 import { BootstrapTable, TableHeaderColumn } from '../../node_modules/react-bootstrap-table';
 import '../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import Modal from '../componentes/confirmModal';
-import { Button, Input } from 'reactstrap';
+import { Button, Input, FormGroup, FormFeedback, ModalBody, ModalFooter } from 'reactstrap';
 import './css/input.css'
 import { Redirect } from 'react-router-dom'
 
@@ -26,7 +26,7 @@ class Table extends Component {
 
   constructor(props) {
     super(props)
-    this.state = { products: [], modal: false, name: '' }
+    this.state = { products: [], modal: false, name:'', validNome: false }
     this.toggle = this.toggle.bind(this)
     this.funcCancel = this.funcCancel.bind(this)
     this.funcConfirm = this.funcConfirm.bind(this)
@@ -58,13 +58,18 @@ class Table extends Component {
   funcCancel() {
     this.setState({modal:false})
   }
+
   toggle() {
-    
-    this.setState({modal:true})
-    if (selected.length !== 0) {
-      this.setState({
-        modal: !this.state.modal
-      })
+    console.log(this.state.name)
+    if(this.state.name.length !== 0){
+      this.setState({modal:true})
+      if (selected.length !== 0) {
+        this.setState({
+          modal: !this.state.modal
+        })
+      }
+    }else{
+      this.setState({validNome: true})
     }
   }
 
@@ -83,7 +88,7 @@ class Table extends Component {
   }
   
   handleChange(event) {
-    this.setState({ name: event.target.value });
+    this.setState({ name: event.target.value, validNome: false });
   }
 
   onRowClick(row){
@@ -123,11 +128,30 @@ class Table extends Component {
         </BootstrapTable>
 
         <div id="InputButton">
-          <Input placeholder="Nome Requisição" id="nome" type="text" name="nome" value={this.state.value} onChange={this.handleChange} />
-          <Button id="buttonPost" color="primary" onClick={this.toggle}>{this.props.buttonName}</Button>
+          <FormGroup>
+            <Input invalid={this.state.validNome} placeholder="Nome Requisição" id="nome" 
+                   type="text" name="nome" value={this.state.value} 
+                   onChange={this.handleChange} />
+            <FormFeedback>Preencha este campo!</FormFeedback>
+          </FormGroup>
+
+          <Button id="buttonPost" color="primary" 
+                  onClick={this.toggle}>{this.props.buttonName}</Button>
 
         </div>
-        <Modal modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} mensagem={'Deseja confirmar?'} />
+        <Modal modal={this.state.modal} onCancel={this.funcCancel} 
+               onConfirm={this.funcConfirm} toggle={true} mensagem={'Deseja confirmar?'} />
+
+        <Modal isOpen={this.state.modal} toggle={this.toggle} className='modal-xl'>
+          <ModalBody>
+              Deseja Confirmar?
+          </ModalBody>
+
+          <ModalFooter>
+              <Button color="primary" onClick={this.funcConfirm}>Confirmar</Button>{' '}
+              <Button color="secondary" onClick={this.funcCancel}>Cancelar</Button>
+          </ModalFooter>
+        </Modal>       
       </div>
     );
   }
