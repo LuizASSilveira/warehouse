@@ -19,13 +19,13 @@ function onRowSelect(row, isSelected) {
 var selectRowProp = {
   clickToSelect: true,
   mode: 'checkbox',
-  bgColor: 'pink',
+  bgColor: 'gray',
   onSelect: onRowSelect
 };
 class Table extends Component {
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = { products: [], modal: false, name: '' }
     this.toggle = this.toggle.bind(this)
     this.funcCancel = this.funcCancel.bind(this)
@@ -89,12 +89,13 @@ class Table extends Component {
   onRowClick(row){
     this.setState({ id: row.id})
     this.setState({ redirect: true })
+
   }
 
   render() {
     
     if (this.state.redirect) {
-      return <Redirect to= {"/solicitacao/validar/"+this.state.id}   />
+        this.props.history.push('/solicitacao/validar/'+this.state.id);
     }
 
     const options ={

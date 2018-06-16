@@ -35,7 +35,7 @@ class Table extends Component {
           clickToSelect: true,
           hideSelectColumn: true,
           mode: 'radio',
-          bgColor: 'pink',
+          bgColor: 'gray',
     };
 
     const options ={
