@@ -136,6 +136,7 @@ class TableEditar extends Component {
           search={true}
           searchPlaceholder='Pesquisar'
           pagination
+          hover={true}
           expandComponent={ this.expandComponent }
           expandableRow={ this.isExpandableRow }
         >

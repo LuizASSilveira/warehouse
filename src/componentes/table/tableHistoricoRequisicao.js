@@ -60,7 +60,7 @@ class Table extends Component {
           search={true}
           searchPlaceholder='Pesquisar'
           pagination
-
+          hover={true}
 
           selectRow={selectRowProp}
           options={options}
