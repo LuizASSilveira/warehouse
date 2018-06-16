@@ -47,7 +47,7 @@ class Table extends Component {
       .then(response => {
         if (response.ok) {
           //alerta dados salvos com sucesso
-          window.location.reload()
+          this.props.history.push('/requisicao/historico');
         } else {
           throw new Error("não foi possivel salvar as alterações");
         }
@@ -133,12 +133,12 @@ class Table extends Component {
                    type="text" name="nome" value={this.state.value} 
                    onChange={this.handleChange} />
             <FormFeedback>Preencha este campo!</FormFeedback>
+            <Button id="criaReq"color="primary" 
+                  onClick={this.toggle}>{this.props.buttonName}</Button>
           </FormGroup>
 
-          <Button id="buttonPost" color="primary" 
-                  onClick={this.toggle}>{this.props.buttonName}</Button>
-
         </div>
+
         <Modal modal={this.state.modal} onCancel={this.funcCancel} 
                onConfirm={this.funcConfirm} toggle={true} mensagem={'Deseja confirmar?'} />
 
@@ -149,7 +149,7 @@ class Table extends Component {
 
           <ModalFooter>
               <Button color="primary" onClick={this.funcConfirm}>Confirmar</Button>{' '}
-              <Button color="secondary" onClick={this.funcCancel}>Cancelar</Button>
+              <Button color="danger" onClick={this.funcCancel}>Cancelar</Button>
           </ModalFooter>
         </Modal>       
       </div>

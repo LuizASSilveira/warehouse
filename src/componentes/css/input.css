@@ -8,7 +8,14 @@
     display: inline-table;
     float: right;
     width: 28%;
+
 }
+
+#criaReq{
+    float: right;
+    display: inline-table;
+}
+
 /*#confirm{
     margin: 10px;
     margin-left: 75%;
