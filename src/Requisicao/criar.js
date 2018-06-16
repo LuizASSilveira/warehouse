@@ -13,7 +13,7 @@ export default class Criar extends Component {
 
                 <Table  
                         history = {this.props.history}
-                        buttonName= {'Criar Requisicao'}
+                        buttonName= {'Criar Requisição'}
                         urlGet=     {'http://localhost:3001/solicitacoes/requisicao'}
                         urlPost=    {'http://localhost:3001/requisicoes'}
                         descricao=  {'Descrição'}

@@ -19,10 +19,10 @@ export default class Criar extends Component {
                         nomeL=          {"nome"}
                         solicitanteL=   {'solicitante'}
 
-                        data=           {"data"}
-                        numero=         {"numero"}
-                        nome=           {"nome"}
-                        solicitante=    {'solicitante'}
+                        data=           {"Data"}
+                        numero=         {"Número"}
+                        nome=           {"Nome"}
+                        solicitante=    {'Solicitante'}
                         />                   
             </div>
         )

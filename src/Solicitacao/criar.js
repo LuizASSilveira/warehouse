@@ -60,16 +60,6 @@ export default class CriarS extends Component {
         });
     }
 
-    componentDidMount(){
-        let adm
-        adm = localStorage.getItem('isAdm')
-        console.log(adm)
-        if(adm === "false"){
-            this.setState({ isAdm: false })
-        }else{
-            this.setState({ isAdm: true })
-        }
-    }
 
     salvar(){
         console.log(this.state)

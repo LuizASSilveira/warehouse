@@ -52,7 +52,7 @@ export default class CriarS extends Component {
         
         return(
             <div>
-                <Nav isadm = {true} />
+                <Nav/>
                 
                 <ErrorAlert isOpen={this.state.alerta} id="errorAlert" color="danger" text='Preencha todos os campos'/>
                 <div id = "Inputs">
@@ -60,7 +60,7 @@ export default class CriarS extends Component {
                     
                     <FormGroup>
                         <Label> Nº Siorg </Label>
-                        <Input placeholder="Numero Siorg" type="number" name="siorg" value={this.state.siorg} onChange={this.onChange} />
+                        <Input placeholder="Número Siorg" type="number" name="siorg" value={this.state.siorg} onChange={this.onChange} />
                     </FormGroup>
 
 
