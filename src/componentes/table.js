@@ -5,6 +5,7 @@ import '../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.
 import Modal from '../componentes/confirmModal';
 import { Button, Input, FormGroup, FormFeedback, ModalBody, ModalFooter } from 'reactstrap';
 import './css/input.css'
+import {ErrorAlert} from '../componentes/alerta';
 import { Redirect } from 'react-router-dom'
 
 
@@ -16,17 +17,12 @@ function onRowSelect(row, isSelected) {
     selected.pop(row.id)
   }
 }
-var selectRowProp = {
-  clickToSelect: true,
-  mode: 'checkbox',
-  bgColor: 'gray',
-  onSelect: onRowSelect
-};
+
 class Table extends Component {
 
   constructor(props) {
     super(props)
-    this.state = { products: [], modal: false, name:'', validNome: false }
+    this.state = { products: [], modal: false, name:'',selected:[], validNome: false, alerta: false}
     this.toggle = this.toggle.bind(this)
     this.funcCancel = this.funcCancel.bind(this)
     this.funcConfirm = this.funcConfirm.bind(this)
@@ -59,19 +55,28 @@ class Table extends Component {
     this.setState({modal:false})
   }
 
+  onRowSelect(row, isSelected) {
+  if (isSelected) {
+    selected.push(row.id)
+    this.setState({alerta:false})
+  } else {
+    selected.pop(row.id)
+  }
+  }
+  
   toggle() {
-    console.log(this.state.name)
-    if(this.state.name.length !== 0){
-      this.setState({modal:true})
-      if (selected.length !== 0) {
-        this.setState({
-          modal: !this.state.modal
-        })
-      }
+    if(this.state.name.length !== 0 && selected.length !== 0){
+      this.setState({modal:true, alerta: false})
     }else{
-      this.setState({validNome: true})
+      if(this.state.name.length == 0){
+        this.setState({validNome: true});
+      }
+      if (selected.length == 0) {
+        this.setState({alerta: true})
+      }
     }
   }
+
 
   componentDidMount() {
     fetch(this.props.urlGet, {
@@ -103,13 +108,24 @@ class Table extends Component {
         this.props.history.push('/solicitacao/validar/'+this.state.id);
     }
 
+
+
     const options ={
       noDataText: 'Não há dados.',
       onRowClick: this.onRowClick
         
     }
 
+    var selectRowProp = {
+      clickToSelect: true,
+      mode: 'checkbox',
+      bgColor: 'gray',
+      onSelect: onRowSelect
+    };
+
     return (
+      <div>
+      <ErrorAlert isOpen={this.state.alerta} id="errorAlert" color="danger" text='Nenhuma solicitação selecionada!'/>
       <div id="table">
         <BootstrapTable
           data={this.state.products}
@@ -152,6 +168,7 @@ class Table extends Component {
               <Button color="danger" onClick={this.funcCancel}>Cancelar</Button>
           </ModalFooter>
         </Modal>       
+      </div>
       </div>
     );
   }
