@@ -7,6 +7,7 @@ export default class AlmoEmprestimo extends Component {
         return(
             <div>
                 <Nav  />
+                <h4 id="table">Histórico de Produtos</h4>
                 <Table />    
             </div>
         )

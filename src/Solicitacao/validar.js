@@ -62,7 +62,7 @@ export default class CriarS extends Component {
         return(
             <div>
                 <Nav isadm = {this.state.isAdm} />
-                                <h4 id="Inputs">Validar Solicitações</h4>
+                <h4 id="table">Validar Solicitações</h4>
                 <ErrorAlert isOpen={this.state.alerta} id="errorAlert" color="danger" text='Preencha todos os campos'/>
 
                 <ValidaSolTable teste={this.props.history} urlGet={'http://localhost:3001/solicitacoes/validar'}/>

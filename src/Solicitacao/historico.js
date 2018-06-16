@@ -24,7 +24,8 @@ export default class Criar extends Component {
         return(
             <div>
                 <Nav isadm = {this.state.isAdm} />
-                                <h4 id="Inputs">Histórico de Solicitações</h4>
+
+                <h4 id="table">Histórico de Solicitações</h4>
                 <Table  buttonName= {'Criar Requisicao'}
                         urlGet=     {'http://localhost:3001/solicitacoes'}
                         descricao=  {'Descrição'}

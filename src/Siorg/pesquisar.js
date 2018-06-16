@@ -29,7 +29,7 @@ export default class Criar extends Component {
         return(
             <div>
                 <Nav    isadm = {this.state.isAdm} />
-                <h4 id="Inputs">Tabela Siorg</h4>
+                <h4 id="table">Tabela Siorg</h4>
 
                 <TableSiorg  b={this.qualquerCoisa} buttonName= {'Criar Requisicao'}
                         urlGet=     {'http://localhost:3001/produtos'}

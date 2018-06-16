@@ -7,6 +7,7 @@ export default class AlmoPedidos extends Component {
         return(
             <div>
                 <Nav />
+                <h4 id="table">Empréstimo de Produtos</h4>
                 <Table  />
             </div>
         )

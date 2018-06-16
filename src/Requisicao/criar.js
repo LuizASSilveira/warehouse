@@ -9,7 +9,7 @@ export default class Criar extends Component {
         return(
             <div>
                 <Nav    isadm = {true} />
-                                <h4 id="Inputs">Criar Requisição</h4>
+                <h4 id="table">Criar Requisição</h4>
 
                 <Table  buttonName= {'Criar Requisicao'}
                         urlGet=     {'http://localhost:3001/solicitacoes/requisicao'}
