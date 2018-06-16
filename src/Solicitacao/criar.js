@@ -76,7 +76,10 @@ export default class CriarS extends Component {
         if(this.state.decricao.length !== 0 && this.state.justificativa.length !== 0){
             const requestInfo = {
                 method: 'POST',
-                body: JSON.stringify({descricao: this.state.decricao  ,justificativa: this.state.justificativa, quantidade: this.state.quantidade, siorg: this.state.siorg}),
+                body: JSON.stringify({descricao: this.state.decricao,
+                                      justificativa: this.state.justificativa, 
+                                      quantidade: this.state.quantidade, 
+                                      siorg: this.state.siorg}),
                 headers: new Headers({
                   'Content-type': 'application/json',
                   'token': localStorage.getItem('auth-token'),
@@ -112,52 +115,62 @@ export default class CriarS extends Component {
                 <Nav isadm={this.state.isAdm} />
                 <ErrorAlert isOpen={this.state.alerta} id="errorAlert" color="danger" text='Preencha todos os campos'/>
                 <div id = "Inputs">
-                    <h4>Criar Solicitação</h4>
+                    <h4 className="titulo">Criar Solicitação</h4>
+
                     <div id='siorgButton'>
-                    <FormGroup>
-                        <Label>Siorg</Label>
-                        <br / >
-                        <Input name='siorg' placeholder='Nº Siorg' type='text' id='inputSiorg' disabled='true' value={this.state.value}/>
-                        <Button id="buttonSiorg" color="secondary" onClick={this.toggle}>Lista Siorg</Button> 
-                    </FormGroup>
-                    </div>     
-                        <Modal isOpen={this.state.modal} toggle={this.toggle} className='modal-xl'>
-                          <ModalHeader toggle={this.toggle}>Lista Siorg</ModalHeader>
-                          <ModalBody>
-                             <TableSiorg a={this.guardaRow} urlGet={'http://localhost:3001/produtos'}/>
-                          </ModalBody>
-                          <ModalFooter>
+                        <FormGroup>
+                         <Label>Siorg</Label>
+                            <br / >
+                            <Input name='siorg' placeholder='Nº Siorg' type='text' 
+                                   id='inputSiorg' disabled='true' value={this.state.value}/>
+                            <Button id="buttonSiorg" color="secondary" 
+                                    onClick={this.toggle}>Lista Siorg</Button> 
+                        </FormGroup>
+                    </div>
+
+                    <Modal isOpen={this.state.modal} toggle={this.toggle} className='modal-xl'>
+                        <ModalHeader toggle={this.toggle}>Lista Siorg</ModalHeader>
+
+                        <ModalBody>
+                            <TableSiorg a={this.guardaRow} urlGet={'http://localhost:3001/produtos'}/>
+                        </ModalBody>
+
+                        <ModalFooter>
                             <Button color="primary" onClick={this.mandaSiorg}>Confirmar</Button>{' '}
                             <Button color="secondary" onClick={this.toggle}>Cancelar</Button>
-                          </ModalFooter>
-                        </Modal>
+                        </ModalFooter>
+                    </Modal>
 
-                    <Label> Quantidade </Label><br />
-                    <NumericInput min={1} max={1000} name={'qtd'} value={this.state.quantidade} strict={true} onChange={this.handleChangeQtd.bind(this)} />
+                    <FormGroup>
+                        <Label> Quantidade </Label><br/>
+                        <NumericInput min={1} max={1000} name={'qtd'} 
+                                      value={this.state.quantidade} strict={true} 
+                                      onChange={this.handleChangeQtd.bind(this)} />
+                    </FormGroup>
 
                     <FormGroup>
                         <Label> Descrição</Label>
-                        <Input invalid={this.state.validDesc} placeholder="Descrição" disabled={this.state.value? true: false} 
-                        type={'textarea'} feedback={'anything'} name={'descricao'} 
-                        onChange={this.handleChangeDes.bind(this)} value={this.state.decricao} />
+                        <Input invalid={this.state.validDesc} placeholder="Descrição" 
+                               disabled={this.state.value? true: false} 
+                               type={'textarea'} feedback={'anything'} name={'descricao'} 
+                               onChange={this.handleChangeDes.bind(this)} value={this.state.decricao} />
                         <FormFeedback>Preencha este campo!</FormFeedback>
                     </FormGroup>  
 
-                     <FormGroup>  
-
-                        
+                    <FormGroup>  
                         <Label>Justificativa</Label>
-                        <Input 
-                        invalid={this.state.validJust} 
-                     placeholder={'Justificativa'} 
-                    type={'textarea'}  value={this.state.justificativa} 
-                    onChange={this.mudaJust}/>
-                    <FormFeedback>Preencha este campo!</FormFeedback>
-                      </FormGroup>  
+                        <Input invalid={this.state.validJust} 
+                               placeholder={'Justificativa'} 
+                               type={'textarea'}  value={this.state.justificativa} 
+                               onChange={this.mudaJust}/>
+                        <FormFeedback>Preencha este campo!</FormFeedback>
+                    </FormGroup> 
+
                     <Link to="/solicitacao/historico">
                         <Button  id="buttonPost" color="danger" >Cancelar</Button>
                     </Link>
-                    <Button id="buttonPost" className="confirm" color="primary" onClick={this.salvar.bind(this)}> Salvar </Button>
+                    <Button id="buttonPost" className="confirm" color="primary" 
+                            onClick={this.salvar.bind(this)}> Salvar </Button>
                 </div>
             </div>
         )

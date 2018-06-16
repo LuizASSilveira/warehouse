@@ -56,7 +56,7 @@ export default class CriarS extends Component {
                 
                 <ErrorAlert isOpen={this.state.alerta} id="errorAlert" color="danger" text='Preencha todos os campos'/>
                 <div id = "Inputs">
-                <h4>Criar Produto Siorg</h4>
+                <h4 className="titulo">Criar Produto Siorg</h4>
                     
                     <FormGroup>
                         <Label> Nº Siorg </Label>
