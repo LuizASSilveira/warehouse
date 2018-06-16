@@ -9,14 +9,7 @@ import {ErrorAlert} from '../componentes/alerta';
 import { Redirect } from 'react-router-dom'
 
 
-var selected = []
-function onRowSelect(row, isSelected) {
-  if (isSelected) {
-    selected.push(row.id)
-  } else {
-    selected.pop(row.id)
-  }
-}
+
 
 class Table extends Component {
 
@@ -28,12 +21,13 @@ class Table extends Component {
     this.funcConfirm = this.funcConfirm.bind(this)
     this.handleChange = this.handleChange.bind(this);
     this.onRowClick = this.onRowClick.bind(this);
+    this.onRowSelect = this.onRowSelect.bind(this);
   }
 
   funcConfirm() {
     const requestInfo = {
       method: 'POST',
-      body: JSON.stringify({nome: this.state.name ,solicitacoes: selected}),
+      body: JSON.stringify({nome: this.state.name ,solicitacoes: this.state.selected}),
       headers: new Headers({
         'Content-type': 'application/json',
         'token': localStorage.getItem('auth-token')
@@ -56,22 +50,26 @@ class Table extends Component {
   }
 
   onRowSelect(row, isSelected) {
-  if (isSelected) {
-    selected.push(row.id)
-    this.setState({alerta:false})
-  } else {
-    selected.pop(row.id)
-  }
+    if (isSelected) {
+      this.setState({selected: this.state.selected.concat(row.id)})
+      this.setState({alerta:false})
+    } else {
+      const index = this.state.selected.indexOf(row.id);
+      if(index < 0) return
+      this.state.selected.splice(index, 1)
+      this.setState({selected: this.state.selected})
+      
+    }
   }
   
   toggle() {
-    if(this.state.name.length !== 0 && selected.length !== 0){
+    if(this.state.name.length !== 0 && this.state.selected.length !== 0){
       this.setState({modal:true, alerta: false})
     }else{
       if(this.state.name.length == 0){
         this.setState({validNome: true});
       }
-      if (selected.length == 0) {
+      if (this.state.selected.length == 0) {
         this.setState({alerta: true})
       }
     }
@@ -120,7 +118,7 @@ class Table extends Component {
       clickToSelect: true,
       mode: 'checkbox',
       bgColor: 'gray',
-      onSelect: onRowSelect
+      onSelect: this.onRowSelect
     };
 
     return (
