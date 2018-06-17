@@ -52,7 +52,8 @@ class Table extends Component {
   onRowSelect(row, isSelected) {
     if (isSelected) {
       this.setState({selected: this.state.selected.concat(row.id)})
-      this.setState({alerta:false})
+      this.props.func(false)
+      this.setState({alerta: false})
     } else {
       const index = this.state.selected.indexOf(row.id);
       if(index < 0) return
@@ -71,6 +72,7 @@ class Table extends Component {
       }
       if (this.state.selected.length === 0) {
         this.setState({alerta: true})
+        this.props.func(true)
       }
     }
   }
@@ -123,7 +125,6 @@ class Table extends Component {
 
     return (
       <div>
-      <ErrorAlert isOpen={this.state.alerta} id="errorAlert" color="danger" text='Nenhuma solicitação selecionada!'/>
       <div id="table">
         <BootstrapTable
           data={this.state.products}
@@ -143,12 +144,16 @@ class Table extends Component {
 
         <div id="InputButton">
           <FormGroup>
-            <Input invalid={this.state.validNome} placeholder="Nome Requisição" id="nome" 
-                   type="text" name="nome" value={this.state.value} 
-                   onChange={this.handleChange} />
-            <FormFeedback>Preencha este campo!</FormFeedback>
-            <Button id="criaReq"color="primary" 
-                  onClick={this.toggle}>{this.props.buttonName}</Button>
+            <div>
+              <Input invalid={this.state.validNome} placeholder="Nome Requisição" id="nome" 
+                     type="text" name="nome" value={this.state.value} 
+                     onChange={this.handleChange} />
+                      <Button id="criaReq"color="primary" 
+                      onClick={this.toggle}>{this.props.buttonName}</Button>
+              <FormFeedback>Preencha este campo!</FormFeedback>
+
+            </div>
+
           </FormGroup>
 
         </div>
