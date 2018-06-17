@@ -14,6 +14,7 @@
 #criaReq{
     float: right;
     display: inline-table;
+    margin-top: 0px;
 }
 
 /*#confirm{
