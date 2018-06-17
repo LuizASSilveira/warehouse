@@ -57,13 +57,11 @@ class ValidaSolTable extends React.Component {
           pagination
           options={options}
         >
-          <TableHeaderColumn isKey dataField="siorg">
-            SIORG
-          </TableHeaderColumn>
-          <TableHeaderColumn dataField="data">Data</TableHeaderColumn>
-          <TableHeaderColumn dataField="descricao">Descrição</TableHeaderColumn>
-          <TableHeaderColumn dataField="quantidade">Quantidade</TableHeaderColumn>
-          <TableHeaderColumn dataField="status">Estado</TableHeaderColumn>
+          <TableHeaderColumn        width='14%' dataField="data"       dataAlign='center'>      Data        </TableHeaderColumn>
+          <TableHeaderColumn isKey  width='10%' dataField="siorg"      dataAlign='center'>      SIORG       </TableHeaderColumn>
+          <TableHeaderColumn        width='11%' dataField="quantidade" dataAlign='center'>      Quantidade  </TableHeaderColumn>
+          <TableHeaderColumn        width='50%' dataField="descricao"  dataAlign='center'>      Descrição   </TableHeaderColumn>
+          <TableHeaderColumn        width='15%' dataField="status"     dataAlign='center'>      Estado      </TableHeaderColumn>
         </BootstrapTable>
 
       </div>

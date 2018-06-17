@@ -28,8 +28,8 @@ export default class Table extends Component {
   }
   toggle(row) {
     this.setState({
+      qtdMAX: row.quantidade,
       modal: !this.state.modal,
-      qtdMAX: row.quantidade
     })
   }
   setQuantidade(valor){
@@ -59,7 +59,7 @@ export default class Table extends Component {
           <TableHeaderColumn width='12%' dataField="button"     dataFormat={buttonFormatter.bind(this)}> Emprestimo   </TableHeaderColumn>
         </BootstrapTable>
         
-        <Modal maxQtd={this.state.qtd} divID = "invisivel" func={this.setQuantidade.bind(this)} label='Quantidade de Produto' value={this.state.qtd} modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} />
+        <Modal max={this.state.qtd} divID = "invisivel" func={this.setQuantidade.bind(this)} label='Quantidade de Produto' value={this.state.qtd} modal={this.state.modal} onCancel={this.funcCancel.bind(this)} onConfirm={this.funcConfirm.bind(this)} toggle={true} />
       </div>
     );
   }
