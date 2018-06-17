@@ -6,6 +6,7 @@ import Modal from '../componentes/confirmModal';
 import { Button, Input, FormGroup, FormFeedback, ModalBody, ModalFooter } from 'reactstrap';
 import './css/input.css'
 import {ErrorAlert} from '../componentes/alerta';
+import ExpandTable from './table/expand'
 
 
 
@@ -102,6 +103,18 @@ class Table extends Component {
 
   }
 
+  expandComponent(row) {
+    return (
+      console.log(row),
+      <ExpandTable data={ row } siorg={false} />
+    );
+  }
+
+  isExpandableRow(row) {
+    return true;
+
+  }
+
   render() {
     
     if (this.state.redirect) {
@@ -112,7 +125,7 @@ class Table extends Component {
 
     const options ={
       noDataText: 'Não há dados.',
-      onRowClick: this.onRowClick
+      onRowDoubleClick: this.onRowClick
         
     }
 
@@ -132,6 +145,8 @@ class Table extends Component {
           search={true}
           pagination
           hover={true}
+          expandComponent={ this.expandComponent }
+          expandableRow={ this.isExpandableRow }
           searchPlaceholder='Pesquisar'
           options={options}
         >

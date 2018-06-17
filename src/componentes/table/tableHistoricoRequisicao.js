@@ -43,7 +43,7 @@ class Table extends Component {
 
     const options ={
       noDataText: 'Não há dados.',
-      onRowClick: this.onRowClick
+      onRowDoubleClick: this.onRowClick
         
     }
     if (this.state.redirect) {

@@ -8,11 +8,10 @@ export default class Criar extends Component {
         return(
             <div>
                 <Nav/>
-                <h4 id="table">Histórico de Requisição</h4>
+                <h4 id="table">Histórico de Requisições</h4>
                 
                 <Table  
                         history={this.props.history}
-                        buttonName=     {'Criar Requisicao'}
                         urlGet=         {'http://localhost:3001/requisicoes'}
                         dataL=          {"data"}
                         numeroL=        {"numero"}

@@ -10,6 +10,7 @@ class ExpandTable extends Component {
 
   render() {
     let naoEhGanbiarra
+    console.log(this.props.data)
     if(!this.props.siorg){
       naoEhGanbiarra = <TableHeaderColumn tdStyle={ { whiteSpace: 'normal' } } dataField="justificativa" >Justificativa</TableHeaderColumn>
     }
