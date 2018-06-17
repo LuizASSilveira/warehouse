@@ -22,7 +22,7 @@ import ValidarS       from './Solicitacao/validar'
 import ValidEspec     from './Solicitacao/validarEspec'
 
 import AlmoEmprestimo from './Almoxarifado/emprestimo'
-import AlmoPedido     from './Almoxarifado/Pedidos'
+import AlmoPedido     from './Almoxarifado/pedidos'
 import AlmoHistorico  from './Almoxarifado/historico'
 import AlmoDevolucao  from './Almoxarifado/devolucao'
 import AlmoInfo       from './Almoxarifado/info'
