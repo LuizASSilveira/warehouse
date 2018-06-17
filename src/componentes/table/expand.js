@@ -16,7 +16,7 @@ class ExpandTable extends Component {
           options={{noDataText: 'Não há dados.'}}
           data = {this.state.data}
           >
-          <TableHeaderColumn dataField="descricao" isKey>Descrição</TableHeaderColumn>
+          <TableHeaderColumn tdStyle={ { whiteSpace: 'normal' } } dataField="descricao" isKey>Descrição</TableHeaderColumn>
 
         </BootstrapTable>
       </div>

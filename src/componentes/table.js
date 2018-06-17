@@ -6,7 +6,7 @@ import Modal from '../componentes/confirmModal';
 import { Button, Input, FormGroup, FormFeedback, ModalBody, ModalFooter } from 'reactstrap';
 import './css/input.css'
 import {ErrorAlert} from '../componentes/alerta';
-import { Redirect } from 'react-router-dom'
+
 
 
 
@@ -66,10 +66,10 @@ class Table extends Component {
     if(this.state.name.length !== 0 && this.state.selected.length !== 0){
       this.setState({modal:true, alerta: false})
     }else{
-      if(this.state.name.length == 0){
+      if(this.state.name.length === 0){
         this.setState({validNome: true});
       }
-      if (this.state.selected.length == 0) {
+      if (this.state.selected.length === 0) {
         this.setState({alerta: true})
       }
     }
