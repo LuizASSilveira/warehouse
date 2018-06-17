@@ -17,6 +17,7 @@ import {
   Label
 } from "reactstrap";
 
+
 const baseURL = "http://localhost:3001/orcamentos";
 const initialState = {
   orcamento: {
@@ -26,7 +27,8 @@ const initialState = {
     referencia: "",
     pdf_patch: ""
   },
-  listaSolicitacao: []
+  listaSolicitacao: [],
+
 };
 
 export default class Orcamento extends Component {
@@ -37,6 +39,22 @@ export default class Orcamento extends Component {
   //     this.setState({ listaOrcamentos: resp.data });
   //   });
   // }
+  getPrices(lista) {
+    let sum = 0;
+    lista.forEach(item => {
+      sum += item.valor;
+    });
+
+    let   mediaUnit = sum / lista.length;
+    let   precoMin = (mediaUnit * 0.6).toPrecision(3);
+    let   precoMax = (mediaUnit * 1.3).toPrecision(3);
+
+    this.setState({
+      mediaUnit,
+      precoMin,
+      precoMax
+    });
+  }
 
 
   componentDidMount() {
@@ -50,6 +68,7 @@ export default class Orcamento extends Component {
       .then(product => {
         this.setState({ listaOrcamentos: product });
       })
+      this.getPrices(this.state.listaSolicitacao);
   }
 
 
@@ -123,10 +142,11 @@ export default class Orcamento extends Component {
     this.setState({ orcamento });
   }
   remove(orcamento) {
-    axios.delete(`${baseURL}/${orcamento.id}`).then(resp => {
-      const lista = this.getUpdatedList(null);
-      this.setState({ listaOrcamentos: lista });
-    });
+    axios.delete(`${baseURL}/${orcamento.id}`)
+    // .then(resp => {
+    //   const lista = this.getUpdatedList(null);
+    //   this.setState({ listaOrcamentos: lista });
+    // });
   }
 
   renderForm() {
@@ -223,28 +243,22 @@ export default class Orcamento extends Component {
             options={options}
             className="mt-4"
           >
-            <TableHeaderColumn isKey dataField="cnpj_fornecedor">
-              CNPJ
-            </TableHeaderColumn>
-            <TableHeaderColumn dataField="nome_fornecedor">
-              Fornecedor
-            </TableHeaderColumn>
-            <TableHeaderColumn dataField="valor">Valor R$</TableHeaderColumn>
-            <TableHeaderColumn dataField="referencia">
-              Referência
-            </TableHeaderColumn>
-            <TableHeaderColumn dataField="pdf_path">Arquivo</TableHeaderColumn>
+            <TableHeaderColumn isKey dataField="cnpj_fornecedor">  CNPJ           </TableHeaderColumn>
+            <TableHeaderColumn dataField="nome_fornecedor">        Fornecedor     </TableHeaderColumn>
+            <TableHeaderColumn dataField="valor">                  Valor R$       </TableHeaderColumn>
+            <TableHeaderColumn dataField="origem">             Referência     </TableHeaderColumn>
+            <TableHeaderColumn dataField="pdf_path">               Arquivo        </TableHeaderColumn>
             <TableHeaderColumn
               dataFormat={(cell, row) => {
                 let orcamento = row;
                 return (
                   <div>
-                    <Button
+                    {/* <Button
                       className="btn btn-default"
                       onClick={() => this.load(orcamento)}
                     >
                       <i className="fa fa-edit" />
-                    </Button>
+                    </Button> */}
                     <Button
                       className="btn btn-danger"
                       onClick={() => this.remove(orcamento)}
