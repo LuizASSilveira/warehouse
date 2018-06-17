@@ -54,7 +54,7 @@ export default class navbarAdm extends React.Component {
                       <NavLink href="/requisicao/criar">Criar Requisição</NavLink>
                     </DropdownItem>
                     <DropdownItem>
-                      <NavLink href="/requisicao/historico">Visualizar Requisição</NavLink>
+                      <NavLink href="/requisicao/historico">Visualizar Requisições</NavLink>
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>)
@@ -66,7 +66,7 @@ export default class navbarAdm extends React.Component {
     let validar, addSiorg, compras, devolver, informa
     if(this.state.admin){
       validar =   <DropdownItem>
-                    <NavLink href="/solicitacao/validar">Validar Solicitação</NavLink>
+                    <NavLink href="/solicitacao/validar">Validar Solicitações</NavLink>
                   </DropdownItem>
       addSiorg =  <DropdownItem>
                     <NavLink href="/siorg/criar">Adicionar Siorg</NavLink>
@@ -101,7 +101,7 @@ export default class navbarAdm extends React.Component {
                     <NavLink href="/solicitacao/criar">Criar Solicitação</NavLink>
                   </DropdownItem>
                   <DropdownItem>
-                    <NavLink href="/solicitacao/historico">Visualizar Solicitação</NavLink>
+                    <NavLink href="/solicitacao/historico">Visualizar Solicitações</NavLink>
                   </DropdownItem>
                   {validar}
                 </DropdownMenu>
