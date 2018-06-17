@@ -7,20 +7,22 @@ export default class Criar extends Component {
     render(){
         return(
             <div>
-                <Nav isadm = {true} />
+                <Nav/>
                 <h4 id="table">Histórico de Requisição</h4>
                 
-                <Table  buttonName=     {'Criar Requisicao'}
+                <Table  
+                        history={this.props.history}
+                        buttonName=     {'Criar Requisicao'}
                         urlGet=         {'http://localhost:3001/requisicoes'}
                         dataL=          {"data"}
                         numeroL=        {"numero"}
                         nomeL=          {"nome"}
                         solicitanteL=   {'solicitante'}
 
-                        data=           {"data"}
-                        numero=         {"numero"}
-                        nome=           {"nome"}
-                        solicitante=    {'solicitante'}
+                        data=           {"Data"}
+                        numero=         {"Número"}
+                        nome=           {"Nome"}
+                        solicitante=    {'Solicitante'}
                         />                   
             </div>
         )

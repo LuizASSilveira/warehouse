@@ -2,24 +2,23 @@ import React, { Component } from 'react';
 import Nav      from '../componentes/navbarAdm';
 import InputG   from '../componentes/inputGenerico'
 import '../componentes/css/input.css'
-import { Button, Label, FormGroup, Input } from 'reactstrap';
+import { Button, Label, FormGroup, Input , FormFeedback} from 'reactstrap';
 import {ErrorAlert} from '../componentes/alerta'
 import { Link } from 'react-router-dom'
 export default class CriarS extends Component {     
     constructor(){
         super()
-        this.state = { decricao: '', siorg: '' , alerta: false, vai: false}
+        this.state = { decricao: '', siorg: '' , alerta: false, validDesc: false, validSiorg: false}
         this.onChange = this.onChange.bind(this);
     }
     handleChangeDes(event) {
-        this.setState({ decricao: event.target.value });
-        console.log(this.state.decricao)
+        this.setState({ decricao: event.target.value, validDesc: false});
     }
 
     onChange(ev) {
     let numsiorg = this.state.siorg
        numsiorg = ev.target.value
-       this.setState({ siorg: numsiorg })
+       this.setState({ siorg: numsiorg, validSiorg: false})
     }
 
     salvar(){
@@ -37,7 +36,6 @@ export default class CriarS extends Component {
                   if (response.ok) {
                     //alerta dados salvos com sucesso
                     console.log("tudo ok")
-                    this.setState({vai:true});
                     this.props.history.push('/siorg/lista');
                   } else {
                     throw new Error("não foi possivel salvar as alterações");
@@ -45,26 +43,37 @@ export default class CriarS extends Component {
                 })
         }
         else{
-            this.setState({ alerta: true })
+            if(this.state.decricao.length == 0){
+                this.setState({validDesc: true});
+            }
+            if(this.state.siorg.length == 0){
+                this.setState({validSiorg: true});
+            }
         }
     }
     render(){
         
         return(
             <div>
-                <Nav isadm = {true} />
+                <Nav/>
                 
-                <ErrorAlert isOpen={this.state.alerta} id="errorAlert" color="danger" text='Preencha todos os campos'/>
                 <div id = "Inputs">
                 <h4 className="titulo">Criar Produto Siorg</h4>
                     
                     <FormGroup>
                         <Label> Nº Siorg </Label>
-                        <Input placeholder="Numero Siorg" type="number" name="siorg" value={this.state.siorg} onChange={this.onChange} />
+                        <Input invalid={this.state.validSiorg} placeholder="Número Siorg" type="number" 
+                               name="siorg" value={this.state.siorg} onChange={this.onChange} />
+                        <FormFeedback>Preencha este campo!</FormFeedback>
                     </FormGroup>
 
-
-                    <InputG label={'Descrição:'} name={'descrição'} placeholder={'Descrição'} type={'textarea'} id={'inputDesc'} value={this.state.value} onChange={this.handleChangeDes.bind(this)}/>                    
+                    <FormGroup>
+                        <Label> Descrição </Label>
+                        <Input invalid={this.state.validDesc} placeholder="Descrição" type = "textarea" 
+                               name="descrição" id="inputDesc" value={this.state.value}
+                               onChange={this.handleChangeDes.bind(this)}/>
+                        <FormFeedback>Preencha este campo!</FormFeedback>
+                    </FormGroup>                   
                     <Link to="/siorg/lista">
                         <Button  id="buttonPost" color="danger" >Cancelar</Button>
                     </Link>

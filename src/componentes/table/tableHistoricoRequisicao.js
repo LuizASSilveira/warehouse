@@ -3,6 +3,7 @@ import '../css/table.css'
 import { BootstrapTable, TableHeaderColumn } from '../../../node_modules/react-bootstrap-table';
 import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import { Redirect } from 'react-router-dom'
+import ExpandTable from './expand'
 
 
 class Table extends Component {
@@ -29,6 +30,8 @@ class Table extends Component {
     this.setState({ redirect: true })
   }
 
+
+
   render() {
     
     const selectRowProp = {
@@ -36,7 +39,10 @@ class Table extends Component {
           hideSelectColumn: true,
           mode: 'radio',
           bgColor: 'gray',
+          clickToExpand: true
     };
+
+
 
     const options ={
       noDataText: 'Não há dados.',
@@ -44,7 +50,7 @@ class Table extends Component {
         
     }
     if (this.state.redirect) {
-      return <Redirect to= {"/requisicao/editar/"+this.state.id}   />
+      this.props.history.push('/requisicao/editar/'+this.state.id);
     }
 
     return (
@@ -54,6 +60,8 @@ class Table extends Component {
           search={true}
           searchPlaceholder='Pesquisar'
           pagination
+          hover={true}
+
           selectRow={selectRowProp}
           options={options}
         >

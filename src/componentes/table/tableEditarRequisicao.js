@@ -4,6 +4,7 @@ import { Button, Input } from 'reactstrap';
 import Modal from '../confirmModal'
 import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import '../css/table.css'
+import ExpandTable from './expand'
 
 const options = {
   noDataText: 'Não há dados.',
@@ -103,6 +104,19 @@ class TableEditar extends Component {
   handleChangeNum(event) {
     this.setState({ numero: event.target.value });
   }
+
+  expandComponent(row) {
+    return (
+      console.log(row),
+      <ExpandTable data={ row } />
+    );
+  }
+
+  isExpandableRow(row) {
+    return true;
+
+  }
+
   render() {
     let self = this;
     function buttonFormatter(cell, row) {
@@ -122,6 +136,9 @@ class TableEditar extends Component {
           search={true}
           searchPlaceholder='Pesquisar'
           pagination
+          hover={true}
+          expandComponent={ this.expandComponent }
+          expandableRow={ this.isExpandableRow }
         >
           <TableHeaderColumn dataField='id' isKey>  ID                                  </TableHeaderColumn>
           <TableHeaderColumn width='50%' dataField={this.props.descricaoL}> {this.props.descricao}  </TableHeaderColumn>

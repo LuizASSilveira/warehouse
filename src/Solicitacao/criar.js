@@ -60,16 +60,6 @@ export default class CriarS extends Component {
         });
     }
 
-    componentDidMount(){
-        let adm
-        adm = localStorage.getItem('isAdm')
-        console.log(adm)
-        if(adm === "false"){
-            this.setState({ isAdm: false })
-        }else{
-            this.setState({ isAdm: true })
-        }
-    }
 
     salvar(){
         console.log(this.state)
@@ -113,7 +103,6 @@ export default class CriarS extends Component {
         return(
             <div>
                 <Nav isadm={this.state.isAdm} />
-                <ErrorAlert isOpen={this.state.alerta} id="errorAlert" color="danger" text='Preencha todos os campos'/>
                 <div id = "Inputs">
                     <h4 className="titulo">Criar Solicitação</h4>
 

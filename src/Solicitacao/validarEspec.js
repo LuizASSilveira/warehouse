@@ -203,7 +203,7 @@ export default class validEspec extends Component {
             
             <FormGroup>
                 <Label>Feedback</Label>
-                <Input type='textarea' invalid={!this.state.products[this.state.index].feedback} name='feedback' value={this.state.products[this.state.index].feedback} onChange={this.onChange} placeholder='Insira um comentário para o solicitante sobre o motivo da aprovação ou cancelamento da solicitação.' />
+                <Input type='textarea' name='feedback' value={this.state.products[this.state.index].feedback} onChange={this.onChange} placeholder='Insira um comentário para o solicitante sobre o motivo da aprovação ou cancelamento da solicitação.' />
                 <FormFeedback>Preencha este campo!</FormFeedback>
             </FormGroup>
             {
@@ -215,12 +215,7 @@ export default class validEspec extends Component {
             
             <div class="right">
                 <Button id="confirm" color="primary" 
-                        onClick={this.quandoClica} 
-                        disabled={
-                            !this.state.products[this.state.index].feedback ||
-                            !this.state.products[this.state.index].descricao ||
-                            !this.state.products[this.state.index].justificativa
-                        }>Confirmar</Button>
+                        onClick={this.quandoClica}>Confirmar</Button>
                 <Link to="/solicitacao/validar">
                     <Button id="cancel" color="danger" >Cancelar</Button>
                 </Link>
@@ -230,7 +225,7 @@ export default class validEspec extends Component {
       )
     }
     else {
-      return ("Algo deu errado!")
+      return ("Carregando")
     }
   }
 }
