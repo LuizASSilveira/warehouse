@@ -4,6 +4,7 @@ import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import { PropTypes } from 'prop-types'
 import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import { Button } from 'reactstrap';
+import ExpandTable from './expand'
 
 export default class TableSiorg extends Component {
     constructor(props) {
@@ -76,6 +77,18 @@ export default class TableSiorg extends Component {
             })
     }
 
+    expandComponent(row) {
+    return (
+      console.log(row),
+      <ExpandTable data={ row } siorg={true} />
+    );
+  }
+
+  isExpandableRow(row) {
+    return true;
+
+  }
+
     render() {
 
         let self = this;
@@ -112,6 +125,8 @@ export default class TableSiorg extends Component {
                     hover={true}
                     selectRow={selectRowProp}
                     searchPlaceholder='Pesquisar'
+                    expandComponent={ this.expandComponent }
+                    expandableRow={ this.isExpandableRow }
                     options={{ noDataText: 'Não há dados.' }}
                 >
                     <TableHeaderColumn width='10%' dataField="siorg" isKey>     Código Siorg     </TableHeaderColumn>

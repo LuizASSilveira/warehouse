@@ -108,7 +108,7 @@ class TableEditar extends Component {
   expandComponent(row) {
     return (
       console.log(row),
-      <ExpandTable data={ row } />
+      <ExpandTable data={ row } siorg={false} />
     );
   }
 

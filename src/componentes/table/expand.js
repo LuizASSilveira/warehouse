@@ -9,6 +9,11 @@ class ExpandTable extends Component {
 	}
 
   render() {
+    let naoEhGanbiarra
+    if(!this.props.siorg){
+      naoEhGanbiarra = <TableHeaderColumn tdStyle={ { whiteSpace: 'normal' } } dataField="justificativa" >Justificativa</TableHeaderColumn>
+    }
+
     return (
       <div>
         <BootstrapTable
@@ -17,7 +22,7 @@ class ExpandTable extends Component {
           data = {this.state.data}
           >
           <TableHeaderColumn tdStyle={ { whiteSpace: 'normal' } } dataField="descricao" isKey>Descrição</TableHeaderColumn>
-
+          {naoEhGanbiarra}
         </BootstrapTable>
       </div>
     );
