@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BootstrapTable, TableHeaderColumn } from '../../../node_modules/react-bootstrap-table';
-import {Input, Button,Label ,FormGroup, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import {Input,Label ,FormGroup } from 'reactstrap';
 import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import '../css/table.css'
 

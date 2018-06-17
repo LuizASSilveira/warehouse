@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import Nav      from '../componentes/navbarAdm';
-import InputG   from '../componentes/inputGenerico'
 import '../componentes/css/input.css'
 import NumericInput from 'react-numeric-input';
 import {Input, Button,Label ,FormGroup, Modal, ModalHeader, ModalBody, ModalFooter, FormFeedback } from 'reactstrap';
-import {ErrorAlert} from '../componentes/alerta';
 import TableSiorg from "../componentes/table/siorgTable";
 import { Link } from 'react-router-dom'
 
@@ -91,10 +89,10 @@ export default class CriarS extends Component {
         }
         else {
             // verifica se a descricao está vazia, se esta entao seta a variavel de validacao
-            if(this.state.decricao.length == 0){
+            if(this.state.decricao.length === 0){
                 this.setState({validDesc: true});
             }
-            if(this.state.justificativa.length == 0){
+            if(this.state.justificativa.length === 0){
                 this.setState({validJust: true});
             }
         }

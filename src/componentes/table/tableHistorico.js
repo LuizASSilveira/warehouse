@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import '../css/table.css'
 import { BootstrapTable, TableHeaderColumn } from '../../../node_modules/react-bootstrap-table';
 import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
-import { Redirect } from 'react-router-dom'
-
 
 class Table extends Component {
   constructor(props) {

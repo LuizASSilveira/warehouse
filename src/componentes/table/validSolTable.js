@@ -1,11 +1,8 @@
 import React from "react";
 import { BootstrapTable, TableHeaderColumn} from "react-bootstrap-table";
 import "../../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css";
-import InputG from "../inputGenerico";
 import '../css/validSolTable.css'
-import {Redirect} from 'react-router-dom'
 import '../css/table.css'
-
 
 class ValidaSolTable extends React.Component {
   constructor(props) {
@@ -15,8 +12,6 @@ class ValidaSolTable extends React.Component {
     }
     this.onRowClick = this.onRowClick.bind(this);
   }
-
-
   componentDidMount() {
     fetch(this.props.urlGet, {
       method: 'GET',
@@ -75,5 +70,4 @@ class ValidaSolTable extends React.Component {
     );
   }
 }
-
 export default ValidaSolTable;

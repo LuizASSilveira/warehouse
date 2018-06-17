@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import Nav      from '../componentes/navbarAdm';
-import InputG   from '../componentes/inputGenerico'
 import '../componentes/css/input.css'
 import { Button, Label, FormGroup, Input , FormFeedback} from 'reactstrap';
-import {ErrorAlert} from '../componentes/alerta'
 import { Link } from 'react-router-dom'
 export default class CriarS extends Component {     
     constructor(){
@@ -43,10 +41,10 @@ export default class CriarS extends Component {
                 })
         }
         else{
-            if(this.state.decricao.length == 0){
+            if(this.state.decricao.length === 0){
                 this.setState({validDesc: true});
             }
-            if(this.state.siorg.length == 0){
+            if(this.state.siorg.length === 0){
                 this.setState({validSiorg: true});
             }
         }

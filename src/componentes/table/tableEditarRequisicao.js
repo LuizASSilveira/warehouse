@@ -140,9 +140,10 @@ class TableEditar extends Component {
           expandComponent={ this.expandComponent }
           expandableRow={ this.isExpandableRow }
         >
-          <TableHeaderColumn dataField='id' isKey>  ID                                  </TableHeaderColumn>
+          <TableHeaderColumn width='00%' dataField='id' isKey>  ID                                  </TableHeaderColumn>
+          <TableHeaderColumn width='18%' dataField={this.props.dataL}>      {this.props.data}       </TableHeaderColumn>
           <TableHeaderColumn width='50%' dataField={this.props.descricaoL}> {this.props.descricao}  </TableHeaderColumn>
-          <TableHeaderColumn width='20%' dataField={this.props.dataL}>      {this.props.data}       </TableHeaderColumn>
+          <TableHeaderColumn width='20%' dataField={this.props.orcamentoL}> {this.props.orcamento}  </TableHeaderColumn>
           <TableHeaderColumn width='20%' dataField={this.props.nomeL}>      {this.props.nome}       </TableHeaderColumn>
           <TableHeaderColumn width='10%' dataField="button" dataFormat={buttonFormatter}> Remover   </TableHeaderColumn>
         </BootstrapTable>
