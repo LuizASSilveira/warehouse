@@ -1,0 +1,25 @@
+#Produto, #Fornecedor, #Historico{
+    margin-top: 3%;
+    border: 2px solid darkgrey;
+    border-radius: 20px;
+    padding: 3%;
+}
+
+
+#Data{
+    width: 40%;
+}
+
+#Valor{
+    width: 40%;
+}
+
+#CNPJ{
+    width: 40%;
+}
+#infoProd{
+    text-align: center;
+    margin: auto;
+    color: slategrey;
+    margin-top: 2%;
+}

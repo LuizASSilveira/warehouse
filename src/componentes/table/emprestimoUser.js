@@ -10,11 +10,10 @@ export default class Table extends Component {
     super()
     this.state = { products: [], modal: false, qtd: 1, qtdMAX: 0 }
     this.toggle = this.toggle.bind(this)
-
   }
 
   componentDidMount() {
-    fetch('https://raw.githubusercontent.com/LuizASSilveira/pi-almoxarifado/master/emprestimo.json')
+    fetch('http://localhost:3001/estoque/emprestimo')
       .then(response => response.json())
       .then(product => {
         this.setState({ products: product })
@@ -32,8 +31,8 @@ export default class Table extends Component {
       modal: !this.state.modal,
     })
   }
-  setQuantidade(valor){
-    this.setState({ qtd: valor }); 
+  setQuantidade(valor) {
+    this.setState({ qtd: valor });
   }
   render() {
     const options = {
@@ -52,14 +51,14 @@ export default class Table extends Component {
           pagination
           options={options}
         >
-          <TableHeaderColumn             dataField='id'         isKey>               ID                               </TableHeaderColumn>
-          <TableHeaderColumn width='0%'  dataField='data'>                           Data                             </TableHeaderColumn>
+          <TableHeaderColumn dataField='id' isKey>               ID                               </TableHeaderColumn>
+          <TableHeaderColumn width='0%' dataField='data'>                           Data                             </TableHeaderColumn>
           <TableHeaderColumn width='20%' dataField='quantidade' dataAlign='center'>  Quantidade Disponivel            </TableHeaderColumn>
           <TableHeaderColumn width='70%' dataField='descricao'>                      Produto                          </TableHeaderColumn>
-          <TableHeaderColumn width='12%' dataField="button"     dataFormat={buttonFormatter.bind(this)}> Emprestimo   </TableHeaderColumn>
+          <TableHeaderColumn width='12%' dataField="button" dataFormat={buttonFormatter.bind(this)}> Emprestimo   </TableHeaderColumn>
         </BootstrapTable>
-        
-        <Modal max={this.state.qtd} divID = "invisivel" func={this.setQuantidade.bind(this)} label='Quantidade de Produto' value={this.state.qtd} modal={this.state.modal} onCancel={this.funcCancel.bind(this)} onConfirm={this.funcConfirm.bind(this)} toggle={true} />
+
+        <Modal max={this.state.qtd} divID="invisivel" func={this.setQuantidade.bind(this)} label='Quantidade de Produto' value={this.state.qtd} modal={this.state.modal} onCancel={this.funcCancel.bind(this)} onConfirm={this.funcConfirm.bind(this)} toggle={true} />
       </div>
     );
   }

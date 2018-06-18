@@ -12,19 +12,27 @@ class ModalAmoxarifado extends React.Component {
                     <ModalBody>
                         {this.props.mensagem}
 
+                        <div id={this.props.divID}>
+                            <Label> {this.props.Fornecedor}: </Label><br />
+                            <Input type="select">
+                                {this.props.array.map((forn) =>
+                                <option key={forn} >{forn}</option>
+                                )}
+                            </Input>
+                        </div>
                         <div id={this.props.divNum}>
                             <Label> {this.props.label}: </Label><br />
-                            <NumericInput type="number" min={1} max={ this.props.max } value={this.props.value} onChange={this.props.setQuantidade} />
+                            <NumericInput type="number" min={1} max={this.props.max} value={this.props.value} onChange={this.props.setQuantidade} />
                         </div>
                         <div id={this.props.divID}>
-                            <Label check id= "checkModal">
-                                <Input type="checkbox"  defaultChecked={this.props.check} onChange={this.props.onChange} />{' '}
-                                ID Unico
+                            <Label check id="checkModal">
+                                <Input type="checkbox" defaultChecked={this.props.check} onChange={this.props.onChange} />{' '}
+                                Produto Publico
                             </Label>
-                        </div>    
+                        </div>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary"   onClick={this.props.onConfirm}>   Confirmar </Button>
+                        <Button color="primary" onClick={this.props.onConfirm}>   Confirmar </Button>
                         <Button color="secondary" onClick={this.props.onCancel}>    Cancelar  </Button>
                     </ModalFooter>
                 </Modal>

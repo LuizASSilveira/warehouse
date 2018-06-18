@@ -8,7 +8,7 @@ import Modal from '../modal-almoxarifado/modal'
 export default class Table extends Component {
     constructor() {
         super()
-        this.state = { products: [], modal: false, qtd : 0 ,id : 0, checked : true, qtdMAX: 0}
+        this.state = { products: [], modal: false, qtd : 0 ,id : 0, checked : true, qtdMAX: 0, arrayForn:['for1','for2', 'for3','forn4', 'forn5'], }
         this.toggle = this.toggle.bind(this)
         this.funcCancel = this.funcCancel.bind(this)
         this.funcConfirm = this.funcConfirm.bind(this)
@@ -42,9 +42,10 @@ export default class Table extends Component {
               if (response.ok) {
                 window.location.reload()
               } else {
-                throw new Error("não foi possivel salvar as alterações");
+                console.log("não foi possivel salvar as alterações");
               }
             })
+
         this.funcCancel()
     }
 
@@ -54,10 +55,10 @@ export default class Table extends Component {
 
     toggle(row) {
         this.setState({
-            modal:  !this.state.modal,
             qtd :   row.quantidade,
             id  :   row.id,
-            qtdMAX: row.quantidade
+            qtdMAX: row.quantidade,
+            modal:  !this.state.modal,
         })
     }
 
@@ -86,15 +87,15 @@ export default class Table extends Component {
                     pagination
                     options={options}
                 >
-                    <TableHeaderColumn dataField='id' isKey>  ID                                                                      </TableHeaderColumn>
-                    <TableHeaderColumn width='15%' dataField='quantidade' dataAlign='center'>  Quantidade                             </TableHeaderColumn>
-                    <TableHeaderColumn width='20%' dataField='requisicao' dataAlign='center'>  Requisição                             </TableHeaderColumn>
-                    <TableHeaderColumn width='50%' dataField='descricao'> Descrição                                                   </TableHeaderColumn>  
-                    <TableHeaderColumn width='0%' dataField='data'>         Data                                                      </TableHeaderColumn>
-                    <TableHeaderColumn width='15%' dataField="button" dataFormat={buttonFormatter.bind(this)}> Carregar Estoque       </TableHeaderColumn>
+                    <TableHeaderColumn width='00%'  dataField='produto_id'      isKey>              ID              </TableHeaderColumn>
+                    <TableHeaderColumn width='15%'  dataField='quantidade'      dataAlign='center'> Quantidade      </TableHeaderColumn>
+                    <TableHeaderColumn width='20%'  dataField='requisicao_id'   dataAlign='center'> Requisição      </TableHeaderColumn>
+                    <TableHeaderColumn width='50%'  dataField='descricao'>                          Descrição       </TableHeaderColumn>  
+                    <TableHeaderColumn width='0%'   dataField='requisicao_data'>                    Data            </TableHeaderColumn>
+                    <TableHeaderColumn width='15%'  dataField="button"              dataFormat={buttonFormatter.bind(this)}> Carregar Estoque       </TableHeaderColumn>
                 </BootstrapTable>
 
-                <Modal max= {this.state.qtd}  onChange={this.setGroup.bind(this)} check={this.state.checked} func={this.setQuantidade.bind(this)} label='Produtos Recebidos' value={this.state.qtd} modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} />
+                <Modal Fornecedor= 'Fornecedor' array={this.state.arrayForn}  max= {this.state.qtd}  onChange={this.setGroup.bind(this)} check={this.state.checked} func={this.setQuantidade.bind(this)} label='Produtos Recebidos' value={this.state.qtd} modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} />
             </div>
         );
     }
