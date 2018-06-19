@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Nav from '../componentes/navbarAdm';
 import {Table} from '../componentes/table/addSolicitacaoReq';
 import {TableEditar} from '../componentes/table/tableEditarRequisicao';
-import {Input, Button,Label ,FormGroup, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 
 
 export default class Criar extends Component {     
