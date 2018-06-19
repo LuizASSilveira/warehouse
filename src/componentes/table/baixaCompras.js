@@ -8,7 +8,7 @@ import Modal from '../modal-almoxarifado/modal'
 export default class Table extends Component {
     constructor() {
         super()
-        this.state = { products: [], modal: false, qtd : 0 ,id : 0, checked : true, qtdMAX: 0, arrayForn:['for1','for2', 'for3','forn4', 'forn5'], }
+        this.state = { products: [], modal: false, qtd : 0 ,id : 0, checked : true, qtdMAX: 0 }
         this.toggle = this.toggle.bind(this)
         this.funcCancel = this.funcCancel.bind(this)
         this.funcConfirm = this.funcConfirm.bind(this)
@@ -87,7 +87,7 @@ export default class Table extends Component {
                     pagination
                     options={options}
                 >
-                    <TableHeaderColumn width='00%'  dataField='produto_id'      isKey>              ID              </TableHeaderColumn>
+                    <TableHeaderColumn width='20%'  dataField='produto_id'      isKey>              ID              </TableHeaderColumn>
                     <TableHeaderColumn width='15%'  dataField='quantidade'      dataAlign='center'> Quantidade      </TableHeaderColumn>
                     <TableHeaderColumn width='20%'  dataField='requisicao_id'   dataAlign='center'> Requisição      </TableHeaderColumn>
                     <TableHeaderColumn width='50%'  dataField='descricao'>                          Descrição       </TableHeaderColumn>  

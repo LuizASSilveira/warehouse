@@ -4,6 +4,11 @@ import NumericInput from 'react-numeric-input';
 import '../css/modal.css'
 
 class ModalAmoxarifado extends React.Component {
+    constructor(){
+        super()
+        this.state = {array:[]}
+    }
+    
     render() {
         return (
             <div >
@@ -15,7 +20,7 @@ class ModalAmoxarifado extends React.Component {
                         <div id={this.props.divID}>
                             <Label> {this.props.Fornecedor}: </Label><br />
                             <Input type="select">
-                                {this.props.array.map((forn) =>
+                                {this.state.array.map((forn) =>
                                 <option key={forn} >{forn}</option>
                                 )}
                             </Input>
@@ -32,7 +37,7 @@ class ModalAmoxarifado extends React.Component {
                         </div>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={this.props.onConfirm}>   Confirmar </Button>
+                        <Button color="primary" onClick={this.props.onConfirm}>     Confirmar </Button>
                         <Button color="secondary" onClick={this.props.onCancel}>    Cancelar  </Button>
                     </ModalFooter>
                 </Modal>

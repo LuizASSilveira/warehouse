@@ -51,11 +51,11 @@ export default class Table extends Component {
           pagination
           options={options}
         >
-          <TableHeaderColumn dataField='id' isKey>               ID                               </TableHeaderColumn>
-          <TableHeaderColumn width='0%' dataField='data'>                           Data                             </TableHeaderColumn>
+          <TableHeaderColumn             dataField='id' isKey>                       iD                               </TableHeaderColumn>
+          <TableHeaderColumn width='0%'  dataField='data'>                           Data                             </TableHeaderColumn>
           <TableHeaderColumn width='20%' dataField='quantidade' dataAlign='center'>  Quantidade Disponivel            </TableHeaderColumn>
           <TableHeaderColumn width='70%' dataField='descricao'>                      Produto                          </TableHeaderColumn>
-          <TableHeaderColumn width='12%' dataField="button" dataFormat={buttonFormatter.bind(this)}> Emprestimo   </TableHeaderColumn>
+          <TableHeaderColumn width='12%' dataField="button"     dataFormat={buttonFormatter.bind(this)}> Emprestimo   </TableHeaderColumn>
         </BootstrapTable>
 
         <Modal max={this.state.qtd} divID="invisivel" func={this.setQuantidade.bind(this)} label='Quantidade de Produto' value={this.state.qtd} modal={this.state.modal} onCancel={this.funcCancel.bind(this)} onConfirm={this.funcConfirm.bind(this)} toggle={true} />
