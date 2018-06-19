@@ -8,6 +8,20 @@ class ModalAmoxarifado extends React.Component {
         super()
         this.state = {array:[]}
     }
+
+    // componentDidMount() {
+    //     fetch("http://localhost:3001/orcamentos/3", {
+    //       method: 'GET',
+    //       headers: new Headers({
+    //         'Content-type': 'application/json',
+    //         'token': localStorage.getItem('auth-token')
+    //       })
+    //     }).then(response => response.json())
+    //       .then(product => {
+    //         this.setState({ array: product });
+            
+    //       })
+    //   }
     
     render() {
         return (
@@ -21,7 +35,7 @@ class ModalAmoxarifado extends React.Component {
                             <Label> {this.props.Fornecedor}: </Label><br />
                             <Input type="select">
                                 {this.state.array.map((forn) =>
-                                <option key={forn} >{forn}</option>
+                                <option key={forn.nome_fornecedor} >{forn.nome_fornecedor}</option>
                                 )}
                             </Input>
                         </div>

@@ -87,7 +87,7 @@ export default class Table extends Component {
                     pagination
                     options={options}
                 >
-                    <TableHeaderColumn width='20%'  dataField='produto_id'      isKey>              ID              </TableHeaderColumn>
+                    <TableHeaderColumn width='10%'  dataField='produto_id'      isKey>              ID              </TableHeaderColumn>
                     <TableHeaderColumn width='15%'  dataField='quantidade'      dataAlign='center'> Quantidade      </TableHeaderColumn>
                     <TableHeaderColumn width='20%'  dataField='requisicao_id'   dataAlign='center'> Requisição      </TableHeaderColumn>
                     <TableHeaderColumn width='50%'  dataField='descricao'>                          Descrição       </TableHeaderColumn>  
