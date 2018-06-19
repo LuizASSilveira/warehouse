@@ -9,16 +9,51 @@ export default class Criar extends Component {
     constructor(props){
         super(props)
         this.state = {
-            modal: false
+            modal: false,
+            selected: []
         }
 
         this.toggle = this.toggle.bind(this);
+        this.guardaRow = this.guardaRow.bind(this);
     }
 
     toggle() {
       this.setState({
         modal: !this.state.modal
       });
+    }
+
+    guardaRow(row, isSelected){
+        if (isSelected) {
+            this.setState({selected: this.state.selected.concat(row.id)})
+        } 
+        else {
+          const index = this.state.selected.indexOf(row.id);
+          if(index < 0) return
+          this.state.selected.splice(index, 1)
+          this.setState({selected: this.state.selected})  
+        }
+    }
+
+    funcConfirm() {
+        const requestInfo = {
+          method: 'POST',
+          body: JSON.stringify({nome: this.state.name ,solicitacoes: this.state.selected}),
+          headers: new Headers({
+            'Content-type': 'application/json',
+            'token': localStorage.getItem('auth-token')
+          })
+        };
+        fetch(this.props.urlPost, requestInfo)
+          .then(response => {
+            if (response.ok) {
+              //alerta dados salvos com sucesso
+              this.props.history.push('/requisicao/historico');
+            } else {
+              throw new Error("não foi possivel salvar as alterações");
+            }
+          })
+        this.toggle()  
     }
 
     render(){
@@ -52,7 +87,7 @@ export default class Criar extends Component {
                     
                     <ModalBody>
                         <Table  
-                            func = {this.controlAlert}
+                            funcao = {this.guardaRow}
                             history = {this.props.history}
                             buttonName= {'Criar Requisição'}
                             urlGet=     {'http://localhost:3001/solicitacoes/requisicao'}
@@ -70,7 +105,7 @@ export default class Criar extends Component {
                     </ModalBody>
 
                     <ModalFooter>
-                        <Button color="primary" >Confirmar</Button>{' '}
+                        <Button color="primary" onClick={this.funcConfirm}>Confirmar</Button>{' '}
                         <Button color="secondary" onClick={this.toggle}>Cancelar</Button>
                     </ModalFooter>
                 </Modal>                
