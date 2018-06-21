@@ -28,33 +28,31 @@ export default class TableSiorg extends Component {
 
         let adm
         adm = localStorage.getItem('isAdm')
-        console.log(adm)
         if(adm === "false"){
             this.setState({ isAdm: false })
         }else{
             this.setState({ isAdm: true })
         }
     }
-    componentDidUpdate(){
-                fetch(this.props.urlGet, {
-            method: 'GET',
-            headers: new Headers({
-                'Content-type': 'application/json',
-                'token': localStorage.getItem('auth-token')
-            })
-        })
-            .then(response => response.json())
-            .then(product => {
-                this.setState({ lista: product });
-            });
+    // componentDidUpdate(){
+    //             fetch(this.props.urlGet, {
+    //         method: 'GET',
+    //         headers: new Headers({
+    //             'Content-type': 'application/json',
+    //             'token': localStorage.getItem('auth-token')
+    //         })
+    //     })
+    //         .then(response => response.json())
+    //         .then(product => {
+    //             this.setState({ lista: product });
+    //         });
 
-    }
+    // }
 
     properFunc(row, isSelected) {
         if (this.props.a) {
             this.props.a(row, isSelected)
         }
-        console.log(row)
     }
 
     excluir(row) {
@@ -79,7 +77,6 @@ export default class TableSiorg extends Component {
 
     expandComponent(row) {
     return (
-      console.log(row),
       <ExpandTable data={ row } siorg={true} />
     );
   }

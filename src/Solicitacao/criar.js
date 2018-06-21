@@ -60,7 +60,6 @@ export default class CriarS extends Component {
 
 
     salvar(){
-        console.log(this.state)
         if(this.state.decricao.length !== 0 && this.state.justificativa.length !== 0){
             const requestInfo = {
                 method: 'POST',
@@ -82,7 +81,6 @@ export default class CriarS extends Component {
                     window.location.reload()
                     this.props.history.push('/solicitacao/historico');
                   } else {
-                      console.log(response)
                     throw new Error(response);
                   }
                 })

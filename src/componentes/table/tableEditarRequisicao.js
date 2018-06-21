@@ -81,8 +81,6 @@ class TableEditar extends Component {
     this.setState({ name: event.target.value });
   }
   excluir(row) {
-    console.log(row.id)
-
     const requestInfo = {
       method: 'DELETE',
       headers: new Headers({
@@ -107,7 +105,6 @@ class TableEditar extends Component {
 
   expandComponent(row) {
     return (
-      console.log(row),
       <ExpandTable data={ row } siorg={false} />
     );
   }
