@@ -15,6 +15,7 @@ export default class Criar extends Component {
 
         this.toggle = this.toggle.bind(this);
         this.guardaRow = this.guardaRow.bind(this);
+        this.funcConfirm = this.funcConfirm.bind(this);
     }
 
     toggle() {
@@ -38,17 +39,16 @@ export default class Criar extends Component {
     funcConfirm() {
         const requestInfo = {
           method: 'POST',
-          body: JSON.stringify({nome: this.state.name ,solicitacoes: this.state.selected}),
+          body: JSON.stringify({solicitacoes: this.state.selected}),
           headers: new Headers({
             'Content-type': 'application/json',
             'token': localStorage.getItem('auth-token')
           })
         };
-        fetch(this.props.urlPost, requestInfo)
+        fetch('http://localhost:3001/requisicoes/'+this.props.match.params.id+'/solicitacoes', requestInfo)
           .then(response => {
             if (response.ok) {
               //alerta dados salvos com sucesso
-              this.props.history.push('/requisicao/historico');
             } else {
               throw new Error("não foi possivel salvar as alterações");
             }
@@ -61,6 +61,7 @@ export default class Criar extends Component {
             <div>
                 <Nav/>
                 <h4 id="table">Editar Requisição</h4>
+                <p>{this.props.match.params.id}</p>
                 <TableEditar  buttonName= {'Salvar'}
 
                         urlGet=     {'http://localhost:3001/requisicoes/' + this.props.match.params.id}
