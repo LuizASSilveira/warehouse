@@ -3,7 +3,6 @@ import { BootstrapTable, TableHeaderColumn} from "react-bootstrap-table";
 import "../../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css";
 import '../css/validSolTable.css'
 import '../css/table.css'
-
 class ValidaSolTable extends React.Component {
   constructor(props) {
     super(props)
@@ -24,28 +23,19 @@ class ValidaSolTable extends React.Component {
         this.setState({ products: product });
       });
   }
-
-
   onRowClick(row){
     this.props.teste.push('/solicitacao/validar/'+row.id)
-
   }
-
   render() {
     const selectRowProp = {
       mode: 'radio',
       hideSelectColumn: true,
       clickToSelect: true,
     }
-
-
     const options ={
       noDataText: 'Não há dados.',
-      onRowClick: this.onRowClick
-        
-    }
-
-  
+      onRowClick: this.onRowClick   
+    }  
     return (
       <div id="table">
         <BootstrapTable

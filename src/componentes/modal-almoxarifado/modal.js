@@ -4,6 +4,25 @@ import NumericInput from 'react-numeric-input';
 import '../css/modal.css'
 
 class ModalAmoxarifado extends React.Component {
+    constructor(){
+        super()
+        this.state = {array:[]}
+    }
+
+    // componentDidMount() {
+    //     fetch("http://localhost:3001/orcamentos/3", {
+    //       method: 'GET',
+    //       headers: new Headers({
+    //         'Content-type': 'application/json',
+    //         'token': localStorage.getItem('auth-token')
+    //       })
+    //     }).then(response => response.json())
+    //       .then(product => {
+    //         this.setState({ array: product });
+            
+    //       })
+    //   }
+    
     render() {
         return (
             <div >
@@ -15,8 +34,8 @@ class ModalAmoxarifado extends React.Component {
                         <div id={this.props.divID}>
                             <Label> {this.props.Fornecedor}: </Label><br />
                             <Input type="select">
-                                {this.props.array.map((forn) =>
-                                <option key={forn} >{forn}</option>
+                                {this.state.array.map((forn) =>
+                                <option key={forn.nome_fornecedor} >{forn.nome_fornecedor}</option>
                                 )}
                             </Input>
                         </div>
@@ -32,7 +51,7 @@ class ModalAmoxarifado extends React.Component {
                         </div>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={this.props.onConfirm}>   Confirmar </Button>
+                        <Button color="primary" onClick={this.props.onConfirm}>     Confirmar </Button>
                         <Button color="secondary" onClick={this.props.onCancel}>    Cancelar  </Button>
                     </ModalFooter>
                 </Modal>

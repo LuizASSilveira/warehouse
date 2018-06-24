@@ -36,24 +36,25 @@ ReactDOM.render(
         
         <Route exact  path="/"                         component={Login}/>
         <Route        path="/requisicao/criar"         component={Criar}/>
-        <Route        path="/requisicao/historico"     component={Historico} />
+        <Route        path="/requisicao/historico"     component={Historico}/>
         <Route        path="/requisicao/editar/:id"    component={EditarReq}/>
 
         <Route        path="/solicitacao/historico"    component={HistoricoSol}/>
-        <Route        path="/solicitacao/criar"        component={criarS} />
-        <Route        path="/solicitacao/orcamento"    component={Orcamento} />
+        <Route        path="/solicitacao/criar"        component={criarS}/>
+        <Route        path="/solicitacao/orcamento"    component={Orcamento}/>
         
         <Route exact  path="/solicitacao/validar"      component={ValidarS}/>
         <Route exact  path="/solicitacao/validar/:id"  component={ValidEspec}/>
 
-        <Route        path="/siorg/criar"              component={criarSiorg} />
-        <Route        path="/siorg/lista"              component={criarLista} />
+        <Route        path="/siorg/criar"              component={criarSiorg}/>
+        <Route        path="/siorg/lista"              component={criarLista}/>
 
-        <Route        path="/almoxarifado/emprestimo"  component={AlmoEmprestimo} />
-        <Route        path="/almoxarifado/compras"     component={AlmoPedido} />
-        <Route        path="/almoxarifado/historico"   component={AlmoHistorico} />
-        <Route        path="/almoxarifado/devolucao"   component={AlmoDevolucao} />
-        <Route        path="/almoxarifado/info"        component={AlmoInfo} />
+        <Route        path="/almoxarifado/compras"     component={AlmoPedido}/>
+        <Route        path="/almoxarifado/info"        component={AlmoInfo}/>
+        
+        <Route        path="/almoxarifado/emprestimo"  component={AlmoEmprestimo}/>
+        <Route        path="/almoxarifado/historico"   component={AlmoHistorico}/>
+        <Route        path="/almoxarifado/devolucao"   component={AlmoDevolucao}/>
 
       </Switch>
     </App>

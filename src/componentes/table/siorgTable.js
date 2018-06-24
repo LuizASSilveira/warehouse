@@ -7,51 +7,52 @@ import { Button } from "reactstrap";
 import ExpandTable from "./expand";
 
 export default class TableSiorg extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { lista: [], isAdm: false };
-    this.properFunc = this.properFunc.bind(this);
-  }
-
-  componentDidMount() {
-    fetch(this.props.urlGet, {
-      method: "GET",
-      headers: new Headers({
-        "Content-type": "application/json",
-        token: localStorage.getItem("auth-token")
-      })
-    })
-      .then(response => response.json())
-      .then(product => {
-        this.setState({ lista: product });
-      });
-
-    let adm;
-    adm = localStorage.getItem("isAdm");
-    // console.log(adm);
-    if (adm === "false") {
-      this.setState({ isAdm: false });
-    } else {
-      this.setState({ isAdm: true });
+    constructor(props) {
+        super(props)
+        this.state = { lista: [], isAdm:false }
+        this.properFunc = this.properFunc.bind(this)
     }
-  }
-  componentDidUpdate() {
-    fetch(this.props.urlGet, {
-      method: "GET",
-      headers: new Headers({
-        "Content-type": "application/json",
-        token: localStorage.getItem("auth-token")
-      })
-    })
-      .then(response => response.json())
-      .then(product => {
-        this.setState({ lista: product });
-      });
-  }
 
-  properFunc(row, isSelected) {
-    if (this.props.a) {
-      this.props.a(row, isSelected);
+    componentDidMount() {
+        fetch(this.props.urlGet, {
+            method: 'GET',
+            headers: new Headers({
+                'Content-type': 'application/json',
+                'token': localStorage.getItem('auth-token')
+            })
+        })
+            .then(response => response.json())
+            .then(product => {
+                this.setState({ lista: product });
+            });
+
+        let adm
+        adm = localStorage.getItem('isAdm')
+        if(adm === "false"){
+            this.setState({ isAdm: false })
+        }else{
+            this.setState({ isAdm: true })
+        }
+    }
+    // componentDidUpdate(){
+    //             fetch(this.props.urlGet, {
+    //         method: 'GET',
+    //         headers: new Headers({
+    //             'Content-type': 'application/json',
+    //             'token': localStorage.getItem('auth-token')
+    //         })
+    //     })
+    //         .then(response => response.json())
+    //         .then(product => {
+    //             this.setState({ lista: product });
+    //         });
+
+    // }
+
+    properFunc(row, isSelected) {
+        if (this.props.a) {
+            this.props.a(row, isSelected)
+        }
     }
     // console.log(row)
   }
@@ -74,8 +75,10 @@ export default class TableSiorg extends Component {
     });
   }
 
-  expandComponent(row) {
-    return <ExpandTable data={row} siorg={true} />;
+    expandComponent(row) {
+    return (
+      <ExpandTable data={ row } siorg={true} />
+    );
   }
 
   isExpandableRow(row) {
