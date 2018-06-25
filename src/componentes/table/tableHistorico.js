@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../css/table.css'
 import { BootstrapTable, TableHeaderColumn } from '../../../node_modules/react-bootstrap-table';
 import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
+import ExpandTable from './expandFeedback'
 
 class Table extends Component {
   constructor(props) {
@@ -25,6 +26,16 @@ class Table extends Component {
   onRowClick(row){
     this.setState({ id: row.id})
     this.setState({ redirect: true })
+  }
+  expandComponent(row) {
+    return (
+      <ExpandTable data={ row } siorg={false} />
+    );
+  }
+
+  isExpandableRow(row) {
+    return true;
+
   }
 
   render() {
@@ -53,8 +64,10 @@ class Table extends Component {
           searchPlaceholder='Pesquisar'
           pagination
           hover={true}
-          selectRow={selectRowProp}
+          // selectRow={selectRowProp}
           options={options}
+          expandComponent={ this.expandComponent }
+          expandableRow={ this.isExpandableRow }
         >
           <TableHeaderColumn dataField='id' isKey>  ID                                 </TableHeaderColumn>
           <TableHeaderColumn width='50%' dataField={this.props.descricaoL}> {this.props.descricao}  </TableHeaderColumn>
