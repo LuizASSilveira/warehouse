@@ -3,6 +3,7 @@ import Nav from '../componentes/navbarAdm';
 import {Table} from '../componentes/table/addSolicitacaoReq';
 import {TableEditar} from '../componentes/table/tableEditarRequisicao';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+import '../componentes/css/editarReq.css'
 
 
 export default class Criar extends Component {     
@@ -61,6 +62,9 @@ export default class Criar extends Component {
             <div>
                 <Nav/>
                 <h4 id="table">Editar Requisição</h4>
+
+                <Button onClick={this.toggle} className="button_req"> Adicionar Solicitação </Button>
+
                 <TableEditar  buttonName= {'Salvar'}
 
                         urlGet=     {'http://localhost:3001/requisicoes/' + this.props.match.params.id}
@@ -80,7 +84,7 @@ export default class Criar extends Component {
                         orcamentoL= {'orcamento'}
                 />
 
-                <Button onClick={this.toggle}> Adicionar Solicitação </Button>
+              
 
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className='modal-xl'>
                     <ModalHeader toggle={this.toggle}>Adicionar Solicitação</ModalHeader>
