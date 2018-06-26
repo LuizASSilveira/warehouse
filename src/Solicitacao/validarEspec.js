@@ -204,7 +204,7 @@ export default class validEspec extends Component {
                 <FormFeedback>Preencha este campo!</FormFeedback>
             </FormGroup>
 
-            <Orcamento dado={this.props.match.params.id} urlGet={'http://localhost:3001/orcamentos/'+ this.props.match.params.id} />
+            <Orcamento isValidar={true} dado={this.props.match.params.id} urlGet={'http://localhost:3001/orcamentos/'+ this.props.match.params.id} />
             
             <div class="right">
                 <Button id="confirm" color="primary" 

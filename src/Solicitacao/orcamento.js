@@ -338,8 +338,13 @@ export default class Orcamento extends Component {
   }
 
   render() {
+    let navbar
+    if(!this.props.isValidar){
+      navbar = <Nav/>
+    }
     return (
       <div>
+        {navbar}
 
         {this.renderForm()}
 
