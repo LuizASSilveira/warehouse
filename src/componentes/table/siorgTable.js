@@ -34,20 +34,6 @@ export default class TableSiorg extends Component {
             this.setState({ isAdm: true })
         }
     }
-    // componentDidUpdate(){
-    //             fetch(this.props.urlGet, {
-    //         method: 'GET',
-    //         headers: new Headers({
-    //             'Content-type': 'application/json',
-    //             'token': localStorage.getItem('auth-token')
-    //         })
-    //     })
-    //         .then(response => response.json())
-    //         .then(product => {
-    //             this.setState({ lista: product });
-    //         });
-
-    // }
 
     properFunc(row, isSelected) {
         if (this.props.a) {
@@ -106,11 +92,12 @@ export default class TableSiorg extends Component {
         }
         }
 
-        let ganbis                
-        if(this.state.isAdm){
-            
-            ganbis = <TableHeaderColumn width='10%' dataField="button" dataFormat={buttonFormatter}> Remover   
-        </TableHeaderColumn>
+        let colunaRemover
+        // Verifica se é ADM e esconde != true (esconde é utilizado em lista siorg de criar sol) 
+        if(this.state.isAdm && !this.props.esconde){
+            colunaRemover = <TableHeaderColumn width='10%' dataField="button" 
+                                               dataFormat={buttonFormatter}> Remover   
+                            </TableHeaderColumn>
         }
 
         return (
@@ -129,7 +116,7 @@ export default class TableSiorg extends Component {
                     <TableHeaderColumn width='10%' dataField="siorg" isKey>     Código Siorg     </TableHeaderColumn>
                     <TableHeaderColumn width='60%' dataField="descricao">       Descrição  </TableHeaderColumn>
                     
-                    {ganbis}
+                    {colunaRemover}
                 </BootstrapTable>
 
 

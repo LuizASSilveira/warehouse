@@ -117,7 +117,7 @@ export default class CriarS extends Component {
                         <ModalHeader toggle={this.toggle}>Lista Siorg</ModalHeader>
 
                         <ModalBody>
-                            <TableSiorg a={this.guardaRow} urlGet={'http://localhost:3001/produtos'}/>
+                            <TableSiorg esconde={true} a={this.guardaRow} urlGet={'http://localhost:3001/produtos'}/>
                         </ModalBody>
 
                         <ModalFooter>
