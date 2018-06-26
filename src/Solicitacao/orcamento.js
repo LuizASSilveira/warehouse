@@ -340,7 +340,6 @@ export default class Orcamento extends Component {
   render() {
     return (
       <div>
-        <Nav isadm={true} />
 
         {this.renderForm()}
 
