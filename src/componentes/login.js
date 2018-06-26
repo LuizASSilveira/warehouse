@@ -34,7 +34,7 @@ export default class Login extends Component {
 
             })
             .catch(error => {
-                this.setState({msg:error.message});
+                this.setState({msg:'Login ou senha inválidos!'});
             });
     }
 
