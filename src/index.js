@@ -54,17 +54,17 @@ import PaginaRed from './pageRedirect'
  }
 
  // Função retorna componente para ser renderizado apenas se usuário está logado.
- function to(Component){
+ function to(Component,history){
    return !logged() ? 
      (<PaginaRed/>) :
-     (<Component/>)
+     (<Component history={history} {...history}/>)
  }
 
  // Função retorna componente para ser renderizado apenas se usuário está logado e é adm.
- function toUsertoo(Component){
+ function toUsertoo(Component, history){
    return !loggedAndAdm() ? 
      (<PaginaRed/>) :
-     (<Component/>)
+     (<Component history={history} {...history}/>)
  }
 
 ReactDOM.render(
@@ -74,27 +74,27 @@ ReactDOM.render(
       <Switch>
         
         <Route exact  path="/"                         component={Login}/>
-        <Route        path="/requisicao/criar"         render={()=> toUsertoo(Criar)}/>
-        <Route        path="/requisicao/historico"     render={()=> toUsertoo(Historico)}/>
-        <Route        path="/requisicao/editar/:id"    render={()=> toUsertoo(EditarReq)}/>
+        <Route        path="/requisicao/criar"         render={(history)=> toUsertoo(Criar, history)}/>
+        <Route        path="/requisicao/historico"     render={(history)=> toUsertoo(Historico, history)}/>
+        <Route        path="/requisicao/editar/:id"    render={(history)=> toUsertoo(EditarReq,history)}/>
 
-        <Route        path="/solicitacao/historico"    render={()=> to(HistoricoSol)}/>
+        <Route        path="/solicitacao/historico"    render={(history)=> to(HistoricoSol,history)}/>
 
-        <Route        path="/solicitacao/criar"        render={()=> to(criarS)}/>
-        <Route exact  path="/solicitacao/orcamento/:id"render={()=> to(Orcamento)}/>
+        <Route        path="/solicitacao/criar"        render={(history)=> to(criarS,history)}/>
+        <Route exact  path="/solicitacao/orcamento/:id"render={(history)=> to(Orcamento,history)}/>
         
-        <Route exact  path="/solicitacao/validar"      render={()=> toUsertoo(ValidarS)}/>
-        <Route exact  path="/solicitacao/validar/:id"  render={()=> toUsertoo(ValidEspec)}/>
+        <Route exact  path="/solicitacao/validar"      render={(history)=> toUsertoo(ValidarS,history)}/>
+        <Route exact  path="/solicitacao/validar/:id"  render={(history)=> toUsertoo(ValidEspec,history)}/>
 
-        <Route        path="/siorg/criar"              render={()=> toUsertoo(criarSiorg)}/>
-        <Route        path="/siorg/lista"              render={()=> to(criarLista)}/>
+        <Route        path="/siorg/criar"              render={(history)=> toUsertoo(criarSiorg, history)}/>
+        <Route        path="/siorg/lista"              render={(history)=> to(criarLista,history)}/>
 
-        <Route        path="/almoxarifado/compras"     render={()=> toUsertoo(AlmoPedido)}/>
-        <Route        path="/almoxarifado/info"        render={()=> toUsertoo(AlmoInfo)}/>
+        <Route        path="/almoxarifado/compras"     render={(history)=> toUsertoo(AlmoPedido,history)}/>
+        <Route        path="/almoxarifado/info"        render={(history)=> toUsertoo(AlmoInfo,history)}/>
         
-        <Route        path="/almoxarifado/emprestimo"  render={()=> to(AlmoEmprestimo)}/>
-        <Route        path="/almoxarifado/historico"   render={()=> to(AlmoHistorico)}/>
-        <Route        path="/almoxarifado/devolucao"   render={()=> toUsertoo(AlmoDevolucao)}/>
+        <Route        path="/almoxarifado/emprestimo"  render={(history)=> to(AlmoEmprestimo,history)}/>
+        <Route        path="/almoxarifado/historico"   render={(history)=> to(AlmoHistorico,history)}/>
+        <Route        path="/almoxarifado/devolucao"   render={(history)=> toUsertoo(AlmoDevolucao,history)}/>
 
       </Switch>
     </App>
