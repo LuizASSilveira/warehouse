@@ -16,7 +16,8 @@ import {
   Label
 } from "reactstrap";
 
-const baseURL = "http://localhost:3001/orcamentos";
+const baseURL = `http://localhost:3001/solicitacoes/1/orcamentos`;
+
 const initialState = {
   orcamento: {
     cnpj_fornecedor: "",
@@ -25,10 +26,10 @@ const initialState = {
     referencia: "",
     pdf_patch: ""
   },
-  listaSolicitacao: [],
-  mediaUnit: Number(0.0),
-  precoMin: Number(0.0),
-  precoMax: Number(0.0)
+  listaOrcamentos: [],
+  mediaUnit: 0.0,
+  precoMin: 0.0,
+  precoMax: 0.0
 };
 
 export default class Orcamento extends Component {
@@ -39,15 +40,20 @@ export default class Orcamento extends Component {
   //     this.setState({ listaOrcamentos: resp.data });
   //   });
   // }
+
   getPrices(lista) {
+    this.setState({
+      mediaUnit: initialState.mediaUnit,
+      precoMin: initialState.precoMin,
+      precoMax: initialState.precoMax
+    });
     let sum = 0;
     lista.forEach(item => {
       sum += item.valor;
     });
-
-    let mediaUnit = sum / lista.length;
-    let precoMin = (mediaUnit * 0.6).toPrecision(3);
-    let precoMax = (mediaUnit * 1.3).toPrecision(3);
+    let mediaUnit = (sum / lista.length).toFixed(2);
+    let precoMin = (mediaUnit * 0.6).toFixed(2);
+    let precoMax = (mediaUnit * 1.3).toFixed(2);
 
     this.setState({
       mediaUnit,
@@ -57,67 +63,73 @@ export default class Orcamento extends Component {
   }
 
   componentDidMount() {
-    fetch(this.props.urlGet, {
-      method: "GET",
-      headers: new Headers({
-        "Content-type": "application/json",
-        token: localStorage.getItem("auth-token")
-      })
+    fetch(baseURL, {
+      method: "GET"
+      // headers: new Headers({
+      //   "Content-Type": "application/json",
+      //   token: localStorage.getItem("auth-token")
+      // })
     })
       .then(response => response.json())
       .then(product => {
         this.setState({ listaOrcamentos: product });
+        this.getPrices(this.state.listaOrcamentos);
       });
-    this.getPrices(this.state.listaSolicitacao);
   }
 
   clear() {
     this.setState({ orcamento: initialState.orcamento });
   }
 
+  save() {
+    const orcamento = this.state.orcamento;
+    // const method = orcamento.id ? "put" : "post";
+    const url = orcamento.id ? `${baseURL}/${orcamento.id}` : baseURL;
+    axios
+      .post(url, orcamento, {
+        headers: new Headers({
+          "Content-Type": "application/json",
+          token: localStorage.getItem("auth-token")
+        })
+      })
+      .then(resp => {
+        const lista = this.getUpdatedList(resp.data);
+        this.setState({
+          orcamento: initialState.orcamento,
+          listaOrcamentos: lista
+        });
+      });
+    this.getPrices(this.state.listaOrcamentos);
+    window.location.reload();
+  }
+
   // save() {
-  //   const orcamento = this.state.orcamento;
-  //   // const method = orcamento.id ? "put" : "post";
-  //   // const url = orcamento.id ? `${baseURL}/${orcamento.id}` : baseURL;
-  //   axios[method](url, orcamento).then(resp => {
-  //     const lista = this.getUpdatedList(resp.data);
-  //     this.setState({
-  //       orcamento: initialState.orcamento,
-  //       listaOrcamentos: lista
-  //     });
+  //   const requestInfo = {
+  //     method: "POST",
+  //     body: {
+  //       cnpj_fornecedor: this.state.orcamento.cnpj_fornecedor,
+  //       nome_fornecedor: this.state.orcamento.nome_fornecedor,
+  //       valor: this.state.orcamento.valor,
+  //       solicitacao_id: this.props.dado,
+  //       origem: this.state.orcamento.referencia
+  //     }
+  //     // headers: new Headers({
+  //     //   "Content-Type": "application/json",
+  //     //   token: localStorage.getItem("auth-token")
+  //     // })
+  //   };
+
+  //   fetch(baseURL, requestInfo).then(response => {
+  //     if (response.ok) {
+  //       //alerta dados salvos com sucesso
+  //       window.location.reload();
+  //       this.getUpdatedList(response);
+  //       // this.props.history.push("/solicitacao/historico");
+  //     } else {
+  //       console.log(response);
+  //     }
   //   });
   // }
-
-  save() {
-    const requestInfo = {
-      method: "POST",
-      body: JSON.stringify({
-        cnpj_fornecedor: this.state.orcamento.cnpj_fornecedor,
-        nome_fornecedor: this.state.orcamento.nome_fornecedor,
-        valor: this.state.orcamento.valor,
-        solicitacao_id: this.props.dado,
-        origem: this.state.orcamento.referencia
-      }),
-      headers: new Headers({
-        "Content-type": "application/json",
-        token: localStorage.getItem("auth-token")
-      })
-    };
-
-    fetch(
-      "http://localhost:3001/orcamentos/" + this.props.dado,
-      requestInfo
-    ).then(response => {
-      if (response.ok) {
-        //alerta dados salvos com sucesso
-        window.location.reload();
-        console.log("tudo ok");
-        this.props.history.push("/solicitacao/historico");
-      } else {
-        console.log(response);
-      }
-    });
-  }
 
   getUpdatedList(orcamento) {
     if (orcamento) {
@@ -141,11 +153,12 @@ export default class Orcamento extends Component {
     this.setState({ orcamento });
   }
   remove(orcamento) {
-    axios.delete(`${baseURL}/${orcamento.id}`);
-    // .then(resp => {
-    //   const lista = this.getUpdatedList(null);
-    //   this.setState({ listaOrcamentos: lista });
-    // });
+    axios.delete(`${baseURL}/${orcamento.id}`).then(() => {
+      const lista = this.getUpdatedList(null);
+      this.setState({ listaOrcamentos: lista });
+    });
+    this.getPrices(this.state.listaOrcamentos);
+    window.location.reload();
   }
 
   renderForm() {
@@ -218,6 +231,13 @@ export default class Orcamento extends Component {
             <Button color="secondary" onClick={event => this.clear(event)}>
               Cancelar
             </Button>{" "}
+            <Button
+              color="secondary"
+              className="pull-right"
+              // onClick={}
+            >
+              Solicitações
+            </Button>{" "}
           </div>
         </Form>
       </Container>
@@ -264,12 +284,12 @@ export default class Orcamento extends Component {
                 let orcamento = row;
                 return (
                   <div>
-                    {/* <Button
+                    <Button
                       className="btn btn-default"
                       onClick={() => this.load(orcamento)}
                     >
                       <i className="fa fa-edit" />
-                    </Button> */}
+                    </Button>
                     <Button
                       className="btn btn-danger"
                       onClick={() => this.remove(orcamento)}
@@ -295,13 +315,13 @@ export default class Orcamento extends Component {
         <Form>
           <FormGroup row>
             <Col sm={4}>
-              <Label>Preço Média</Label>
+              <Label>Preço Médio</Label>
               <InputGroup>
                 <InputGroupAddon addonType="prepend">R$</InputGroupAddon>
                 <Input
                   type="number"
                   disabled
-                  value={this.state.mediaUnit}
+                  value={this.state.mediaUnit ? this.state.mediaUnit : 0.0}
                   onChange={event => this.updateField(event)}
                 />
               </InputGroup>
@@ -314,7 +334,7 @@ export default class Orcamento extends Component {
                 <Input
                   type="number"
                   disabled
-                  value={this.state.precoMin}
+                  value={this.state.precoMin ? this.state.precoMin : 0.0}
                   onChange={event => this.updateField(event)}
                 />
               </InputGroup>
@@ -326,7 +346,7 @@ export default class Orcamento extends Component {
                 <Input
                   type="number"
                   disabled
-                  value={this.state.precoMax}
+                  value={this.state.precoMax ? this.state.precoMax : 0.0}
                   onChange={event => this.updateField(event)}
                 />
               </InputGroup>
