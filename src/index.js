@@ -28,32 +28,39 @@ import AlmoDevolucao  from './Almoxarifado/devolucao'
 import AlmoInfo       from './Almoxarifado/info'
 
 import PaginaRed from './pageRedirect'
- 
+ // Função verifica se usuário está logado, perguntando se há algo em localStorage.
  function logged(){
    if(window.localStorage.length){
      return true
    }
    return false
  }
+
+ // Função que verifica se usuário está logado e é Admin.
  function loggedAndAdm(){
    let adm
    adm = localStorage.getItem('isAdm')
+   // If necessário para converter string para tipo booleano.
    if(adm === 'true'){
      adm = true
    }else{
      adm = false
    }
+
    if(window.localStorage.length && adm){
      return true
    }
    return false
  }
+
+ // Função retorna componente para ser renderizado apenas se usuário está logado.
  function to(Component){
    return !logged() ? 
      (<PaginaRed/>) :
      (<Component/>)
  }
 
+ // Função retorna componente para ser renderizado apenas se usuário está logado e é adm.
  function toUsertoo(Component){
    return !loggedAndAdm() ? 
      (<PaginaRed/>) :

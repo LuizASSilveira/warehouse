@@ -27,7 +27,7 @@ export default class Redirecionador extends React.Component {
     }
     return (
        <div style={{textAlign:'center', marginTop:'3%' }}>
-        <h2 >Você não está logado!</h2>
+        <h2 >Você não está logado ou não tem permissão para acessar esta página!</h2>
         <h4>Redirecionando para login em {this.state.tempo}...</h4>
        </div>   
     )
