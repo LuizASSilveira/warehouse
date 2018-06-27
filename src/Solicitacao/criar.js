@@ -75,15 +75,15 @@ export default class CriarS extends Component {
               };
 
               fetch('http://localhost:3001/solicitacoes', requestInfo)
-                .then(response => {
+                .then(response => response.json().then(data=>{
                   if (response.ok) {
-                    //alerta dados salvos com sucesso
-                    window.location.reload()
-                    this.props.history.push('/solicitacao/historico');
+                    console.log(data.id)
+                    // window.location.reload()
+                    this.props.history.push('/solicitacao/orcamento/' + data.id);
                   } else {
                     throw new Error(response);
                   }
-                })
+                }))
         }
         else {
             // verifica se a descricao está vazia, se esta entao seta a variavel de validacao
