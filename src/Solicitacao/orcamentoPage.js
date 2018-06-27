@@ -3,6 +3,9 @@ import Nav from "../componentes/navbarAdm";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import "../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css";
 import axios from "axios";
+import { Link } from 'react-router-dom'
+import '../componentes/css/orcamentoPage.css'
+
 import {
   Button,
   Form,
@@ -137,7 +140,7 @@ export default class Orcamento extends Component {
   renderForm() {
     return (
       <Container>
-        <h3>Orçamentos</h3>
+        <h3>Orçamentos</h3><br/>
         <Form>
           <FormGroup row>
             <Col sm={4}>
@@ -201,7 +204,7 @@ export default class Orcamento extends Component {
             <Button color="primary" onClick={event => this.save(event)}>
               Salvar
             </Button>{" "}
-            <Button color="secondary" onClick={event => this.clear(event)}>
+            <Button color="danger" onClick={event => this.clear(event)}>
               Cancelar
             </Button>{" "}
           </div>
@@ -337,6 +340,9 @@ export default class Orcamento extends Component {
         {this.renderTable()}
 
         {this.renderPrices()}
+        <Link to="/solicitacao/historico">
+            <Button  className="botao_sucesso" color="success" >Visualizar Solicitações</Button>
+        </Link>
       </div>
     );
   }
