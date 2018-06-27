@@ -47,7 +47,7 @@ import PaginaRed from './pageRedirect'
      adm = false
    }
 
-   if(window.localStorage.length && adm){
+   if(adm){
      return true
    }
    return false

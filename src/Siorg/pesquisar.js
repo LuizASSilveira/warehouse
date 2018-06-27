@@ -15,7 +15,7 @@ export default class Criar extends Component {
                 <Nav/>
                 <h4 id="table">Tabela Siorg</h4>
 
-                <TableSiorg  b={this.qualquerCoisa} buttonName= {'Criar Requisicao'}
+                <TableSiorg  desativarSelect={true} buttonName= {'Criar Requisicao'}
                         urlGet=     {'http://localhost:3001/produtos'}
                         urlDelete= {'http://localhost:3001/produtos/'}
                         

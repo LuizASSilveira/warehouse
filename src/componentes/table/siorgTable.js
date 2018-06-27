@@ -79,7 +79,7 @@ export default class TableSiorg extends Component {
             return <Button color="danger" onClick={() => self.excluir(row)} >X</Button>;
         }
         let selectRowProp;
-        if(this.props.b){
+        if(this.props.desativarSelect){
            selectRowProp = {
             onSelect: this.properFunc
            }
