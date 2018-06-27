@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Nav from "../componentes/navbarAdm";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import "../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css";
 import axios from "axios";
@@ -16,7 +15,7 @@ import {
   Label
 } from "reactstrap";
 
-const baseURL = `http://localhost:3001/solicitacoes/1/orcamentos`;
+const baseURL = `http://localhost:3001/orcamentos`;
 
 const initialState = {
   orcamento: {
@@ -47,28 +46,34 @@ export default class Orcamento extends Component {
       precoMin: initialState.precoMin,
       precoMax: initialState.precoMax
     });
-    let sum = 0;
-    lista.forEach(item => {
-      sum += item.valor;
-    });
-    let mediaUnit = (sum / lista.length).toFixed(2);
-    let precoMin = (mediaUnit * 0.6).toFixed(2);
-    let precoMax = (mediaUnit * 1.3).toFixed(2);
 
-    this.setState({
-      mediaUnit,
-      precoMin,
-      precoMax
-    });
+    if (lista.length > 0) {
+      let sum = 0;
+      lista.forEach(item => {
+        sum += item.valor;
+      });
+      let mediaUnit = (sum / lista.length).toFixed(2);
+      let precoMin = (mediaUnit * 0.6).toFixed(2);
+      let precoMax = (mediaUnit * 1.3).toFixed(2);
+
+      this.setState({
+        mediaUnit,
+        precoMin,
+        precoMax
+      });
+    }
   }
 
   componentDidMount() {
-    fetch(baseURL, {
-      method: "GET"
-      // headers: new Headers({
-      //   "Content-Type": "application/json",
-      //   token: localStorage.getItem("auth-token")
-      // })
+    var parser = document.createElement("a");
+    parser.href = window.location.href;
+    // console.log(parser.pathname.slice(21));
+    fetch(`${baseURL}/${parser.pathname.slice(21)}`, {
+      method: "GET",
+      headers: new Headers({
+        "Content-Type": "application/json",
+        token: localStorage.getItem("auth-token")
+      })
     })
       .then(response => response.json())
       .then(product => {
@@ -84,9 +89,10 @@ export default class Orcamento extends Component {
   save() {
     const orcamento = this.state.orcamento;
     // const method = orcamento.id ? "put" : "post";
-    const url = orcamento.id ? `${baseURL}/${orcamento.id}` : baseURL;
+    var parser = document.createElement("a");
+    parser.href = window.location.href;
     axios
-      .post(url, orcamento, {
+      .post(`${baseURL}/${parser.pathname.slice(21)}`, orcamento, {
         headers: new Headers({
           "Content-Type": "application/json",
           token: localStorage.getItem("auth-token")
@@ -231,13 +237,6 @@ export default class Orcamento extends Component {
             <Button color="secondary" onClick={event => this.clear(event)}>
               Cancelar
             </Button>{" "}
-            <Button
-              color="secondary"
-              className="pull-right"
-              // onClick={}
-            >
-              Solicitações
-            </Button>{" "}
           </div>
         </Form>
       </Container>
@@ -360,8 +359,6 @@ export default class Orcamento extends Component {
   render() {
     return (
       <div>
-        <Nav isadm={true} />
-
         {this.renderForm()}
 
         {this.renderTable()}
