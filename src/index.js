@@ -35,8 +35,27 @@ import PaginaRed from './pageRedirect'
    }
    return false
  }
+ function loggedAndAdm(){
+   let adm
+   adm = localStorage.getItem('isAdm')
+   if(adm === 'true'){
+     adm = true
+   }else{
+     adm = false
+   }
+   if(window.localStorage.length && adm){
+     return true
+   }
+   return false
+ }
  function to(Component){
    return !logged() ? 
+     (<PaginaRed/>) :
+     (<Component/>)
+ }
+
+ function toUsertoo(Component){
+   return !loggedAndAdm() ? 
      (<PaginaRed/>) :
      (<Component/>)
  }
@@ -48,27 +67,27 @@ ReactDOM.render(
       <Switch>
         
         <Route exact  path="/"                         component={Login}/>
-        <Route        path="/requisicao/criar"         render={()=> to(Criar)}/>
-        <Route        path="/requisicao/historico"     render={()=> to(Historico)}/>
-        <Route        path="/requisicao/editar/:id"    render={()=> to(EditarReq)}/>
+        <Route        path="/requisicao/criar"         render={()=> toUsertoo(Criar)}/>
+        <Route        path="/requisicao/historico"     render={()=> toUsertoo(Historico)}/>
+        <Route        path="/requisicao/editar/:id"    render={()=> toUsertoo(EditarReq)}/>
 
         <Route        path="/solicitacao/historico"    render={()=> to(HistoricoSol)}/>
 
         <Route        path="/solicitacao/criar"        render={()=> to(criarS)}/>
         <Route exact  path="/solicitacao/orcamento/:id"render={()=> to(Orcamento)}/>
         
-        <Route exact  path="/solicitacao/validar"      render={()=> to(ValidarS)}/>
-        <Route exact  path="/solicitacao/validar/:id"  render={()=> to(ValidEspec)}/>
+        <Route exact  path="/solicitacao/validar"      render={()=> toUsertoo(ValidarS)}/>
+        <Route exact  path="/solicitacao/validar/:id"  render={()=> toUsertoo(ValidEspec)}/>
 
-        <Route        path="/siorg/criar"              render={()=> to(criarSiorg)}/>
+        <Route        path="/siorg/criar"              render={()=> toUsertoo(criarSiorg)}/>
         <Route        path="/siorg/lista"              render={()=> to(criarLista)}/>
 
-        <Route        path="/almoxarifado/compras"     render={()=> to(AlmoPedido)}/>
-        <Route        path="/almoxarifado/info"        render={()=> to(AlmoInfo)}/>
+        <Route        path="/almoxarifado/compras"     render={()=> toUsertoo(AlmoPedido)}/>
+        <Route        path="/almoxarifado/info"        render={()=> toUsertoo(AlmoInfo)}/>
         
         <Route        path="/almoxarifado/emprestimo"  render={()=> to(AlmoEmprestimo)}/>
         <Route        path="/almoxarifado/historico"   render={()=> to(AlmoHistorico)}/>
-        <Route        path="/almoxarifado/devolucao"   render={()=> to(AlmoDevolucao)}/>
+        <Route        path="/almoxarifado/devolucao"   render={()=> toUsertoo(AlmoDevolucao)}/>
 
       </Switch>
     </App>
