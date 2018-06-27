@@ -6,29 +6,13 @@ import '../componentes/css/input.css'
 export default class Criar extends Component {
     constructor(){
         super()
-        this.state={isAdm:false}
     } 
-
-    qualquerCoisa(){
-        //let a
-    }
-
-    componentDidMount(){
-        let adm
-        adm = localStorage.getItem('isAdm')
-        console.log(adm)
-        if(adm === "false"){
-            this.setState({ isAdm: false })
-        }else{
-            this.setState({ isAdm: true })
-        }
-    }
 
     render(){
        
         return(
             <div>
-                <Nav    isadm = {this.state.isAdm} />
+                <Nav/>
                 <h4 id="table">Tabela Siorg</h4>
 
                 <TableSiorg  b={this.qualquerCoisa} buttonName= {'Criar Requisicao'}
