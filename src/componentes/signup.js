@@ -19,7 +19,7 @@ import {
   CardHeader
 } from "reactstrap";
 
-export default class Login extends Component {
+export default class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = { msg: [], redirect: false };
@@ -28,18 +28,23 @@ export default class Login extends Component {
     event.preventDefault();
     const requestInfo = {
       method: "POST",
-      body: JSON.stringify({ nome: this.nome.value, senha: this.senha.value }),
+      body: JSON.stringify({
+        email: this.email.value,
+        departamento: this.departamento.value,
+        nome: this.nome.value,
+        senha: this.senha.value
+      }),
       headers: new Headers({
         "Content-type": "application/json"
       })
     };
 
-    fetch("http://localhost:3001/login", requestInfo)
+    fetch("http://localhost:3001/signup", requestInfo)
       .then(response => {
         if (response.ok) {
           return response.text();
         } else {
-          throw new Error("não foi possível fazer o login");
+          throw new Error("não foi possível fazer o cadastro");
         }
       })
       .then(token => {
@@ -102,11 +107,33 @@ export default class Login extends Component {
                         {""}
                       </Col>
                     </FormGroup>
+                    <FormGroup row>
+                      <Col sm={12}>
+                        <Input
+                          innerRef={input => (this.email = input)}
+                          type="email"
+                          name="email"
+                          placeholder="Email"
+                        />
+                        {""}
+                      </Col>
+                    </FormGroup>
+                    <FormGroup row>
+                      <Col sm={12}>
+                        <Input
+                          innerRef={input => (this.departamento = input)}
+                          type="text"
+                          name="departamento"
+                          placeholder="Departamento"
+                        />
+                        {""}
+                      </Col>
+                    </FormGroup>
                     <Button type="submit" color="success">
                       Entrar
                     </Button>
-                    <a class="btn btn-primary" href="/cadastrar">
-                      Cadastrar
+                    <a class="btn btn-primary" href="/">
+                      Login
                     </a>
                   </Form>
                 </Col>
@@ -115,35 +142,6 @@ export default class Login extends Component {
           </Card>
         </Container>
       </div>
-
-      // {/* <h1 className="header-logo">Almoxarifado UTFPR</h1> */}
-      // <span>{this.state.msg}</span>
-
-      // <Form onSubmit={this.envia.bind(this)}>
-      //   <FormGroup>
-      //     <Label for="exampleEmail">Email</Label>
-      //     <Input
-      //       type="email"
-      //       name="email"
-      //       id="exampleEmail"
-      //       placeholder="with a placeholder"
-      //     />
-      //   </FormGroup>
-      // </Form>
-      // <input
-      //   placeholder=" Usuário"
-      //   type="text"
-      //   ref={input => (this.nome = input)}
-      // />
-      // <input
-      //   placeholder=" Senha"
-      //   type="password"
-      //   ref={input => (this.senha = input)}
-      // />
-      // <div>
-      //   <input type="submit" value="Entrar" />
-      //   <a class="btn btn-primary" href="/cadastrar" value="Cadastrar" />
-      // </div>
     );
   }
 }
