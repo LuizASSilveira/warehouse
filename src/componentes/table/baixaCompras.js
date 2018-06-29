@@ -71,10 +71,10 @@ export default class Table extends Component {
                         });
         })
         this.setState({
-            qtd :   row.quantidade,
-            id  :   row.id,
-            qtdMAX: row.quantidade,
-            modal:  !this.state.modal,
+            qtd :           row.quantidade,
+            qtdMAX:         row.quantidade,
+            idSolicitacao:  row.solicitacao_id,    
+            modal:          !this.state.modal,
         })
     }
     setQuantidade(valor){
@@ -112,7 +112,7 @@ export default class Table extends Component {
                     <TableHeaderColumn width='15%'  dataField="button"              dataFormat={buttonFormatter.bind(this)}> Carregar Estoque       </TableHeaderColumn>
                 </BootstrapTable>
 
-                <Modal orcamentoID={this.orcamentoID} valor={this.valor} idSolicitacao={this.state.idSolicitacao} Fornecedor= 'Fornecedor' array={this.state.arrayForn}  max= {this.state.qtd}  onChange={this.setGroup.bind(this)} check={this.state.checked} func={this.setQuantidade.bind(this)} label='Produtos Recebidos' value={this.state.qtd} modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} />
+                <Modal orcamentoID={this.orcamentoID} valor={this.valor} idSolicitacao={this.state.idSolicitacao} Fornecedor= 'Fornecedor' array={this.state.arrayForn}  max= {this.state.qtd}  onChange={this.setGroup.bind(this)} check={this.state.checked} func={this.setQuantidade.bind(this)} label='Produtos Recebidos' value={this.state.qtd} modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm.bind(this)} toggle={true} />
             </div>
         );
     }
