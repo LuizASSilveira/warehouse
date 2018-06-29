@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import '../css/table.css'
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
-import { PropTypes } from 'prop-types'
-import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
-import { Button } from 'reactstrap';
-import ExpandTable from './expand'
+import React, { Component } from "react";
+import "../css/table.css";
+import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
+import { PropTypes } from "prop-types";
+import "../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css";
+import { Button } from "reactstrap";
+import ExpandTable from "./expand";
 
 export default class TableSiorg extends Component {
     constructor(props) {
@@ -40,26 +40,26 @@ export default class TableSiorg extends Component {
             this.props.a(row, isSelected)
         }
     }
+    // console.log(row)
+  }
 
-    excluir(row) {
-
-        const requestInfo = {
-            method: 'DELETE',
-            headers: new Headers({
-                'Content-type': 'application/json',
-                'token': localStorage.getItem('auth-token')
-            })
-        };
-        fetch(this.props.urlDelete + row.siorg, requestInfo)
-            .then(response => {
-                if (response.ok) {
-                    //alerta dados salvos com sucesso
-                    window.location.reload()
-                } else {
-                    throw new Error("não foi possivel salvar as alterações");
-                }
-            })
-    }
+  excluir(row) {
+    const requestInfo = {
+      method: "DELETE",
+      headers: new Headers({
+        "Content-type": "application/json",
+        token: localStorage.getItem("auth-token")
+      })
+    };
+    fetch(this.props.urlDelete + row.siorg, requestInfo).then(response => {
+      if (response.ok) {
+        //alerta dados salvos com sucesso
+        window.location.reload();
+      } else {
+        throw new Error("não foi possivel salvar as alterações");
+      }
+    });
+  }
 
     expandComponent(row) {
     return (
@@ -69,9 +69,45 @@ export default class TableSiorg extends Component {
 
   isExpandableRow(row) {
     return true;
-
   }
 
+<<<<<<< HEAD
+  render() {
+    let self = this;
+    function buttonFormatter(cell, row) {
+      return (
+        <Button color="danger" onClick={() => self.excluir(row)}>
+          X
+        </Button>
+      );
+    }
+    let selectRowProp;
+    if (this.props.b) {
+      selectRowProp = {
+        onSelect: this.properFunc
+      };
+    } else {
+      selectRowProp = {
+        mode: "radio",
+        clickToSelect: true,
+        bgColor: "grey",
+        onSelect: this.properFunc
+      };
+    }
+
+    let ganbis;
+    if (this.state.isAdm) {
+      ganbis = (
+        <TableHeaderColumn
+          width="10%"
+          dataField="button"
+          dataFormat={buttonFormatter}
+        >
+          {" "}
+          Remover
+        </TableHeaderColumn>
+      );
+=======
     render() {
 
         let self = this;
@@ -122,11 +158,39 @@ export default class TableSiorg extends Component {
 
             </div>
         );
+>>>>>>> b4cce67802ee6a6875035006943b4676b1615e74
     }
 
+    return (
+      <div id="table">
+        <BootstrapTable
+          data={this.state.lista}
+          search={true}
+          pagination
+          hover={true}
+          selectRow={selectRowProp}
+          searchPlaceholder="Pesquisar"
+          expandComponent={this.expandComponent}
+          expandableRow={this.isExpandableRow}
+          options={{ noDataText: "Não há dados." }}
+        >
+          <TableHeaderColumn width="10%" dataField="siorg" isKey>
+            {" "}
+            Código Siorg{" "}
+          </TableHeaderColumn>
+          <TableHeaderColumn width="60%" dataField="descricao">
+            {" "}
+            Descrição{" "}
+          </TableHeaderColumn>
+
+          {ganbis}
+        </BootstrapTable>
+      </div>
+    );
+  }
 }
 TableSiorg.propTypes = {
-    a: PropTypes.func,
-    b:PropTypes.func
+  a: PropTypes.func,
+  b: PropTypes.func
 };
-export { TableSiorg }
+export { TableSiorg };
