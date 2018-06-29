@@ -2,13 +2,8 @@ import React, { Component } from 'react';
 import Nav from '../componentes/navbarAdm';
 import {Table} from '../componentes/table/tableHistorico';
 import '../componentes/css/input.css'
-import {Redirect} from 'react-router'
 
 export default class Criar extends Component {     
-    constructor(){
-        super()
-    }
-
     render(){
         return(
             <div>

@@ -6,24 +6,9 @@ import '../css/modal.css'
 class ModalAmoxarifado extends React.Component {
     constructor(){
         super()
-        this.state = {array:[]}
+        this.state = { array:[]}
     }
-
-    // componentDidMount() {
-    //     fetch("http://localhost:3001/orcamentos/3", {
-    //       method: 'GET',
-    //       headers: new Headers({
-    //         'Content-type': 'application/json',
-    //         'token': localStorage.getItem('auth-token')
-    //       })
-    //     }).then(response => response.json())
-    //       .then(product => {
-    //         this.setState({ array: product });
-            
-    //       })
-    //   }
-    
-    render() {
+        render() {
         return (
             <div >
                 <Modal isOpen={this.props.modal} toggle={this.props.onCancel} className={this.props.className}>
@@ -33,9 +18,9 @@ class ModalAmoxarifado extends React.Component {
 
                         <div id={this.props.divID}>
                             <Label> {this.props.Fornecedor}: </Label><br />
-                            <Input type="select">
-                                {this.state.array.map((forn) =>
-                                <option key={forn.nome_fornecedor} >{forn.nome_fornecedor}</option>
+                            <Input type="select" value={this.props.valor} onChange={this.props.orcamentoID}>
+                                {this.props.array.map((forn) =>
+                                <option key={forn.nome_fornecedor} >{forn.id}</option>
                                 )}
                             </Input>
                         </div>
@@ -59,5 +44,4 @@ class ModalAmoxarifado extends React.Component {
         );
     }
 }
-
 export default ModalAmoxarifado;

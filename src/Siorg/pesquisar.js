@@ -4,10 +4,6 @@ import {TableSiorg} from '../componentes/table/siorgTable';
 import '../componentes/css/input.css'
 
 export default class Criar extends Component {
-    constructor(){
-        super()
-    } 
-
     render(){
        
         return(

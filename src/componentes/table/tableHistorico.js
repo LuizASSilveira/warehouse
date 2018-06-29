@@ -40,12 +40,12 @@ class Table extends Component {
 
   render() {
     
-    const selectRowProp = {
-          clickToSelect: true,
-          hideSelectColumn: true,
-          mode: 'radio',
-          bgColor: 'gray',
-    };
+    // const selectRowProp = {
+    //       clickToSelect: true,
+    //       hideSelectColumn: true,
+    //       mode: 'radio',
+    //       bgColor: 'gray',
+    // };
 
     const options ={
       noDataText: 'Não há dados.',
