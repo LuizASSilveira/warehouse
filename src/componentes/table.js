@@ -5,13 +5,7 @@ import '../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.
 import Modal from '../componentes/confirmModal';
 import { Button, Input, FormGroup, FormFeedback, ModalBody, ModalFooter } from 'reactstrap';
 import './css/input.css'
-import {ErrorAlert} from '../componentes/alerta';
 import ExpandTable from './table/expand'
-
-
-
-
-
 class Table extends Component {
 
   constructor(props) {

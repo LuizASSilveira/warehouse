@@ -34,20 +34,6 @@ export default class TableSiorg extends Component {
             this.setState({ isAdm: true })
         }
     }
-    // componentDidUpdate(){
-    //             fetch(this.props.urlGet, {
-    //         method: 'GET',
-    //         headers: new Headers({
-    //             'Content-type': 'application/json',
-    //             'token': localStorage.getItem('auth-token')
-    //         })
-    //     })
-    //         .then(response => response.json())
-    //         .then(product => {
-    //             this.setState({ lista: product });
-    //         });
-
-    // }
 
     properFunc(row, isSelected) {
         if (this.props.a) {
@@ -85,6 +71,7 @@ export default class TableSiorg extends Component {
     return true;
   }
 
+<<<<<<< HEAD
   render() {
     let self = this;
     function buttonFormatter(cell, row) {
@@ -120,6 +107,58 @@ export default class TableSiorg extends Component {
           Remover
         </TableHeaderColumn>
       );
+=======
+    render() {
+
+        let self = this;
+        function buttonFormatter(cell, row) {
+            return <Button color="danger" onClick={() => self.excluir(row)} >X</Button>;
+        }
+        let selectRowProp;
+        if(this.props.desativarSelect){
+           selectRowProp = {
+            onSelect: this.properFunc
+           }
+        }else{
+          selectRowProp = {
+            mode: 'radio',
+            clickToSelect: true,
+            bgColor: 'grey',
+            onSelect: this.properFunc
+        }
+        }
+
+        let colunaRemover
+        // Verifica se é ADM e esconde != true (esconde é utilizado em lista siorg de criar sol) 
+        if(this.state.isAdm && !this.props.esconde){
+            colunaRemover = <TableHeaderColumn width='10%' dataField="button" 
+                                               dataFormat={buttonFormatter}> Remover   
+                            </TableHeaderColumn>
+        }
+
+        return (
+            <div id="table">
+                <BootstrapTable
+                    data={this.state.lista}
+                    search={true}
+                    pagination
+                    hover={true}
+                    selectRow={selectRowProp}
+                    searchPlaceholder='Pesquisar'
+                    expandComponent={ this.expandComponent }
+                    expandableRow={ this.isExpandableRow }
+                    options={{ noDataText: 'Não há dados.' }}
+                >
+                    <TableHeaderColumn width='10%' dataField="siorg" isKey>     Código Siorg     </TableHeaderColumn>
+                    <TableHeaderColumn width='60%' dataField="descricao">       Descrição  </TableHeaderColumn>
+                    
+                    {colunaRemover}
+                </BootstrapTable>
+
+
+            </div>
+        );
+>>>>>>> b4cce67802ee6a6875035006943b4676b1615e74
     }
 
     return (

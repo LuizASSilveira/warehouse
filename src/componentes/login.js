@@ -22,7 +22,7 @@ import {
 export default class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = { msg: [], redirect: false };
+    this.state = { msg: [], redirect: fconflialse };
   }
   envia(event) {
     event.preventDefault();
