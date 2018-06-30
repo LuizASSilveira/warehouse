@@ -32,10 +32,10 @@ export default class Table extends Component {
         const requestInfo = {
             method: 'POST',
             body: JSON.stringify({  
-                                    orcamento_id:   this.state.valor,
-                                    solicitacao_id: this.state.idSolicitacao,
-                                    quantidade:     this.state.qtd,
-                                    unico:          this.state.checked,                              
+                orcamento_id:   this.state.valor,
+                solicitacao_id: this.state.idSolicitacao,
+                quantidade:     this.state.qtd,
+                unico:          this.state.checked,                              
             }),
             headers: new Headers({
               'Content-type': 'application/json',
@@ -66,6 +66,7 @@ export default class Table extends Component {
         })
         }).then(response => response.json())
         .then(product => {
+            console.log(product[0].id)
             this.setState({ arrayForn: product, 
                             valor:  product[0].id,
                         });

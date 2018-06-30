@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import "./css/login.css";
 import { Redirect } from "react-router-dom";
 import {
-  InputGroup,
+  
   Form,
   Input,
   FormGroup,
-  Label,
   Col,
   Button,
   Container,
@@ -14,7 +13,6 @@ import {
   Card,
   CardBody,
   CardTitle,
-  CardSubtitle,
   CardText,
   CardHeader
 } from "reactstrap";
@@ -22,7 +20,7 @@ import {
 export default class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = { msg: [], redirect: fconflialse };
+    this.state = { msg: [] };
   }
   envia(event) {
     event.preventDefault();
