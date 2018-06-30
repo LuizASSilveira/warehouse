@@ -98,15 +98,13 @@ class Table extends Component {
   }
 
   expandComponent(row) {
-    return (
-      console.log(row),
+    return (      
       <ExpandTable data={ row } siorg={false} />
     );
   }
 
-  isExpandableRow(row) {
+  isExpandableRow() {
     return true;
-
   }
 
   render() {
@@ -114,8 +112,6 @@ class Table extends Component {
     if (this.state.redirect) {
         this.props.history.push('/solicitacao/validar/'+this.state.id);
     }
-
-
 
     const options ={
       noDataText: 'Não há dados.',
@@ -126,8 +122,9 @@ class Table extends Component {
     var selectRowProp = {
       clickToSelect: true,
       mode: 'checkbox',
-      bgColor: 'gray',
-      onSelect: this.onRowSelect
+      bgColor:'#98FB98',
+      
+      onSelect: this.onRowSelect,
     };
 
     return (
@@ -144,7 +141,7 @@ class Table extends Component {
           searchPlaceholder='Pesquisar'
           options={options}
         >
-          <TableHeaderColumn dataField='id' isKey>  ID                                 </TableHeaderColumn>
+          <TableHeaderColumn dataField='id' isKey>  ID                                              </TableHeaderColumn>
           <TableHeaderColumn width='20%' dataField={this.props.dataL}>      {this.props.data}       </TableHeaderColumn>
           <TableHeaderColumn width='60%' dataField={this.props.descricaoL}> {this.props.descricao}  </TableHeaderColumn>
           <TableHeaderColumn width='10%' dataField={this.props.statusL}>    {this.props.status}     </TableHeaderColumn>
@@ -154,11 +151,8 @@ class Table extends Component {
         <div id="InputButton">
           <FormGroup>
             <div>
-              <Input invalid={this.state.validNome} placeholder="Nome Requisição" id="nome" 
-                     type="text" name="nome" value={this.state.value} 
-                     onChange={this.handleChange} />
-                      <Button id="criaReq"color="primary" 
-                      onClick={this.toggle}>{this.props.buttonName}</Button>
+              <Input invalid={this.state.validNome} placeholder="Nome Requisição" id="nome" type="text" name="nome" value={this.state.value} onChange={this.handleChange} />
+                      <Button id="criaReq"color="primary" onClick={this.toggle}>{this.props.buttonName}</Button>
               <FormFeedback>Preencha este campo!</FormFeedback>
 
             </div>

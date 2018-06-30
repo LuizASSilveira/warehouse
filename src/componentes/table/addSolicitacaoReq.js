@@ -97,7 +97,7 @@ class Table extends Component {
     var selectRowProp = {
       clickToSelect: true,
       mode: 'checkbox',
-      bgColor: 'gray',
+      bgColor:'#98FB98',
       onSelect: this.onRowSelect
     };
 
