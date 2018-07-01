@@ -6,16 +6,51 @@
     background: white;
     padding: 1em;
 }
-
-.login-box input {
+.login-box input{
     display: block;
     border-radius: 5px;
     margin: 1em auto;
     border: 1px solid #dbdbdb;
 }
-
 .login-box input[type='submit'] {
     background: #3897f0;
     border-color: #3897f0;
     color: white;    
+    width: 30%;
+    cursor: pointer;
+}
+#cadastro{
+    border: 1px solid #E8E8E8;
+    margin: auto;
+    margin-top: 5%;
+    padding: 4%;
+    width: 40%;
+    border-radius: 5%;
+    box-shadow: 1px 1px  #aaaaaa;
+}
+#logo{
+    margin-top: -7%; 
+    margin-bottom: 5%;
+    text-align: center;
+}
+#Badge{
+    display: block;
+    font-size: 90%;
+    width: 30%;
+    color: white; 
+    display: block;
+    border-radius: 5px;
+    margin: -1em auto;
+    border: 1px solid #dbdbdb;
+}
+Label{
+    margin-top: 5%;
+}
+#buttonCadastro{
+    margin: auto;
+    margin-top: 5%;
+    width: 80%;
+}
+button{
+    width: 46%;
 }

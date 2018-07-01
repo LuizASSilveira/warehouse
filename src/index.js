@@ -63,7 +63,6 @@ function to(Component, history) {
     <Component history={history} {...history} />
   );
 }
-
 // Função retorna componente para ser renderizado apenas se usuário está logado e é adm.
 function toUsertoo(Component, history) {
   return !loggedAndAdm() ? (
@@ -72,7 +71,6 @@ function toUsertoo(Component, history) {
     <Component history={history} {...history} />
   );
 }
-
 ReactDOM.render(
   <BrowserRouter>
     <App>

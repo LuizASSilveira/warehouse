@@ -1,146 +1,67 @@
 import React, { Component } from "react";
 import "./css/login.css";
-import { Redirect } from "react-router-dom";
-import {
-  InputGroup,
-  Form,
-  Input,
-  FormGroup,
-  Label,
-  Col,
-  Button,
-  Container,
-  Row,
-  Card,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  CardText,
-  CardHeader
-} from "reactstrap";
-
+import { Input, FormGroup, Label, Button } from "reactstrap";
 export default class Signup extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { msg: [], redirect: false };
+  constructor() {
+    super();
+    this.state = { msg: [], nome: '', email: '', senha: '', departamento: '' };
   }
-  envia(event) {
-    event.preventDefault();
+  envia() {
     const requestInfo = {
-      method: "POST",
-      body: JSON.stringify({
-        email: this.email.value,
-        departamento: this.departamento.value,
-        nome: this.nome.value,
-        senha: this.senha.value
-      }),
+      method: 'POST',
+      body: JSON.stringify({ nome: this.state.nome, senha: this.state.senha, email: this.state.email , departamento: this.state.departamento }),
       headers: new Headers({
-        "Content-type": "application/json"
+        'Content-type': 'application/json',
+        'token': localStorage.getItem('auth-token')
       })
     };
-
-    fetch("http://localhost:3001/signup", requestInfo)
+    fetch('http://localhost:3001/signup', requestInfo)
       .then(response => {
         if (response.ok) {
-          return response.text();
+          this.props.history.push('/')
         } else {
-          throw new Error("não foi possível fazer o cadastro");
+          throw new Error("não foi possivel salvar as alterações");
         }
       })
-      .then(token => {
-        var obj = JSON.parse(token);
-        localStorage.setItem("auth-token", obj.token);
-        localStorage.setItem("isAdm", obj.isAdm);
-        localStorage.setItem("nome", obj.nome);
-        this.setState({ redirect: true });
-      })
-      .catch(error => {
-        this.setState({ msg: error.message });
-      });
   }
-
-  componentDidMount() {
-    localStorage.removeItem("auth-token");
-    localStorage.removeItem("isAdm");
-    localStorage.removeItem("nome");
+  ChangeDes(event) {
+    this.setState({ nome: event.target.value});
+  }
+  ChangeSen(event) {
+    this.setState({ senha: event.target.value});
+  }
+  ChangeEma(event) {
+    this.setState({ email: event.target.value});
+  }
+  ChangeDep(event) {
+    this.setState({ departamento: event.target.value});
+  }
+  voltar(){
+    this.props.history.push('/')
   }
 
   render() {
-    if (this.state.redirect) {
-      return <Redirect to="/solicitacao/historico" />;
-    }
     return (
-      <div>
-        <Container>
-          <br />
-          <br />
-          <Card body className="text-center">
-            <CardHeader>Almoxarifado UTFPR </CardHeader>
-            <CardBody>
-              <CardTitle />
-              <CardText>
-                <span>{this.state.msg}</span>
-              </CardText>
+      <div id='cadastro'>
+        <h1 id= 'logo' className="header-logo">Cadastro</h1>
 
-              <Row>
-                <Col sm="12" md={{ size: 8, offset: 2 }}>
-                  <Form onSubmit={this.envia.bind(this)}>
-                    <FormGroup row>
-                      <Col sm={12}>
-                        <Input
-                          innerRef={input => (this.nome = input)}
-                          type="text"
-                          name="username"
-                          placeholder="Nome de Usuário"
-                        />
-                        {""}
-                      </Col>
-                    </FormGroup>
-                    <FormGroup row>
-                      <Col sm={12}>
-                        <Input
-                          innerRef={input => (this.senha = input)}
-                          type="password"
-                          name="senha"
-                          placeholder="Senha"
-                        />
-                        {""}
-                      </Col>
-                    </FormGroup>
-                    <FormGroup row>
-                      <Col sm={12}>
-                        <Input
-                          innerRef={input => (this.email = input)}
-                          type="email"
-                          name="email"
-                          placeholder="Email"
-                        />
-                        {""}
-                      </Col>
-                    </FormGroup>
-                    <FormGroup row>
-                      <Col sm={12}>
-                        <Input
-                          innerRef={input => (this.departamento = input)}
-                          type="text"
-                          name="departamento"
-                          placeholder="Departamento"
-                        />
-                        {""}
-                      </Col>
-                    </FormGroup>
-                    <Button type="submit" color="success">
-                      Entrar
-                    </Button>
-                    <a class="btn btn-primary" href="/">
-                      Login
-                    </a>
-                  </Form>
-                </Col>
-              </Row>
-            </CardBody>
-          </Card>
-        </Container>
+        <FormGroup>         
+          <Label>Nome de Usuario</Label>
+          <Input placeholder=" Usuário"       type="text"     onChange={this.ChangeDes.bind(this)} value={this.state.nome}      />
+
+          <Label>Senha</Label>
+          <Input placeholder=" Senha"         type="password" onChange={this.ChangeSen.bind(this)} value={this.state.senha}  />
+          
+          <Label>Email</Label>
+          <Input placeholder=" Email"         type="email"    onChange={this.ChangeEma.bind(this)} value={this.state.email}  />
+
+          <Label>Departamento</Label>
+          <Input placeholder=" Departamento"  type="text"     onChange={this.ChangeDep.bind(this)} value={this.state.departamento}  />
+          <div id='buttonCadastro'>
+          <Button  onClick={this.envia.bind(this)}   color="primary">    Cadastrar </Button>
+          <Button  id="voltar"  onClick={this.voltar.bind(this)}  color="secondary">  voltar    </Button>
+          </div>
+          </FormGroup>
       </div>
     );
   }
