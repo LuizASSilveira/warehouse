@@ -12,7 +12,7 @@ class ModalAmoxarifado extends React.Component {
         return (
             <div >
                 <Modal isOpen={this.props.modal} toggle={this.props.onCancel} className={this.props.className}>
-                    <ModalHeader toggle={this.props.onCancel}>Almoxarifado</ModalHeader>
+                    <ModalHeader toggle={this.props.onCancel}>{this.props.cabecalho}</ModalHeader>
                     <ModalBody>
                         {this.props.mensagem}
                         <div id={this.props.divNum}>
