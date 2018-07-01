@@ -15,6 +15,15 @@ class ModalAmoxarifado extends React.Component {
                     <ModalHeader toggle={this.props.onCancel}>Almoxarifado</ModalHeader>
                     <ModalBody>
                         {this.props.mensagem}
+
+                        <div id={this.props.divID}>
+                            <Label> {this.props.Fornecedor}: </Label><br />
+                            <Input type="select" value={this.props.valor} onChange={this.props.orcamentoID}>
+                                {this.props.array.map((forn) =>
+                                <option key={forn.id} >{forn.nome_fornecedor}</option>
+                                )}
+                            </Input>
+                        </div>
                         <div id={this.props.divNum}>
                             <Label> {this.props.label}: </Label><br />
                             <NumericInput type="number" min={1} max={this.props.max} value={this.props.value} onChange={this.props.func} />

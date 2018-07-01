@@ -47,7 +47,7 @@ export default class Signup extends Component {
 
         <FormGroup>         
           <Label>Nome de Usuario</Label>
-          <Input placeholder=" Usuário"       type="text"     onChange={this.ChangeDes.bind(this)} value={this.state.nome}      />
+          <Input id="Label" placeholder=" Usuário"       type="text"     onChange={this.ChangeDes.bind(this)} value={this.state.nome}      />
 
           <Label>Senha</Label>
           <Input id="Label" placeholder=" Senha"         type="password" onChange={this.ChangeSen.bind(this)} value={this.state.senha}  />

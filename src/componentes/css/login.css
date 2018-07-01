@@ -44,14 +44,15 @@
     margin: -1em auto;
     border: 1px solid #dbdbdb;
 }
-Label{
-    margin-top: 5%;
+#Label{
+    margin-bottom: 3%;
+    margin-top: -1%;
 }
 #buttonCadastro{
     margin: auto;
     margin-top: 5%;
     width: 80%;
 }
-button{
+#button{
     width: 46%;
 }

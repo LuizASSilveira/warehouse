@@ -3,7 +3,7 @@ import '../css/table.css'
 import { BootstrapTable, TableHeaderColumn } from '../../../node_modules/react-bootstrap-table';
 import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import { Button } from 'reactstrap'
-import Modal from '../modal-almoxarifado/modal'
+import Modal from '../modal-almoxarifado/modal2'
 
 export default class Table extends Component {
     constructor() {
@@ -104,13 +104,13 @@ export default class Table extends Component {
                     pagination
                     options={options}
                 >
-                    <TableHeaderColumn width='10%'  dataField='produto_id'      isKey>              ID              </TableHeaderColumn>
-                    <TableHeaderColumn width='10%'  dataField='solicitacao_id'  >                   IDSolicitacao   </TableHeaderColumn>
-                    <TableHeaderColumn width='15%'  dataField='quantidade'      dataAlign='center'> Quantidade      </TableHeaderColumn>
-                    <TableHeaderColumn width='20%'  dataField='requisicao_id'   dataAlign='center'> Requisição      </TableHeaderColumn>
-                    <TableHeaderColumn width='50%'  dataField='descricao'>                          Descrição       </TableHeaderColumn>  
+                    <TableHeaderColumn width='0%'   dataField='produto_id'      isKey>              ID              </TableHeaderColumn>
+                    <TableHeaderColumn width='0%'   dataField='solicitacao_id'  >                   IDSolicitacao   </TableHeaderColumn>
+                    <TableHeaderColumn width='15%'  dataField='quantidade'       dataAlign='center'>Quantidade      </TableHeaderColumn>
+                    <TableHeaderColumn width='20%'  dataField='requisicao_id'    dataAlign='center'>Requisição      </TableHeaderColumn>
+                    <TableHeaderColumn width='50%'  dataField='descricao'        dataAlign='center'>Descrição       </TableHeaderColumn>  
                     <TableHeaderColumn width='0%'   dataField='requisicao_data'>                    Data            </TableHeaderColumn>
-                    <TableHeaderColumn width='15%'  dataField="button"              dataFormat={buttonFormatter.bind(this)}> Carregar Estoque       </TableHeaderColumn>
+                    <TableHeaderColumn width='15%'  dataField="button"           dataAlign='center'   dataFormat={buttonFormatter.bind(this)}> Carregar Estoque       </TableHeaderColumn>
                 </BootstrapTable>
 
                 <Modal orcamentoID={this.orcamentoID} valor={this.valor} idSolicitacao={this.state.idSolicitacao} Fornecedor= 'Fornecedor' array={this.state.arrayForn}  max= {this.state.qtd}  onChange={this.setGroup.bind(this)} check={this.state.checked} func={this.setQuantidade.bind(this)} label='Produtos Recebidos' value={this.state.qtd} modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm.bind(this)} toggle={true} />

@@ -32,9 +32,9 @@ export default class CriarS extends Component {
               fetch("http://localhost:3001/produtos", requestInfo)
                 .then(response => {
                   if (response.ok) {
-                    //this.props.history.push('/siorg/lista');
-                    this.setState({ siorg: '', value: ''})
-                    alert("Novo SIORG criado com sucesso!")
+                    this.props.history.push('/siorg/lista');
+                    // this.setState({ siorg: '', value: ''})
+                    // alert("Novo SIORG criado com sucesso!")
 
                   } else {
                     throw new Error("não foi possivel salvar as alterações");
