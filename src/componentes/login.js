@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './css/login.css';
 import { Redirect } from 'react-router-dom'
+import { Label } from "reactstrap";
 export default class Login extends Component {
     constructor(props){
         super(props);        
@@ -48,9 +49,10 @@ export default class Login extends Component {
         }
         return(
             <div className="login-box">
-            <h1 className="header-logo">Almoxarifado UTFPR</h1>
+            <h1 className="header-logo">Login</h1>
             <span>{this.state.msg}</span>
                 <form onSubmit={this.envia.bind(this)}>
+
                     <input placeholder=" Usuário" type="text"   ref={(input) => this.nome = input}/>
                     <input placeholder=" Senha" type="password" ref={(input) => this.senha = input}/>
                     <input type="submit" value="Entrar" />
