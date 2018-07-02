@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Nav } from "react";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import "../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css";
 import axios from "axios";

@@ -3,8 +3,8 @@ import Nav from "../componentes/navbarAdm";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import "../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css";
 import axios from "axios";
-import { Link } from 'react-router-dom'
-import '../componentes/css/orcamentoPage.css'
+import { Link } from "react-router-dom";
+import "../componentes/css/orcamentoPage.css";
 
 import {
   Button,
@@ -19,7 +19,6 @@ import {
   Label
 } from "reactstrap";
 
-
 const baseURL = "http://localhost:3001/orcamentos";
 const initialState = {
   orcamento: {
@@ -30,7 +29,9 @@ const initialState = {
     pdf_patch: ""
   },
   listaSolicitacao: [],
-
+  mediaUnit: 0.0,
+  precoMin: 0.0,
+  precoMax: 0.0
 };
 
 export default class Orcamento extends Component {
@@ -41,40 +42,48 @@ export default class Orcamento extends Component {
   //     this.setState({ listaOrcamentos: resp.data });
   //   });
   // }
+
   getPrices(lista) {
-    let sum = 0;
-    lista.forEach(item => {
-      sum += item.valor;
-    });
-
-    let   mediaUnit = sum / lista.length;
-    let   precoMin = (mediaUnit * 0.6).toPrecision(3);
-    let   precoMax = (mediaUnit * 1.3).toPrecision(3);
-
     this.setState({
-      mediaUnit,
-      precoMin,
-      precoMax
+      mediaUnit: initialState.mediaUnit,
+      precoMin: initialState.precoMin,
+      precoMax: initialState.precoMax
     });
-  }
 
+    if (lista.length > 0) {
+      let sum = 0;
+      lista.forEach(item => {
+        sum += item.valor;
+      });
+      let mediaUnit = (sum / lista.length).toFixed(2);
+      let precoMin = (mediaUnit * 0.6).toFixed(2);
+      let precoMax = (mediaUnit * 1.3).toFixed(2);
+
+      this.setState({
+        mediaUnit,
+        precoMin,
+        precoMax
+      });
+    }
+  }
 
   componentDidMount() {
-    fetch('http://localhost:3001/orcamentos/'+ this.props.match.params.id, {
-      method: 'GET',
+    var parser = document.createElement("a");
+    parser.href = window.location.href;
+    // console.log(parser.pathname.slice(21));
+    fetch(`${baseURL}/${parser.pathname.slice(23)}`, {
+      method: "GET",
       headers: new Headers({
-        'Content-type': 'application/json',
-        'token': localStorage.getItem('auth-token')
+        "Content-Type": "application/json",
+        token: localStorage.getItem("auth-token")
       })
-    }).then(response => response.json())
+    })
+      .then(response => response.json())
       .then(product => {
         this.setState({ listaOrcamentos: product });
-      })
-      this.getPrices(this.state.listaSolicitacao);
+        this.getPrices(this.state.listaOrcamentos);
+      });
   }
-
-
-
 
   clear() {
     this.setState({ orcamento: initialState.orcamento });
@@ -82,7 +91,7 @@ export default class Orcamento extends Component {
 
   save() {
     const requestInfo = {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify({
         cnpj_fornecedor: this.state.orcamento.cnpj_fornecedor,
         nome_fornecedor: this.state.orcamento.nome_fornecedor,
@@ -91,22 +100,29 @@ export default class Orcamento extends Component {
         origem: this.state.orcamento.referencia
       }),
       headers: new Headers({
-        'Content-type': 'application/json',
-        'token': localStorage.getItem('auth-token'),
+        "Content-type": "application/json",
+        token: localStorage.getItem("auth-token")
       })
     };
 
-    fetch('http://localhost:3001/orcamentos/' + this.props.match.params.id, requestInfo)
-      .then(response => {
-        if (response.ok) {
-          //alerta dados salvos com sucesso
-          window.location.reload()
-        } else {
-          console.log(response)
-        }
-      })
+    fetch(
+      "http://localhost:3001/orcamentos/" + this.props.match.params.id,
+      requestInfo
+    ).then(response => {
+      if (response.ok) {
+        //alerta dados salvos com sucesso
+        const lista = this.getUpdatedList(response.data);
+        this.setState({
+          orcamento: initialState.orcamento,
+          listaOrcamentos: lista
+        });
+        this.getPrices(this.state.listaOrcamentos);
+        window.location.reload();
+      } else {
+        console.log(response);
+      }
+    });
   }
-
 
   getUpdatedList(orcamento) {
     if (orcamento) {
@@ -130,17 +146,19 @@ export default class Orcamento extends Component {
     this.setState({ orcamento });
   }
   remove(orcamento) {
-    axios.delete(`${baseURL}/${orcamento.id}`)
-    // .then(resp => {
-    //   const lista = this.getUpdatedList(null);
-    //   this.setState({ listaOrcamentos: lista });
-    // });
+    axios.delete(`${baseURL}/${orcamento.id}`).then(() => {
+      const lista = this.getUpdatedList(null);
+      this.setState({ listaOrcamentos: lista });
+    });
+    this.getPrices(this.state.listaOrcamentos);
+    window.location.reload();
   }
 
   renderForm() {
     return (
       <Container>
-        <h3>Orçamentos</h3><br/>
+        <h3>Orçamentos</h3>
+        <br />
         <Form>
           <FormGroup row>
             <Col sm={4}>
@@ -231,11 +249,23 @@ export default class Orcamento extends Component {
             options={options}
             className="mt-4"
           >
-            <TableHeaderColumn isKey dataField="cnpj_fornecedor">  CNPJ           </TableHeaderColumn>
-            <TableHeaderColumn dataField="nome_fornecedor">        Fornecedor     </TableHeaderColumn>
-            <TableHeaderColumn dataField="valor">                  Valor R$       </TableHeaderColumn>
-            <TableHeaderColumn dataField="origem">             Referência     </TableHeaderColumn>
-            <TableHeaderColumn dataField="pdf_path">               Arquivo        </TableHeaderColumn>
+            <TableHeaderColumn isKey dataField="cnpj_fornecedor">
+              {" "}
+              CNPJ{" "}
+            </TableHeaderColumn>
+            <TableHeaderColumn dataField="nome_fornecedor">
+              {" "}
+              Fornecedor{" "}
+            </TableHeaderColumn>
+            <TableHeaderColumn dataField="valor"> Valor R$ </TableHeaderColumn>
+            <TableHeaderColumn dataField="origem">
+              {" "}
+              Referência{" "}
+            </TableHeaderColumn>
+            <TableHeaderColumn dataField="pdf_path">
+              {" "}
+              Arquivo{" "}
+            </TableHeaderColumn>
             <TableHeaderColumn
               dataFormat={(cell, row) => {
                 let orcamento = row;
@@ -290,7 +320,7 @@ export default class Orcamento extends Component {
                 <Input
                   type="number"
                   disabled
-                  value={this.setMediaUnit()}
+                  value={this.state.mediaUnit ? this.state.mediaUnit : 0.0}
                   onChange={event => this.updateField(event)}
                 />
               </InputGroup>
@@ -303,7 +333,7 @@ export default class Orcamento extends Component {
                 <Input
                   type="number"
                   disabled
-                  value={this.state.orcamento.valor}
+                  value={this.state.precoMin ? this.state.precoMin : 0.0}
                   onChange={event => this.updateField(event)}
                 />
               </InputGroup>
@@ -315,7 +345,7 @@ export default class Orcamento extends Component {
                 <Input
                   type="number"
                   disabled
-                  value={this.state.orcamento.valor}
+                  value={this.state.precoMax ? this.state.precoMax : 0.0}
                   onChange={event => this.updateField(event)}
                 />
               </InputGroup>
@@ -327,9 +357,9 @@ export default class Orcamento extends Component {
   }
 
   render() {
-    let navbar
-    if(!this.props.isValidar){
-      navbar = <Nav/>
+    let navbar;
+    if (!this.props.isValidar) {
+      navbar = <Nav />;
     }
     return (
       <div>
@@ -341,7 +371,9 @@ export default class Orcamento extends Component {
 
         {this.renderPrices()}
         <Link to="/solicitacao/historico">
-            <Button  className="botao_sucesso" color="success" >Visualizar Solicitações</Button>
+          <Button className="botao_sucesso" color="success">
+            Visualizar Solicitações
+          </Button>
         </Link>
       </div>
     );
