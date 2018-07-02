@@ -15,7 +15,7 @@ export default class Table extends Component {
   }
 
   componentDidMount() {
-    fetch('https://raw.githubusercontent.com/LuizASSilveira/pi-almoxarifado/master/emprestimo.json')
+    fetch('http://localhost:3001/estoque/devolucao')
       .then(response => response.json())
       .then(product => {
         this.setState({ products: product })
@@ -53,13 +53,13 @@ export default class Table extends Component {
           pagination
           options={options}
         >
-          <TableHeaderColumn dataField='id' isKey>                                                   ID               </TableHeaderColumn>
-          <TableHeaderColumn width='14%' dataField='dataA' dataAlign='center'>                       Data Emprestimo  </TableHeaderColumn>
-          <TableHeaderColumn width='14%' dataField='dataD' dataAlign='center'>                       Data Devolução   </TableHeaderColumn>
-          <TableHeaderColumn width='12%' dataField='quantidade' dataAlign='center'>                  Quantidade       </TableHeaderColumn>
-          <TableHeaderColumn width='30%' dataField='descricao'>                                      Produto          </TableHeaderColumn>
-          <TableHeaderColumn width='19%' dataField='solicitante'>                                    Solicitante      </TableHeaderColumn>
-          <TableHeaderColumn width='11%' dataField="button" dataFormat={buttonFormatter.bind(this)}> Devolução        </TableHeaderColumn>
+          <TableHeaderColumn width='0%'  dataField='IdProduto' isKey>                                ID               </TableHeaderColumn>
+          <TableHeaderColumn width='0%'  dataField='usuario_id'>                                     Usuario Id       </TableHeaderColumn>
+          <TableHeaderColumn width='20%' dataField='dataD'  dataAlign='center'>                      Data Devolução   </TableHeaderColumn>
+          <TableHeaderColumn width='40%' dataField='descricao'>                                      Produto         </TableHeaderColumn>
+          <TableHeaderColumn width='25%' dataField='Saidas' dataAlign='center'>                      Quantidade       </TableHeaderColumn>
+          <TableHeaderColumn width='25%' dataField='nome'>                                           Solicitante      </TableHeaderColumn>
+          <TableHeaderColumn width='15%' dataField="button" dataFormat={buttonFormatter.bind(this)}> Devolução        </TableHeaderColumn>
         </BootstrapTable>
         <Modal divID="invisivel" divNum="invisivel" mensagem="Gostaria de confimar a devolução"  modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} />
       </div>
