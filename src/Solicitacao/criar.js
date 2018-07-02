@@ -105,11 +105,17 @@ export default class CriarS extends Component {
                     <div id='siorgButton'>
                         <FormGroup>
                          <Label>Siorg</Label>
-                            <br / >
-                            <Input name='siorg' placeholder='Nº Siorg' type='text' 
-                                   id='inputSiorg' disabled='true' value={this.state.value}/>
-                            <Button id="buttonSiorg" color="secondary" 
-                                    onClick={this.toggle}>Lista Siorg</Button> 
+                            <br/>
+                            <div id='InputButtonSiorg'>
+                                <Input name='siorg' placeholder='Nº Siorg' type='text' 
+                                    id='inputSiorg' disabled='true' value={this.state.value}/>
+                                <Button id="buttonSiorg" color="secondary" onClick={this.toggle}>
+                                    Lista Siorg
+                                </Button> 
+                            </div>
+                            <br/>
+                            <br/>
+
                         </FormGroup>
                     </div>
 

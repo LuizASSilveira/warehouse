@@ -42,19 +42,17 @@
     margin: 5px;
 }
 
-#siorgButton{
-    width: 100%;
+#InputButtonSiorg{
+
+    width: 35%;
+    float: left;
+    display: inline-flex;
+}
+#inputSiorg{
+    height: 100%; 
+    margin: auto;   
 }
 
-#inputSiorg{
-    width: 30% ;
-    display: inline;
-}
-#buttonSiorg{
-    display: inline;
-    margin: 15px;
-    vertical-align: middle;
-}
 .modal-xl { 
     max-width: 1140px; 
 }
