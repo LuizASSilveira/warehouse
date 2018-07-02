@@ -7,7 +7,7 @@ import Modal from '../modal-almoxarifado/modalEmprestimo'
 export default class Table extends Component {
   constructor() {
     super()
-    this.state = { txt:'', products: [], modal: false, qtd: 1, qtdMAX: 0 }
+    this.state = { txt: '', estoqueId: 0, products: [], modal: false, qtd: 1, qtdMAX: 0 }
     this.toggle = this.toggle.bind(this)
   }
   componentDidMount() {
@@ -18,6 +18,29 @@ export default class Table extends Component {
       });
   }
   funcConfirm() {
+
+    if (this.state.qtd != '') {
+      const requestInfo = {
+        method: 'POST',
+        body: JSON.stringify({
+          estoque_id: this.state.idSolicitacao,
+          quantidade: this.state.qtd,
+          local: this.state.txt,
+        }),
+        headers: new Headers({
+          'Content-type': 'application/json',
+          'token': localStorage.getItem('auth-token')
+        })
+      };
+      fetch(this.props.urlPost, requestInfo)
+        .then(response => {
+          if (response.ok) {
+            window.location.reload()
+          } else {
+            console.log("não foi possivel salvar as alterações");
+          }
+        })
+    }
     this.funcCancel()
   }
   funcCancel() {
@@ -26,16 +49,16 @@ export default class Table extends Component {
   toggle(row) {
     this.setState({
       qtdMAX: row.quantidade,
+      estoqueId: row.estoqueId,
       modal: !this.state.modal,
     })
   }
   setQuantidade(valor) {
     this.setState({ qtd: valor });
   }
-  setText(event){
+  setText(event) {
     this.setState({ txt: event.target.value });
   }
-  
   render() {
     const options = {
       noDataText: 'Não há dados.',
@@ -53,13 +76,13 @@ export default class Table extends Component {
           pagination
           options={options}
         >
-          <TableHeaderColumn             dataField='estoqueId' isKey>                       iD                               </TableHeaderColumn>
+          <TableHeaderColumn dataField='estoqueId' isKey>                iD                               </TableHeaderColumn>
           <TableHeaderColumn width='20%' dataField='quantidade' dataAlign='center'>  Quantidade Disponivel            </TableHeaderColumn>
           <TableHeaderColumn width='70%' dataField='descricao'>                      Produto                          </TableHeaderColumn>
-          <TableHeaderColumn width='12%' dataField="button"     dataFormat={buttonFormatter.bind(this)}> Emprestimo   </TableHeaderColumn>
+          <TableHeaderColumn width='12%' dataField="button" dataFormat={buttonFormatter.bind(this)}> Emprestimo   </TableHeaderColumn>
         </BootstrapTable>
 
-        <Modal max={this.state.qtd} valueText={this.state.txt} funcText={this.setText.bind(this)} func={this.setQuantidade.bind(this)}  value={this.state.qtd} modal={this.state.modal} onCancel={this.funcCancel.bind(this)} onConfirm={this.funcConfirm.bind(this)} toggle={true} />
+        <Modal max={this.state.qtdMAX} valueText={this.state.txt} funcText={this.setText.bind(this)} func={this.setQuantidade.bind(this)} value={this.state.qtd} modal={this.state.modal} onCancel={this.funcCancel.bind(this)} onConfirm={this.funcConfirm.bind(this)} toggle={true} />
       </div>
     );
   }

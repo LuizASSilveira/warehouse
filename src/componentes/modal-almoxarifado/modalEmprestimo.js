@@ -22,7 +22,7 @@ class ModalAmoxarifado extends React.Component {
                         <br />
                         <div >
                             <Label> Localidade: </Label><br />
-                            <Input type="text" value={this.props.valueText} onChange={this.props.funcText} />
+                            <Input placeholder='Informe o destino do produto' type="text" value={this.props.valueText} onChange={this.props.funcText} />
                         </div>
 
                     </ModalBody>
