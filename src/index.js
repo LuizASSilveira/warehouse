@@ -28,6 +28,8 @@ import AlmoDevolucao from "./Almoxarifado/devolucao";
 import AlmoInfo from "./Almoxarifado/info";
 
 import Signup from "./componentes/signup";
+import validaUsuario from "./login/validaUsuario";
+
 
 import PaginaRed from "./pageRedirect";
 // Função verifica se usuário está logado, perguntando se há algo em localStorage.
@@ -147,9 +149,13 @@ ReactDOM.render(
           render={history => toUsertoo(AlmoDevolucao, history)}
         />
 
-        <Route path="/almoxarifado/emprestimo" component={AlmoEmprestimo} />
-        <Route path="/almoxarifado/historico" component={AlmoHistorico} />
-        <Route path="/almoxarifado/devolucao" component={AlmoDevolucao} />
+        <Route path="/almoxarifado/emprestimo"  component={AlmoEmprestimo} />
+        
+        <Route path="/usuario/validacao"        component={validaUsuario} />
+
+        <Route path="/almoxarifado/historico"   component={AlmoHistorico} />
+        <Route path="/almoxarifado/devolucao"   component={AlmoDevolucao} />
+
       </Switch>
     </App>
   </BrowserRouter>,
