@@ -11,7 +11,7 @@ export default class Table extends Component {
     this.toggle = this.toggle.bind(this)
   }
   componentDidMount() {
-    fetch('http://localhost:3001/estoque/emprestimo')
+    fetch('http://localhost:3001/estoque')
       .then(response => response.json())
       .then(product => {
         this.setState({ products: product })
@@ -53,8 +53,7 @@ export default class Table extends Component {
           pagination
           options={options}
         >
-          <TableHeaderColumn             dataField='id' isKey>                       iD                               </TableHeaderColumn>
-          <TableHeaderColumn width='0%'  dataField='data'>                           Data                             </TableHeaderColumn>
+          <TableHeaderColumn             dataField='estoqueId' isKey>                       iD                               </TableHeaderColumn>
           <TableHeaderColumn width='20%' dataField='quantidade' dataAlign='center'>  Quantidade Disponivel            </TableHeaderColumn>
           <TableHeaderColumn width='70%' dataField='descricao'>                      Produto                          </TableHeaderColumn>
           <TableHeaderColumn width='12%' dataField="button"     dataFormat={buttonFormatter.bind(this)}> Emprestimo   </TableHeaderColumn>
