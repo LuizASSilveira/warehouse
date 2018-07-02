@@ -146,11 +146,12 @@ export default class validEspec extends Component {
           <h4>Validar Solicitação</h4>
             
             <FormGroup>
-              <Label> Siorg</Label>
-              <div id='siorgButton'>
+            <br/>
+              <Label> Siorg</Label><br/>
+              <div id='InputButtonSiorg'>
                 <Input placeholder="Nº Siorg" name='siorg' value={this.state.products[this.state.index].siorg} type='text' id='inputSiorg' disabled='true' />
                 <Button id="buttonSiorg" color="secondary" onClick={this.toggle}>Lista Siorg</Button>
-              </div>
+              </div><br/><br/>
               <Modal isOpen={this.state.modal} toggle={this.toggle} className='modal-xl'>
                 <ModalHeader toggle={this.toggle}>Lista Siorg</ModalHeader>
                 <ModalBody>

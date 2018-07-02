@@ -72,7 +72,7 @@ export default class TableSiorg extends Component {
     function buttonFormatter(cell, row) {
       return (
         <Button color="danger" onClick={() => self.excluir(row)}>
-          X
+          <i className="fa fa-remove" />
         </Button>
       );
     }
@@ -97,10 +97,10 @@ export default class TableSiorg extends Component {
         <TableHeaderColumn
           width="10%"
           dataField="button"
+          dataAlign='center'
           dataFormat={buttonFormatter}
         >
-          {" "}
-          Remover
+        Remover
         </TableHeaderColumn>
       );
     }
@@ -118,15 +118,8 @@ export default class TableSiorg extends Component {
           expandableRow={this.isExpandableRow}
           options={{ noDataText: "Não há dados." }}
         >
-          <TableHeaderColumn width="10%" dataField="siorg" isKey>
-            {" "}
-            Código Siorg{" "}
-          </TableHeaderColumn>
-          <TableHeaderColumn width="60%" dataField="descricao">
-            {" "}
-            Descrição{" "}
-          </TableHeaderColumn>
-
+          <TableHeaderColumn width="10%" dataField="siorg"      dataAlign='center' isKey>  Código Siorg   </TableHeaderColumn>
+          <TableHeaderColumn width="60%" dataField="descricao"  dataAlign='center'  >      Descrição      </TableHeaderColumn>
           {colunaRemover}
         </BootstrapTable>
       </div>
