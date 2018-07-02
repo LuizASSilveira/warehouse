@@ -3,15 +3,13 @@ import '../css/table.css'
 import { BootstrapTable, TableHeaderColumn } from '../../../node_modules/react-bootstrap-table';
 import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import { Button } from 'reactstrap'
-import Modal from '../modal-almoxarifado/modal'
-
+import Modal from '../modal-almoxarifado/modalEmprestimo'
 export default class Table extends Component {
   constructor() {
     super()
-    this.state = { products: [], modal: false, qtd: 1, qtdMAX: 0 }
+    this.state = { txt:'', products: [], modal: false, qtd: 1, qtdMAX: 0 }
     this.toggle = this.toggle.bind(this)
   }
-
   componentDidMount() {
     fetch('http://localhost:3001/estoque/emprestimo')
       .then(response => response.json())
@@ -34,6 +32,10 @@ export default class Table extends Component {
   setQuantidade(valor) {
     this.setState({ qtd: valor });
   }
+  setText(event){
+    this.setState({ txt: event.target.value });
+  }
+  
   render() {
     const options = {
       noDataText: 'Não há dados.',
@@ -58,7 +60,7 @@ export default class Table extends Component {
           <TableHeaderColumn width='12%' dataField="button"     dataFormat={buttonFormatter.bind(this)}> Emprestimo   </TableHeaderColumn>
         </BootstrapTable>
 
-        <Modal max={this.state.qtd} divID="invisivel" func={this.setQuantidade.bind(this)} label='Quantidade de Produto' value={this.state.qtd} modal={this.state.modal} onCancel={this.funcCancel.bind(this)} onConfirm={this.funcConfirm.bind(this)} toggle={true} />
+        <Modal max={this.state.qtd} valueText={this.state.txt} funcText={this.setText.bind(this)} func={this.setQuantidade.bind(this)}  value={this.state.qtd} modal={this.state.modal} onCancel={this.funcCancel.bind(this)} onConfirm={this.funcConfirm.bind(this)} toggle={true} />
       </div>
     );
   }

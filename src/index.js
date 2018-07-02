@@ -27,6 +27,8 @@ import AlmoHistorico from "./Almoxarifado/historico";
 import AlmoDevolucao from "./Almoxarifado/devolucao";
 import AlmoInfo from "./Almoxarifado/info";
 
+import AlmoIdUnico from "./Almoxarifado/idUnico";
+
 import Signup from "./componentes/signup";
 import validaUsuario from "./login/validaUsuario";
 
@@ -148,7 +150,8 @@ ReactDOM.render(
           path="/almoxarifado/devolucao"
           render={history => toUsertoo(AlmoDevolucao, history)}
         />
-
+  
+        <Route path="/almoxarifado/unico"  component={AlmoIdUnico} />
         <Route path="/almoxarifado/emprestimo"  component={AlmoEmprestimo} />
         
         <Route path="/usuario/validacao"        component={validaUsuario} />

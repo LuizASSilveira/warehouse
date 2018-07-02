@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Nav from '../componentes/navbarAdm';
-//import Table from '../componentes/table/baixaCompras'
+import Table from '../componentes/table/idUnico'
 
 export default class AlmoEmprestimo extends Component {
     render() {

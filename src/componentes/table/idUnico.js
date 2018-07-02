@@ -4,14 +4,16 @@ import { Button } from 'reactstrap'
 import Modal from '../modal-almoxarifado/modal'
 import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import '../css/table.css'
+
 export default class Table extends Component {
   constructor() {
     super()
-    this.state = { products: [], modal: false }
+    this.state = { products: [], modal: false , codigoB:0}
     this.toggle = this.toggle.bind(this)
     this.funcCancel = this.funcCancel.bind(this)
     this.funcConfirm = this.funcConfirm.bind(this)
   }
+
   componentDidMount() {
     fetch('https://raw.githubusercontent.com/LuizASSilveira/pi-almoxarifado/master/emprestimo.json')
       .then(response => response.json())
@@ -30,12 +32,19 @@ export default class Table extends Component {
       modal: !this.state.modal
     })
   }
+
+  setCodigo(valor){
+    this.setState({
+        codigoB: valor
+      })
+      console.log(this.state.codigoB)
+  }
   render() {
     const options = {
       noDataText: 'Não há dados.',
     }
     function buttonFormatter(cell, row) {
-      return <Button color="primary" onClick={() => this.toggle(row)} >Aprovar</Button>;
+      return <Button color="danger" onClick={() => this.toggle(row)} >Devolvido</Button>;
     }
     return (
       <div id="table">
@@ -47,13 +56,15 @@ export default class Table extends Component {
           pagination
           options={options}
         >
-          <TableHeaderColumn width='0%' dataField='id' isKey>                                          ID              </TableHeaderColumn>
-          <TableHeaderColumn width='30%' dataField='usuario'        dataAlign='center'>                Usuario         </TableHeaderColumn>
-          <TableHeaderColumn width='30%' dataField='departamento'   dataAlign='center'>                Departamento    </TableHeaderColumn>
-          <TableHeaderColumn width='30%' dataField='email'          dataAlign='center'>                Email           </TableHeaderColumn>
-          <TableHeaderColumn width='10%' dataField="button"         dataFormat={buttonFormatter.bind(this)}>    Devolução       </TableHeaderColumn>
+          <TableHeaderColumn dataField='id' isKey>                                                   ID               </TableHeaderColumn>
+          <TableHeaderColumn width='14%' dataField='dataA' dataAlign='center'>                       Data Emprestimo  </TableHeaderColumn>
+          <TableHeaderColumn width='14%' dataField='dataD' dataAlign='center'>                       Data Devolução   </TableHeaderColumn>
+          <TableHeaderColumn width='12%' dataField='quantidade' dataAlign='center'>                  Quantidade       </TableHeaderColumn>
+          <TableHeaderColumn width='30%' dataField='descricao'>                                      Produto          </TableHeaderColumn>
+          <TableHeaderColumn width='19%' dataField='solicitante'>                                    Solicitante      </TableHeaderColumn>
+          <TableHeaderColumn width='11%' dataField="button" dataFormat={buttonFormatter.bind(this)}> Devolução        </TableHeaderColumn>
         </BootstrapTable>
-        <Modal cabecalho='Validar Usuario' mensagem='Gostaria de Aprovar esse Usuario' divID="invisivel" divNum="invisivel" modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} />
+        <Modal func='' divID="invisivel" label="Código de Barras" modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} />
       </div>
     );
   }
