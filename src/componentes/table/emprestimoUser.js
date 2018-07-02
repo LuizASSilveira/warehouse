@@ -23,7 +23,7 @@ export default class Table extends Component {
       const requestInfo = {
         method: 'POST',
         body: JSON.stringify({
-          estoque_id: this.state.idSolicitacao,
+          estoque_id: this.state.estoqueId,
           quantidade: this.state.qtd,
           local: this.state.txt,
         }),
@@ -32,7 +32,7 @@ export default class Table extends Component {
           'token': localStorage.getItem('auth-token')
         })
       };
-      fetch(this.props.urlPost, requestInfo)
+      fetch('http://localhost:3001/estoque/emprestimo', requestInfo)
         .then(response => {
           if (response.ok) {
             window.location.reload()
@@ -52,6 +52,7 @@ export default class Table extends Component {
       estoqueId: row.estoqueId,
       modal: !this.state.modal,
     })
+
   }
   setQuantidade(valor) {
     this.setState({ qtd: valor });
