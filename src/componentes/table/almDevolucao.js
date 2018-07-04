@@ -4,16 +4,14 @@ import { Button } from 'reactstrap'
 import Modal from '../modal-almoxarifado/modal'
 import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import '../css/table.css'
-
 export default class Table extends Component {
   constructor() {
     super()
-    this.state = { products: [], modal: false }
+    this.state = { products: [], modal: false, estoque_id:'', quantidade: 0, }
     this.toggle = this.toggle.bind(this)
     this.funcCancel = this.funcCancel.bind(this)
     this.funcConfirm = this.funcConfirm.bind(this)
   }
-
   componentDidMount() {
     fetch('http://localhost:3001/estoque/devolucao')
       .then(response => response.json())
@@ -21,21 +19,41 @@ export default class Table extends Component {
         this.setState({ products: product })
       });
   }
-
   funcConfirm() {
-    this.funcCancel()
+    const requestInfo = {
+      method: 'POST',
+      body: JSON.stringify({
+        estoque_id: this.state.estoque_id,
+        quantidade: this.state.quantidade,
+      }),
+      headers: new Headers({
+        'Content-type': 'application/json',
+        'token': localStorage.getItem('auth-token')
+      })
+    };
+    fetch('http://localhost:3001/estoque/devolver', requestInfo)
+      .then(response => {
+        if (response.ok) {
+          console.log("sucesso")
+          //alerta dados salvos com sucesso
+          //this.props.history.push('/requisicao/historico');
+        } else {
+          throw new Error("não foi possivel salvar as alterações");
+        }
+      })
+    this.funcCancel()  
   }
-
   funcCancel() {
     this.setState({ modal: false })
   }
-
   toggle(row) {
     this.setState({
+      estoque_id: row.IdProduto,
+      quantidade: row.Saidas,
+
       modal: !this.state.modal
     })
   }
-
   render() {
     const options = {
       noDataText: 'Não há dados.',
