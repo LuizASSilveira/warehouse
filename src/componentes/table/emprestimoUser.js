@@ -7,7 +7,7 @@ import Modal from '../modal-almoxarifado/modalEmprestimo'
 export default class Table extends Component {
   constructor() {
     super()
-    this.state = { txt: '', estoqueId: 0, products: [], modal: false, qtd: 1, qtdMAX: 0 }
+    this.state = { txt: '', estoqueId: 0, products: [], modal: false, qtd: 1, rowId:0, qtdMAX: 0, redirect: false}
     this.toggle = this.toggle.bind(this)
   }
   componentDidMount() {
@@ -19,7 +19,7 @@ export default class Table extends Component {
   }
   funcConfirm() {
 
-    if (this.state.qtd != '') {
+    if (this.state.qtd !=='') {
       const requestInfo = {
         method: 'POST',
         body: JSON.stringify({
@@ -60,9 +60,14 @@ export default class Table extends Component {
   setText(event) {
     this.setState({ txt: event.target.value });
   }
+
+  onRowClick(row){
+    this.props.history.push("/almoxarifado/info/" + row.estoqueId);
+  }
   render() {
     const options = {
       noDataText: 'Não há dados.',
+      onRowDoubleClick: this.onRowClick.bind(this),
     }
     function buttonFormatter(cell, row) {
       return <Button color="primary" onClick={() => this.toggle(row)} >Emprestar</Button>;
@@ -77,7 +82,7 @@ export default class Table extends Component {
           pagination
           options={options}
         >
-          <TableHeaderColumn dataField='estoqueId' isKey>                iD                               </TableHeaderColumn>
+          <TableHeaderColumn dataField='estoqueId' isKey>                            iD                               </TableHeaderColumn>
           <TableHeaderColumn width='20%' dataField='quantidade' dataAlign='center'>  Quantidade Disponivel            </TableHeaderColumn>
           <TableHeaderColumn width='70%' dataField='descricao'>                      Produto                          </TableHeaderColumn>
           <TableHeaderColumn width='12%' dataField="button" dataFormat={buttonFormatter.bind(this)}> Emprestimo   </TableHeaderColumn>

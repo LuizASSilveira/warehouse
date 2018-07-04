@@ -8,7 +8,7 @@ import '../css/table.css'
 export default class Table extends Component {
   constructor() {
     super()
-    this.state = { products: [], modal: false , codigoB:0}
+    this.state = { products: [], modal: false , codigoB: ""}
     this.toggle = this.toggle.bind(this)
     this.funcCancel = this.funcCancel.bind(this)
     this.funcConfirm = this.funcConfirm.bind(this)
@@ -38,11 +38,8 @@ export default class Table extends Component {
       codigoB : valor
     })
   }
-
   setCodigo(valor){
-    console.log(valor)
-  
-    
+    console.log(valor)    
   }
   render() {
     const options = {

@@ -42,7 +42,7 @@ export default class Table extends Component {
           options={options}
         >
           <TableHeaderColumn  width='0%' dataField='id' isKey>                          ID                     </TableHeaderColumn>
-          <TableHeaderColumn width='15%' dataField='data'       dataAlign='center'>     Data Devolução         </TableHeaderColumn>
+          <TableHeaderColumn width='20%' dataField='data'       dataAlign='center'>     Data Movimentação         </TableHeaderColumn>
           <TableHeaderColumn width='15%' dataField='tipo'       dataAlign='center'>     Tipo                   </TableHeaderColumn>
           <TableHeaderColumn width='20%' dataField='quantidade' dataAlign='center'>     Quantidade             </TableHeaderColumn>
           <TableHeaderColumn width='50%' dataField='descricao'  dataAlign='center'>     Produto                </TableHeaderColumn>
