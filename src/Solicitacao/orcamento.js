@@ -30,33 +30,68 @@ const initialState = {
   listaOrcamentos: [],
   mediaUnit: 0.0,
   precoMin: 0.0,
-  precoMax: 0.0
+  precoMax: 0.0,
+  valid: false
 };
 
 export default class Orcamento extends Component {
   state = { ...initialState };
 
   getPrices(lista) {
-    this.setState({
-      mediaUnit: initialState.mediaUnit,
-      precoMin: initialState.precoMin,
-      precoMax: initialState.precoMax
-    });
+    if (lista > 0) {
+      if (
+        lista[lista.lenght - 1].valor >= this.state.precoMin &&
+        lista[lista.lenght - 1].valor > this.state.precoMax
+      ) {
+        this.setState({
+          mediaUnit: initialState.mediaUnit,
+          precoMin: initialState.precoMin,
+          precoMax: initialState.precoMax
+        });
 
-    if (lista.length > 0) {
-      let sum = 0;
-      lista.forEach(item => {
-        sum += item.valor;
-      });
-      let mediaUnit = (sum / lista.length).toFixed(2);
-      let precoMin = (mediaUnit * 0.6).toFixed(2);
-      let precoMax = (mediaUnit * 1.3).toFixed(2);
+        if (lista.length > 0) {
+          let sum = 0;
+          lista.forEach(item => {
+            sum += item.valor;
+          });
 
+          let mediaUnit = (sum / lista.length).toFixed(2);
+          let precoMin = (mediaUnit * 0.6).toFixed(2);
+          let precoMax = (mediaUnit * 1.6).toFixed(2);
+
+          this.setState({
+            mediaUnit,
+            precoMin,
+            precoMax
+          });
+        }
+      } else {
+        lista.pop();
+        this.state.listaOrcamentos = lista;
+      }
+    } else {
       this.setState({
-        mediaUnit,
-        precoMin,
-        precoMax
+        mediaUnit: initialState.mediaUnit,
+        precoMin: initialState.precoMin,
+        precoMax: initialState.precoMax
       });
+
+      if (lista.length > 0) {
+        let sum = 0;
+        lista.forEach(item => {
+          sum += item.valor;
+        });
+
+        let mediaUnit = (sum / lista.length).toFixed(2);
+        let precoMin = (mediaUnit * 0.6).toFixed(2);
+        let precoMax = (mediaUnit * 1.6).toFixed(2);
+
+        this.setState({
+          mediaUnit,
+          precoMin,
+          precoMax
+        });
+      }
     }
   }
 
@@ -149,6 +184,16 @@ export default class Orcamento extends Component {
     const orcamento = { ...this.state.orcamento };
     orcamento[event.target.name] = event.target.value;
     this.setState({ orcamento });
+
+    if (this.state.listaOrcamentos.length > 0) {
+      if (orcamento.valor < this.state.precoMin) {
+        this.state.valid = false;
+      } else if (orcamento.valor > this.state.precoMax) {
+        this.state.valid = false;
+      } else {
+        this.state.valid = true;
+      }
+    }
   }
 
   load(orcamento) {
@@ -203,10 +248,11 @@ export default class Orcamento extends Component {
                 required
                 type="number"
                 name="valor"
+                value={this.state.orcamento.valor}
                 onChange={event => this.updateField(event)}
                 placeholder="Valor 0,00"
                 errorMessage="Campo inválido"
-                validate={{ min: 1, max: 5000 }}
+                valid={this.state.valid}
               />
             </Col>
           </Row>
@@ -228,6 +274,7 @@ export default class Orcamento extends Component {
                 type="file"
                 id="pdf_path"
                 name="pdf_path"
+                value={this.state.orcamento.pdf_path}
                 label="Submeta um arquivo de orçamento."
               />
             </Col>
@@ -240,77 +287,6 @@ export default class Orcamento extends Component {
           </Button>{" "}
         </AvForm>
       </Container>
-      // <Container>
-      //   <h3>Orçamentos</h3>
-      //   <Form>
-      //     <FormGroup row>
-      //       <Col sm={4}>
-      //         <Input
-      //           required
-      //           type="number"
-      //           name="cnpj_fornecedor"
-      //           value={this.state.orcamento.cnpj_fornecedor}
-      //           onChange={event => this.updateField(event)}
-      //           placeholder="CNPJ do Fornecedor"
-      //         />
-      //       </Col>
-
-      //       <Col sm={5}>
-      //         <Input
-      //           required
-      //           type="text"
-      //           name="nome_fornecedor"
-      //           value={this.state.orcamento.nome_fornecedor}
-      //           onChange={event => this.updateField(event)}
-      //           placeholder="Nome do Fornecedor"
-      //         />
-      //       </Col>
-      //       <Col sm={3}>
-      //         <InputGroup>
-      //           <InputGroupAddon addonType="prepend">R$</InputGroupAddon>
-      //           <Input
-      //             required
-      //             type="number"
-      //             name="valor"
-      //             value={this.state.orcamento.valor}
-      //             onChange={event => this.updateField(event)}
-      //             placeholder="Valor 0,00"
-      //           />
-      //         </InputGroup>
-      //       </Col>
-      //     </FormGroup>
-      //     <FormGroup row>
-      //       <Col>
-      //         <InputGroup>
-      //           <InputGroupAddon addonType="prepend">URL</InputGroupAddon>
-      //           <Input
-      //             type="text"
-      //             name="referencia"
-      //             value={this.state.orcamento.referencia}
-      //             onChange={event => this.updateField(event)}
-      //             placeholder="http://www..."
-      //           />
-      //         </InputGroup>
-      //       </Col>
-      //       <Col>
-      //         <CustomInput
-      //           type="file"
-      //           id="pdf_path"
-      //           name="pdf_path"
-      //           label="Submeta um arquivo de orçamento."
-      //         />
-      //       </Col>
-      //     </FormGroup>
-      //     <div>
-      //       <Button color="primary" onClick={event => this.save(event)}>
-      //         Salvar
-      //       </Button>{" "}
-      //       <Button color="secondary" onClick={event => this.clear(event)}>
-      //         Cancelar
-      //       </Button>{" "}
-      //     </div>
-      //   </Form>
-      // </Container>
     );
   }
 
@@ -428,10 +404,6 @@ export default class Orcamento extends Component {
   }
 
   render() {
-    let navbar;
-    if (!this.props.isValidar) {
-      navbar = <Nav />;
-    }
     return (
       <div>
         {this.renderForm()}

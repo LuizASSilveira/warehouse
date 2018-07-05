@@ -33,7 +33,8 @@ const initialState = {
   listaSolicitacao: [],
   mediaUnit: 0.0,
   precoMin: 0.0,
-  precoMax: 0.0
+  precoMax: 0.0,
+  valid: false
 };
 
 export default class Orcamento extends Component {
@@ -46,27 +47,36 @@ export default class Orcamento extends Component {
   // }
 
   getPrices(lista) {
-    this.setState({
-      mediaUnit: initialState.mediaUnit,
-      precoMin: initialState.precoMin,
-      precoMax: initialState.precoMax
-    });
+    if (lista > 0) {
+      if (
+        lista[lista.lenght - 1].valor >= this.state.precoMin &&
+        lista[lista.lenght - 1].valor > this.state.precoMax
+      ) {
+        this.setState({
+          mediaUnit: initialState.mediaUnit,
+          precoMin: initialState.precoMin,
+          precoMax: initialState.precoMax
+        });
 
-    if (lista.length > 0) {
-      let sum = 0;
-      lista.forEach(item => {
-        sum += item.valor;
-      });
+        if (lista.length > 0) {
+          let sum = 0;
+          lista.forEach(item => {
+            sum += item.valor;
+          });
 
-      let mediaUnit = (sum / lista.length).toFixed(2);
-      let precoMin = (mediaUnit * 0.6).toFixed(2);
-      let precoMax = (mediaUnit * 1.6).toFixed(2);
+          let mediaUnit = (sum / lista.length).toFixed(2);
+          let precoMin = (mediaUnit * 0.6).toFixed(2);
+          let precoMax = (mediaUnit * 1.6).toFixed(2);
 
-      this.setState({
-        mediaUnit,
-        precoMin,
-        precoMax
-      });
+          this.setState({
+            mediaUnit,
+            precoMin,
+            precoMax
+          });
+        }
+      } else {
+        lista.pop();
+      }
     }
   }
 
@@ -142,6 +152,16 @@ export default class Orcamento extends Component {
     const orcamento = { ...this.state.orcamento };
     orcamento[event.target.name] = event.target.value;
     this.setState({ orcamento });
+
+    if (this.state.listaOrcamentos.length > 0) {
+      if (orcamento.valor < this.state.precoMin) {
+        this.state.valid = false;
+      } else if (orcamento.valor > this.state.precoMax) {
+        this.state.valid = false;
+      } else {
+        this.state.valid = true;
+      }
+    }
   }
 
   load(orcamento) {
@@ -199,7 +219,7 @@ export default class Orcamento extends Component {
                 onChange={event => this.updateField(event)}
                 placeholder="Valor 0,00"
                 errorMessage="Campo inválido"
-                validate={{ min: 1, max: 500 }}
+                valid={this.state.valid}
               />
             </Col>
           </Row>
@@ -283,12 +303,6 @@ export default class Orcamento extends Component {
                 let orcamento = row;
                 return (
                   <div>
-                    {/* <Button
-                      className="btn btn-default"
-                      onClick={() => this.load(orcamento)}
-                    >
-                      <i className="fa fa-edit" />
-                    </Button> */}
                     <Button
                       className="btn btn-danger"
                       onClick={() => this.remove(orcamento)}
