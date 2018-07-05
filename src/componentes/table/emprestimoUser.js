@@ -11,11 +11,23 @@ export default class Table extends Component {
     this.toggle = this.toggle.bind(this)
   }
   componentDidMount() {
-    fetch('http://localhost:3001/estoque')
-      .then(response => response.json())
-      .then(product => { 
-        this.setState({ products: product });
-      });
+      fetch('http://localhost:3001/estoque', {
+        method: 'GET',
+        headers: new Headers({
+          'Content-type': 'application/json',
+          'token': localStorage.getItem('auth-token')
+        })
+      })
+        .then(response => response.json())
+        .then(product => {
+          let array = product
+        array.forEach((a) =>
+          {if(a.codigo === null){
+            a.codigo = 'Consumivel'
+          }}
+        )
+        this.setState({ products: array })
+        })
   }
 
   funcConfirm() {

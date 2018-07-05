@@ -83,8 +83,8 @@ class Table extends Component {
     })
       .then(response => response.json())
       .then(product => {
-        this.setState({ products: product });
-      });
+        this.setState({ products: product })
+      })
   }
   
   handleChange(event) {

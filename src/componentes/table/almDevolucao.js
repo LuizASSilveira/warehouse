@@ -7,18 +7,31 @@ import '../css/table.css'
 export default class Table extends Component {
   constructor() {
     super()
-    this.state = { products: [], modal: false, estoque_id:'', usuario_id: 0, quantidade: 0, }
+    this.state = { products: [], modal: false, estoque_id: '', usuario_id: 0, quantidade: 0, }
     this.toggle = this.toggle.bind(this)
     this.funcCancel = this.funcCancel.bind(this)
     this.funcConfirm = this.funcConfirm.bind(this)
   }
-  
+
   componentDidMount() {
-    fetch('http://localhost:3001/estoque/devolucao')
+
+    fetch('http://localhost:3001/estoque/devolucao', {
+      method: 'GET',
+      headers: new Headers({
+        'Content-type': 'application/json',
+        'token': localStorage.getItem('auth-token')
+      })
+    })
       .then(response => response.json())
       .then(product => {
-        this.setState({ products: product })
-      });
+        let array = product
+        array.forEach((a) => {
+          if (a.codigo === null) {
+            a.codigo = 'Consumivel'
+          }
+        })
+        this.setState({ products: array })
+      })
   }
   funcConfirm() {
     const requestInfo = {
@@ -41,7 +54,7 @@ export default class Table extends Component {
           throw new Error("não foi possivel salvar as alterações");
         }
       })
-    this.funcCancel()  
+    this.funcCancel()
   }
   funcCancel() {
     this.setState({ modal: false })
@@ -61,7 +74,7 @@ export default class Table extends Component {
     function buttonFormatter(cell, row) {
       return (
         <div>
-          <Button color="primary" onClick={() => this.toggle(row)} >Devolução</Button><br/>
+          <Button color="primary" onClick={() => this.toggle(row)} >Devolução</Button><br />
           {/* <Button color="success" onClick={() => this.toggle(row)} >Retirada</Button> */}
         </div>
       )
@@ -75,17 +88,17 @@ export default class Table extends Component {
           pagination
           options={options}
         >
-          <TableHeaderColumn width='0%'  dataField='IdProduto' isKey>                                ID               </TableHeaderColumn>
+          <TableHeaderColumn width='0%' dataField='IdProduto' isKey>                                ID               </TableHeaderColumn>
           {/* <TableHeaderColumn width='20%' dataField='dataD'  dataAlign='center'>                      Data Retirada   </TableHeaderColumn> */}
           {/* <TableHeaderColumn width='20%' dataField='dataD'  dataAlign='center'>                      Data Devolução   </TableHeaderColumn> */}
           <TableHeaderColumn width='0%' dataField='usuario_id'>                                      Usuario Id </TableHeaderColumn>
           <TableHeaderColumn width='15%' dataField='Saidas' dataAlign='center'>                      Quantidade       </TableHeaderColumn>
           <TableHeaderColumn width='20%' dataField='codigo' dataAlign='center'>      Codigo                           </TableHeaderColumn>
           <TableHeaderColumn width='40%' dataField='descricao' dataAlign='center'>                                      Produto         </TableHeaderColumn>
-          <TableHeaderColumn width='20%' dataField='nome'dataAlign='center'>                                           Solicitante      </TableHeaderColumn>
+          <TableHeaderColumn width='20%' dataField='nome' dataAlign='center'>                                           Solicitante      </TableHeaderColumn>
           <TableHeaderColumn width='15%' dataField="button" dataFormat={buttonFormatter.bind(this)} dataAlign='center'> Devolução        </TableHeaderColumn>
         </BootstrapTable>
-        <Modal cabecalho="Almocharifado" divID="invisivel" divNum="invisivel" mensagem="Gostaria de confimar a devolução"  modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} />
+        <Modal cabecalho="Almocharifado" divID="invisivel" divNum="invisivel" mensagem="Gostaria de confimar a devolução" modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} />
       </div>
     );
   }
