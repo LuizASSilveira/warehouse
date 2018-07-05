@@ -11,12 +11,9 @@ export default class Table extends Component {
     this.toggle = this.toggle.bind(this)
   }
   componentDidMount() {
-
     fetch('http://localhost:3001/estoque')
-
       .then(response => response.json())
-      .then(product => {
-      console.log(this.props.urlGet)    
+      .then(product => { 
         this.setState({ products: product });
       });
   }
@@ -75,7 +72,6 @@ export default class Table extends Component {
     function buttonFormatter(cell, row) {
       return <Button color="primary" onClick={() => this.toggle(row)} >Emprestar</Button>;
     }
-    console.log(this.state.qtd)
     return (
       <div id="table">
         <BootstrapTable

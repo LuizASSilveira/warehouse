@@ -85,7 +85,7 @@ export default class Table extends Component {
           <TableHeaderColumn width='20%' dataField='nome'dataAlign='center'>                                           Solicitante      </TableHeaderColumn>
           <TableHeaderColumn width='15%' dataField="button" dataFormat={buttonFormatter.bind(this)} dataAlign='center'> Devolução        </TableHeaderColumn>
         </BootstrapTable>
-        <Modal divID="invisivel" divNum="invisivel" mensagem="Gostaria de confimar a devolução"  modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} />
+        <Modal cabecalho="Almocharifado" divID="invisivel" divNum="invisivel" mensagem="Gostaria de confimar a devolução"  modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} />
       </div>
     );
   }

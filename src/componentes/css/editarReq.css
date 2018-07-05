@@ -1,5 +1,6 @@
 .button_req {
-	position: relative;
-    left: 70.6%;
-    margin-top: 1.27%;
+    float: left;
+    display: block;
+    margin-top: 4.8%;
+    margin-left: 10%;
 }

@@ -57,7 +57,7 @@ export default class Criar extends Component {
                 <Nav/>
                 <h4 id="table">Editar Requisição</h4>
 
-                <Button onClick={this.toggle} className="button_req"> Adicionar Solicitação </Button>
+                <Button onClick={this.toggle} className="button_req"> Adicionar Solicitação </Button><br/><br/>
 
                 <TableEditar  buttonName= {'Salvar'}
 
