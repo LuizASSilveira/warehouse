@@ -46,7 +46,7 @@ export default class Criar extends Component {
             'token': localStorage.getItem('auth-token')
           })
         };
-        fetch('http://localhost:3001/requisicoes/'+this.props.match.params.id+'/solicitacoes', requestInfo)
+        fetch('http://localhost:3001/requisicoes/'+ this.props.match.params.id + '/solicitacoes', requestInfo)
           .then(response => {
             if (response.ok) {
               //alerta dados salvos com sucesso

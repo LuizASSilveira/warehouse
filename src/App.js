@@ -4,5 +4,4 @@ class App extends Component {
     return <div id="main">{this.props.children}</div>;
   }
 }
-
 export default App;

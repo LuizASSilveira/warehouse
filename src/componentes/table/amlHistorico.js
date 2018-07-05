@@ -10,11 +10,19 @@ export default class Table extends Component {
     this.state = { products: [], modal: false }
   }
 
+  
   componentDidMount() {
-    fetch('https://raw.githubusercontent.com/LuizASSilveira/pi-almoxarifado/master/emprestimo.json')
+    fetch('http://localhost:3001/estoque/historicoUsuario', {
+      method: 'GET',
+      headers: new Headers({
+        'Content-type': 'application/json',
+        'token': localStorage.getItem('auth-token')
+      })
+    })
       .then(response => response.json())
       .then(product => {
-        this.setState({ products: product })
+        console.log(product)
+        this.setState({ products: product });
       });
   }
 
@@ -33,11 +41,11 @@ export default class Table extends Component {
           pagination
           options={options}
         >
-          <TableHeaderColumn             dataField='id' isKey>                          ID                     </TableHeaderColumn>
-          <TableHeaderColumn width='15%' dataField='dataA'      dataAlign='center'>     Data Emprestimo        </TableHeaderColumn>
-          <TableHeaderColumn width='15%' dataField='dataD'      dataAlign='center'>     Data Devolução         </TableHeaderColumn>
+          <TableHeaderColumn  width='0%' dataField='id' isKey>                          ID                     </TableHeaderColumn>
+          <TableHeaderColumn width='20%' dataField='data'       dataAlign='center'>     Data Movimentação         </TableHeaderColumn>
+          <TableHeaderColumn width='15%' dataField='tipo'       dataAlign='center'>     Tipo                   </TableHeaderColumn>
           <TableHeaderColumn width='20%' dataField='quantidade' dataAlign='center'>     Quantidade             </TableHeaderColumn>
-          <TableHeaderColumn width='50%' dataField='descricao'>                         Produto                </TableHeaderColumn>
+          <TableHeaderColumn width='50%' dataField='descricao'  dataAlign='center'>     Produto                </TableHeaderColumn>
         </BootstrapTable>
 
       </div>

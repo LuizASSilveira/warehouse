@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BootstrapTable, TableHeaderColumn } from '../../../node_modules/react-bootstrap-table';
-import { Button } from 'reactstrap'
+import { Button, Input } from 'reactstrap'
 import Modal from '../modal-almoxarifado/modal'
 import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import '../css/table.css'
@@ -8,16 +8,17 @@ import '../css/table.css'
 export default class Table extends Component {
   constructor() {
     super()
-    this.state = { products: [], modal: false , codigoB:0}
+    this.state = { products: [], modal: false , codigoB: ""}
     this.toggle = this.toggle.bind(this)
     this.funcCancel = this.funcCancel.bind(this)
     this.funcConfirm = this.funcConfirm.bind(this)
   }
-
+  
   componentDidMount() {
-    fetch('https://raw.githubusercontent.com/LuizASSilveira/pi-almoxarifado/master/emprestimo.json')
+    fetch('http://localhost:3001/estoque/historicoUsuario')
       .then(response => response.json())
       .then(product => {
+        console.log(product)
         this.setState({ products: product })
       });
   }
@@ -32,20 +33,27 @@ export default class Table extends Component {
       modal: !this.state.modal
     })
   }
-
-  setCodigo(valor){
+  toggleInput(valor) {
     this.setState({
-        codigoB: valor
-      })
-      console.log(this.state.codigoB)
+      codigoB : valor
+    })
+  }
+  setCodigo(valor){
+    console.log(valor)    
   }
   render() {
     const options = {
       noDataText: 'Não há dados.',
     }
     function buttonFormatter(cell, row) {
-      return <Button color="danger" onClick={() => this.toggle(row)} >Devolvido</Button>;
+      return <Button color="danger" value={this.state.codigoB} onClick={() => this.toggle(row)} >Devolvido</Button>
     }
+    
+    function inputFormatter(cell, row) {
+      return <Input onClick={() => this.oggleInpu(row)}/>
+    }
+
+
     return (
       <div id="table">
         <BootstrapTable
@@ -56,15 +64,14 @@ export default class Table extends Component {
           pagination
           options={options}
         >
-          <TableHeaderColumn dataField='id' isKey>                                                   ID               </TableHeaderColumn>
-          <TableHeaderColumn width='14%' dataField='dataA' dataAlign='center'>                       Data Emprestimo  </TableHeaderColumn>
-          <TableHeaderColumn width='14%' dataField='dataD' dataAlign='center'>                       Data Devolução   </TableHeaderColumn>
+          <TableHeaderColumn width='12%' dataField='id' isKey>                                                   ID               </TableHeaderColumn>
           <TableHeaderColumn width='12%' dataField='quantidade' dataAlign='center'>                  Quantidade       </TableHeaderColumn>
           <TableHeaderColumn width='30%' dataField='descricao'>                                      Produto          </TableHeaderColumn>
           <TableHeaderColumn width='19%' dataField='solicitante'>                                    Solicitante      </TableHeaderColumn>
+          <TableHeaderColumn width='20%' dataField="button" dataFormat={inputFormatter.bind(this)}>  Código        </TableHeaderColumn>
           <TableHeaderColumn width='11%' dataField="button" dataFormat={buttonFormatter.bind(this)}> Devolução        </TableHeaderColumn>
         </BootstrapTable>
-        <Modal func='' divID="invisivel" label="Código de Barras" modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} />
+        <Modal func='' cabecalho="Almoxarifado" label="Código de Barras" modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} />
       </div>
     );
   }

@@ -27,7 +27,7 @@ class ModalAmoxarifado extends React.Component {
                         </div>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={this.props.onConfirm}>     Confirmar </Button>
+                        <Button color="primary"   onClick={this.props.onConfirm}>     Confirmar </Button>
                         <Button color="secondary" onClick={this.props.onCancel}>    Cancelar  </Button>
                     </ModalFooter>
                 </Modal>

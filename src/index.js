@@ -81,6 +81,7 @@ ReactDOM.render(
       <Switch>
         <Route exact path="/" component={Login} />
         <Route exact path="/cadastrar" component={Signup} />
+        
         <Route
           path="/requisicao/criar"
           render={history => toUsertoo(Criar, history)}
@@ -134,7 +135,7 @@ ReactDOM.render(
           render={history => toUsertoo(AlmoPedido, history)}
         />
         <Route
-          path="/almoxarifado/info"
+          path="/almoxarifado/info/:id"
           render={history => toUsertoo(AlmoInfo, history)}
         />
 

@@ -63,7 +63,7 @@ export default class navbarAdm extends React.Component {
   }
 
   render() {
-    let validar, addSiorg, compras, devolver, informa
+    let validar, addSiorg, compras, devolver, informa,usuarioValida
     if(this.state.admin){
       validar =   <DropdownItem>
                     <NavLink href="/solicitacao/validar">Validar Solicitações</NavLink>
@@ -79,9 +79,9 @@ export default class navbarAdm extends React.Component {
                     <NavLink href="/almoxarifado/devolucao">Devolução</NavLink>
                   </DropdownItem>
 
-      informa =                   <DropdownItem>
+      informa =   <DropdownItem>
                     <NavLink href="/almoxarifado/info">Informações</NavLink>
-                  </DropdownItem>
+                  </DropdownItem>            
     }
 
     return (
@@ -137,8 +137,19 @@ export default class navbarAdm extends React.Component {
                   {informa}
                 </DropdownMenu>
               </UncontrolledDropdown>
+
+              <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav caret>
+                  Usuarios
+                </DropdownToggle>
+                <DropdownMenu right>
+                  <DropdownItem>
+                    <NavLink href="/usuario/validacao">Validar Acesso</NavLink>
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
               
-              </Nav>
+            </Nav>
 
               <Nav className="ml-auto" navbar>
 

@@ -288,6 +288,12 @@ export default class Orcamento extends Component {
             <Button color="danger" onClick={event => this.clear(event)}>
               Cancelar
             </Button>{" "}
+            <Link to="/solicitacao/historico">
+              <Button color="success">
+                Voltar
+              </Button>
+            </Link>
+
           </div>
         </Form>
       </Container>
@@ -416,16 +422,13 @@ export default class Orcamento extends Component {
       <div>
         {navbar}
 
+
         {this.renderForm()}
 
         {this.renderTable()}
 
         {this.renderPrices()}
-        <Link to="/solicitacao/historico">
-          <Button className="botao_sucesso" color="success">
-            Visualizar Solicitações
-          </Button>
-        </Link>
+
       </div>
     );
   }

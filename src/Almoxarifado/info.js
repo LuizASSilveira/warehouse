@@ -7,7 +7,7 @@ export default class AlmoEmprestimo extends Component {
         return(
             <div>
                 <Nav  />
-                <Table />    
+                <Table param ={this.props.match.params.id} />    
             </div>
         )
     }

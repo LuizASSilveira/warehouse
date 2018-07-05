@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './css/login.css';
 import { Redirect } from 'react-router-dom'
-import { Label } from "reactstrap";
 export default class Login extends Component {
     constructor(props){
         super(props);        
@@ -56,7 +55,7 @@ export default class Login extends Component {
                     <input placeholder=" Usuário" type="text"   ref={(input) => this.nome = input}/>
                     <input placeholder=" Senha" type="password" ref={(input) => this.senha = input}/>
                     <input type="submit" value="Entrar" />
-                    <a id='Badge'  class="btn btn-secondary" href="/cadastrar"> Cadastrar </a>
+                    <a id='Badge'   className="btn btn-secondary" href="/cadastrar"> Cadastrar </a>
                 </form>
             </div>
         );
