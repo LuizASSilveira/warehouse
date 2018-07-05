@@ -12,9 +12,7 @@ export default class Table extends Component {
     this.toggle = this.toggle.bind(this)
     this.funcCancel = this.funcCancel.bind(this)
     this.funcConfirm = this.funcConfirm.bind(this)
-    
   }
-  
   componentDidMount() {
     fetch('http://localhost:3001/estoque/validarProduto')
       .then(response => response.json())
@@ -53,27 +51,18 @@ export default class Table extends Component {
       modal: !this.state.modal
     })
   }
-  // toggleInput(valor) {
-  //   this.setState({
-  //     codigoB : valor,
-  //   })
-  // }
   setCodigo(valor){
-    console.log(valor)
     this.setState({
       codigoB : valor,
     })
   }
-  render() {
+  render(){
     const options = {
       noDataText: 'Não há dados.',
     }
     function buttonFormatter(cell, row) {
       return <Button color="primary" value={this.state.codigoB} onClick={() => this.toggle(row)} >Carregar Estoque</Button>
     }
-    // function inputFormatter(cell, row) {
-    //   return <Input onClick={() => this.toggleInput(row)}/>
-    // }
     return (
       <div id="table">
         <BootstrapTable
@@ -86,7 +75,6 @@ export default class Table extends Component {
         >
           <TableHeaderColumn width='12%' dataField='id' isKey>                                       ID               </TableHeaderColumn>
           <TableHeaderColumn width='30%' dataField='descricao'>                                      Produto          </TableHeaderColumn>
-          {/* <TableHeaderColumn width='20%' dataField="input"  dataFormat={inputFormatter.bind(this)}>  Código        </TableHeaderColumn> */}
           <TableHeaderColumn width='11%' dataField="button" dataFormat={buttonFormatter.bind(this)}  dataAlign='center'> Devolução        </TableHeaderColumn>
         </BootstrapTable>
         <Modal value={this.state.codigoB}  divID='invisivel' func={this.setCodigo.bind(this)} cabecalho="Almoxarifado" label="Código de Barras" modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} />

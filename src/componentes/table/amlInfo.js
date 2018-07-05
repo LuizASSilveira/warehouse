@@ -12,6 +12,7 @@ export default class Table extends Component {
   }
 
   componentDidMount() {
+
     fetch('http://localhost:3001/estoque/historicoProduto/' + this.props.param, {
       method: 'GET',
       headers: new Headers({
@@ -56,6 +57,8 @@ export default class Table extends Component {
           origem: obj.origem,
         });
       });
+
+
   }
 
 render() {

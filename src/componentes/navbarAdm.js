@@ -134,10 +134,14 @@ export default class navbarAdm extends React.Component {
                   <DropdownItem>
                     <NavLink href="/almoxarifado/historico">Histórico</NavLink>
                   </DropdownItem>
-                  {informa}
+                  <DropdownItem>
+                    <NavLink href="/almoxarifado/unico">Unico</NavLink>
+                  </DropdownItem>
+                  {/* <DropdownItem>
+                    <NavLink href="/almoxarifado/composto">Composto</NavLink>
+                  </DropdownItem> */}
                 </DropdownMenu>
               </UncontrolledDropdown>
-
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
                   Usuarios

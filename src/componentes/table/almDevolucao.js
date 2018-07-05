@@ -82,6 +82,7 @@ export default class Table extends Component {
           {/* <TableHeaderColumn width='20%' dataField='dataD'  dataAlign='center'>                      Data Devolução   </TableHeaderColumn> */}
           <TableHeaderColumn width='0%' dataField='usuario_id'>                                      Usuario Id </TableHeaderColumn>
           <TableHeaderColumn width='15%' dataField='Saidas' dataAlign='center'>                      Quantidade       </TableHeaderColumn>
+          <TableHeaderColumn width='20%' dataField='codigo' dataAlign='center'>      Codigo                           </TableHeaderColumn>
           <TableHeaderColumn width='40%' dataField='descricao' dataAlign='center'>                                      Produto         </TableHeaderColumn>
           <TableHeaderColumn width='20%' dataField='nome'dataAlign='center'>                                           Solicitante      </TableHeaderColumn>
           <TableHeaderColumn width='15%' dataField="button" dataFormat={buttonFormatter.bind(this)} dataAlign='center'> Devolução        </TableHeaderColumn>

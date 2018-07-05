@@ -7,30 +7,33 @@ import App from "./App";
 
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 
-import Login from "./componentes/login";
-import Criar from "./Requisicao/criar";
-import Historico from "./Requisicao/historico";
-import EditarReq from "./Requisicao/editar";
 
-import criarSiorg from "./Siorg/criar";
-import criarLista from "./Siorg/pesquisar";
+import Login          from "./componentes/login";
+import Criar          from "./Requisicao/criar";
+import Historico      from "./Requisicao/historico";
+import EditarReq      from "./Requisicao/editar";
 
-import criarS from "./Solicitacao/criar";
-import Orcamento from "./Solicitacao/orcamentoPage";
-import HistoricoSol from "./Solicitacao/historico";
-import ValidarS from "./Solicitacao/validar";
-import ValidEspec from "./Solicitacao/validarEspec";
+
+import criarSiorg     from "./Siorg/criar";
+import criarLista     from "./Siorg/pesquisar";
+
+import criarS         from "./Solicitacao/criar";
+import Orcamento      from "./Solicitacao/orcamentoPage";
+import HistoricoSol   from "./Solicitacao/historico";
+import ValidarS       from "./Solicitacao/validar";
+import ValidEspec     from "./Solicitacao/validarEspec";
 
 import AlmoEmprestimo from "./Almoxarifado/emprestimo";
-import AlmoPedido from "./Almoxarifado/Pedidos";
-import AlmoHistorico from "./Almoxarifado/historico";
-import AlmoDevolucao from "./Almoxarifado/devolucao";
-import AlmoInfo from "./Almoxarifado/info";
+import AlmoPedido     from "./Almoxarifado/Pedidos";
+import AlmoHistorico  from "./Almoxarifado/historico";
+import AlmoDevolucao  from "./Almoxarifado/devolucao";
+import AlmoInfo       from "./Almoxarifado/info";
 
-import AlmoIdUnico from "./Almoxarifado/idUnico";
+import AlmoIdUnico    from "./Almoxarifado/idUnico";
+import AlmoComposto   from "./Almoxarifado/composto";
 
-import Signup from "./componentes/signup";
-import validaUsuario from "./login/validaUsuario";
+import Signup         from "./componentes/signup";
+import validaUsuario  from "./login/validaUsuario";
 
 
 import PaginaRed from "./pageRedirect";
@@ -52,7 +55,6 @@ function loggedAndAdm() {
   } else {
     adm = false;
   }
-
   if (adm) {
     return true;
   }
@@ -81,7 +83,6 @@ ReactDOM.render(
       <Switch>
         <Route exact path="/" component={Login} />
         <Route exact path="/cadastrar" component={Signup} />
-        
         <Route
           path="/requisicao/criar"
           render={history => toUsertoo(Criar, history)}
@@ -94,12 +95,10 @@ ReactDOM.render(
           path="/requisicao/editar/:id"
           render={history => toUsertoo(EditarReq, history)}
         />
-
         <Route
           path="/solicitacao/historico"
           render={history => to(HistoricoSol, history)}
         />
-
         <Route
           path="/solicitacao/criar"
           render={history => to(criarS, history)}
@@ -109,7 +108,6 @@ ReactDOM.render(
           path="/solicitacao/orcamento/:id"
           render={history => to(Orcamento, history)}
         />
-
         <Route
           exact
           path="/solicitacao/validar"
@@ -120,7 +118,6 @@ ReactDOM.render(
           path="/solicitacao/validar/:id"
           render={history => toUsertoo(ValidEspec, history)}
         />
-
         <Route
           path="/siorg/criar"
           render={history => toUsertoo(criarSiorg, history)}
@@ -129,7 +126,6 @@ ReactDOM.render(
           path="/siorg/lista"
           render={history => to(criarLista, history)}
         />
-
         <Route
           path="/almoxarifado/compras"
           render={history => toUsertoo(AlmoPedido, history)}
@@ -138,7 +134,6 @@ ReactDOM.render(
           path="/almoxarifado/info/:id"
           render={history => toUsertoo(AlmoInfo, history)}
         />
-
         <Route
           path="/almoxarifado/emprestimo"
           render={history => to(AlmoEmprestimo, history)}
@@ -151,8 +146,9 @@ ReactDOM.render(
           path="/almoxarifado/devolucao"
           render={history => toUsertoo(AlmoDevolucao, history)}
         />
-  
-        <Route path="/almoxarifado/unico"  component={AlmoIdUnico} />
+        <Route path="/almoxarifado/unico"       component={AlmoIdUnico} />
+        <Route path="/almoxarifado/composto"       component={AlmoComposto} />
+
         <Route path="/almoxarifado/emprestimo"  component={AlmoEmprestimo} />
         
         <Route path="/usuario/validacao"        component={validaUsuario} />
