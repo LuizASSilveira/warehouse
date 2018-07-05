@@ -36,10 +36,7 @@ export default class Table extends Component {
     fetch('http://localhost:3001/estoque/devolucao', requestInfo)
       .then(response => {
         if (response.ok) {
-          console.log("sucesso")
           window.location.reload()
-          //alerta dados salvos com sucesso
-          //this.props.history.push('/requisicao/historico');
         } else {
           throw new Error("não foi possivel salvar as alterações");
         }

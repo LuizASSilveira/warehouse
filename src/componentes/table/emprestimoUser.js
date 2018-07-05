@@ -7,9 +7,7 @@ import Modal from '../modal-almoxarifado/modalEmprestimo'
 export default class Table extends Component {
   constructor() {
     super()
-
     this.state = { txt: '', estoqueId: 0, products: [], modal: false, qtd: 1, rowId:0, qtdMAX: 0, redirect: false}
-
     this.toggle = this.toggle.bind(this)
   }
   componentDidMount() {
@@ -46,7 +44,6 @@ export default class Table extends Component {
           }
         })
     }
-
     this.funcCancel()
   }
   funcCancel() {
@@ -57,12 +54,8 @@ export default class Table extends Component {
       qtdMAX: row.quantidade,
       estoqueId: row.estoqueId,
       modal: !this.state.modal,
-
-      qtdMAX: row.quantidade,
       siorg : row.produto_id
-
     })
-
   }
   setQuantidade(valor) {
     this.setState({ qtd: valor });
@@ -93,15 +86,12 @@ export default class Table extends Component {
           pagination
           options={options}
         >
-
           <TableHeaderColumn dataField='estoqueId' isKey>                            iD                               </TableHeaderColumn>
           <TableHeaderColumn width='20%' dataField='quantidade' dataAlign='center'>  Quantidade Disponivel            </TableHeaderColumn>
           <TableHeaderColumn width='20%' dataField='codigo' dataAlign='center'>      Codigo                           </TableHeaderColumn>
           <TableHeaderColumn width='60%' dataField='descricao'>                      Produto                          </TableHeaderColumn>
           <TableHeaderColumn width='14%' dataField="button" dataFormat={buttonFormatter.bind(this)}> Emprestimo       </TableHeaderColumn>
-          
         </BootstrapTable>
-
         <Modal max={this.state.qtdMAX} valueText={this.state.txt} funcText={this.setText.bind(this)} func={this.setQuantidade.bind(this)} value={this.state.qtd} modal={this.state.modal} onCancel={this.funcCancel.bind(this)} onConfirm={this.funcConfirm.bind(this)} toggle={true} />
 
       </div>

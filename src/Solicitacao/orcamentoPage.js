@@ -307,9 +307,10 @@ export default class Orcamento extends Component {
     if (this.state.listaOrcamentos > 0) {
       this.state.listaOrcamentos.map(orcamento => {
         media += orcamento.valor;
+        return (media / this.state.listaOrcamentos.length) * 1.0;
       });
-      return (media / this.state.listaOrcamentos.length) * 1.0;
-    } else {
+    } 
+    else {
       return media;
     }
   }
