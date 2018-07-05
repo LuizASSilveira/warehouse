@@ -93,6 +93,25 @@ export default class Orcamento extends Component {
         });
       }
     }
+
+    const requestInfo = {
+      method: "PUT",
+      body: JSON.stringify({
+        mediaOrcamento: this.state.mediaUnit
+      }),
+      headers: new Headers({
+        "Content-type": "application/json",
+        token: localStorage.getItem("auth-token")
+      })
+    };
+
+    var parser = document.createElement("a");
+    parser.href = window.location.href;
+
+    fetch(
+      `http://localhost:3001/solicitacoes/${parser.pathname.slice(21)}`,
+      requestInfo
+    ).then(response => {});
   }
 
   componentDidMount() {

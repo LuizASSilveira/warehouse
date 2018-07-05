@@ -77,7 +77,46 @@ export default class Orcamento extends Component {
       } else {
         lista.pop();
       }
+    } else {
+      this.setState({
+        mediaUnit: initialState.mediaUnit,
+        precoMin: initialState.precoMin,
+        precoMax: initialState.precoMax
+      });
+
+      if (lista.length > 0) {
+        let sum = 0;
+        lista.forEach(item => {
+          sum += item.valor;
+        });
+
+        let mediaUnit = (sum / lista.length).toFixed(2);
+        let precoMin = (mediaUnit * 0.6).toFixed(2);
+        let precoMax = (mediaUnit * 1.6).toFixed(2);
+
+        this.setState({
+          mediaUnit,
+          precoMin,
+          precoMax
+        });
+      }
     }
+
+    const requestInfo = {
+      method: "PUT",
+      body: JSON.stringify({
+        mediaOrcamento: this.state.mediaUnit
+      }),
+      headers: new Headers({
+        "Content-type": "application/json",
+        token: localStorage.getItem("auth-token")
+      })
+    };
+
+    fetch(
+      "http://localhost:3001/solicitacoes/" + this.props.match.params.id,
+      requestInfo
+    ).then(response => {});
   }
 
   componentDidMount() {
