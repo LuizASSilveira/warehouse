@@ -12,24 +12,22 @@ class ModalAmoxarifado extends React.Component {
         return (
             <div >
                 <Modal isOpen={this.props.modal} toggle={this.props.onCancel} className={this.props.className}>
-                    <ModalHeader toggle={this.props.onCancel}>{this.props.cabecalho}</ModalHeader>
+                    <ModalHeader toggle={this.props.onCancel}>Almoxarifado</ModalHeader>
                     <ModalBody>
-                        {this.props.mensagem}
+
                         <div id={this.props.divNum}>
-                            <Label> {this.props.label}: </Label><br />
-
+                            <Label> Quantidade: </Label><br />
                             <NumericInput type="number" min={1} max={this.props.max} value={this.props.value} onChange={this.props.func} />
+                        </div>
+                        <br />
+                        <div >
+                            <Label> Localidade: </Label><br />
+                            <Input placeholder='Informe o destino do produto' type="text" value={this.props.valueText} onChange={this.props.funcText} />
+                        </div>
 
-                        </div>
-                        <div id={this.props.divID}>
-                            <Label check id="checkModal">
-                                <Input type="checkbox" defaultChecked={this.props.check} onChange={this.props.onChange} />{' '}
-                                Produto Publico
-                            </Label>
-                        </div>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary"   onClick={this.props.onConfirm}>     Confirmar </Button>
+                        <Button color="primary" onClick={this.props.onConfirm}>     Confirmar </Button>
                         <Button color="secondary" onClick={this.props.onCancel}>    Cancelar  </Button>
                     </ModalFooter>
                 </Modal>

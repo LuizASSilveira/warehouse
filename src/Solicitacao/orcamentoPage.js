@@ -1,7 +1,11 @@
-import React, { Component, Nav } from "react";
+import React, { Component } from "react";
+import Nav from "../componentes/navbarAdm";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import "../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import "../componentes/css/orcamentoPage.css";
+
 import {
   Button,
   Form,
@@ -15,8 +19,7 @@ import {
   Label
 } from "reactstrap";
 
-const baseURL = `http://localhost:3001/orcamentos`;
-
+const baseURL = "http://localhost:3001/orcamentos";
 const initialState = {
   orcamento: {
     cnpj_fornecedor: "",
@@ -25,7 +28,7 @@ const initialState = {
     referencia: "",
     pdf_patch: ""
   },
-  listaOrcamentos: [],
+  listaSolicitacao: [],
   mediaUnit: 0.0,
   precoMin: 0.0,
   precoMax: 0.0
@@ -68,7 +71,7 @@ export default class Orcamento extends Component {
     var parser = document.createElement("a");
     parser.href = window.location.href;
     // console.log(parser.pathname.slice(21));
-    fetch(`${baseURL}/${parser.pathname.slice(21)}`, {
+    fetch(`${baseURL}/${parser.pathname.slice(23)}`, {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -87,55 +90,39 @@ export default class Orcamento extends Component {
   }
 
   save() {
-    const orcamento = this.state.orcamento;
-    // const method = orcamento.id ? "put" : "post";
-    var parser = document.createElement("a");
-    parser.href = window.location.href;
-    axios
-      .post(`${baseURL}/${parser.pathname.slice(21)}`, orcamento, {
-        headers: new Headers({
-          "Content-Type": "application/json",
-          token: localStorage.getItem("auth-token")
-        })
+    const requestInfo = {
+      method: "POST",
+      body: JSON.stringify({
+        cnpj_fornecedor: this.state.orcamento.cnpj_fornecedor,
+        nome_fornecedor: this.state.orcamento.nome_fornecedor,
+        valor: this.state.orcamento.valor,
+        solicitacao_id: this.props.dado,
+        origem: this.state.orcamento.referencia
+      }),
+      headers: new Headers({
+        "Content-type": "application/json",
+        token: localStorage.getItem("auth-token")
       })
-      .then(resp => {
-        const lista = this.getUpdatedList(resp.data);
+    };
+
+    fetch(
+      "http://localhost:3001/orcamentos/" + this.props.match.params.id,
+      requestInfo
+    ).then(response => {
+      if (response.ok) {
+        //alerta dados salvos com sucesso
+        const lista = this.getUpdatedList(response.data);
         this.setState({
           orcamento: initialState.orcamento,
           listaOrcamentos: lista
         });
-      });
-    this.getPrices(this.state.listaOrcamentos);
-    window.location.reload();
+        this.getPrices(this.state.listaOrcamentos);
+        window.location.reload();
+      } else {
+        console.log(response);
+      }
+    });
   }
-
-  // save() {
-  //   const requestInfo = {
-  //     method: "POST",
-  //     body: {
-  //       cnpj_fornecedor: this.state.orcamento.cnpj_fornecedor,
-  //       nome_fornecedor: this.state.orcamento.nome_fornecedor,
-  //       valor: this.state.orcamento.valor,
-  //       solicitacao_id: this.props.dado,
-  //       origem: this.state.orcamento.referencia
-  //     }
-  //     // headers: new Headers({
-  //     //   "Content-Type": "application/json",
-  //     //   token: localStorage.getItem("auth-token")
-  //     // })
-  //   };
-
-  //   fetch(baseURL, requestInfo).then(response => {
-  //     if (response.ok) {
-  //       //alerta dados salvos com sucesso
-  //       window.location.reload();
-  //       this.getUpdatedList(response);
-  //       // this.props.history.push("/solicitacao/historico");
-  //     } else {
-  //       console.log(response);
-  //     }
-  //   });
-  // }
 
   getUpdatedList(orcamento) {
     if (orcamento) {
@@ -171,6 +158,7 @@ export default class Orcamento extends Component {
     return (
       <Container>
         <h3>Orçamentos</h3>
+        <br />
         <Form>
           <FormGroup row>
             <Col sm={4}>
@@ -234,9 +222,15 @@ export default class Orcamento extends Component {
             <Button color="primary" onClick={event => this.save(event)}>
               Salvar
             </Button>{" "}
-            <Button color="secondary" onClick={event => this.clear(event)}>
+            <Button color="danger" onClick={event => this.clear(event)}>
               Cancelar
             </Button>{" "}
+            <Link to="/solicitacao/historico">
+              <Button color="success">
+                Voltar
+              </Button>
+            </Link>
+
           </div>
         </Form>
       </Container>
@@ -283,12 +277,12 @@ export default class Orcamento extends Component {
                 let orcamento = row;
                 return (
                   <div>
-                    <Button
+                    {/* <Button
                       className="btn btn-default"
                       onClick={() => this.load(orcamento)}
                     >
                       <i className="fa fa-edit" />
-                    </Button>
+                    </Button> */}
                     <Button
                       className="btn btn-danger"
                       onClick={() => this.remove(orcamento)}
@@ -308,13 +302,25 @@ export default class Orcamento extends Component {
     );
   }
 
+  setMediaUnit() {
+    let media = 0;
+    if (this.state.listaOrcamentos > 0) {
+      this.state.listaOrcamentos.map(orcamento => {
+        media += orcamento.valor;
+      });
+      return (media / this.state.listaOrcamentos.length) * 1.0;
+    } else {
+      return media;
+    }
+  }
+
   renderPrices() {
     return (
       <Container>
         <Form>
           <FormGroup row>
             <Col sm={4}>
-              <Label>Preço Médio</Label>
+              <Label>Preço Média</Label>
               <InputGroup>
                 <InputGroupAddon addonType="prepend">R$</InputGroupAddon>
                 <Input
@@ -363,11 +369,15 @@ export default class Orcamento extends Component {
     }
     return (
       <div>
+        {navbar}
+
+
         {this.renderForm()}
 
         {this.renderTable()}
 
         {this.renderPrices()}
+
       </div>
     );
   }

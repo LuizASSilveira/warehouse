@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './css/login.css';
 import { Redirect } from 'react-router-dom'
-
 export default class Login extends Component {
     constructor(props){
         super(props);        
@@ -16,7 +15,6 @@ export default class Login extends Component {
                 'Content-type' : 'application/json' 
             })
         };
-
         fetch('http://localhost:3001/login',requestInfo)
            .then(response => {
                 if(response.ok) {
@@ -37,25 +35,27 @@ export default class Login extends Component {
                 this.setState({msg:error.message});
             });
     }
-
     componentDidMount(){
         localStorage.removeItem('auth-token')
         localStorage.removeItem('isAdm')
         localStorage.removeItem('nome')
     }
-    
+    voltar(){}
+
     render(){
         if (this.state.redirect) {
             return <Redirect to='/solicitacao/historico'/>;
         }
         return(
             <div className="login-box">
-            <h1 className="header-logo">Almoxarifado UTFPR</h1>
+            <h1 className="header-logo">Login</h1>
             <span>{this.state.msg}</span>
                 <form onSubmit={this.envia.bind(this)}>
-                    <input placeholder=" Usuário" type="text" ref={(input) => this.nome = input}/>
+
+                    <input placeholder=" Usuário" type="text"   ref={(input) => this.nome = input}/>
                     <input placeholder=" Senha" type="password" ref={(input) => this.senha = input}/>
                     <input type="submit" value="Entrar" />
+                    <a id='Badge'   className="btn btn-secondary" href="/cadastrar"> Cadastrar </a>
                 </form>
             </div>
         );

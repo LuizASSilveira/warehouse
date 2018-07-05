@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import '../css/table.css'
 import { BootstrapTable, TableHeaderColumn } from '../../../node_modules/react-bootstrap-table';
 import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
-import { Redirect } from 'react-router-dom'
-
+import ExpandTable from './expandFeedback'
 
 class Table extends Component {
   constructor(props) {
@@ -28,15 +27,25 @@ class Table extends Component {
     this.setState({ id: row.id})
     this.setState({ redirect: true })
   }
+  expandComponent(row) {
+    return (
+      <ExpandTable data={ row } siorg={false} />
+    );
+  }
+
+  isExpandableRow(row) {
+    return true;
+
+  }
 
   render() {
     
-    const selectRowProp = {
-          clickToSelect: true,
-          hideSelectColumn: true,
-          mode: 'radio',
-          bgColor: 'pink',
-    };
+    // const selectRowProp = {
+    //       clickToSelect: true,
+    //       hideSelectColumn: true,
+    //       mode: 'radio',
+    //       bgColor: 'gray',
+    // };
 
     const options ={
       noDataText: 'Não há dados.',
@@ -54,13 +63,16 @@ class Table extends Component {
           search={true}
           searchPlaceholder='Pesquisar'
           pagination
-          selectRow={selectRowProp}
+          hover={true}
+          // selectRow={selectRowProp}
           options={options}
+          expandComponent={ this.expandComponent }
+          expandableRow={ this.isExpandableRow }
         >
           <TableHeaderColumn dataField='id' isKey>  ID                                 </TableHeaderColumn>
           <TableHeaderColumn width='50%' dataField={this.props.descricaoL}> {this.props.descricao}  </TableHeaderColumn>
           <TableHeaderColumn width='20%' dataField={this.props.dataL}>      {this.props.data}       </TableHeaderColumn>
-          <TableHeaderColumn width='10%' dataField={this.props.statusL}>    {this.props.status}     </TableHeaderColumn>
+          <TableHeaderColumn width='15%' dataField={this.props.statusL}>    {this.props.status}     </TableHeaderColumn>
           <TableHeaderColumn width='20%' dataField={this.props.nomeL}>      {this.props.nome}       </TableHeaderColumn>
         </BootstrapTable>
 

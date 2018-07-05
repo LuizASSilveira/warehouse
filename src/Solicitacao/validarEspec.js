@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import Nav from '../componentes/navbarAdm';
 import '../componentes/css/input.css'
 import { Input, Button, Label, FormGroup, Modal, ModalHeader, ModalBody, ModalFooter, FormFeedback } from 'reactstrap';
-import InputG from "../componentes/inputGenerico";
-import OrcamentosTable from "../componentes/table/orcamentos";
 import TableSiorg from "../componentes/table/siorgTable";
 import NumericInput from 'react-numeric-input';
 import { Link } from 'react-router-dom'
@@ -131,29 +129,29 @@ export default class validEspec extends Component {
 
 
   render() {
-    let feed
-
+    
     console.log(this.state.products[0])
-    const selectRowProp = {
-      mode: 'radio',
-      hideSelectColumn: true,
-      clickToSelect: true,
-      onSelect: this.properFunc
-    }
+    // const selectRowProp = {
+    //   mode: 'radio',
+    //   hideSelectColumn: true,
+    //   clickToSelect: true,
+    //   onSelect: this.properFunc
+    // }
     if (!this.state.loading) {
 
       return (
         <div>
-          <Nav isadm={true} />
+          <Nav/>
           <div id="Inputs">
           <h4>Validar Solicitação</h4>
             
             <FormGroup>
-              <Label> Siorg</Label>
-              <div id='siorgButton'>
+            <br/>
+              <Label> Siorg</Label><br/>
+              <div id='InputButtonSiorg'>
                 <Input placeholder="Nº Siorg" name='siorg' value={this.state.products[this.state.index].siorg} type='text' id='inputSiorg' disabled='true' />
                 <Button id="buttonSiorg" color="secondary" onClick={this.toggle}>Lista Siorg</Button>
-              </div>
+              </div><br/><br/>
               <Modal isOpen={this.state.modal} toggle={this.toggle} className='modal-xl'>
                 <ModalHeader toggle={this.toggle}>Lista Siorg</ModalHeader>
                 <ModalBody>
@@ -203,24 +201,15 @@ export default class validEspec extends Component {
             
             <FormGroup>
                 <Label>Feedback</Label>
-                <Input type='textarea' invalid={!this.state.products[this.state.index].feedback} name='feedback' value={this.state.products[this.state.index].feedback} onChange={this.onChange} placeholder='Insira um comentário para o solicitante sobre o motivo da aprovação ou cancelamento da solicitação.' />
+                <Input type='textarea' name='feedback' value={this.state.products[this.state.index].feedback} onChange={this.onChange} placeholder='Insira um comentário para o solicitante sobre o motivo da aprovação ou cancelamento da solicitação.' />
                 <FormFeedback>Preencha este campo!</FormFeedback>
             </FormGroup>
-            {
-                /**
-                 <OrcamentosTable urlGet={"http://localhost:3001/solicitacoes/" + this.props.match.params.id + "/orcamentos"} />
-                **/
-            }
-            <Orcamento dado={this.props.match.params.id} urlGet={'http://localhost:3001/orcamentos/'+ this.props.match.params.id} />
+
+            <Orcamento isValidar={true} dado={this.props.match.params.id} urlGet={'http://localhost:3001/orcamentos/'+ this.props.match.params.id} />
             
             <div class="right">
                 <Button id="confirm" color="primary" 
-                        onClick={this.quandoClica} 
-                        disabled={
-                            !this.state.products[this.state.index].feedback ||
-                            !this.state.products[this.state.index].descricao ||
-                            !this.state.products[this.state.index].justificativa
-                        }>Confirmar</Button>
+                        onClick={this.quandoClica}>Confirmar</Button>
                 <Link to="/solicitacao/validar">
                     <Button id="cancel" color="danger" >Cancelar</Button>
                 </Link>
@@ -230,7 +219,7 @@ export default class validEspec extends Component {
       )
     }
     else {
-      return ("Algo deu errado!")
+      return ("Carregando")
     }
   }
 }

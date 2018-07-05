@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import Nav from '../componentes/navbarAdm';
-import Table from '../componentes/table/baixaCompras'
+import Table from '../componentes/table/idUnico'
 
 export default class AlmoEmprestimo extends Component {
     render() {
         return (
             <div>
-
                 <Nav />
                 <Table
                     urlGet="http://localhost:3001/estoque/requisitado"
                     urlPost="http://localhost:3001/estoque"
                 />
-
             </div>
         )
     }

@@ -4,6 +4,7 @@ import { Button, Input } from 'reactstrap';
 import Modal from '../confirmModal'
 import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import '../css/table.css'
+import ExpandTable from './expand'
 
 const options = {
   noDataText: 'Não há dados.',
@@ -80,8 +81,6 @@ class TableEditar extends Component {
     this.setState({ name: event.target.value });
   }
   excluir(row) {
-    console.log(row.id)
-
     const requestInfo = {
       method: 'DELETE',
       headers: new Headers({
@@ -103,6 +102,18 @@ class TableEditar extends Component {
   handleChangeNum(event) {
     this.setState({ numero: event.target.value });
   }
+
+  expandComponent(row) {
+    return (
+      <ExpandTable data={ row } siorg={false} />
+    );
+  }
+
+  isExpandableRow(row) {
+    return true;
+
+  }
+
   render() {
     let self = this;
     function buttonFormatter(cell, row) {
@@ -122,10 +133,14 @@ class TableEditar extends Component {
           search={true}
           searchPlaceholder='Pesquisar'
           pagination
+          hover={true}
+          expandComponent={ this.expandComponent }
+          expandableRow={ this.isExpandableRow }
         >
-          <TableHeaderColumn dataField='id' isKey>  ID                                  </TableHeaderColumn>
+          <TableHeaderColumn width='00%' dataField='id' isKey>  ID                                  </TableHeaderColumn>
+          <TableHeaderColumn width='18%' dataField={this.props.dataL}>      {this.props.data}       </TableHeaderColumn>
           <TableHeaderColumn width='50%' dataField={this.props.descricaoL}> {this.props.descricao}  </TableHeaderColumn>
-          <TableHeaderColumn width='20%' dataField={this.props.dataL}>      {this.props.data}       </TableHeaderColumn>
+          <TableHeaderColumn width='20%' dataField={this.props.orcamentoL}> {this.props.orcamento}  </TableHeaderColumn>
           <TableHeaderColumn width='20%' dataField={this.props.nomeL}>      {this.props.nome}       </TableHeaderColumn>
           <TableHeaderColumn width='10%' dataField="button" dataFormat={buttonFormatter}> Remover   </TableHeaderColumn>
         </BootstrapTable>

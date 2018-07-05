@@ -7,7 +7,8 @@ export default class AlmoPedidos extends Component {
         return(
             <div>
                 <Nav />
-                <Table  />
+                <h4 id="table">Empréstimo de Produtos</h4>
+                <Table array= {[]} history = {this.props.history} />
             </div>
         )
     }
