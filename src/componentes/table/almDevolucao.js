@@ -37,6 +37,7 @@ export default class Table extends Component {
       .then(response => {
         if (response.ok) {
           console.log("sucesso")
+          window.location.reload()
           //alerta dados salvos com sucesso
           //this.props.history.push('/requisicao/historico');
         } else {

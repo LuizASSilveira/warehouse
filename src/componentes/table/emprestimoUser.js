@@ -24,8 +24,6 @@ export default class Table extends Component {
   }
 
   funcConfirm() {
-
-
     if (this.state.qtd !=='') {
       const requestInfo = {
         method: 'POST',

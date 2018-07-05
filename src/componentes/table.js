@@ -161,14 +161,10 @@ class Table extends Component {
 
         </div>
 
-        <Modal modal={this.state.modal} onCancel={this.funcCancel} 
-               onConfirm={this.funcConfirm} toggle={true} mensagem={'Deseja confirmar?'} />
+        <Modal header="Requisição" modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} mensagem={'Deseja confirmar?'} />
 
         <Modal isOpen={this.state.modal} toggle={this.toggle} className='modal-xl'>
-          <ModalBody>
-              Deseja Confirmar?
-          </ModalBody>
-
+          <ModalBody>  Deseja Confirmar?    </ModalBody>
           <ModalFooter>
               <Button color="primary" onClick={this.funcConfirm}>Confirmar</Button>{' '}
               <Button color="danger" onClick={this.funcCancel}>Cancelar</Button>

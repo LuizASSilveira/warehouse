@@ -147,6 +147,16 @@ export default class validEspec extends Component {
             
             <FormGroup>
             <br/>
+              <Label>Solicitação Status:</Label>
+              {console.log(this.state.products[0].status)}
+              <Input id='optInput' type="select" name="status"  value={this.state.products[this.state.index].status} onChange={this.onChange}>
+                <option>ABERTO</option>
+                <option>APROVADO</option>
+                <option>CANCELADO</option>
+              </Input>
+            </FormGroup>
+
+            <FormGroup>
               <Label> Siorg</Label><br/>
               <div id='InputButtonSiorg'>
                 <Input placeholder="Nº Siorg" name='siorg' value={this.state.products[this.state.index].siorg} type='text' id='inputSiorg' disabled='true' />
@@ -188,16 +198,7 @@ export default class validEspec extends Component {
                 <FormFeedback>Preencha este campo!</FormFeedback>
             </FormGroup>
 
-            <FormGroup>
-              <Label>Estado</Label>
-              {console.log(this.state.products[0].status)}
-              <Input type="select" name="status"  value={this.state.products[this.state.index].status} onChange={this.onChange}>
-                <option>ABERTO</option>
-                <option>APROVADO</option>
-                <option>CANCELADO</option>
-
-              </Input>
-            </FormGroup>
+            
             
             <FormGroup>
                 <Label>Feedback</Label>

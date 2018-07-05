@@ -4,14 +4,13 @@ import { BootstrapTable, TableHeaderColumn } from '../../../node_modules/react-b
 import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import '../css/input.css'
 
-
-
 class Table extends Component {
 
   constructor(props) {
     super(props)
-    this.state = { products: [], 
-                   selected:[]
+    this.state = {
+      products: [],
+      selected: []
     }
 
     this.funcCancel = this.funcCancel.bind(this)
@@ -23,7 +22,7 @@ class Table extends Component {
   funcConfirm() {
     const requestInfo = {
       method: 'POST',
-      body: JSON.stringify({nome: this.state.name ,solicitacoes: this.state.selected}),
+      body: JSON.stringify({ nome: this.state.name, solicitacoes: this.state.selected }),
       headers: new Headers({
         'Content-type': 'application/json',
         'token': localStorage.getItem('auth-token')
@@ -38,24 +37,24 @@ class Table extends Component {
           throw new Error("não foi possivel salvar as alterações");
         }
       })
-    this.funcCancel()  
-}
+    this.funcCancel()
+  }
 
   funcCancel() {
-    this.setState({modal:false})
+    this.setState({ modal: false })
   }
 
   onRowSelect(row, isSelected) {
     if (isSelected) {
-      this.setState({selected: this.state.selected.concat(row.id)})
+      this.setState({ selected: this.state.selected.concat(row.id) })
       this.props.funcao(row, isSelected)
-    } 
+    }
     else {
       this.props.funcao(row, isSelected)
       const index = this.state.selected.indexOf(row.id);
-      if(index < 0) return
+      if (index < 0) return
       this.state.selected.splice(index, 1)
-      this.setState({selected: this.state.selected})  
+      this.setState({ selected: this.state.selected })
     }
   }
 
@@ -74,8 +73,8 @@ class Table extends Component {
       });
   }
 
-  onRowClick(row){
-    this.setState({ id: row.id})
+  onRowClick(row) {
+    this.setState({ id: row.id })
     this.setState({ redirect: true })
 
   }
@@ -83,21 +82,21 @@ class Table extends Component {
 
   render() {
     if (this.state.redirect) {
-      this.props.history.push('/solicitacao/validar/'+this.state.id);
+      this.props.history.push('/solicitacao/validar/' + this.state.id);
     }
 
 
 
-    const options ={
+    const options = {
       noDataText: 'Não há dados.',
       onRowDoubleClick: this.onRowClick
-        
+
     }
 
     var selectRowProp = {
       clickToSelect: true,
       mode: 'checkbox',
-      bgColor:'#98FB98',
+      bgColor: '#98FB98',
       onSelect: this.onRowSelect
     };
 
@@ -119,7 +118,7 @@ class Table extends Component {
             <TableHeaderColumn width='10%' dataField={this.props.statusL}>    {this.props.status}     </TableHeaderColumn>
             <TableHeaderColumn width='20%' dataField={this.props.nomeL}>      {this.props.nome}       </TableHeaderColumn>
           </BootstrapTable>
-      
+
         </div>
       </div>
     );

@@ -4,8 +4,6 @@ import {Table} from '../componentes/table/addSolicitacaoReq';
 import {TableEditar} from '../componentes/table/tableEditarRequisicao';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 import '../componentes/css/editarReq.css'
-
-
 export default class Criar extends Component {     
     constructor(props){
         super(props)
@@ -13,18 +11,15 @@ export default class Criar extends Component {
             modal: false,
             selected: []
         }
-
         this.toggle = this.toggle.bind(this);
         this.guardaRow = this.guardaRow.bind(this);
         this.funcConfirm = this.funcConfirm.bind(this);
     }
-
     toggle() {
       this.setState({
         modal: !this.state.modal
       });
     }
-
     guardaRow(row, isSelected){
         if (isSelected) {
             this.setState({selected: this.state.selected.concat(row.id)})
@@ -36,7 +31,6 @@ export default class Criar extends Component {
           this.setState({selected: this.state.selected})  
         }
     }
-
     funcConfirm() {
         const requestInfo = {
           method: 'POST',
@@ -50,13 +44,13 @@ export default class Criar extends Component {
           .then(response => {
             if (response.ok) {
               //alerta dados salvos com sucesso
+              window.location.reload()
             } else {
               throw new Error("não foi possivel salvar as alterações");
             }
           })
         this.toggle()  
     }
-
     render(){
         return(
             <div>
