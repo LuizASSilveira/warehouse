@@ -83,6 +83,7 @@ export default class Orcamento extends Component {
         this.setState({ listaOrcamentos: product });
         this.getPrices(this.state.listaOrcamentos);
       });
+
   }
 
   clear() {
@@ -122,6 +123,27 @@ export default class Orcamento extends Component {
         console.log(response);
       }
     });
+
+      
+    const requestInfos = {
+      method: 'PUT',
+      body: JSON.stringify({mediaOrcamento: this.state.mediaUnit}),
+      headers: new Headers({
+        'Content-type': 'application/json',
+        'token': localStorage.getItem('auth-token')
+      })
+    };
+    fetch('http://localhost:3001/solicitacoes/' + this.props.match.params.id, requestInfos)
+      .then(response => {
+        if (response.ok) {
+          //alerta dados salvos com sucesso
+          console.log("fumego")
+        } else {
+          throw new Error("não foi possivel salvar as alterações");
+        }
+      })
+
+
   }
 
   getUpdatedList(orcamento) {

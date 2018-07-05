@@ -60,6 +60,7 @@ class TableEditar extends Component {
       .then(product => {
         this.setState({ products: product });
         console.log(product)
+        console.log("akiiiii")
       });
 
     fetch(this.props.urlGet2, {
