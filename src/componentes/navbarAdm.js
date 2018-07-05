@@ -63,27 +63,22 @@ export default class navbarAdm extends React.Component {
   }
 
   render() {
-    let validar, addSiorg, compras, devolver, informa,usuarioValida
+    let validar, addSiorg, compras, devolver
     if(this.state.admin){
-      validar =   <DropdownItem>
-                    <NavLink href="/solicitacao/validar">Validar Solicitações</NavLink>
-                  </DropdownItem>
-      addSiorg =  <DropdownItem>
-                    <NavLink href="/siorg/criar">Adicionar Siorg</NavLink>
-                  </DropdownItem>
-      compras =                   <DropdownItem>
-                    <NavLink href="/almoxarifado/compras">Compras</NavLink>
-                  </DropdownItem>
+      validar=  <DropdownItem>
+                  <NavLink href="/solicitacao/validar">Validar Solicitações</NavLink>
+                </DropdownItem>
+      addSiorg =<DropdownItem>
+                  <NavLink href="/siorg/criar">Adicionar Siorg</NavLink>
+                </DropdownItem>
+      compras = <DropdownItem>
+                  <NavLink href="/almoxarifado/compras">Compras</NavLink>
+                </DropdownItem>
 
-      devolver =                   <DropdownItem>
-                    <NavLink href="/almoxarifado/devolucao">Devolução</NavLink>
-                  </DropdownItem>
-
-      informa =   <DropdownItem>
-                    <NavLink href="/almoxarifado/info">Informações</NavLink>
-                  </DropdownItem>            
+      devolver= <DropdownItem>
+                  <NavLink href="/almoxarifado/devolucao">Devolução</NavLink>
+                </DropdownItem>          
     }
-
     return (
       <div>
         <Navbar color="light" light expand="md">
@@ -101,7 +96,7 @@ export default class navbarAdm extends React.Component {
                     <NavLink href="/solicitacao/criar">Criar Solicitação</NavLink>
                   </DropdownItem>
                   <DropdownItem>
-                    <NavLink href="/solicitacao/historico">Visualizar Solicitações</NavLink>
+                    <NavLink href="/solicitacao/historico">Historico Solicitações</NavLink>
                   </DropdownItem>
                   {validar}
                 </DropdownMenu>

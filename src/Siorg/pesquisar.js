@@ -12,7 +12,7 @@ export default class Criar extends Component {
                 <h4 id="table">Tabela Siorg</h4>
 
                 <TableSiorg  desativarSelect={true} buttonName= {'Criar Requisicao'}
-                        urlGet=     {'http://localhost:3001/produtos'}
+                        urlGet=     {'http://localhost:3001/produtos/'}
                         urlDelete= {'http://localhost:3001/produtos/'}
                         
                         descricao=  {'Descrição'}

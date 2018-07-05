@@ -169,6 +169,22 @@ export default class validEspec extends Component {
 
             <FormGroup>
               <br />
+              <Label>Solicitação Status:</Label>
+              {console.log(this.state.products[0].status)}
+              <Input
+                id="optInput"
+                type="select"
+                name="status"
+                value={this.state.products[this.state.index].status}
+                onChange={this.onChange}
+              >
+                <option>ABERTO</option>
+                <option>APROVADO</option>
+                <option>CANCELADO</option>
+              </Input>
+            </FormGroup>
+
+            <FormGroup>
               <Label> Siorg</Label>
               <br />
               <div id="InputButtonSiorg">
@@ -251,25 +267,6 @@ export default class validEspec extends Component {
                 value={this.state.products[this.state.index].justificativa}
               />
               <FormFeedback>Preencha este campo!</FormFeedback>
-            </FormGroup>
-
-            <FormGroup>
-              <Label>Estado</Label>
-              {console.log(this.state.products[0].status)}
-              <Input
-                type="select"
-                name="status"
-                value={this.state.products[this.state.index].status}
-                onChange={this.onChange}
-                // disabled={
-                //   this.state.products[this.state.index].siorg ? true : false
-                // }
-                disabled={this.state.listaOrcamentos.length < 3 ? true : false}
-              >
-                <option>ABERTO</option>
-                <option>APROVADO</option>
-                <option>CANCELADO</option>
-              </Input>
             </FormGroup>
 
             <FormGroup>

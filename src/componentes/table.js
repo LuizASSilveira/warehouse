@@ -83,8 +83,8 @@ class Table extends Component {
     })
       .then(response => response.json())
       .then(product => {
-        this.setState({ products: product });
-      });
+        this.setState({ products: product })
+      })
   }
   
   handleChange(event) {
@@ -142,10 +142,10 @@ class Table extends Component {
           options={options}
         >
           <TableHeaderColumn dataField='id' isKey>  ID                                              </TableHeaderColumn>
-          <TableHeaderColumn width='20%' dataField={this.props.dataL}>      {this.props.data}       </TableHeaderColumn>
-          <TableHeaderColumn width='60%' dataField={this.props.descricaoL}> {this.props.descricao}  </TableHeaderColumn>
-          <TableHeaderColumn width='10%' dataField={this.props.statusL}>    {this.props.status}     </TableHeaderColumn>
-          <TableHeaderColumn width='20%' dataField={this.props.nomeL}>      {this.props.nome}       </TableHeaderColumn>
+          <TableHeaderColumn width='20%' dataField={this.props.dataL} dataAlign='center'>      {this.props.data}       </TableHeaderColumn>
+          <TableHeaderColumn width='60%' dataField={this.props.descricaoL} dataAlign='center'> {this.props.descricao}  </TableHeaderColumn>
+          <TableHeaderColumn width='10%' dataField={this.props.statusL} dataAlign='center'>    {this.props.status}     </TableHeaderColumn>
+          <TableHeaderColumn width='20%' dataField={this.props.nomeL} dataAlign='center'>      {this.props.nome}       </TableHeaderColumn>
         </BootstrapTable>
 
         <div id="InputButton">
@@ -161,14 +161,10 @@ class Table extends Component {
 
         </div>
 
-        <Modal modal={this.state.modal} onCancel={this.funcCancel} 
-               onConfirm={this.funcConfirm} toggle={true} mensagem={'Deseja confirmar?'} />
+        <Modal header="Requisição" modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm} toggle={true} mensagem={'Deseja confirmar?'} />
 
         <Modal isOpen={this.state.modal} toggle={this.toggle} className='modal-xl'>
-          <ModalBody>
-              Deseja Confirmar?
-          </ModalBody>
-
+          <ModalBody>  Deseja Confirmar?    </ModalBody>
           <ModalFooter>
               <Button color="primary" onClick={this.funcConfirm}>Confirmar</Button>{' '}
               <Button color="danger" onClick={this.funcCancel}>Cancelar</Button>

@@ -33,9 +33,6 @@ export default class CriarS extends Component {
                 .then(response => {
                   if (response.ok) {
                     this.props.history.push('/siorg/lista');
-                    // this.setState({ siorg: '', value: ''})
-                    // alert("Novo SIORG criado com sucesso!")
-
                   } else {
                     throw new Error("não foi possivel salvar as alterações");
                   }
@@ -55,7 +52,6 @@ export default class CriarS extends Component {
         return(
             <div>
                 <Nav/>
-                
                 <div id = "Inputs">
                 <h4 className="titulo">Criar Produto Siorg</h4>
                     

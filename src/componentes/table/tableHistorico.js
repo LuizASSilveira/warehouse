@@ -70,10 +70,10 @@ class Table extends Component {
           expandableRow={ this.isExpandableRow }
         >
           <TableHeaderColumn dataField='id' isKey>  ID                                 </TableHeaderColumn>
-          <TableHeaderColumn width='50%' dataField={this.props.descricaoL}> {this.props.descricao}  </TableHeaderColumn>
-          <TableHeaderColumn width='20%' dataField={this.props.dataL}>      {this.props.data}       </TableHeaderColumn>
-          <TableHeaderColumn width='15%' dataField={this.props.statusL}>    {this.props.status}     </TableHeaderColumn>
-          <TableHeaderColumn width='20%' dataField={this.props.nomeL}>      {this.props.nome}       </TableHeaderColumn>
+          <TableHeaderColumn width='65%' dataField={this.props.descricaoL} dataAlign='center'> {this.props.descricao}  </TableHeaderColumn>
+          <TableHeaderColumn width='15%' dataField={this.props.dataL} dataAlign='center'>      {this.props.data}       </TableHeaderColumn>
+          <TableHeaderColumn width='13%' dataField={this.props.statusL} dataAlign='center'>    {this.props.status}     </TableHeaderColumn>
+          <TableHeaderColumn width='15%' dataField={this.props.nomeL} dataAlign='center'>      {this.props.nome}       </TableHeaderColumn>
         </BootstrapTable>
 
       </div>

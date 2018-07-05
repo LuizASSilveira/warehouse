@@ -1,4 +1,4 @@
-import React, { Component, Nav } from "react";
+import React, { Component } from "react";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 import "../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css";

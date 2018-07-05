@@ -59,4 +59,6 @@
 .titulo{
     margin-bottom: 1cm;
 }
-
+#optInput{
+    width: 25%;
+}
