@@ -8,14 +8,16 @@ import Modal from '../modal-almoxarifado/modal2'
 export default class Table extends Component {
     constructor() {
         super()
+
         this.state = {valor: 0 ,arrayForn: [] , products: [], modal: false, qtd : 0 ,id : 0, checked : true, qtdMAX: 0, idSolicitacao: 0}
+
         this.toggle = this.toggle.bind(this)
         this.funcCancel = this.funcCancel.bind(this)
         this.funcConfirm = this.funcConfirm.bind(this)
         this.orcamentoID = this.orcamentoID.bind(this)   
     }
     componentDidMount() {
-        fetch(this.props.urlGet, {
+        fetch("http://localhost:3001/estoque/requisitado", {
           method: 'GET',
           headers: new Headers({
             'Content-type': 'application/json',
@@ -24,6 +26,7 @@ export default class Table extends Component {
         })
           .then(response => response.json())
           .then(product => {
+          console.log(this.props.urlGet)    
             this.setState({ products: product });
           });
       }
@@ -31,18 +34,20 @@ export default class Table extends Component {
     funcConfirm() {
         const requestInfo = {
             method: 'POST',
+
             body: JSON.stringify({  
                 orcamento_id:   this.state.valor,
                 solicitacao_id: this.state.idSolicitacao,
                 quantidade:     this.state.qtd,
                 unico:          this.state.checked,                              
             }),
+
             headers: new Headers({
               'Content-type': 'application/json',
               'token': localStorage.getItem('auth-token')
             })
           };
-          fetch(this.props.urlPost, requestInfo)
+          fetch('http://localhost:3001/estoque', requestInfo)
             .then(response => {
               if (response.ok) {
                 window.location.reload()
@@ -72,10 +77,12 @@ export default class Table extends Component {
                         });
         })
         this.setState({
+
             qtd :           row.quantidade,
             qtdMAX:         row.quantidade,
             idSolicitacao:  row.solicitacao_id,    
             modal:          !this.state.modal,
+
         })
     }
     setQuantidade(valor){
@@ -104,6 +111,7 @@ export default class Table extends Component {
                     pagination
                     options={options}
                 >
+
                     <TableHeaderColumn width='0%'   dataField='produto_id'      isKey>              ID              </TableHeaderColumn>
                     <TableHeaderColumn width='0%'   dataField='solicitacao_id'  >                   IDSolicitacao   </TableHeaderColumn>
                     <TableHeaderColumn width='15%'  dataField='quantidade'       dataAlign='center'>Quantidade      </TableHeaderColumn>
@@ -114,6 +122,7 @@ export default class Table extends Component {
                 </BootstrapTable>
 
                 <Modal orcamentoID={this.orcamentoID} valor={this.valor} idSolicitacao={this.state.idSolicitacao} Fornecedor= 'Fornecedor' array={this.state.arrayForn}  max= {this.state.qtd}  onChange={this.setGroup.bind(this)} check={this.state.checked} func={this.setQuantidade.bind(this)} label='Produtos Recebidos' value={this.state.qtd} modal={this.state.modal} onCancel={this.funcCancel} onConfirm={this.funcConfirm.bind(this)} toggle={true} />
+
             </div>
         );
     }

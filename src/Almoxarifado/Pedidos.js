@@ -6,11 +6,13 @@ export default class AlmoEmprestimo extends Component {
     render() {
         return (
             <div>
+
                 <Nav />
                 <Table
                     urlGet="http://localhost:3001/estoque/requisitado"
                     urlPost="http://localhost:3001/estoque"
                 />
+
             </div>
         )
     }
