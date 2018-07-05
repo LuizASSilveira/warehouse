@@ -130,7 +130,7 @@ export default class CriarS extends Component {
 
                         <ModalFooter>
                             <Button color="primary" onClick={this.mandaSiorg}>Confirmar</Button>{' '}
-                            <Button color="secondary" onClick={this.toggle}>Cancelar</Button>
+                            <Button color="danger" onClick={this.toggle}>Cancelar</Button>
                         </ModalFooter>
                     </Modal>
 

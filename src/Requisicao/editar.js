@@ -57,7 +57,7 @@ export default class Criar extends Component {
                 <Nav/>
                 <h4 id="table">Editar Requisição</h4>
 
-                <Button onClick={this.toggle} className="button_req"> Adicionar Solicitação </Button><br/><br/>
+                <Button color="success" onClick={this.toggle} className="button_req"> Adicionar Solicitação </Button><br/><br/>
 
                 <TableEditar  buttonName= {'Salvar'}
 
@@ -77,9 +77,6 @@ export default class Criar extends Component {
                         nomeL=      {'nome'}
                         orcamentoL= {'orcamento'}
                 />
-
-              
-
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className='modal-xl'>
                     <ModalHeader toggle={this.toggle}>Adicionar Solicitação</ModalHeader>
                     
@@ -104,7 +101,7 @@ export default class Criar extends Component {
 
                     <ModalFooter>
                         <Button color="primary" onClick={this.funcConfirm}>Confirmar</Button>{' '}
-                        <Button color="secondary" onClick={this.toggle}>Cancelar</Button>
+                        <Button color="danger" onClick={this.toggle}>Cancelar</Button>
                     </ModalFooter>
                 </Modal>                
             </div>

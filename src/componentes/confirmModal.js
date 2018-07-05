@@ -43,7 +43,7 @@ class Confirm extends React.Component {
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.toggleConfirm}>Confirmar</Button>{' '}
-            <Button color="secondary" onClick={this.toggleCancel}>Cancelar</Button>
+            <Button color="danger" onClick={this.toggleCancel}>Cancelar</Button>
           </ModalFooter>
         </Modal>
       </div>

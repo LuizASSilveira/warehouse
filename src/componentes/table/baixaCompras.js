@@ -26,7 +26,6 @@ export default class Table extends Component {
         })
           .then(response => response.json())
           .then(product => {
-          console.log(this.props.urlGet)    
             this.setState({ products: product });
           });
       }

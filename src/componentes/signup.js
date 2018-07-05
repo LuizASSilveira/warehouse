@@ -59,7 +59,7 @@ export default class Signup extends Component {
           <Input id="Label" placeholder=" Departamento"  type="text"     onChange={this.ChangeDep.bind(this)} value={this.state.departamento}  />
           <div id='buttonCadastro'>
           <Button  id='button'  onClick={this.envia.bind(this)}   color="primary">    Cadastrar </Button>
-          <Button  id="button"  onClick={this.voltar.bind(this)}  color="secondary">  voltar    </Button>
+          <Button  id="button"  onClick={this.voltar.bind(this)}  color="secondary">  Voltar    </Button>
           </div>
           </FormGroup>
       </div>

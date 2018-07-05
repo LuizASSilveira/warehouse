@@ -59,6 +59,7 @@ class TableEditar extends Component {
       .then(response => response.json())
       .then(product => {
         this.setState({ products: product });
+        console.log(product)
       });
 
     fetch(this.props.urlGet2, {
@@ -88,7 +89,7 @@ class TableEditar extends Component {
         'token': localStorage.getItem('auth-token')
       })
     };
-    fetch(this.props.urlDelete + row.id, requestInfo)
+    fetch(this.props.urlDelete + row.id + '/solicitacao/' , requestInfo)
       .then(response => {
         if (response.ok) {
           //alerta dados salvos com sucesso

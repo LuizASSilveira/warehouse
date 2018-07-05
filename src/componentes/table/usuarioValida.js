@@ -13,8 +13,7 @@ export default class Table extends Component {
     this.funcConfirm = this.funcConfirm.bind(this)
   }
   componentDidMount() {
-  
-      fetch('http://localhost:3001/users', {
+      fetch('http://localhost:3001/users/unverified', {
         method: 'GET',
         headers: new Headers({
           'Content-type': 'application/json',
@@ -24,6 +23,7 @@ export default class Table extends Component {
         .then(response => response.json())
         .then(product => {
           this.setState({ products: product });
+          console.log(product)
         });
   }
   funcConfirm() {
