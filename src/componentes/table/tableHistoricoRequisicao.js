@@ -53,11 +53,11 @@ class Table extends Component {
           selectRow={selectRowProp}
           options={options}
         >
-          <TableHeaderColumn width='10%' dataField='id' isKey>  ID                                 </TableHeaderColumn>
-          <TableHeaderColumn width='22%' dataField={this.props.dataL}>          {this.props.data}       </TableHeaderColumn>
-          <TableHeaderColumn width='22%' dataField={this.props.numeroL}>        {this.props.numero}  </TableHeaderColumn>
-          <TableHeaderColumn width='22%' dataField={this.props.nomeL}>          {this.props.nome}       </TableHeaderColumn>
-          <TableHeaderColumn width='22%' dataField={this.props.solicitanteL}>   {this.props.solicitante}     </TableHeaderColumn>
+          <TableHeaderColumn width='0%' dataField='id' isKey>  ID                                 </TableHeaderColumn>
+          <TableHeaderColumn width='22%' dataField={this.props.dataL} dataAlign='center'>          {this.props.data}       </TableHeaderColumn>
+          <TableHeaderColumn width='22%' dataField={this.props.numeroL} dataAlign='center'>        {this.props.numero}  </TableHeaderColumn>
+          <TableHeaderColumn width='22%' dataField={this.props.nomeL} dataAlign='center'>          {this.props.nome}       </TableHeaderColumn>
+          <TableHeaderColumn width='22%' dataField={this.props.solicitanteL} dataAlign='center'>   {this.props.solicitante}     </TableHeaderColumn>
         </BootstrapTable>
 
       </div>
