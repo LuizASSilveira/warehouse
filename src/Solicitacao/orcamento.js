@@ -1,5 +1,6 @@
 import React, { Component, Nav } from "react";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
+import { AvForm, AvField } from "availity-reactstrap-validation";
 import "../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css";
 import axios from "axios";
 import {
@@ -12,7 +13,8 @@ import {
   Col,
   InputGroup,
   InputGroupAddon,
-  Label
+  Label,
+  Row
 } from "reactstrap";
 
 const baseURL = `http://localhost:3001/orcamentos`;
@@ -33,12 +35,6 @@ const initialState = {
 
 export default class Orcamento extends Component {
   state = { ...initialState };
-
-  // componentWillMount() {
-  //   axios(baseURL).then(resp => {
-  //     this.setState({ listaOrcamentos: resp.data });
-  //   });
-  // }
 
   getPrices(lista) {
     this.setState({
@@ -88,7 +84,7 @@ export default class Orcamento extends Component {
 
   save() {
     const orcamento = this.state.orcamento;
-    // const method = orcamento.id ? "put" : "post";
+
     var parser = document.createElement("a");
     parser.href = window.location.href;
     axios
@@ -171,57 +167,63 @@ export default class Orcamento extends Component {
     return (
       <Container>
         <h3>Orçamentos</h3>
-        <Form>
-          <FormGroup row>
+        <br />
+
+        <AvForm>
+          <Row>
             <Col sm={4}>
-              <Input
-                required
+              <AvField
+                label="CNPJ Fornecedor"
                 type="number"
                 name="cnpj_fornecedor"
                 value={this.state.orcamento.cnpj_fornecedor}
                 onChange={event => this.updateField(event)}
                 placeholder="CNPJ do Fornecedor"
+                required
+                errorMessage="Campo inválido"
               />
             </Col>
 
             <Col sm={5}>
-              <Input
+              <AvField
+                label="Nome Fornecedor"
                 required
                 type="text"
                 name="nome_fornecedor"
                 value={this.state.orcamento.nome_fornecedor}
                 onChange={event => this.updateField(event)}
                 placeholder="Nome do Fornecedor"
+                errorMessage="Campo inválido"
               />
             </Col>
+
             <Col sm={3}>
-              <InputGroup>
-                <InputGroupAddon addonType="prepend">R$</InputGroupAddon>
-                <Input
-                  required
-                  type="number"
-                  name="valor"
-                  value={this.state.orcamento.valor}
-                  onChange={event => this.updateField(event)}
-                  placeholder="Valor 0,00"
-                />
-              </InputGroup>
+              <AvField
+                label="Valor (R$)"
+                required
+                type="number"
+                name="valor"
+                onChange={event => this.updateField(event)}
+                placeholder="Valor 0,00"
+                errorMessage="Campo inválido"
+                validate={{ min: 1, max: 5000 }}
+              />
             </Col>
-          </FormGroup>
-          <FormGroup row>
+          </Row>
+          <Row>
             <Col>
-              <InputGroup>
-                <InputGroupAddon addonType="prepend">URL</InputGroupAddon>
-                <Input
-                  type="text"
-                  name="referencia"
-                  value={this.state.orcamento.referencia}
-                  onChange={event => this.updateField(event)}
-                  placeholder="http://www..."
-                />
-              </InputGroup>
+              <AvField
+                label="Referência"
+                type="text"
+                name="referencia"
+                value={this.state.orcamento.referencia}
+                onChange={event => this.updateField(event)}
+                placeholder="http://www..."
+                errorMessage="Campo inválido"
+              />
             </Col>
             <Col>
+              <Label>Arquivo</Label>
               <CustomInput
                 type="file"
                 id="pdf_path"
@@ -229,17 +231,86 @@ export default class Orcamento extends Component {
                 label="Submeta um arquivo de orçamento."
               />
             </Col>
-          </FormGroup>
-          <div>
-            <Button color="primary" onClick={event => this.save(event)}>
-              Salvar
-            </Button>{" "}
-            <Button color="secondary" onClick={event => this.clear(event)}>
-              Cancelar
-            </Button>{" "}
-          </div>
-        </Form>
+          </Row>
+          <Button color="primary" onClick={event => this.save(event)}>
+            Salvar
+          </Button>{" "}
+          <Button color="secondary" onClick={event => this.clear(event)}>
+            Cancelar
+          </Button>{" "}
+        </AvForm>
       </Container>
+      // <Container>
+      //   <h3>Orçamentos</h3>
+      //   <Form>
+      //     <FormGroup row>
+      //       <Col sm={4}>
+      //         <Input
+      //           required
+      //           type="number"
+      //           name="cnpj_fornecedor"
+      //           value={this.state.orcamento.cnpj_fornecedor}
+      //           onChange={event => this.updateField(event)}
+      //           placeholder="CNPJ do Fornecedor"
+      //         />
+      //       </Col>
+
+      //       <Col sm={5}>
+      //         <Input
+      //           required
+      //           type="text"
+      //           name="nome_fornecedor"
+      //           value={this.state.orcamento.nome_fornecedor}
+      //           onChange={event => this.updateField(event)}
+      //           placeholder="Nome do Fornecedor"
+      //         />
+      //       </Col>
+      //       <Col sm={3}>
+      //         <InputGroup>
+      //           <InputGroupAddon addonType="prepend">R$</InputGroupAddon>
+      //           <Input
+      //             required
+      //             type="number"
+      //             name="valor"
+      //             value={this.state.orcamento.valor}
+      //             onChange={event => this.updateField(event)}
+      //             placeholder="Valor 0,00"
+      //           />
+      //         </InputGroup>
+      //       </Col>
+      //     </FormGroup>
+      //     <FormGroup row>
+      //       <Col>
+      //         <InputGroup>
+      //           <InputGroupAddon addonType="prepend">URL</InputGroupAddon>
+      //           <Input
+      //             type="text"
+      //             name="referencia"
+      //             value={this.state.orcamento.referencia}
+      //             onChange={event => this.updateField(event)}
+      //             placeholder="http://www..."
+      //           />
+      //         </InputGroup>
+      //       </Col>
+      //       <Col>
+      //         <CustomInput
+      //           type="file"
+      //           id="pdf_path"
+      //           name="pdf_path"
+      //           label="Submeta um arquivo de orçamento."
+      //         />
+      //       </Col>
+      //     </FormGroup>
+      //     <div>
+      //       <Button color="primary" onClick={event => this.save(event)}>
+      //         Salvar
+      //       </Button>{" "}
+      //       <Button color="secondary" onClick={event => this.clear(event)}>
+      //         Cancelar
+      //       </Button>{" "}
+      //     </div>
+      //   </Form>
+      // </Container>
     );
   }
 

@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import Nav from "../componentes/navbarAdm";
+import { AvForm, AvField } from "availity-reactstrap-validation";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
+import { Link } from "react-router-dom";
 import "../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import "../componentes/css/orcamentoPage.css";
 
 import {
@@ -16,7 +17,8 @@ import {
   Col,
   InputGroup,
   InputGroupAddon,
-  Label
+  Label,
+  Row
 } from "reactstrap";
 
 const baseURL = "http://localhost:3001/orcamentos";
@@ -31,10 +33,7 @@ const initialState = {
   listaSolicitacao: [],
   mediaUnit: 0.0,
   precoMin: 0.0,
-  precoMax: 0.0,
-  valid: false,
-  invalid: true,
-  disabled: true
+  precoMax: 0.0
 };
 
 export default class Orcamento extends Component {
@@ -55,20 +54,9 @@ export default class Orcamento extends Component {
 
     if (lista.length > 0) {
       let sum = 0;
-      // let max = lista[0].valor * 1.3;
-      // let min = lista[0].valor * 0.6;
       lista.forEach(item => {
-        // if (item.valor * 1.3 > max) {
-        //   max = item.valor;
-        // }
-        // if (item.valor * 0.6 < min) {
-        //   min = item.valor;
-        // }
         sum += item.valor;
       });
-      // let mediaUnit = ((max + min) / 2).toFixed(2);
-      // let precoMin = max.toFixed(2);
-      // let precoMax = min.toFixed(2);
 
       let mediaUnit = (sum / lista.length).toFixed(2);
       let precoMin = (mediaUnit * 0.6).toFixed(2);
@@ -85,7 +73,6 @@ export default class Orcamento extends Component {
   componentDidMount() {
     var parser = document.createElement("a");
     parser.href = window.location.href;
-    // console.log(parser.pathname.slice(21));
     fetch(`${baseURL}/${parser.pathname.slice(23)}`, {
       method: "GET",
       headers: new Headers({
@@ -105,8 +92,6 @@ export default class Orcamento extends Component {
   }
 
   save() {
-    // if(this.state.orcamento.valor )
-
     const requestInfo = {
       method: "POST",
       body: JSON.stringify({
@@ -157,26 +142,7 @@ export default class Orcamento extends Component {
     const orcamento = { ...this.state.orcamento };
     orcamento[event.target.name] = event.target.value;
     this.setState({ orcamento });
-
-    if (
-      Number(orcamento.valor * 1.0) >= this.state.precoMin &&
-      Number(orcamento.valor * 1.0) <= this.state.precoMax
-    ) {
-      // this.setState({ valid: true });
-      // this.setState({ invalid: false });
-    } else {
-      this.setState({ valid: false });
-      this.setState({ invalid: true });
-    }
-    console.log(this.state.valid);
   }
-
-  // handle(event) {
-  //   const orcamento = { ...this.state.orcamento };
-  //   orcamento[event.target.name] = event.target.value;
-
-  //   console.log(event.target.value);
-  // }
 
   load(orcamento) {
     this.setState({ orcamento });
@@ -195,80 +161,62 @@ export default class Orcamento extends Component {
       <Container>
         <h3>Orçamentos</h3>
         <br />
-        <Form>
-          <FormGroup row>
+
+        <AvForm>
+          <Row>
             <Col sm={4}>
-              <Input
-                required
+              <AvField
+                label="CNPJ Fornecedor"
                 type="number"
                 name="cnpj_fornecedor"
                 value={this.state.orcamento.cnpj_fornecedor}
                 onChange={event => this.updateField(event)}
                 placeholder="CNPJ do Fornecedor"
+                required
+                errorMessage="Campo inválido"
               />
             </Col>
 
             <Col sm={5}>
-              <Input
+              <AvField
+                label="Nome Fornecedor"
                 required
                 type="text"
                 name="nome_fornecedor"
                 value={this.state.orcamento.nome_fornecedor}
                 onChange={event => this.updateField(event)}
                 placeholder="Nome do Fornecedor"
+                errorMessage="Campo inválido"
               />
             </Col>
+
             <Col sm={3}>
-              <InputGroup>
-                <InputGroupAddon addonType="prepend">R$</InputGroupAddon>
-                <Input
-                  required
-                  type="number"
-                  name="valor"
-                  invalid={this.state.invalid}
-                  valid={this.state.valid}
-                  // invalid={this.state.valid}
-                  // valid={}
-                  // valid={
-                  //   () => {
-                  //     if (
-                  //       this.state.orcamento.valor * 0.6 >=
-                  //         this.state.precoMin &&
-                  //       this.state.orcamento.precoMax * 1.3 <=
-                  //         this.state.precoMax
-                  //     ) {
-                  //       return false;
-                  //     } else {
-                  //       return false;
-                  //     }
-                  //   }
-                  // this.state.orcamento.valor <= this.state.max &&
-                  // this.state.orcamento.valor >= this.state.min
-                  //   ? true
-                  //   : false
-                  // }
-                  //
-                  value={this.state.orcamento.valor}
-                  onChange={event => this.updateField(event)}
-                  placeholder="Valor 0,00"
-                />
-              </InputGroup>
+              <AvField
+                label="Valor (R$)"
+                required
+                type="number"
+                name="valor"
+                onChange={event => this.updateField(event)}
+                placeholder="Valor 0,00"
+                errorMessage="Campo inválido"
+                validate={{ min: 1, max: 500 }}
+              />
             </Col>
-          </FormGroup>
-          <FormGroup row>
+          </Row>
+          <Row>
             <Col>
-              <InputGroup>
-                <InputGroupAddon addonType="prepend">URL</InputGroupAddon>
-                <Input
-                  type="text"
-                  name="referencia"
-                  value={this.state.orcamento.referencia}
-                  onChange={event => this.updateField(event)}
-                  placeholder="http://www..."
-                />
-              </InputGroup>
+              <AvField
+                label="Referência"
+                type="text"
+                name="referencia"
+                value={this.state.orcamento.referencia}
+                onChange={event => this.updateField(event)}
+                placeholder="http://www..."
+                errorMessage="Campo inválido"
+              />
             </Col>
             <Col>
+              <Label>Arquivo</Label>
               <CustomInput
                 type="file"
                 id="pdf_path"
@@ -276,26 +224,21 @@ export default class Orcamento extends Component {
                 label="Submeta um arquivo de orçamento."
               />
             </Col>
-          </FormGroup>
-          <div>
-            <Button
-              color="primary"
-              disabled={this.state.disabled}
-              onClick={event => this.save(event)}
-            >
-              Salvar
-            </Button>{" "}
-            <Button color="danger" onClick={event => this.clear(event)}>
-              Cancelar
-            </Button>{" "}
-            <Link to="/solicitacao/historico">
-              <Button color="success">
-                Voltar
-              </Button>
-            </Link>
-
-          </div>
-        </Form>
+          </Row>
+          <Button
+            color="primary"
+            disabled={this.state.disabled}
+            onClick={event => this.save(event)}
+          >
+            Salvar
+          </Button>{" "}
+          <Button color="danger" onClick={event => this.clear(event)}>
+            Cancelar
+          </Button>{" "}
+          <Link to="/solicitacao/historico">
+            <Button color="success">Voltar</Button>
+          </Link>
+        </AvForm>
       </Container>
     );
   }
@@ -422,13 +365,11 @@ export default class Orcamento extends Component {
       <div>
         {navbar}
 
-
         {this.renderForm()}
 
         {this.renderTable()}
 
         {this.renderPrices()}
-
       </div>
     );
   }
