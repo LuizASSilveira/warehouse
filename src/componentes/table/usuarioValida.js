@@ -13,11 +13,18 @@ export default class Table extends Component {
     this.funcConfirm = this.funcConfirm.bind(this)
   }
   componentDidMount() {
-    fetch('https://raw.githubusercontent.com/LuizASSilveira/pi-almoxarifado/master/emprestimo.json')
-      .then(response => response.json())
-      .then(product => {
-        this.setState({ products: product })
-      });
+  
+      fetch('http://localhost:3001/users', {
+        method: 'GET',
+        headers: new Headers({
+          'Content-type': 'application/json',
+          'token': localStorage.getItem('auth-token')
+        })
+      })
+        .then(response => response.json())
+        .then(product => {
+          this.setState({ products: product });
+        });
   }
   funcConfirm() {
     this.funcCancel()
@@ -48,7 +55,7 @@ export default class Table extends Component {
           options={options}
         >
           <TableHeaderColumn width='0%' dataField='id' isKey>                                          ID              </TableHeaderColumn>
-          <TableHeaderColumn width='30%' dataField='usuario'        dataAlign='center'>                Usuario         </TableHeaderColumn>
+          <TableHeaderColumn width='30%' dataField='nome'        dataAlign='center'>                   Usuario         </TableHeaderColumn>
           <TableHeaderColumn width='30%' dataField='departamento'   dataAlign='center'>                Departamento    </TableHeaderColumn>
           <TableHeaderColumn width='30%' dataField='email'          dataAlign='center'>                Email           </TableHeaderColumn>
           <TableHeaderColumn width='10%' dataField="button"         dataFormat={buttonFormatter.bind(this)}>    Devolução       </TableHeaderColumn>
